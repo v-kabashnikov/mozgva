@@ -1,0 +1,15 @@
+ default: &default
+   APP_NAME: mozgva
+   HOST: localhost:3000
+   DATABASE_USERNAME: postgres
+   DATABASE_PASSWORD: postgres_password
+ development:
+   <<: *default
+ test:
+   <<: *default
+ production:
+   <<: *default
+   HOST: mozgva.dshop24.ru
+   DATABASE_USERNAME: deployer
+   DATABASE_PASSWORD: deployer_password
+   SECRET_KEY_BASE: 2b7713b6644d5d69bf217570a3b1af7b8816c58194e8246cfd85835c28cf1a28a580d8180cc5514cf7a018373dac3118e3596d23c002abb14a8ee15707ebd462
