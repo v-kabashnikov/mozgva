@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: "\"Мозгва\" <info@mozgva.ru>"
   layout 'mailer'
 end

@@ -1,0 +1,12 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: 'Пароль слишком короткий'
+            password_confirmation:
+              confirmation: 'Пароли не совпадают'
+            email:
+              taken: 'Пользователь с таким email уже зарегистрирован'
