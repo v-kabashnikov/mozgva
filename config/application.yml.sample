@@ -3,6 +3,9 @@
    HOST: localhost:3000
    DATABASE_USERNAME: postgres
    DATABASE_PASSWORD: postgres_password
+   # sendgrid
+   SENDGRID_USERNAME: app324221@heroku.com
+   SENDGRID_PASSWORD: sdfkj82jahuj2
  development:
    <<: *default
  test:
