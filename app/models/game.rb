@@ -5,5 +5,5 @@ class Game < ApplicationRecord
   
   enum status: { 'checking' => 'checking', 'open' => 'open', 'canceled' => 'canceled', 'ended' => 'ended' }
 
-  validates_presense_of :max_people_number, :max_teams_number
+  validates_presence_of :max_people_number, :max_teams_number
 end
