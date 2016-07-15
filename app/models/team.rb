@@ -1,8 +1,10 @@
 class Team < ApplicationRecord
   MAX_MEMBERS_COUNT = 9
+
   belongs_to :league, optional: true
   has_many :members, dependent: :destroy
   has_many :users, through: :members
+  has_many :invitations, dependent: :destroy
 
   before_create :set_invite
 
@@ -17,8 +19,16 @@ class Team < ApplicationRecord
     members.count
   end
 
+  def invitations_count
+    invitations.count
+  end
+
   def add_member user
     Member.create(user: user, team: self)
+  end
+
+  def invite_member user, inviter
+    Invitation.create(user: user, inviter: inviter, team: self)
   end
 
   private

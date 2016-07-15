@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_one :member, dependent: :destroy
   has_one :team, through: :member
+  has_many :invitations, dependent: :destroy
 end

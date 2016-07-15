@@ -1,3 +1,5 @@
+puts 'destroying users'
+User.destroy_all
 puts 'creating users'
 User.create(email: 'admin@mozgva.ru', password: 'password', name: 'Админ', role: 'admin')
 User.create(email: 'moderator@mozgva.ru', password: 'password', name: 'Модератор', role: 'moderator')
@@ -6,6 +8,26 @@ User.create(email: 'user@mozgva.ru', password: 'password', name: 'Юзер')
 puts 'destroying leagues'
 League.destroy_all
 puts 'creating leagues'
-League.create(name: 'Юго-Запад')
-League.create(name: 'Высшая')
-League.create(name: 'Масляков')
+%w(Юго-Запад Высшая Масляков Топчик).each{ |l| League.create(name: l) }
+
+puts 'destroying cities'
+City.destroy_all
+puts 'creating cities'
+%w(Москва Санкт-Петербург Берлин).each{ |c| City.create(name: c) }
+
+puts 'destroying places'
+Place.destroy_all
+puts 'creating places'
+city = City.where(name: 'Москва').first_or_create
+Place.create(name: 'Бар "Colin hall"', site: 'http://coin-hall.ru/', city: city, address: 'Улица Пятницкая, 71/5, строение 2')
+Place.create(name: 'Glenuill', site: 'http://facebook.com/pages/glenuill/846619468685308', city: city, address: 'Садовая-Самотечная, 20, стр. 1')
+city = City.where(name: 'Санкт-Петербург').first_or_create
+Place.create(name: 'Гастропаб "Duo"', site: 'http://www.duobar.ru/', city: city, address: 'Кирочная, 8А')
+Place.create(name: 'Кафе "Obed Bufet"', site: 'http://spb.obedbufet.ru/nevsky_centre', city: city, address: 'Невский просп., 114–116, ТЦ «Невский центр», 5 этаж')
+city = City.where(name: 'Берлин').first_or_create
+Place.create(name: 'Teigwaren', site: 'http://www.teigwaren-berlin.de/', city: city, address: 'Oderberger Straße 41')
+
+puts 'destroying games'
+Game.destroy_all
+puts 'creating games'
+
