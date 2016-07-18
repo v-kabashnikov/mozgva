@@ -5,10 +5,16 @@ class Team < ApplicationRecord
   has_many :members, dependent: :destroy
   has_many :users, through: :members
   has_many :invitations, dependent: :destroy
+  has_many :waiting_invitations, ->{ waiting }, class_name: 'Invitation'
+  has_many :invited_users, through: :waiting_invitations, class_name: "User", source: :user
 
   before_create :set_invite
 
   validates :name, presence: true, uniqueness: true
+
+  def full?
+    members_count + invitations_count >= MAX_MEMBERS_COUNT
+  end
 
   def generate_invite
     values = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
@@ -23,14 +29,11 @@ class Team < ApplicationRecord
     invitations.count
   end
 
-  def add_member user
+  def add_member_checking user
+    Invitation.where(user: user).where.not(team: self).update_all(status: 'declined')
     Member.create(user: user, team: self)
   end
-
-  def invite_member user, inviter
-    Invitation.create(user: user, inviter: inviter, team: self)
-  end
-
+  
   private
   def set_invite
     self.invite = loop do

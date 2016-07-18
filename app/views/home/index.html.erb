@@ -1,1 +1,8 @@
 <h1>ГЛАВНАЯ</h1>
+<% if current_user %>
+  <%= render 'teams/form' unless current_user.team %>
+  <br>
+  <% if current_user.invitations.waiting.present? %>
+    <%= render partial: 'invitations/index', locals: { invitations: current_user.invitations.waiting } %>
+  <% end %>
+<% end %>

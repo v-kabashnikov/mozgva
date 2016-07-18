@@ -4,3 +4,4 @@
 //= require bootstrap-sprockets
 
 //= require sign_in_up
+//= require main

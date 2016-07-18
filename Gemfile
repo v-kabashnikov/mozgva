@@ -8,6 +8,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
+gem 'jquery-turbolinks'
+gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 

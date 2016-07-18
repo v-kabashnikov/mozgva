@@ -1,7 +1,15 @@
 class TeamsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
-    Team.create(team_params)
-    
+    team = Team.create(team_params)
+    team.add_member(current_user)
+    redirect_to my_team_path
+  end
+
+  def my_team
+  	@team = current_user.team
+  	render 'show'
   end
 
   private
