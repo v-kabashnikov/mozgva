@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
       if member.save
         redirect_to my_team_path
       else
-        flash[:errors] = member.errors.messages)
+        flash[:errors] = member.errors.messages
         redirect_back(fallback_location: index_path)
       end
     else

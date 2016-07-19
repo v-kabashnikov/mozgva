@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]
   resources :teams, only: [:create, :destroy, :update]
   resources :invitations, only: [:create, :destroy] do
