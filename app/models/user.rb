@@ -16,7 +16,7 @@ class User < ApplicationRecord
   end
 
   def can_be_invited? team
-    !team && invited?(team)
+    !self.team && !invited?(team)
   end
 
   def accept invitation

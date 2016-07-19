@@ -9,23 +9,6 @@
   </head>
 
   <body>
-    <p class="pull-left">
-      <%= link_to 'Главная', root_path %>
-    </p>
-    <p class="pull-right">
-      <% if current_user %>
-    	  <%= "Привет, #{current_user.email}" %>
-        <%= link_to 'Моя команда', my_team_path if current_user.team %>
-    	  <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-    	<% else %>
-    	  <%= link_to "Войти", "#sign_in", "data-toggle" => "modal", :class => 'btn btn-small' %>
-    	  <%= link_to "Регистрация", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small' %>
-    	  <%= render 'shared/sign_in' %>
-    	  <%= render 'shared/sign_up' %>
-    	<% end %>
-    </p>
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
