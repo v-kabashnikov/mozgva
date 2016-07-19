@@ -17,4 +17,34 @@ $( document ).ready(function() {
 	  	$('.result').html('Пользователь не найден');
 	  }
 	});
+
+	// $("div#update_city ul li a").click(function(e){
+	// 	div = $(this).closest("div");
+ //    $.ajax({
+ //        type: div.data("method"),
+ //        url: div.data("action"),
+ //        data: { "city_id": $(this).data("value") },
+ //        success: function(data){}
+ //    });            
+	// });
+
+	addFormDropdown("div#update_city")
+
+	function addFormDropdown(selector, successFunction = function(data){}){
+		el = $(selector);
+		if(el.data("action")){
+			dataString = el.find("ul").data("name") + "=";
+			method = el.data("method") || "post";
+			el.find('a').click(function(e){
+				e.preventDefault();
+		    $.ajax({
+		        type: method,
+		        url: el.data("action"),
+		        data: dataString + $(this).data("value"),
+		        success: successFunction
+		    });            
+			});
+		}
+	}
+
 });

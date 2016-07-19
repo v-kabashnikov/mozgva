@@ -20,6 +20,7 @@
 					<span>
 						<div class="links">
 							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+							<%= link_to "Моя команда", my_team_path %>
 						</div>
 					</span>		
 				<% else %>
@@ -35,10 +36,17 @@
 			<div class="logoWrap">
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<a class="local">
+			<div class="local">
 				<img src="<%= asset_path('lightningSec/lightning.png') %>"/>
-				Москва
-			</a>
+				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="post" data-action="<%=update_city_path%>">
+					<span><%= @city.name %></span>
+			    <ul class="dropdown" tabindex="1" data-name="city_id">
+		    		<% City.all.each do |city| %>
+			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+			      <% end %>
+			    </ul>
+				</div>
+			</div>
 		</div>
 		<div class="line SomeTabs">
 			<div class="item">
