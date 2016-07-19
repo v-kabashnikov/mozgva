@@ -13,34 +13,47 @@
 <section class="headInfo">
 	<div class="contentWrapper">
 		<div class="line">
-		<% if current_user %>
 			<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
-			<%= "Hello, #{current_user.email}" %>
-			<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-			<% else %>
+			
 			<div class="authorizationWrap" >
-				<span>
-					<img src="<%= asset_path('lightningSec/lightning.png') %>">
-					<div class="links">
-						<a href="#sign_in" data-toggle="modal">Войти</a>
-						<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
-					</div>
-				</span>
+				<% if current_user %>
+					<span>
+						<div class="links">
+							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+							<%= link_to "Моя команда", my_team_path %>
+						</div>
+					</span>		
+				<% else %>
+					<span>
+						<div class="links">
+							<a href="#sign_in" data-toggle="modal">Войти</a>
+							<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+						</div>
+					</span>
+		  	<% end %>
 			</div>
 
-	  		<% end %>
 			<div class="logoWrap">
-				<img src="<%= asset_path('logo.png') %>">
+				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<a class="local">
+			<div class="local">
 				<img src="<%= asset_path('symbol/location.png') %>"/>
-				Москва
-			</a>
+				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="post" data-action="<%=update_city_path%>">
+					<span><%= @city.name %></span>
+			    <ul class="dropdown" tabindex="1" data-name="city_id">
+		    		<% City.all.each do |city| %>
+			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+			      <% end %>
+			    </ul>
+				</div>
+			</div>
 		</div>
 		<div class="line SomeTabs">
 			<div class="item">
-				<img src="<%= asset_path('header/ligi.png') %>">
-				<p>Лиги</p>	
+				<%= link_to leagues_path do %>
+					<img src="<%= asset_path('header/ligi.png') %>">
+					<p>Лиги</p>
+				<% end %>
 			</div>
 			<div class="item">
 				<img src="<%= asset_path('header/gifts.png') %>">
