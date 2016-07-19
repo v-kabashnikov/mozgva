@@ -4,7 +4,7 @@ $( document ).ready(function() {
 	  email_search.find('.result').show();
 	  if(data && data["user"]) {
 		$('.result').html("<b>"+data['user']['name']+"</b> "+"("+data['user']['email']+")");
-	  	if(data["can_be_invited"]){
+	  	if(!data["can_be_invited"]){
 	  		$('.result').append("<p>Этот пользователь не может быть приглашен</p>")
 	  	}
 	  	else {
