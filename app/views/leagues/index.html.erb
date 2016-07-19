@@ -1,11 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Leagues</h1>
+<h1>Лиги</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Название</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,9 +12,6 @@
     <% @leagues.each do |league| %>
       <tr>
         <td><%= league.name %></td>
-        <td><%= link_to 'Show', league %></td>
-        <td><%= link_to 'Edit', edit_league_path(league) %></td>
-        <td><%= link_to 'Destroy', league, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
