@@ -1,0 +1,6 @@
+<% @team ||= Team.new %>
+<%= form_for @team, url: teams_path do |f| %>
+  <%= f.text_field :name, placeholder: 'Название' %>
+  <%= f.collection_select :league_id, League.all, :id, :name %>
+  <%= f.submit %>
+<% end %>

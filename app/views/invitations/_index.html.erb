@@ -1,0 +1,17 @@
+<h3>Приглашения</h3>
+<table>
+  <tr>
+    <th>Команда</th>
+    <th>Приглашающий</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% invitations.each do |inv| %>
+    <tr>
+      <td><%= inv.team.name %></td>
+      <td><%= "#{inv.inviter.name}(#{inv.inviter.email})" %></td>
+      <td><%= link_to 'Принять', accept_invitation_path(inv) %></td>
+      <td><%= link_to 'Отклонить', decline_invitation_path(inv) %></td>
+    </tr>
+  <% end %>
+</table>
