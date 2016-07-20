@@ -28,9 +28,9 @@ $( document ).ready(function() {
  //    });            
 	// });
 
-	addFormDropdown("div#update_city")
+	addFormDropdown("div#update_city");
 
-	function addFormDropdown(selector, successFunction = function(data){}){
+	function addFormDropdown(selector, successFunction){
 		el = $(selector);
 		if(el.data("action")){
 			dataString = el.find("ul").data("name") + "=";
