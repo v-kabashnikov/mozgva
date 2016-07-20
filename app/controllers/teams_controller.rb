@@ -12,7 +12,7 @@ class TeamsController < ApplicationController
         redirect_back(fallback_location: index_path)
       end
     else
-      flash[:errors] = team.errors.messages.merge(member.errors.messages)
+      flash[:errors] = team.errors.messages
       redirect_back(fallback_location: index_path)
     end
   end

@@ -1,8 +1,523 @@
-<h1>ГЛАВНАЯ</h1>
-<% if current_user %>
-  <%= render 'teams/form' unless current_user.team %>
-  <br>
-  <% if current_user.invitations.waiting.present? %>
-    <%= render partial: 'invitations/index', locals: { invitations: current_user.invitations.waiting } %>
-  <% end %>
-<% end %>
+<section class="lightningSection">
+	<div class="contentWrapper">
+		<p>
+		<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
+		Молния!
+		</p>
+		<div class="imgWrapp">
+			<img class="left" src="<%= asset_path('lightningSec/bgLeft.png') %>">
+		</div>
+		<h3>Начинается Чемпионат Мозгвы! Опа-опа!</h3>
+	</div>
+</section>
+<section class="headInfo">
+	<div class="contentWrapper">
+		<div class="line">
+			<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
+			
+			<div class="authorizationWrap" >
+				<% if current_user %>
+					<span>
+						<div class="links">
+							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+							<%= link_to "Моя команда", my_team_path %>
+						</div>
+					</span>		
+				<% else %>
+					<span>
+						<div class="links">
+							<a href="#sign_in" data-toggle="modal">Войти</a>
+							<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+						</div>
+					</span>
+		  	<% end %>
+			</div>
+
+			<div class="logoWrap">
+				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
+			</div>
+			<div class="local">
+				<img src="<%= asset_path('symbol/location.png') %>"/>
+				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="post" data-action="<%=update_city_path%>">
+					<span><%= @city.name %></span>
+			    <ul class="dropdown" tabindex="1" data-name="city_id">
+		    		<% City.all.each do |city| %>
+			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+			      <% end %>
+			    </ul>
+				</div>
+			</div>
+		</div>
+		<div class="line SomeTabs">
+			<div class="item">
+				<%= link_to leagues_path do %>
+					<img src="<%= asset_path('header/ligi.png') %>">
+					<p>Лиги</p>
+				<% end %>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('header/gifts.png') %>">
+				<p>Подарочные<br/> сертификаты</p>	
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('header/rang.png') %>">
+				<p>Рейтинг<br/> команд</p>	
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('header/calendar.png') %>">
+				<p>Календарь игр</p>	
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('header/korporat.png') %>">
+				<p>Корпоратив</p>	
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('header/connect.png') %>">
+				<p>Франшиза<br/> и спонсорство</p>	
+			</div>
+		</div>
+
+	</div>
+</section>
+<section class="aboutSec">
+	<div class="contentWrapper">
+		<div class="infoWrap">
+			<h1>Это Мозгва,<br/> детка</h1>
+			<p>Мозгва — это 10 000 участников и 245 команд!<br/>
+			Это еще что-нибудь, например!</p>
+		</div>
+		<span class="tag">#ЭтоМозгваДетка</span>
+		<ul class="cycles">
+			<li><img src="<%= asset_path('aboutSec/left.png') %>"></li>
+			<li><img src="<%= asset_path('aboutSec/right.png') %>"></li>
+		</ul>
+		<a class="like">
+			<img src="<%= asset_path('symbol/like.png') %>" />
+				Лойс
+		</a>
+		<div class="playBtn">
+			<img src="<%= asset_path('aboutSec/play.png') %>"/>
+		</div>
+	</div>
+
+</section>
+
+<section class="noticeSection">
+	<div class="contentWrapper">
+		<div class="halfLeft">
+			<div class="wrapSelectCityMonth"> <!--SELECT SITY & MONTH-->
+				<div id="dd" class="wrapper-dropdown" tabindex="1">
+					<span>Москва</span>
+				    <ul class="dropdown" tabindex="1">
+				        <li><a href="#">Москва</a></li>
+				        <li><a href="#">Берлин</a></li>
+				        <li><a href="#">Минск</a></li>
+				        <li><a href="#">Питер</a></li>
+				    </ul>
+				</div>
+				<div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
+					<span>Сетнтябрь</span>
+				    <ul class="dropdown" tabindex="1">
+						<li><a href="#">Сентябрь</a></li>
+				        <li><a href="#">Октябрь</a></li>
+				        <li><a href="#">Декабрь</a></li>
+				        <li><a href="#">Январь</a></li>
+				        <li><a href="#">Февраль</a></li>
+				        <li><a href="#">Март</a></li>
+				        <li><a href="#">Апрель</a></li>
+				        <li><a href="#">Май</a></li>
+				        <li><a href="#">Июнь</a></li>
+				        <li><a href="#">Июль</a></li>
+				        <li><a href="#">Август</a></li>
+
+				    </ul>
+				</div>
+			​</div> <!--AND SELECT SITY & MONTH-->
+			<div class="gamesTabs">
+				<div class="item">
+					<ul class="navDayGame" role="tablist">
+						<p>2 игры в этот день</p>
+						<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="home" role="tab" data-toggle="tab"></a></li>
+						<li role="presentation"><a href="#day1_it_2" aria-controls="profile" data-toggle="tab"></a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="day1_it_1">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								
+								<li>Игра</li>
+								<li><span class="num">23</span><span>"На льду"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 500 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 20:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-pane" id="day1_it_2">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								<li>Игра</li>
+								<li><span class="num">24</span><span>"На льду 2"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 300 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 19:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<ul class="navDayGame" role="tablist">
+						<p>2 игры в этот день</p>
+						<li role="presentation" class="active"><a href="#day2_it_1" aria-controls="home" role="tab" data-toggle="tab"></a></li>
+						<li role="presentation"><a href="#day2_it_2" aria-controls="profile" data-toggle="tab"></a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="day2_it_1">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								
+								<li>Игра</li>
+								<li><span class="num">23</span><span>"На льду"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 500 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 20:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-pane" id="day2_it_2">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								<li>Игра</li>
+								<li><span class="num">24</span><span>"На льду 2"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 300 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 19:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<ul class="navDayGame" role="tablist">
+						<p>1 игра в этот день</p>
+						<li role="presentation" class="active"><a href="#day3_it_1" aria-controls="home" role="tab" data-toggle="tab"></a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="day3_it_1">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								
+								<li>Игра</li>
+								<li><span class="num">23</span><span>"На льду"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 500 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 20:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="item">
+					<ul class="navDayGame" role="tablist">
+						<p>2 игры в этот день</p>
+						<li role="presentation" class="active"><a href="#day4_it_1" aria-controls="home" role="tab" data-toggle="tab"></a></li>
+						<li role="presentation"><a href="#day4_it_2" aria-controls="profile" data-toggle="tab"></a></li>
+						
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="day4_it_1">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								
+								<li>Игра</li>
+								<li><span class="num">23</span><span>"На льду"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 500 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 20:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-pane" id="day4_it_2">
+							<span class="date">
+								04 Cр
+							</span>
+							<ul class="top">
+								<li>Игра</li>
+								<li><span class="num">24</span><span>"На льду 2"</span></li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Бар & Ресторан «Coin-Hall»</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/price.png')%>"/></span> 300 руб.</li>
+								<li>
+									<span><img src="<%= asset_path('noticeSec/time.png')%>"/></span> 19:00</li>
+							</ul>
+							<ul class="bottom">
+								<li>
+									<button type="buttom" class="roundBtn" name="">
+									Участвовать</button>
+								</li>
+								<li>
+									<a href="">Список команд</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="halfRight">
+			<div class="noticCarosel">
+			  <div>
+			  	<ul class="roundWrap">
+			  		<li>Мозгва 24: «Мозгва—Сокольники»</li>
+			  		<li>
+			  			<span><img src="<%= asset_path('noticeSec/locationCarousel.png') %>"/></span>Парк «Сокольники»
+			  		</li>
+			  		<li>8 сентября</li>
+			  		<li>16 : 00</li>
+			  		<li><button class="redBtn">Участвовать</button></li>
+			  	</ul>
+			  </div>
+			  <div>your content</div>
+			  <div>your content</div>
+			</div>
+		</div>
+	</div>
+	<div class="contentWrapper">
+		<div class="halfLeft">
+			<div class="photoTabs">
+				<div class="head">
+					<h2>Фоточки</h2>
+				</div>
+				<div class="body">
+					    <ul class="tabNav">
+					      <li class="active"><a href="#tab1" data-toggle="tab">20 сентября</a></li>
+					      <li><a href="#tab2" data-toggle="tab">21 сентября</a></li>
+					      <li><a href="#tab3" data-toggle="tab">22 сентября</a></li>
+					    </ul>
+					    <div class="tab-content">
+							<div class="tab-pane active" id="tab1">
+								<p>320 штук</p>
+								<div class="center">
+								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/1.jpg')%>);"></div>
+								  </div>
+								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/2.jpg')%>);"></div>
+								  </div>
+								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/3.jpg')%>);"></div>
+								  </div>
+								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/4.jpg')%>);"></div>
+								  </div>
+								</div>
+							</div>
+							<div class="tab-pane" id="tab2">Tab 2 content...</div>
+							<div class="tab-pane" id="tab3">Tab 3 content...</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		<div class="halfRight">
+			<div class="adParthTop" style="background-image:url(<%= asset_path('ad/heineken.png')%>);">
+			</div>
+			
+			<div class="adParthBottom">
+				<div class="carouselWrap">
+					<img src="<%= asset_path('ad/cherries.png')%>"/>
+					<div class="topPeopleCarousel">
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava6.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava7.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava8.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
+						<div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="contentWrapper">
+		<div class="full">
+			<div class="partnersParth">
+				<div class="carouselWrap">
+					<div class="partnerCarousel">
+						<div class="item">
+							<img src="<%= asset_path('partners/kaspersky.png') %>" />
+							<p>Касперский</p>
+						</div>
+						<div class="item">
+							<img src="<%= asset_path('partners/microsoft.png') %>" />
+							<p>Майкрософт</p>
+						</div>
+						<div class="item">
+							<img src="<%= asset_path('partners/publicis.png') %>" />
+							<p>Публицис</p>
+						</div>
+						<div class="item">
+							<img src="<%= asset_path('partners/publicis.png') %>" />
+							<p>Публицис</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<div class="contentWrapperSmall">
+		<div class="left">
+			<ul>
+				<li><a href="">Календарь игр</a></li>
+				<li><a href="">Лиги</a></li>
+				<li><a href="">Сертификаты</a></li>
+				<li><a href="">Рейтинг команд</a></li>
+				<li><a href="">Франшиза и спонсорство</a></li>
+			</ul>
+		</div>
+		<div class="right">
+			<ul>
+				<li><span><img src="<%= asset_path('symbol/like.png') %>"/></span>Первая бар-олимпиада</li>
+				<li><img src="<%= asset_path('logoFooter.png') %>"/></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<script type="text/javascript">
+			function DropDown(el) {
+				this.dd = el;
+				this.placeholder = this.dd.children('span');
+				this.opts = this.dd.find('ul.dropdown > li');
+				this.val = '';
+				this.index = -1;
+				this.initEvents();
+			}
+			DropDown.prototype = {
+				initEvents : function() {
+					var obj = this;
+					obj.dd.on('click', function(event){
+						$(this).toggleClass('active');
+						return false;
+					});
+					obj.opts.on('click',function(){
+						var opt = $(this);
+						obj.val = opt.text();
+						obj.index = opt.index();
+						obj.placeholder.text(obj.val);
+					});
+				},
+				getValue : function() {
+					return this.val;
+				},
+				getIndex : function() {
+					return this.index;
+				}
+			}
+			$(function() {
+
+				var dd = new DropDown( $('#dd') );
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown').removeClass('active');
+				});
+
+			});
+			$(function() {
+
+				var dd = new DropDown( $('#dd2') );
+				$(document).click(function() {
+					// all dropdowns
+					$('.wrapper-dropdown').removeClass('active');
+				});
+			});
+		</script>
+
+	
+
+	  	<%= render 'shared/sign_in' %>
+	  	<%= render 'shared/sign_up' %>

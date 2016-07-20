@@ -1,40 +1,44 @@
 <h2>Моя команда</h2>
-<p>Название: <strong><%= @team.name %></strong></p>
-<div>
-  <table class="table">
-    <tr>
-      <th>Имя</th>
-      <th>Email</th>
-      <th></th>
-    </tr>
-    <% @team.users.each do |m| %>
+<% if @team %>
+  <p>Название: <strong><%= @team.name %></strong></p>
+  <div>
+    <table class="table">
       <tr>
+        <th>Имя</th>
+        <th>Email</th>
+        <th></th>
+      </tr>
+      <% @team.users.each do |m| %>
+        <tr>
+          <td><%= m.name %></td>
+          <td><%= m.email %></td>
+          <td>Участник</td>
+        </tr>
+      <% end %>
+      <% @team.invited_users.each do |m| %>
         <td><%= m.name %></td>
         <td><%= m.email %></td>
-        <td>Участник</td>
-      </tr>
-    <% end %>
-    <% @team.invited_users.each do |m| %>
-      <td><%= m.name %></td>
-      <td><%= m.email %></td>
-      <td>Приглашен</td>
-    <% end %>
-  </table>
-  <br>
-  <%= flash[:errors] if flash[:errors] %>
-  <% unless @team.full? %>
-    <div class="email_search">
-      <%= form_tag users_search_path, remote: true, id: 'email_users_search' do %>
-        <%= text_field_tag :email %>
-        <%= submit_tag 'Искать' %>
+        <td>Приглашен</td>
       <% end %>
-      <div class="result" style="display: none;"></div>
-      <div class="invitation" style="display: none;">
-        <%= form_for Invitation.new do |f| %>
-          <%= f.hidden_field :user_id %>
-          <%= f.submit 'Пригласить' %>
+    </table>
+    <br>
+    <%= flash[:errors] if flash[:errors] %>
+    <% unless @team.full? %>
+      <div class="email_search">
+        <%= form_tag users_search_path, remote: true, id: 'email_users_search' do %>
+          <%= text_field_tag :email %>
+          <%= submit_tag 'Искать' %>
         <% end %>
+        <div class="result" style="display: none;"></div>
+        <div class="invitation" style="display: none;">
+          <%= form_for Invitation.new do |f| %>
+            <%= f.hidden_field :user_id %>
+            <%= f.submit 'Пригласить' %>
+          <% end %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% else %>
+  <%= render 'form' %>
+<% end %>

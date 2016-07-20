@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/team', to: 'teams#my_team', as: :my_team
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   post '/users/search', to: 'users#search', as: :users_search
+  post '/users/update_city', to: 'users#update_city', as: :update_city
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
