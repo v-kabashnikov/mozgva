@@ -7,6 +7,7 @@ class Team < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :waiting_invitations, ->{ waiting }, class_name: 'Invitation'
   has_many :invited_users, through: :waiting_invitations, class_name: "User", source: :user
+  has_many :game_registrations, dependent: :destroy
 
   before_create :set_invite
 

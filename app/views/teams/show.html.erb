@@ -41,4 +41,5 @@
   </div>
 <% else %>
   <%= render 'form' %>
+  <%= render partial: 'invitations/index', locals: { invitations: current_user.invitations } %>
 <% end %>
