@@ -1,4 +1,10 @@
 $( document ).ready(function() {
+	$('a.disabled').click(function(e){
+		e.preventDefault();
+		e.stopPropagation();
+	})
+
+
 	$("#email_users_search").on("ajax:success", function(e, data, status, xhr){
 	  var email_search = $(this).parent(".email_search");
 	  email_search.find('.result').show();
@@ -18,17 +24,35 @@ $( document ).ready(function() {
 	  }
 	});
 
-	// $("div#update_city ul li a").click(function(e){
-	// 	div = $(this).closest("div");
- //    $.ajax({
- //        type: div.data("method"),
- //        url: div.data("action"),
- //        data: { "city_id": $(this).data("value") },
- //        success: function(data){}
- //    });            
-	// });
-
 	addFormDropdown("div#update_city");
+	addFormLink("a.get_teams_list", displayTeamsList);
+
+	function displayTeamsList(data){
+		console.log(data);
+		var modalBody = 'Пока нет команд';
+		if(data.length > 0){
+			modalBody = $.map(data, function(val, i){
+				return (i+1) + ". " + val.name;
+			}).join("<br>");
+		}
+		$('#teams_list').find('.modal-body').html(modalBody);
+	}
+
+	function addFormLink(selector, successFunction){	
+		$(selector).click(function(e){
+			el = $(this);
+			if(el.data("action")){
+				dataString = el.data("name") + "=";
+				method = el.data("method") || "get";
+		    $.ajax({
+	        type: method,
+	        url: el.data("action"),
+	        data: dataString + $(this).data("value"),
+	        success: successFunction
+		    });            
+			}
+		});
+	}
 
 	function addFormDropdown(selector, successFunction){
 		el = $(selector);

@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:list]
 
   def create
     team = Team.new(team_params)
@@ -20,6 +20,10 @@ class TeamsController < ApplicationController
   def my_team
     @team = current_user.team
     render 'show'
+  end
+
+  def list
+    @teams = Game.find(params[:game_id]).teams
   end
 
   private

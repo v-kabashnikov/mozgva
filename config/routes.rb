@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]
-  resources :teams, only: [:create, :destroy, :update]
+  resources :game_registrations, only: [:create]
+  resources :teams, only: [:create, :destroy, :update] do
+    get 'list', on: :collection
+  end
   resources :invitations, only: [:create, :destroy] do
     member do
       get 'accept'
