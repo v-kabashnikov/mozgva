@@ -2,17 +2,9 @@ class HomeController < ApplicationController
   before_action :set_city
 
   def index
-    @game_groups = Game.upcoming_games(@city).group_by.group_by{|g| g.when.strftime("%d.%m.%Y")}
+  	@curr_month = [Date.today.strftime('%Y-%m'), MONTH_NAMES[Date.today.strftime('%m').to_i - 1]]
+    @game_groups = Game.grouped_games(@city, @curr_month.first)
+    @months = Game.select("to_char(games.when, 'YYYY-MM') as month").distinct.order('month').map{|m| [m.month, MONTH_NAMES[m.month.split('-').second.to_i-1]]}
     @main_games = Game.all.sample(rand(1..3))
   end
-
-  private
-  def set_city
-    @city = if current_user
-      current_user.city || City.first
-    else
-      City.find_by(id: session[:city_id]) || City.first
-    end
-  end
-
 end

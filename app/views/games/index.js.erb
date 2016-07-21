@@ -1,0 +1,10 @@
+$(".gamesTabs").html("<%= j render 'games/tabs' %>");
+<% if @city && @curr_month %>
+	span = $('#games_filter').find('#dd span');
+	span.text("<%=@city.name%>");
+	span.data('current-value', '<%=@city.id%>');
+
+	span = $('#games_filter').find('#dd2 span');
+	span.text("<%=@curr_month.second%>");
+	span.data('current-value', '<%=@curr_month.first%>') 
+<% end %>
