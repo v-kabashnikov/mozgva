@@ -13,8 +13,6 @@
 <section class="headInfo">
 	<div class="contentWrapper">
 		<div class="line">
-		<!-- 	<span></span>
-			 -->
 			<div class="authorizationWrap" >
 				<img src="<%= asset_path('lightningSec/lightning.png') %>">
 				<% if current_user %>
@@ -100,130 +98,102 @@
 			<img src="<%= asset_path('aboutSec/play.png') %>"/>
 		</div>
 	</div>
-
 </section>
 
-<section class="noticeSection">
-	<div class="contentWrapper">
-		<div class="halfLeft">
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
-				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
-				<div id="dd" class="wrapper-dropdown" tabindex="1">
-					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
-				    <ul class="dropdown" tabindex="1" data-name="city_id">
-				    	<% City.all.each do |city| %>
-			        	<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-			      	<% end %>
-				    </ul>
-				</div>
-				<div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
-					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
-				    <ul class="dropdown" tabindex="1" data-name="year_month">
-				    <% @months.each do |month| %>
-							<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
-						<% end %>
 
-				    </ul>
-				</div>
-			​</div> <!--AND SELECT SITY & MONTH-->
-			<div class="gamesTabs">
-				<%= render 'games/tabs' %>
-			</div>
-		</div>
-		<div class="halfRight">
-			<div class="noticCarosel">
-				<%= render 'games/main_carousel' %>
-			</div>
-		</div>
+
+<section class="noticeSection">
+	<div class="fullWrapp">
+	      <div class="left">
+	        <div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
+	          <div id="dd" class="wrapper-dropdown" tabindex="1">
+	            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+	              	<ul class="dropdown" tabindex="1" data-name="city_id">
+			    	<% City.all.each do |city| %>
+		        		<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+		      		<% end %>
+			    	</ul>
+	          </div>
+	          <div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
+	            <span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+	              <ul class="dropdown" tabindex="1" data-name="year_month">
+				    <% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+					<% end %>	
+	              </ul>
+	          </div>
+	        ​</div> <!--AND SELECT SITY & MONTH-->
+	        <div class="gamesTabs">
+	          <%= render 'games/tabs' %>
+	        </div>
+	      </div>
+	      <div class="right">
+	        <div class="noticCarosel">
+	          <%= render 'games/main_carousel' %>
+	        </div>
+	      </div>
 	</div>
-	<div class="contentWrapper">
-		<div class="halfLeft">
+	<div class="fullWrapp">
+		<div class="left">
 			<div class="photoTabs">
-				<div class="head">
-					<h2>Фоточки</h2>
-				</div>
-				<div class="body">
-					    <ul class="tabNav">
-					      <li class="active"><a href="#tab1" data-toggle="tab">20 сентября</a></li>
-					      <li><a href="#tab2" data-toggle="tab">21 сентября</a></li>
-					      <li><a href="#tab3" data-toggle="tab">22 сентября</a></li>
-					    </ul>
-					    <div class="tab-content">
-							<div class="tab-pane active" id="tab1">
-								<p>320 штук</p>
-								<div class="center">
-								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/1.jpg')%>);"></div>
-								  </div>
-								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/2.jpg')%>);"></div>
-								  </div>
-								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/3.jpg')%>);"></div>
-								  </div>
-								  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/4.jpg')%>);"></div>
-								  </div>
-								</div>
-							</div>
-							<div class="tab-pane" id="tab2">Tab 2 content...</div>
-							<div class="tab-pane" id="tab3">Tab 3 content...</div>
-						</div>
-				</div>
-			</div>
+	          <div class="head">
+	            <h2>Фоточки</h2>
+	          </div>
+	          <div class="body">
+	              <ul class="tabNav">
+	                <li class="active"><a href="#tab1" data-toggle="tab">20 сентября</a></li>
+	                <li><a href="#tab2" data-toggle="tab">21 сентября</a></li>
+	                <li><a href="#tab3" data-toggle="tab">22 сентября</a></li>
+	              </ul>
+	              <div class="tab-content">
+	              <div class="tab-pane active" id="tab1">
+	                <p>320 штук</p>
+	                <div class="center">
+	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/1.jpg')%>);"></div>
+	                  </div>
+	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/2.jpg')%>);"></div>
+	                  </div>
+	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/3.jpg')%>);"></div>
+	                  </div>
+	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/4.jpg')%>);"></div>
+	                  </div>
+	                </div>
+	              </div>
+	              <div class="tab-pane" id="tab2">Tab 2 content...</div>
+	              <div class="tab-pane" id="tab3">Tab 3 content...</div>
+	            </div>
+	          </div>
+	        </div>
 		</div>
-		<div class="halfRight">
+		<div class="right">
 			<div class="adParthTop" style="background-image:url(<%= asset_path('ad/heineken.png')%>);">
-			</div>
-			
-			<div class="adParthBottom">
-				<div class="carouselWrap">
-					<img src="<%= asset_path('ad/cherries.png')%>"/>
-					<div class="topPeopleCarousel">
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava6.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava7.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava8.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
-						<div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="contentWrapper">
-		<div class="full">
-			<div class="partnersParth">
-				<div class="carouselWrap">
-					<div class="partnerCarousel">
-						<div class="item">
-							<img src="<%= asset_path('partners/kaspersky.png') %>" />
-							<p>Касперский</p>
-						</div>
-						<div class="item">
-							<img src="<%= asset_path('partners/microsoft.png') %>" />
-							<p>Майкрософт</p>
-						</div>
-						<div class="item">
-							<img src="<%= asset_path('partners/publicis.png') %>" />
-							<p>Публицис</p>
-						</div>
-						<div class="item">
-							<img src="<%= asset_path('partners/publicis.png') %>" />
-							<p>Публицис</p>
-						</div>
-					</div>
-				</div>
-			</div>
+	        </div>
+	        <div class="adParthBottom">
+	          <div class="carouselWrap">
+	            <img src="<%= asset_path('ad/cherries.png')%>"/>
+	            <div class="topPeopleCarousel">
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava6.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava7.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava8.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava1.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></div>
+	              <div class="item" style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></div>
+	            </div>
+	          </div>
+	        </div>
 		</div>
 	</div>
 </section>
 <footer>
-	<div class="contentWrapperSmall">
+	<div class="fullWrapp">
 		<div class="left">
 			<ul>
 				<li><a href="">Календарь игр</a></li>

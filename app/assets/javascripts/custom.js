@@ -1,5 +1,9 @@
 $(document).ready(function(){
-	$('.noticCarosel').slick({});
+	$('.noticCarosel').slick({
+		slidesToShow: 1,
+	  slidesToScroll: 1,
+	  arrows:true
+	});
 
 	$('.center').slick({
 	  centerMode: true,
@@ -89,5 +93,14 @@ $(document).ready(function(){
 	      }
 	    }
 	  ]
+	});
+	$('.gamesCarousel').slick({
+	  rows: 2,
+	  arrows:false,
+	  dots:true,
+	  variableWidth:true,
+	  slidesToShow: 2,
+	  slidesToScroll: 2,
+	  variableWidth: true
 	});
 });
