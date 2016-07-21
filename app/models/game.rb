@@ -20,4 +20,10 @@ class Game < ApplicationRecord
   def open_for_reg?
   	max_people_number > members.count && max_teams_number > teams.count
   end
+
+  def self.grouped_games city = nil, year_month = nil
+    games = upcoming_games(city)
+    games = games.where("to_char(games.when, 'YYYY-MM') = ?", year_month) if year_month.present?
+    games.group_by.group_by{ |g| g.when.strftime("%d.%m.%Y") }
+  end
 end

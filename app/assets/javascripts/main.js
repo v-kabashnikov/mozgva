@@ -25,10 +25,10 @@ $( document ).ready(function() {
 	});
 
 	addFormDropdown("div#update_city");
+	addFormDropdown("div#games_filter");
 	addFormLink("a.get_teams_list", displayTeamsList);
 
 	function displayTeamsList(data){
-		console.log(data);
 		var modalBody = 'Пока нет команд';
 		if(data.length > 0){
 			modalBody = $.map(data, function(val, i){
@@ -54,21 +54,45 @@ $( document ).ready(function() {
 		});
 	}
 
-	function addFormDropdown(selector, successFunction){
-		el = $(selector);
-		if(el.data("action")){
-			dataString = el.find("ul").data("name") + "=";
+	// function addFormDropdown(selector, successFunction){
+	// 	el = $(selector);
+	// 	if(el.data("action")){
+	// 		dataString = el.find("ul").data("name") + "=";
+	// 		method = el.data("method") || "post";
+	// 		el.find('a').click(function(e){
+	// 			e.preventDefault();
+	// 	    $.ajax({
+	// 	        type: method,
+	// 	        url: el.data("action"),
+	// 	        data: dataString + $(this).data("value"),
+	// 	        success: successFunction
+	// 	    });            
+	// 		});
+	// 	}
+	// }
+
+
+	function addFormDropdown(selector, successFunction){		
+		$(selector).find('a').click(function(e){
+			el = $(selector);
 			method = el.data("method") || "post";
-			el.find('a').click(function(e){
-				e.preventDefault();
-		    $.ajax({
-		        type: method,
-		        url: el.data("action"),
-		        data: dataString + $(this).data("value"),
-		        success: successFunction
-		    });            
-			});
-		}
+			e.preventDefault();
+			clicked_link = $(this);
+			clicked_link_ul = clicked_link.parents('ul');
+			el = clicked_link.parents(selector).first();
+			if(el.data("action")){
+				dataString = [clicked_link_ul.data('name') + '=' + clicked_link.data('value')];
+				el.find("ul").not(clicked_link_ul).each(function(){
+					dataString.push($(this).data('name') + '=' + $(this).parent().find('span').data('current-value'));
+				});
+				$.ajax({
+	        type: method,
+	        url: el.data("action"),
+	        data: dataString.join('&'),
+	        success: successFunction
+		    });
+			}
+		});
 	}
 
 });
