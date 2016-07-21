@@ -13,11 +13,12 @@
 <section class="headInfo">
 	<div class="contentWrapper">
 		<div class="line">
-			<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
-			
+		<!-- 	<span></span>
+			 -->
 			<div class="authorizationWrap" >
 				<% if current_user %>
 					<span>
+						<img src="<%= asset_path('lightningSec/lightning.png') %>">
 						<div class="links">
 							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 							<%= link_to "Моя команда", my_team_path %>
@@ -36,8 +37,8 @@
 			<div class="logoWrap">
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<div class="local">
-				<img src="<%= asset_path('symbol/location.png') %>"/>
+			<div class="wrapSelectCityMonth">
+				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
 				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="post" data-action="<%=update_city_path%>">
 					<span><%= @city.name %></span>
 			    <ul class="dropdown" tabindex="1" data-name="city_id">
@@ -481,6 +482,7 @@
 				initEvents : function() {
 					var obj = this;
 					obj.dd.on('click', function(event){
+						$('.wrapper-dropdown').not(this).removeClass('active');
 						$(this).toggleClass('active');
 						return false;
 					});
@@ -500,20 +502,13 @@
 			}
 			$(function() {
 
-				var dd = new DropDown( $('#dd') );
+				var dd = new DropDown($('#dd'));
+				dd = new DropDown($('#dd2'));
+				dd = new DropDown( $('#update_city'));
 				$(document).click(function() {
-					// all dropdowns
 					$('.wrapper-dropdown').removeClass('active');
 				});
 
-			});
-			$(function() {
-
-				var dd = new DropDown( $('#dd2') );
-				$(document).click(function() {
-					// all dropdowns
-					$('.wrapper-dropdown').removeClass('active');
-				});
 			});
 		</script>
 

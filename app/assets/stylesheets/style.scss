@@ -49,12 +49,20 @@ body {
 	// min-height: 9000px;
 }
 // COMMON STYLES
-.contentWrapper {
-	max-width:90vw;
-	margin:0 auto;
+@media only screen and (min-width: 1250px) {
+	.contentWrapper {
+		max-width:90vw;
+		margin:0 auto;
+	}
+}
+@media only screen and (min-width: 1600px) {
+	.contentWrapper {
+		max-width:70vw;
+		margin:0 auto;
+	}
 }
 .contentWrapperSmall {
-	max-width:67vw;
+	max-width: 63.3vw;
 	margin:0 auto;
 }
 ul {
@@ -70,6 +78,11 @@ a {
 	}
 	&:hover,&:focus {
 		text-decoration: none;
+	}
+}
+.slick-slide  {
+	&:focus {
+		outline:none;
 	}
 }
 .lightningSection {
@@ -109,6 +122,48 @@ a {
 .headInfo {
 	background-color:$redHard;
 	padding:40px 0;
+	.wrapSelectCityMonth {
+		width:0;
+		display: block;
+		margin:0;
+		.wrapper-dropdown {
+			font-size:14px;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			height: 40px;
+			width:150px;
+			margin:0;
+			padding:0;
+			border-bottom:1px solid #fff;
+			float: right;
+			.dropdown {
+				text-align: left;
+			}
+			&:before {
+		    	content: "";
+			    width: 19px;
+			    height: 19px;
+			    position: absolute;
+			    background-image:asset-url("symbol/location.png");
+			    background-repeat: no-repeat;
+			    left: 0;
+			    top: 50%;
+		    }
+		    &.active {
+				background-color: transparent;
+				&:before {
+				    transform: rotate(0deg);
+				    margin-top: -6px;
+				}
+				.dropdown {
+					opacity: 1;
+				    pointer-events: auto;
+				    margin-top:1px;
+				}
+			}
+		}
+	}
 	.contentWrapper {
 		font-family:$GraublauSansDisplayLtFont;
 		.line {
@@ -134,14 +189,6 @@ a {
 
 						}
 					}	
-				}
-				
-			}
-			.local {
-				color:#fff;
-				text-decoration: none;
-				img {
-					margin-right:20px;
 				}
 			}
 			.logoWrap {
@@ -269,7 +316,7 @@ a {
 		justify-content: center;
 	}
 	.gamesTabs {
-		max-width: 77%;
+		max-width: 100%;
 		margin:50px 0 50px auto;
 		justify-content: space-around;
 		display: flex;
@@ -282,6 +329,7 @@ a {
 				justify-content: flex-end;
 				padding:0 15px;
 				align-items: center;
+				margin: 0 0 10px 0;
 				p {
 					color:#e5e5e5;
 					margin:0 auto 0 0;
@@ -427,16 +475,49 @@ a {
 			}
 		}
 		.slick-next {
-		    left: 510px;
+		    left: 480px;
+		    transform: rotate(270deg);
+		    width: 45px;
+			height: 45px;
+		    z-index: 3;
+		    &:before {
+		    	background-color:#fff;
+		    	border-radius:50%;
+		    	background-image:asset-url("symbol/arrowDown.png");
+		    	transform: rotate(90deg);
+		    	background-position:center;
+		    	background-repeat: no-repeat;
+		    	padding: 20px;
+		    	content:"";
+		    	line-height:0;
+		    	padding: 10px 20px;
+		    	opacity:1;
+		    }
+
 		}
 		.slick-prev {
-		    
+		    transform: rotate(90deg);
 		    left: 25px;
+		    width: 45px;
+			height: 45px;
 		    z-index: 3;
+		    &:before {
+		    	background-color:#fff;
+		    	border-radius:50%;
+		    	background-image:asset-url("symbol/arrowDown.png");
+		    	transform: rotate(90deg);
+		    	background-position:center;
+		    	background-repeat: no-repeat;
+		    	padding: 20px;
+		    	content:"";
+		    	line-height:0;
+		    	padding: 10px 20px;
+		    	opacity:1;
+		    }
 		}
 	}
 	.photoTabs {
-		max-width: 70%;
+		max-width: 85%;
 		margin:50px 50px 50px auto;
 		justify-content: space-around;
 		display: flex;
@@ -456,6 +537,7 @@ a {
 		.body {
 			background-image: linear-gradient(#000, #410a3e,#410a3e);
 			border-radius:0 0 10px 10px;
+			min-height:438px;
 			width:100%;
 			.tabNav {
 				margin:0;
@@ -501,6 +583,19 @@ a {
 				.slick-next {
 					right: 0px;
 					top: -60px;
+					height:70px;
+					width:40px;
+					&:before {
+						background-image:asset-url("symbol/arrowBg.png");
+						content: '';
+						top:0;
+						right:0;
+						width: 30px;
+						height: 70px;
+						position: absolute;
+						background-repeat: no-repeat;
+						opacity: 1;
+					}
 				}
 				.slick-prev {
 					left: 0px;
@@ -556,9 +651,9 @@ a {
 	.partnersParth {
 		background-color:#fff;
 		border-radius: 15px;
-		width:69%;
+		width: 86.2%;
 		height: 220px;
-		margin:0 90px 0 0;
+		margin: 0 60px 0 0;
 		text-align: center;
 		display: flex;
 		align-items: center;
@@ -603,23 +698,22 @@ a {
 		font-size:20px;
 	    position: relative;
 	    width: 200px;
-	    padding: 10px;
+	    padding: 10px 0 10px 30px;
 	    margin:0 0 0 50px;
 	    color: #fff;
 	    outline: none;
 	    cursor: pointer;
 	    border-bottom:1px solid $redHard;
-	    &:after {
+	    &:before {
 	    	content: "";
-		    width: 0;
-		    height: 0;
+		    width: 19px;
+		    height: 19px;
 		    position: absolute;
-		    right: 16px;
+		    background-image:asset-url("symbol/arrowDown.png");
+		    background-repeat: no-repeat;
+		    left: 0;
 		    top: 50%;
 		    margin-top: -6px;
-		    border-width: 6px 0 6px 6px;
-		    border-style: solid;
-		    border-color: transparent #fff;
 	    }
 	    .dropdown {
 			position: absolute;
@@ -649,10 +743,12 @@ a {
 		}
 		&.active {
 			background-color: transparent;
-			&:after {
+			&:before {
 				border-color: #9bc7de transparent;
 			    border-width: 6px 6px 0 6px ;
 			    margin-top: -3px;
+			    transform: rotate(180deg);
+				background-position: bottom;
 			}
 			.dropdown {
 				opacity: 1;
@@ -702,20 +798,6 @@ footer {
 			
 		}
 	}
-}
-
-/* No CSS3 support */
-
-.no-opacity .wrapper-dropdown .dropdown,
-.no-pointerevents .wrapper-dropdown .dropdown {
-    display: none;
-    opacity: 1; /* If opacity support but no pointer-events support */
-    pointer-events: auto; /* If pointer-events support but no pointer-events support */
-}
-
-.no-opacity .wrapper-dropdown.active .dropdown,
-.no-pointerevents .wrapper-dropdown.active .dropdown {
-    display: block;
 }
 
 .roundBtn {
