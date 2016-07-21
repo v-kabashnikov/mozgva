@@ -85,6 +85,9 @@ a {
 		outline:none;
 	}
 }
+a.disabled{
+	cursor: default;
+}
 .lightningSection {
 	background-color:$blue;
 	background-image:asset-url('lightningSec/bgRight.png');
@@ -432,6 +435,9 @@ a {
 						}
 					}
 				}
+				.my-game{
+					background-color: lighten($redLight, 10%);
+				}
 			}
 		}
 	}
@@ -472,7 +478,10 @@ a {
 					font-family:$GraublauSansDisplayRegFont;
 					font-size: 18px;
 				}
-			}
+			}			
+		}
+		.my-game .roundWrap{
+			background-color: lighten($blue, 20%);
 		}
 		.slick-next {
 		    left: 480px;
@@ -812,6 +821,7 @@ footer {
 	&:focus {
 		outline:none;
 	}
+	display: block;
 }
 .redBtn {
 	background-color:$redLight;
@@ -823,4 +833,5 @@ footer {
 	&:focus {
 		outline:none;
 	}
+	display: block;
 }

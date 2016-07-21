@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_one :member, dependent: :destroy
   has_one :team, through: :member
   has_many :invitations, dependent: :destroy
+  has_many :sent_invitations, class_name: 'Invitation', foreign_key: "inviter_id", dependent: :destroy
 
   def member? team
     team.users.include? self
@@ -18,6 +19,10 @@ class User < ApplicationRecord
 
   def can_be_invited? team
     !self.team && !invited?(team)
+  end
+
+  def participate? game
+    GameRegistration.find_by(team: self.team, game: game).present?
   end
 
   def accept invitation

@@ -1,0 +1,8 @@
+<% if @gr %>
+	$(".game<%=@game.id%> .participateBtn").remove();
+	$("#mainGame<%=@game.id%> .participateBtn").remove();
+	$(".game<%=@game.id%>,#mainGame<%=@game.id%>").addClass("my-game");
+<% else %>
+	$("#errors_modal").find('.modal-body').html("<%= j(render partial: 'shared/errors', locals: { errors: flash[:modal_errors] }) %>")
+	$("#errors_modal").modal('toggle');
+<% end %>
