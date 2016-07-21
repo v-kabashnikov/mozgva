@@ -16,9 +16,9 @@
 		<!-- 	<span></span>
 			 -->
 			<div class="authorizationWrap" >
+				<img src="<%= asset_path('lightningSec/lightning.png') %>">
 				<% if current_user %>
 					<span>
-						<img src="<%= asset_path('lightningSec/lightning.png') %>">
 						<div class="links">
 							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 							<%= link_to "Моя команда", my_team_path %>
@@ -39,8 +39,8 @@
 			</div>
 			<div class="wrapSelectCityMonth">
 				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
-				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="post" data-action="<%=update_city_path%>">
-					<span><%= @city.name %></span>
+				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="put" data-action="<%=update_city_path%>">
+					<span data-value="<%= @city.id %>"><%= @city.name %></span>
 			    <ul class="dropdown" tabindex="1" data-name="city_id">
 		    		<% City.all.each do |city| %>
 			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
@@ -106,30 +106,22 @@
 <section class="noticeSection">
 	<div class="contentWrapper">
 		<div class="halfLeft">
-			<div class="wrapSelectCityMonth"> <!--SELECT SITY & MONTH-->
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
+				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
 				<div id="dd" class="wrapper-dropdown" tabindex="1">
-					<span>Москва</span>
-				    <ul class="dropdown" tabindex="1">
-				        <li><a href="#">Москва</a></li>
-				        <li><a href="#">Берлин</a></li>
-				        <li><a href="#">Минск</a></li>
-				        <li><a href="#">Питер</a></li>
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+				    <ul class="dropdown" tabindex="1" data-name="city_id">
+				    	<% City.all.each do |city| %>
+			        	<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+			      	<% end %>
 				    </ul>
 				</div>
 				<div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
-					<span>Сетнтябрь</span>
-				    <ul class="dropdown" tabindex="1">
-						<li><a href="#">Сентябрь</a></li>
-				        <li><a href="#">Октябрь</a></li>
-				        <li><a href="#">Декабрь</a></li>
-				        <li><a href="#">Январь</a></li>
-				        <li><a href="#">Февраль</a></li>
-				        <li><a href="#">Март</a></li>
-				        <li><a href="#">Апрель</a></li>
-				        <li><a href="#">Май</a></li>
-				        <li><a href="#">Июнь</a></li>
-				        <li><a href="#">Июль</a></li>
-				        <li><a href="#">Август</a></li>
+					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+				    <ul class="dropdown" tabindex="1" data-name="year_month">
+				    <% @months.each do |month| %>
+							<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+						<% end %>
 
 				    </ul>
 				</div>
@@ -272,6 +264,8 @@
 						obj.val = opt.text();
 						obj.index = opt.index();
 						obj.placeholder.text(obj.val);
+						obj.placeholder.data('current-value', opt.find('a').data('value'));
+						// obj.dd.trigger( "dropdown:change" );
 					});
 				},
 				getValue : function() {
