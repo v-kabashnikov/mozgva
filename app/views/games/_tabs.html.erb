@@ -2,7 +2,7 @@
 <% @game_groups.each_with_index do |gg, gg_i| %>
   <% games = gg[1] %>
 
-    <div class="item">
+    <div class="itemGame">
       <ul class="navDayGame" role="tablist">
         <p><%= games.count %> игры в этот день</p>
         <% games.count.times do |i| %>

@@ -212,69 +212,24 @@
 	</div>
 </footer>
 
-<script type="text/javascript">
-			function DropDown(el) {
-				this.dd = el;
-				this.placeholder = this.dd.children('span');
-				this.opts = this.dd.find('ul.dropdown > li');
-				this.val = '';
-				this.index = -1;
-				this.initEvents();
-			}
-			DropDown.prototype = {
-				initEvents : function() {
-					var obj = this;
-					obj.dd.on('click', function(event){
-						$('.wrapper-dropdown').not(this).removeClass('active');
-						$(this).toggleClass('active');
-						return false;
-					});
-					obj.opts.on('click',function(){
-						var opt = $(this);
-						obj.val = opt.text();
-						obj.index = opt.index();
-						obj.placeholder.text(obj.val);
-						obj.placeholder.data('current-value', opt.find('a').data('value'));
-						// obj.dd.trigger( "dropdown:change" );
-					});
-				},
-				getValue : function() {
-					return this.val;
-				},
-				getIndex : function() {
-					return this.index;
-				}
-			}
-			$(function() {
-
-				var dd = new DropDown($('#dd'));
-				dd = new DropDown($('#dd2'));
-				dd = new DropDown( $('#update_city'));
-				$(document).click(function() {
-					$('.wrapper-dropdown').removeClass('active');
-				});
-
-			});
-		</script>
-
 	
 
-	  	<%= render 'shared/sign_in' %>
-	  	<%= render 'shared/sign_up' %>
-	  	<%= render 'shared/errors_modal' %>
+	<%= render 'shared/sign_in' %>
+	<%= render 'shared/sign_up' %>
+	<%= render 'shared/errors_modal' %>
 
-	  	<div class="modal fade in" id="teams_list">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button class="close" data-dismiss="modal">x</button>
-			        <h2 class="text-center">Список команд</h2>
-			      </div>
-			      <div class="modal-body">
-							Список
-			      </div>
-			      <div class="modal-footer">
-			      </div>
-			    </div>
-			  </div>
-			</div>
+  	<div class="modal fade in" id="teams_list">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button class="close" data-dismiss="modal">x</button>
+	        <h2 class="text-center">Список команд</h2>
+	      </div>
+	      <div class="modal-body">
+					Список
+	      </div>
+	      <div class="modal-footer">
+	      </div>
+	    </div>
+	  </div>
+	</div>
