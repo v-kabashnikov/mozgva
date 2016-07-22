@@ -113,9 +113,12 @@
                 
                 
                 <h3>5000 P</h3>
-                <p>
-                  <img class="slider_x5" src="<%= asset_path('team/slider_x5.png') %>" />
-                </p>
+                <div class="sliderWrapper">
+                  <div class="slider">
+                    <sub>1</sub><input type="range" min="1" max="9" value="1" id="fader" step="0" oninput="outputUpdate(value)"> <sub>9</sub>
+                    <output for="fader" id="volume"></output>
+                  </div>
+                </div>
                 
                 <div class="red_block">
                   <ul class="right_left">
@@ -251,3 +254,4 @@
     </div>
   </div>
 </section>
+
