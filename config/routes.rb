@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
   get '/team', to: 'teams#my_team', as: :my_team
   get '/calendar', to: 'home#calendar', as: :calendar
+  get '/franchise', to: 'home#franchise', as: :franchise
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
