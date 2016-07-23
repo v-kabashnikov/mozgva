@@ -48,12 +48,12 @@
 			</div>
 		</div>
 		<div class="line SomeTabs">
+			<%= link_to leagues_path do %>
 			<div class="item">
-				<%= link_to leagues_path do %>
-					<img src="<%= asset_path('header/ligi.png') %>">
-					<p>Лиги</p>
-				<% end %>
+				<img src="<%= asset_path('header/ligi.png') %>">
+				<p>Лиги</p>
 			</div>
+			<% end %>
 			<div class="item">
 				<img src="<%= asset_path('header/gifts.png') %>">
 				<p>Подарочные<br/> сертификаты</p>	
