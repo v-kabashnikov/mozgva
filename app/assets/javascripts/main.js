@@ -25,7 +25,17 @@ $( document ).ready(function() {
 	});
 
 	addFormDropdown("div#update_city");
-	addFormDropdown("div#games_filter");
+	addFormDropdown("div#games_filter", function(){
+		$('.gamesCarousel').slick({
+		  rows: 2,
+		  arrows:false,
+		  dots:true,
+		  variableWidth:true,
+		  slidesToShow: 2,
+		  slidesToScroll: 2,
+		  variableWidth: true
+		});
+	});
 	addFormLink("a.get_teams_list", displayTeamsList);
 
 	function displayTeamsList(data){
