@@ -1687,7 +1687,21 @@ footer.franchiseF {
 		}
 	}
 }
-
+.loadMore {
+	width:100%;
+	height:50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:#292c34;
+	span {
+		border-radius:500%;
+		width:10px;
+		height:10px;
+		margin:5px;
+		background-color:rgba(255,255,255,.5);
+	}
+}
 ////////////// CALENDAR PAGE
 
 .topInfo.calendar {
@@ -1766,24 +1780,11 @@ footer.franchiseF {
 			// margin:0 auto 0 0;
 			justify-content: space-between;
 			width:900px;
-			.loadMore {
-				width:100%;
-				max-width: 840px;
-				margin:auto;
-				height:50px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				background-color:#292c34;
-				span {
-					border-radius:500%;
-					width:10px;
-					height:10px;
-					margin:5px;
-					background-color:rgba(255,255,255,.5);
-				}
-			}	
+				
 		}
+	}
+	.loadMore {
+		margin:30px;
 	}
 }
 
@@ -2023,7 +2024,7 @@ footer.franchiseF {
 .teamSec {
 	background-color:$darkBlue;
 	border:10px solid $redLight;
-	padding: 150px 0 100px;
+	padding: 150px 0 0;
 	.contentWrap {
 		display: flex;
 		justify-content: center;
@@ -2033,7 +2034,6 @@ footer.franchiseF {
 		.left {
 			width:100%;
 			max-width:550px;
-			background-color:#12151b;
 			border-radius:15px;
 			color:#fff;
 			h4 {
@@ -2042,8 +2042,8 @@ footer.franchiseF {
 				font-size:20px;
 				margin:30px 0 20px;
 			}
-			.teamSucsesTabs {
-				.navTeamSucses {
+			.teamSuccessTabs {
+				.navTeamSuccess {
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -2104,6 +2104,9 @@ footer.franchiseF {
 					}
 				}
 			}
+		}
+		.left.Success {
+			background-color:#12151b;
 		}
 		.right {
 			width:100%;
@@ -2256,9 +2259,153 @@ footer.franchiseF {
 					border-radius:0 0 15px 15px;
 					padding:10px 20px
 				}
+				ul.foot {
+					justify-content: flex-start;
+					padding:0 20px 20px;
+					li {
+						margin:0 5px;
+
+					}
+				}
 			} 
+		}
+		.full {
+			display: flex;
+			align-items: flex-start;
+			width:100%;
+			max-width:1170px;
+		}
+		.photoHead {
+			background-color: transparent;
+			padding:30px;
+			color:#fff;
+			height:80px;
+			h3 {
+				color:#fff;
+				margin:0 auto 0 0;
+				font-family:$GraublauSansDisplayRegFont;
+			}
+			p {
+				margin:0 0 0 auto;
+			}
+			.red {
+				color:$redLight;
+			}
+		}
+		.photoArchive {
+			background-color:#12151b;
+			width:100%;
+			max-width: 170px;
+   			border-radius: 15px;
+   			margin-right:15px;
+   			display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		    h4 {
+		    	border-bottom: 3px solid $light_red;
+		    	font-size: 26px;
+		    	padding:30px 0 10px;
+		    	color:#fff;
+		    }
+   			ul {
+   				li {
+   					position: relative;
+   					&:before {
+   						content:"";
+   						width:10px;
+   						height:10px;
+   						background-color:#2c3140;
+   						border-radius:50%;
+						position: absolute;
+						left: -20px;
+    					top: 5px;
+   					}
+   					&.active {
+   						&:before {
+							background-color:$light_red;
+   						}
+   					}
+   					&:last-child {
+   						margin-bottom:40px;
+   					}
+   					a {
+   						color:#fff;
+   						&:hover {
+   							color:#fff;
+   						}
+   					}
+   				}
+   			}
+   			
+		}
+		.tab-content.albom {
+			width:100%;
+			.loadMore {
+				margin:30px 15px 0;
+			}
+		}
+		.AlbomItmWrapper {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			width:100%;
+			margin: 0 15px;
+			.AlbomItm {
+				background-color:#12151b;
+				width:48.5%;
+				height:300px;
+				position: relative;
+				border-radius: 15px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				color:#fff;
+				background-size: cover;
+				background-position:center;
+				background-repeat: no-repeat;
+				&:nth-child(2n-1) {
+					margin:0;
+				}
+				&:nth-child(2n) {
+					margin:0 0 30px 0;
+				}
+				&:last-child {
+					margin-bottom:0;
+				}
+				&.photoShow {
+					text-align: center;
+					h4 {
+						margin:20px 0 40px;
+						font-family:$GraublauSansDisplayRegFont;
+						font-size:18px;
+					}
+				}
+				a {
+					color:#fff;
+					border-bottom: 1px solid;
+					&:hover {
+						color:#fff;
+					}
+				}
+				.albomInfo {
+					position: absolute;
+					background-color:$blue;
+					margin: auto;
+					top:0;
+					padding:10px 20px;
+					border-radius:0 0 15px 15px;
+					right:0;
+					left:0;
+					max-width:200px;
+					text-align: center;
+				}
+			}
+
 
 		}
+		
 	}
 }
 
