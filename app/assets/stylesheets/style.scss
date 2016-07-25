@@ -49,6 +49,10 @@ $GraublauSansDisplayBdFont:GraublauSansDispBd;
 body {
 	// min-height: 9000px;
 }
+body.modal-open-noscroll {
+  margin-right: 0!important;
+  overflow: hidden;
+}
 // COMMON STYLES
 @media only screen and (min-width: 1250px) {
 	.contentWrapper {

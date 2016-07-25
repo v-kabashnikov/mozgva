@@ -25,17 +25,7 @@ $( document ).ready(function() {
 	});
 
 	addFormDropdown("div#update_city");
-	addFormDropdown("div#games_filter", function(){
-		$('.gamesCarousel').slick({
-		  rows: 2,
-		  arrows:false,
-		  dots:true,
-		  variableWidth:true,
-		  slidesToShow: 2,
-		  slidesToScroll: 2,
-		  variableWidth: true
-		});
-	});
+	addFormDropdown("div#games_filter");
 	addFormLink("a.get_teams_list", displayTeamsList);
 
 	function displayTeamsList(data){
@@ -104,5 +94,19 @@ $( document ).ready(function() {
 			}
 		});
 	}
+
+	$('.modal').on('show.bs.modal', function () {
+    if ($(document).height() > $(window).height()) {
+      // no-scroll
+      $('body').addClass("modal-open-noscroll");
+    }
+    else { 
+      $('body').removeClass("modal-open-noscroll");
+    }
+  })
+  $('.modal').on('hide.bs.modal', function () {
+      $('body').removeClass("modal-open-noscroll");
+  })
+
 
 });

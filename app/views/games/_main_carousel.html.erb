@@ -1,7 +1,7 @@
 <% @main_games.each do |game| %>
   <div id="mainGame<%=game.id%>" class="<%= 'my-game' if(current_user && current_user.participate?(game)) %>">
     <ul class="roundWrap">
-      <li><%= "#{game.name}: #{game.league.name}" %></li>
+      <li><%= "#{game.name}: #{game.city.name}" %></li>
       <li>
         <span><img src="<%= asset_path('noticeSec/locationCarousel.png') %>"/></span><%= game.place.name %>
       </li>

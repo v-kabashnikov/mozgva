@@ -213,9 +213,11 @@
 </footer>
 
 	
-
-	<%= render 'shared/sign_in' %>
-	<%= render 'shared/sign_up' %>
+	<% unless current_user %>
+		<%= render 'shared/sign_in' %>
+		<%= render 'shared/sign_up' %>
+		<%= render 'shared/restore_password' %>
+	<% end %>
 	<%= render 'shared/errors_modal' %>
 
   	<div class="modal fade in" id="teams_list">
