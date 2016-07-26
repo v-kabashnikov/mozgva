@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :sent_invitations, class_name: 'Invitation', foreign_key: "inviter_id", dependent: :destroy
 
+  has_attached_file :avatar, styles: { small: "400x400#", thumb: "140x140#" }
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   def member? team
     team.users.include? self
   end

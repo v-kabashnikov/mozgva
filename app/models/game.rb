@@ -8,6 +8,8 @@ class Game < ApplicationRecord
   
   enum status: { 'checking' => 'checking', 'open' => 'open', 'canceled' => 'canceled', 'ended' => 'ended' }
 
+  scope :main, ->{ where main: true }
+
   validates_presence_of :max_people_number, :max_teams_number
   validates_uniqueness_of :number
 

@@ -5,6 +5,40 @@ $( document ).ready(function() {
 	})
 
 
+	$('.start_edit').on('click', function(e){
+		e.preventDefault();
+		var editable = $(this).parent().find('.editable');
+		editable.attr('contenteditable', 'true');
+		var range = document.createRange();
+		var sel = window.getSelection();
+		var pos = editable.text().length;
+		range.setStart(editable[0].childNodes[0], pos);
+		range.collapse(true);
+		sel.removeAllRanges();
+    sel.addRange(range);
+    editable[0].focus();
+	});
+
+	$('.editable').keydown(function(event){
+		if(event.keyCode == 13){
+			event.preventDefault();
+			var editable = $(this);
+			editable.attr('contenteditable', 'false');
+			editable.data('');
+
+			if(editable.data("action")){
+				dataString = editable.data("name") + "=";
+				method = editable.data("method") || "put";
+		    $.ajax({
+	        type: method,
+	        url: editable.data("action"),
+	        data: dataString + editable.text(),
+	        success: function(){}
+		    });            
+			}
+		}
+	});
+
 	$("#email_users_search").on("ajax:success", function(e, data, status, xhr){
 	  var email_search = $(this).parent(".email_search");
 	  email_search.find('.result').show();
@@ -94,5 +128,19 @@ $( document ).ready(function() {
 			}
 		});
 	}
+
+	$('.modal').on('show.bs.modal', function () {
+    if ($(document).height() > $(window).height()) {
+      // no-scroll
+      $('body').addClass("modal-open-noscroll");
+    }
+    else { 
+      $('body').removeClass("modal-open-noscroll");
+    }
+  })
+  $('.modal').on('hide.bs.modal', function () {
+      $('body').removeClass("modal-open-noscroll");
+  })
+
 
 });

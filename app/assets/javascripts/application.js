@@ -5,3 +5,4 @@
 //= require custom
 //= require main
 //= require sign_in_up
+//= require teams

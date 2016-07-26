@@ -44,3 +44,4 @@ puts 'creating games'
 	)
 end
 
+# 10.times{Game.create(number: rand(1..400),name: "Игра #{(1..6).map{('а'..'я').to_a.sample}.join}",place: Place.all.sample,league: League.all.sample,price: rand(4..7) * 100,when: Time.now + rand(1..3600*24*10),status: 'open',max_people_number: rand(10..100),max_teams_number: rand(5..15))}
