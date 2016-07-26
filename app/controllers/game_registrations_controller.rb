@@ -10,8 +10,9 @@ class GameRegistrationsController < ApplicationController
 				flash[:modal_errors] = @gr.errors.messages
 			end
 		else
-			flash[:modal_errors] = ["Необходимо сперва вступпить в команду или создать свою"]
+			flash[:modal_errors] = ["Необходимо сперва вступить в команду или создать свою"]
 		end
+		render 'change'
 	end
 
 end

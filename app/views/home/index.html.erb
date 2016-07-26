@@ -19,7 +19,11 @@
 					<span>
 						<div class="links">
 							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-							<%= link_to "Моя команда", my_team_path %>
+							<% if current_user.team %>
+								<%= link_to("Моя команда", my_team_path) %>
+							<% else %>
+								<%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+							<% end %>
 						</div>
 					</span>		
 				<% else %>
@@ -217,6 +221,8 @@
 		<%= render 'shared/sign_in' %>
 		<%= render 'shared/sign_up' %>
 		<%= render 'shared/restore_password' %>
+	<% else %>
+		<%= render 'shared/team_modal' unless current_user.team %>
 	<% end %>
 	<%= render 'shared/errors_modal' %>
 

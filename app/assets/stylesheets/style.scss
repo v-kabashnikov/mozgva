@@ -49,6 +49,9 @@ $GraublauSansDisplayBdFont:GraublauSansDispBd;
 body {
 	// min-height: 9000px;
 }
+.editable {
+	outline: none;
+}
 body.modal-open-noscroll {
   margin-right: 0!important;
   overflow: hidden;
@@ -1924,6 +1927,21 @@ footer.franchiseF {
 						color:#000;
 					}
 				}
+				.avatar_wrapper {
+					width:140px;
+					height:140px;
+					border-radius:50%;
+					position: absolute;
+				}
+				&.not_member {
+					.avatar_wrapper {
+						opacity: .6;
+						background-color: #000;
+					}
+					p {
+						opacity: .6;
+					}
+				}				
 				a {
 					margin: auto;
 				}

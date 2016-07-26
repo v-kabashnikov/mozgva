@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'list', on: :collection
   end
   get 'games/filter', to: 'games#filter', as: :games_filter
+  delete 'games/:id/unregister', to: 'games#unregister', as: :game_unregister
 
   resources :invitations, only: [:create, :destroy] do
     member do
