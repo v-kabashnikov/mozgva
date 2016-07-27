@@ -17,6 +17,10 @@ class Team < ApplicationRecord
     members_count + invitations_count >= MAX_MEMBERS_COUNT
   end
 
+  def places
+    MAX_MEMBERS_COUNT - members_count - invitations_count
+  end
+
   def generate_invite
     values = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
     (1..5).map{ values.sample.to_s }.join

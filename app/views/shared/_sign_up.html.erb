@@ -2,23 +2,28 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button class="close" data-dismiss="modal">x</button>
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
         <h2 class="text-center">Регистрация</h2>
       </div>
       <div class="modal-body">
         <%= form_for(User.new, url: registration_path(:user), html: {id: 'sign_up_user', :'data-type' => 'json'}, remote: true) do |f| %>
-          
+
             <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
 
           
             <%= f.email_field :email, autofocus: true, placeholder: 'Email', class: "modalInput", required: true %>
+            
+            <%= f.password_field :password, placeholder: 'Пароль', class: "modalInput", required: true %>
 
               <%= check_box_tag :user_pers_agree %>
               <%= f.label :pers_agree, "Согласен с обработкой перс.данных" %>
               <%= check_box_tag :user_user_agree %>
               <%= f.label :user_agree, "Согласен с пользовательским соглашением" %>
           
-            <%= f.submit "Регистрация", class: "redBtn" %>
+            <%= f.submit "Регистрация", class: "blueBtn" %>
         <% end %>
       </div>
     </div>

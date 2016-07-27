@@ -1,7 +1,7 @@
 <section class="navTeamSec">
   <div class="headWrapper">
     <ul>
-      <li><a href="" class="whiteBorderBtn">Войти</a></li>
+      <li><%= link_to "Выйти", destroy_user_session_path, method: :delete, class: 'whiteBorderBtn' %></li>
       <li>Лига: <span>Чемпионы</span></li>
       <li>Очки: <span>345 3535 54</span></li>
     </ul>
@@ -16,8 +16,8 @@
 </section>
 <section class="topInfo team">
   <div class="contentWrap">
-    <a href="">Редактировать</a>
-    <h1>Барсиковые Войска</h1>
+    <a href="#" class="start_edit">Редактировать</a>
+    <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
   <ul class="contentWrap">
       <li><img src="<%= asset_path('team/achif.png') %>" /></li>
@@ -26,45 +26,31 @@
   </ul>
   <div class="contentWrap">
     <ul class="faceParth">
-      <li>
-        <div class="avatar"></div>
-        <p class="captain"> Андрей</p>
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p class="subCaptain"> Юля</p>   
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p> Андрей</p>
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p> Андрей</p>
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p> Андрей</p>
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p> Андрей</p>
-      </li>
-      <li>
-        <div class="avatar"></div>
-        <p> Андрей</p>
-      </li>
-      <li>
-        <a href="">
-        <div class="avatar">
-          <div class="cycle">
-            <span></span>
-            <span></span>
-          </div>
-          <sub>еще 2 места</sub>
-        </div>
-        </a>
-      </li>
+      <% @team.members.each do |member| %>
+        <li>
+          <div class="avatar"></div>
+          <p class="<%= member.team_role %>"><%= member.user.name %></p>
+        </li>
+      <% end %>
+      <% @team.invitations.each do |inv| %>
+        <li class="not_member">
+          <div class="avatar"></div>
+          <p><%= inv.user.name %></p>
+        </li>
+      <% end %>
+      <% unless @team.full? %>
+        <li>
+          <a href="#invite_modal" data-toggle="modal">
+            <div class="avatar">
+              <div class="cycle">
+                <span></span>
+                <span></span>
+              </div>
+              <sub>еще <%= "#{@team.places} #{Russian.p(@team.places, "место", "места", "мест")}" %></sub>
+            </div>
+          </a>
+        </li>
+    <% end %>      
     </ul>
   </div>
 </section>
@@ -267,4 +253,7 @@
 </section>
 
 
+
+<%= render 'shared/team_modal' %>
+<%= render 'shared/invite_modal' unless @team.full? %>
 

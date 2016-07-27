@@ -2,21 +2,39 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button class="close" data-dismiss="modal">x</button>
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
         <h2 class="text-center">Авторизация</h2>
       </div>
       <div class="modal-body">
         <%= form_for(User.new, url: session_path(:user), html:{id: 'sign_in_user', :'data-type' => 'json'  }, remote: true) do |f| %>
           
-            <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "modalInput", required: true %>
+            <%= f.email_field :email, autofocus: true, placeholder: "Почта", class: "modalInput", required: true %>
             <%= f.password_field :password, autocomplete: "off", placeholder: "Пароль", class: "modalInput", required: true %>
           <% if Devise.mappings[:user].rememberable? -%>
-            <div>
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me, "Запомнить меня" %>
-            </div>
+            <a data-dismiss="modal" data-toggle="modal" data-target="#restore_password" aria-hidden="false" href="#">Забыли пароль?</a>
+            <ul class="social">
+              <li>
+                <a href="">
+                  <img src="<%= asset_path('symbol/fb.png') %>" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="<%= asset_path('symbol/twiter.png') %>" />
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  <img src="<%= asset_path('symbol/vk.png') %>" />
+                </a>
+              </li>
+            </ul>
+            
           <% end -%>
-          <%= f.submit "Войти", class: "redBtn" %>
+          <%= f.submit "Готово", class: "blueBtn" %>
         <% end %>
       </div>
     </div>

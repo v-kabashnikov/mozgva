@@ -1,0 +1,27 @@
+<div class="modal fade in" id="invite_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">x</button>
+        <h2 class="text-center">Команда</h2>
+      </div>
+      <div class="modal-body">
+        <div class="email_search">
+          <%= form_tag users_search_path, remote: true, id: 'email_users_search' do %>
+            <%= text_field_tag :email %>
+            <%= submit_tag 'Искать' %>
+          <% end %>
+          <div class="result" style="display: none;"></div>
+          <div class="invitation" style="display: none;">
+            <%= form_for Invitation.new do |f| %>
+              <%= f.hidden_field :user_id %>
+              <%= f.submit 'Пригласить' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal fade in" id="team_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">x</button>
+        <h2 class="text-center">Команда</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@team || Team.new, remote: true) do |f| %>
+          <div class="form-group">
+            <%= f.text_field :name, autofocus: true, placeholder: "Название", class: "form-control", required: true %>
+          </div>
+          <div class="text-center">
+            <%= f.submit "Сохранить", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

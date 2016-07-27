@@ -49,6 +49,13 @@ $GraublauSansDisplayBdFont:GraublauSansDispBd;
 body {
 	// min-height: 9000px;
 }
+.editable {
+	outline: none;
+}
+body.modal-open-noscroll {
+  margin-right: 0!important;
+  overflow: hidden;
+}
 // COMMON STYLES
 @media only screen and (min-width: 1250px) {
 	.contentWrapper {
@@ -694,6 +701,19 @@ footer {
 }
 .redBtn {
 	background-color:$redLight;
+	border-radius:50px;
+	border:0;
+	text-align: center;
+	padding: 15px 35px;
+	cursor: pointer;
+	color:#fff;
+	&:focus {
+		outline:none;
+	}
+	display: block;
+}
+.blueBtn {
+	background-color:$blue;
 	border-radius:50px;
 	border:0;
 	text-align: center;
@@ -1933,6 +1953,14 @@ footer.franchiseF {
 						color:#000;
 					}
 				}
+				&.not_member {
+					.avatar {
+						box-shadow: inset 14px 16px 211px 176px rgba(0,0,0,0.55);
+					}
+					p {
+						opacity: .6;
+					}
+				}				
 				a {
 					margin: auto;
 				}
@@ -2434,10 +2462,19 @@ footer.franchiseF {
 		max-width: 320px;
 	}
 	.modal-content {
-		background-color:$blue;
+		background-color:#fff;
 		.modal-header {
 			border:0;
+			border-radius:4px 4px 0 0;
 			color:#fff;
+		}
+		.modal-header {
+			background-color:#0c00ff;
+			h2 {
+				font-family: $mainFontBold;
+				font-size:40px;
+			}
+			
 		}
 		.modal-body{
 			form {
@@ -2446,19 +2483,20 @@ footer.franchiseF {
 				flex-direction: column;
 				align-items: center;
 				.modalInput {
+					text-align: center;
 					background-color: transparent;
 					border:0;
-					border-bottom: 1px solid;
+					border-bottom: 2px solid;
 					padding:8px 5px;
-					color:#fff;
+					color:$blue;
 					display: block;
-					max-width:300px;
+					max-width:220px;
 					width:100%;
 					margin-bottom:15px;
 					&:-webkit-autofill {
-			        	-webkit-box-shadow: inset 0 0 0 50px $blue !important;
-			        	-webkit-text-fill-color: #fff !important;
-			        	color: #fff !important;
+			        	-webkit-box-shadow: inset 0 0 0 50px #fff !important;
+			        	-webkit-text-fill-color: $blue !important;
+			        	color: $blue !important;
 			      	}
 				}
 
@@ -2468,35 +2506,80 @@ footer.franchiseF {
 
 				input[type=checkbox]:checked + label:before {
 					background-color:$redLight;
-
+					border:1px solid $redLight;
 				}
 				label {
 					position: relative;
 				    margin: 15px auto 0;
-				    color: #fff;
-				    width: 250px;
+				    color: $blue;
 				    display: block;
+				    font-family:$GraublauSansDisplayLtFont;
+				    font-weight:200;
+					cursor: pointer;
+					width: 220px;
 					&:before {
-						background-color:#fff;
-						width:10px;
-						height:10px;
+						background-color:transparent;
+						border:1px solid $blue;
+						width:8px;
+						height:8px;
 						border-radius:50%;
 						content:"";
 						position: absolute;
-						margin: auto 0 auto -20px;
-						top:0;
+						margin: auto 0 auto -15px;
+    					top: -3px;
 						bottom:0;
-						transition:background-color .4s;
+						transition:background-color .4s,border .4s;
+
 					}
 				}
 				input[type=submit] {
 					margin:30px 0;
 				}
+				a {
+					color:rgba(0,0,0,.7);
+					transition:color .4s;
+					font-family:$GraublauSansDisplayLtFont;
+					&:hover {
+						color:$blue;
+					}
+				}
+			}
+			.social {
+				margin-top:10px;
+				display: flex;
+				li {
+					margin:5px;
+				}
 			}
 		}
 	}
 
-
+.closeModal {
+		display: flex;
+	    flex-direction: column;
+	    align-items: flex-end;
+	    justify-content: center;
+	    
+	    cursor: pointer;
+	span {
+		background-color:#fff;
+		width:12px;
+		height:2px;
+		display: block;
+		transition:background-color .4s;
+		transform:rotate(-45deg);
+		&:last-child{
+			transform:rotate(45deg);
+			margin: -2px 0 0 0;
+		}
+		
+	}
+	&:hover {
+		span {
+			background-color:$redLight;
+		}
+	}
+}
 /*
 	blalblabla ()
 	if (slick-slide.count < 4) {
