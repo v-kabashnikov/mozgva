@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # devise_scope :user do
+  #   get '/i/:invite' => "users/registrations#new"
+  # end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]
   resources :game_registrations, only: [:create]
@@ -22,5 +26,7 @@ Rails.application.routes.draw do
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
   root 'home#index'
+
+  get '/i/:invite', to: 'invitations#invite_reg'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
