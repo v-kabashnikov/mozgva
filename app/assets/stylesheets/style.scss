@@ -77,9 +77,17 @@ a {
 		text-decoration: none;
 	}
 }
-input,input:focus{
-	outline:none;
-	border:0;
+
+button,
+a:hover,
+a:focus,
+input,
+input:focus,
+textarea:focus,
+select:focus,
+button:visited {
+  text-decoration: none;
+  outline: none;
 }
 .slick-slide  {
 	&:focus {
@@ -530,27 +538,13 @@ a.disabled{
 			}
 		}	
 	}
-	// .partnersParth {
-	// 	background-color:#fff;
-	// 	border-radius: 15px;
-	// 	width: 86.2%;
-	// 	height: 220px;
-	// 	margin: 0 60px 0 0;
-	// 	text-align: center;
-	// 	display: flex;
-	// 	align-items: center;
-	// 	.carouselWrap {
-	// 		max-width:894px;
-	// 		margin: auto;
-	// 		.item {
-	// 			display: flex;
-	// 			flex-direction: column;
-	// 			height: 120px;
-	// 			justify-content: space-between;
-	// 			margin:0 70px;
-	// 		}
-	// 	}
-	// }
+	footer {
+		background-color: transparent;
+		padding:0;
+		.right,.left {
+			margin:0;
+		}
+	}
 }
 
 
@@ -646,10 +640,12 @@ a.disabled{
 footer {
 	background-color:$darkBlue;
 	padding:0 0 70px;
+	max-width: 1200px;
+    margin: auto;
 	ul {
 		display: flex;
-		justify-content: space-around;
-		align-items: stretch;
+		justify-content: space-between;
+		align-items:center;
 		li {
 			margin:0 auto 0 0;
 			color:#fff;
@@ -703,6 +699,7 @@ footer {
 	text-align: center;
 	padding: 15px 35px;
 	cursor: pointer;
+	color:#fff;
 	&:focus {
 		outline:none;
 	}
@@ -1279,7 +1276,7 @@ $yellow: #ffae0f;
 
 
 .fullWrapp {
-	width:100vw;
+	width:100%;
 	align-items: center;
 	display: flex;
 	justify-content:center;
@@ -1590,6 +1587,8 @@ output {
 		align-items: center;
 		padding:0 50px;
 		height:250px;
+		max-width: 1200px;
+    	margin: auto;
 		h1 {
 			font-size: $h1;
 			font-family: $mainFontBold;
@@ -1715,9 +1714,11 @@ footer.franchiseF {
 	border:10px solid $redLight;
 	.calendarWrap {
 		display: flex;
-		justify-content: center;
+	    justify-content: space-between;
+	    max-width: 1200px;
+	    margin: auto;
 		.sideBar {
-			margin: 20px 50px 0 0;
+			margin: 20px 0 0 0;
 			width:250px;
 			.wrapSelectCityMonth {
 				flex-direction: column;
@@ -1774,19 +1775,26 @@ footer.franchiseF {
 			}
 		}
 		.eventsParth {
-			margin: 20px 0 0 50px;
+			margin: 20px 0;
 			display: flex;
 			flex-wrap: wrap;
-			// margin:0 auto 0 0;
 			justify-content: space-between;
 			width:900px;
-				
 		}
 	}
 	.loadMore {
 		margin:30px;
 	}
 }
+// @media only screen and (min-width: 1400px) {
+// 	.calendarSec {
+// 		.calendarWrap {
+// 			.eventsParth {
+// 				
+// 			}
+// 		}
+// 	}
+// }
 
 ////////////// franchise PAGE
 .topInfo.franchise {
@@ -1867,33 +1875,37 @@ footer.franchiseF {
 
 .navTeamSec {
 	background-color:$redLight;
-	display: flex;
-	justify-content: center;
-	padding:0 50px;
-	.teamNav {
-		a {
-			border-bottom: 1px solid;
+	.headWrapper {
+		display: flex;
+		max-width:1200px;
+		margin: auto;
+		justify-content: space-between;
+		padding:0 50px;
+		.teamNav {
+			a {
+				border-bottom: 1px solid;
+			}
 		}
-	}
-	ul {
-		color:#fff;
-		margin:30px auto 30px 0;
-		&:first-child{
+		ul {
+			color:#fff;
 			margin:30px auto 30px 0;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			background-color:rgba(255,255,255,.3);
-			border-radius:50px;
-			li {
-				margin: 0 10px;
-				&:first-child {
-					margin:0 10px 0 0;
-				}
-				&:last-child {
-					margin:0 20px 0 10px;
-				}
+			&:first-child{
+				margin:30px auto 30px 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background-color:rgba(255,255,255,.3);
+				border-radius:50px;
+				li {
+					margin: 0 10px;
+					&:first-child {
+						margin:0 10px 0 0;
+					}
+					&:last-child {
+						margin:0 20px 0 10px;
+					}
 
+				}
 			}
 		}
 	}
@@ -2409,12 +2421,92 @@ footer.franchiseF {
 	}
 }
 
-@media only screen and (min-width: 1800px) {
-	.navTeamSec {
-		ul{
-			margin:30px auto 30px -400px;
-		}
-	}
+///// MODALS
+
+
+
+
+.signIn {
+	
 }
 
+.modal-dialog {
+		max-width: 320px;
+	}
+	.modal-content {
+		background-color:$blue;
+		.modal-header {
+			border:0;
+			color:#fff;
+		}
+		.modal-body{
+			form {
+				display: flex;
+				justify-content: space-between;
+				flex-direction: column;
+				align-items: center;
+				.modalInput {
+					background-color: transparent;
+					border:0;
+					border-bottom: 1px solid;
+					padding:8px 5px;
+					color:#fff;
+					display: block;
+					max-width:300px;
+					width:100%;
+					margin-bottom:15px;
+					&:-webkit-autofill {
+			        	-webkit-box-shadow: inset 0 0 0 50px $blue !important;
+			        	-webkit-text-fill-color: #fff !important;
+			        	color: #fff !important;
+			      	}
+				}
 
+				input[type=checkbox] {
+					display: none;
+				}
+
+				input[type=checkbox]:checked + label:before {
+					background-color:$redLight;
+
+				}
+				label {
+					position: relative;
+				    margin: 15px auto 0;
+				    color: #fff;
+				    width: 250px;
+				    display: block;
+					&:before {
+						background-color:#fff;
+						width:10px;
+						height:10px;
+						border-radius:50%;
+						content:"";
+						position: absolute;
+						margin: auto 0 auto -20px;
+						top:0;
+						bottom:0;
+						transition:background-color .4s;
+					}
+				}
+				input[type=submit] {
+					margin:30px 0;
+				}
+			}
+		}
+	}
+
+
+/*
+	blalblabla ()
+	if (slick-slide.count < 4) {
+		slick-slide {
+			display: flex;
+		    justify-content: space-between;
+		    width: 100%;
+		    max-width: 620px;
+		}
+	} 
+	
+
+*/

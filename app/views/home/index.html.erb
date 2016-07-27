@@ -14,9 +14,10 @@
 	<div class="contentWrapper">
 		<div class="line">
 			<div class="authorizationWrap" >
-				<img src="<%= asset_path('lightningSec/lightning.png') %>">
+				
 				<% if current_user %>
 					<span>
+						<img src="<%= asset_path('lightningSec/lightning.png') %>">
 						<div class="links">
 							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 							<%= link_to "Моя команда", my_team_path %>
@@ -24,6 +25,7 @@
 					</span>		
 				<% else %>
 					<span>
+						<img src="<%= asset_path('lightningSec/lightning.png') %>">
 						<div class="links">
 							<a href="#sign_in" data-toggle="modal">Войти</a>
 							<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
@@ -191,26 +193,27 @@
 	        </div>
 		</div>
 	</div>
+	<footer>
+		<div class="fullWrapp">
+			<div class="left">
+				<ul>
+					<li><a href="">Календарь игр</a></li>
+					<li><a href="">Лиги</a></li>
+					<li><a href="">Сертификаты</a></li>
+					<li><a href="">Рейтинг команд</a></li>
+					<li><a href="">Франшиза и спонсорство</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<ul>
+					<li><span><img src="<%= asset_path('symbol/like.png') %>"/></span>Первая бар-олимпиада</li>
+					<li><img src="<%= asset_path('logoFooter.png') %>"/></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
 </section>
-<footer>
-	<div class="fullWrapp">
-		<div class="left">
-			<ul>
-				<li><a href="">Календарь игр</a></li>
-				<li><a href="">Лиги</a></li>
-				<li><a href="">Сертификаты</a></li>
-				<li><a href="">Рейтинг команд</a></li>
-				<li><a href="">Франшиза и спонсорство</a></li>
-			</ul>
-		</div>
-		<div class="right">
-			<ul>
-				<li><span><img src="<%= asset_path('symbol/like.png') %>"/></span>Первая бар-олимпиада</li>
-				<li><img src="<%= asset_path('logoFooter.png') %>"/></li>
-			</ul>
-		</div>
-	</div>
-</footer>
+
 
 	
 
