@@ -1,16 +1,18 @@
 <section class="navTeamSec">
-  <ul>
-    <%= link_to "Выйти", destroy_user_session_path, method: :delete, class: 'whiteBorderBtn' %>
-    <li>Лига: <span>Чемпионы</span></li>
-    <li>Очки: <span>345 3535 54</span></li>
-  </ul>
-  <ul class="navigationWrap teamNav">
-    <li><a href="">Календарь игр</a></li>
-    <li><a href="">Лиги</a></li>
-    <li><a href="">Сертификаты</a></li>
-    <li><a href="">Рейтинг команд</a></li>
-    <li><a href="">Франшиза и спонсорство</a></li>
-  </ul>
+  <div class="headWrapper">
+    <ul>
+      <li><%= link_to "Выйти", destroy_user_session_path, method: :delete, class: 'whiteBorderBtn' %></li>
+      <li>Лига: <span>Чемпионы</span></li>
+      <li>Очки: <span>345 3535 54</span></li>
+    </ul>
+    <ul class="navigationWrap teamNav">
+      <li><a href="">Календарь игр</a></li>
+      <li><a href="">Лиги</a></li>
+      <li><a href="">Сертификаты</a></li>
+      <li><a href="">Рейтинг команд</a></li>
+      <li><a href="">Франшиза и спонсорство</a></li>
+    </ul>
+  </div>
 </section>
 <section class="topInfo team">
   <div class="contentWrap">
