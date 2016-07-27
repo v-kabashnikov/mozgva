@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
 	before_action :authenticate_user!
-	before_action :set_invitation, only: [:accept, :decline]
+	before_action :set_invitation, only: [:accept, :decline, :destroy]
 
 	def create
 		inv = Invitation.create(invitation_params.merge(inviter: current_user, team: current_user.team))
@@ -18,6 +18,11 @@ class InvitationsController < ApplicationController
 	def decline
 		current_user.decline @invitation
 		redirect_to :back
+	end
+
+	def destroy
+		@invitation.destroy
+		render json: { status: :ok, invitation: { id: @invitation.id } }	
 	end
 
 	private

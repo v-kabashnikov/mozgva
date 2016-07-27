@@ -58,6 +58,14 @@ $( document ).ready(function() {
 	  }
 	});
 
+	$(".remove_member").on("ajax:success", function(e, data, status, xhr){
+		$('#member_' + data['member']['id']).remove();
+	});
+
+	$(".remove_invitation").on("ajax:success", function(e, data, status, xhr){
+		$('#invitation_' + data['invitation']['id']).remove();
+	});
+
 	addFormDropdown("div#update_city");
 	addFormDropdown("div#games_filter");
 	addFormLink("a.get_teams_list", displayTeamsList);

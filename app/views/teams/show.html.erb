@@ -25,14 +25,19 @@
   <div class="contentWrap">
     <ul class="faceParth">
       <% @team.members.each do |member| %>
-        <li>
+        <li id="member_<%= member.id %>">
+          <% if current_user.member.captain? && !member.captain? %>
+            <%= link_to '❌', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+          <% end %>
           <div class="avatar"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
       <% @team.invitations.each do |inv| %>
-        <li class="not_member">
-          <div class="avatar_wrapper"></div>
+        <li class="not_member" id="invitation_<%= inv.id %>">
+          <% if current_user.member.captain? %>
+            <%= link_to '❌', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+          <% end %>
           <div class="avatar"></div>
           <p><%= inv.user.name %></p>
         </li>
