@@ -64,35 +64,8 @@ $(document).ready(function(){
 	  ]
 	});
 	$('.partnerCarousel').slick({
-	  speed: 300,
 	  slidesToShow: 3,
-	  slidesToScroll: 3,
-	  variableWidth: true,
-	  responsive: [
-	    {
-	      breakpoint: 1024,
-	      settings: {
-	        slidesToShow: 3,
-	        slidesToScroll: 3,
-	        infinite: true,
-	        dots: true
-	      }
-	    },
-	    {
-	      breakpoint: 600,
-	      settings: {
-	        slidesToShow: 3,
-	        slidesToScroll: 3
-	      }
-	    },
-	    {
-	      breakpoint: 480,
-	      settings: {
-	        slidesToShow: 1,
-	        slidesToScroll: 1
-	      }
-	    }
-	  ]
+	  slidesToScroll: 3
 	});
 	$('.gamesCarousel').slick({
 	  rows: 2,
@@ -103,39 +76,9 @@ $(document).ready(function(){
 	  slidesToScroll: 2,
 	  variableWidth: true
 	});
-	var sliderimg = 'mozgva/app/assets/images/symbol/ticket.png';
-	$("output").html("<span> x1</span>"); 
 
 });
 
-// function outputUpdate(val) {
-// 	document.querySelector('#value').value = val;
-// }
-function outputUpdate(vol) {
-  var output = document.querySelector("#volume");
-	// output.value ='x'+ vol;
-	var sliderimg = 'mozgva/app/assets/images/symbol/ticket.png';
-	$("output").html("<span> x"+vol+"</span>"); 
-	if (vol==1) {
-		output.style.left = 0+'px';
-	} else if (vol==2) {
-		output.style.left = 20+'px';
-	} else if (vol==3) {
-		output.style.left = 40+'px';
-	} else if (vol==4) {
-		output.style.left = 60+'px';
-	} else if (vol==5) {
-		output.style.left = 80+'px';
-	} else if (vol==6) {
-		output.style.left = 100+'px';
-	} else if (vol==7) {
-		output.style.left = 120+'px';
-	} else if (vol==8) {
-		output.style.left = 140+'px';
-	} else if (vol==9) {
-		output.style.left = 160+'px';
-	}
-}
 
 function DropDown(el) {
 				this.dd = el;
