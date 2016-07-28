@@ -159,6 +159,38 @@ $( document ).ready(function() {
         event.trigger.textContent = 'Копировать';
         $(event.trigger).attr('disabled', false)
     }, 2000);
-});
+	});
 
+	var edit_form = $('#edit_user');
+	if(edit_form.length > 0){
+		fields_for_confirmation = ["user_email", "user_password"];
+		var email = edit_form.find('#user_email').val();
+		$('#edit_user').on('keyup', '#user_email', function(){
+			var form = $(this).parents('form');
+			console.log($(this).val());
+			var passes = form.find('.password_changed');
+			if($(this).val() != email){
+				passes.show();
+				passes.find('input').attr('required', true);
+			}
+			else{
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
+		});
+		$('#edit_user').on('keyup', '#user_password', function(){
+			var form = $(this).parents('form');
+			console.log($(this).val());
+			var passes = form.find('.password_changed');
+			if($(this).val()){
+				passes.show();
+				passes.find('input').attr('required', true);
+			}
+			else{
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
+		});
+	}
+	
 });

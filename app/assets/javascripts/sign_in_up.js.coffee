@@ -17,8 +17,11 @@ $ ->
       else
         form.submit();
   )
-  $("form#sign_in_user, form#sign_up_user").bind("ajax:success", (event, xhr, settings) ->
-    window.location = '/'
+  $("form#sign_in_user, form#sign_up_user, form#edit_user").bind("ajax:success", (event, xhr, settings) ->
+    if $(this).attr('id') == 'edit_user'
+      $(this).parents('.modal').modal('hide')
+    else
+      window.location = '/'
   ).bind("ajax:error", (event, xhr, settings, exceptions) ->
     $(".error_label").remove();
     $(this).children(".input_wrapper").removeClass("has_error");

@@ -16,6 +16,12 @@ class User < ApplicationRecord
     team.users.include? self
   end
 
+  def generate_confirmation_code
+    code = (1..4).map{rand(0..9).to_s}.join
+    update(confirmation_code: code)
+    code
+  end
+
   def invited? team
     team.invited_users.include? self
   end

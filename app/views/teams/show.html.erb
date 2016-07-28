@@ -16,7 +16,9 @@
 </section>
 <section class="topInfo team">
   <div class="contentWrap">
-    <a href="#" class="start_edit">Редактировать</a>
+    <% if current_user.member.captain? %>
+      <a href="#" class="start_edit">Редактировать</a>
+    <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
   <ul class="contentWrap">

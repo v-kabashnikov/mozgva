@@ -19,6 +19,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def send_confirmation_code
+    current_user.update(account_update_params)
+    code = current_user.generate_confirmation_code
+    # send_code
+  end
+
+  def check_confirmation_code
+    if params[:code].present? && params[:code] == current_user.code
+      current_user.update(phone_confirmed_at: Time.now)
+      render json: { status: :ok }
+    else
+      render json: { status: :error, code: 'Неверный код' }
+    end
+  end
+
   def create
   	super
   	if resource && @team && !@team.full?
@@ -27,6 +42,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+  def update_resource(resource, params)
+    method = params[:password].present? ? :update_with_password : :update_without_password
+    resource.send(method, params)
+  end
+
   def set_team
   	@team = Team.find_by(invite: params[:invite]) if params[:invite].present?
   end
@@ -36,6 +56,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def account_update_params
-    params.require(:user).permit(:name, :phone, :email, :password, :password_confirmation, :avatar)
+    fields = [:name, :phone, :avatar, :email]
+    fields + [:password, :password_confirmation, :current_password] if params[:password].present?
+    params.require(:user).permit(fields)
   end
 end
