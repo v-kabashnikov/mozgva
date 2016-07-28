@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  # devise_scope :user do
-  #   get '/i/:invite' => "users/registrations#new"
-  # end
+  devise_scope :user do
+    get '/users/send_confirmation' => "users/registrations#send_confirmation"
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]

@@ -19,13 +19,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def send_confirmation_code
+  def send_confirmation
     current_user.update(account_update_params)
     code = current_user.generate_confirmation_code
-    # send_code
+    # send_code(code)
   end
 
-  def check_confirmation_code
+  def check_confirmation
     if params[:code].present? && params[:code] == current_user.code
       current_user.update(phone_confirmed_at: Time.now)
       render json: { status: :ok }
