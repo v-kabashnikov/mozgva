@@ -28,6 +28,6 @@ Rails.application.routes.draw do
   put '/users/update_city', to: 'users#update_city', as: :update_city
   root 'home#index'
 
-  get '/i/:invite', to: 'invitations#invite_reg'
+  get '/i/:invite', to: 'invitations#invite_reg', as: :invite
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

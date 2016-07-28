@@ -6,7 +6,7 @@
           <span></span>
           <span></span>
         </div>
-        <h2 class="text-center">Команда</h2>
+        <h2 class="text-center">Пригласить</h2>
       </div>
       <div class="modal-body">
         <div class="email_search">
@@ -21,6 +21,11 @@
               <%= f.submit 'Пригласить' %>
             <% end %>
           </div>
+        </div>
+        <div class="invite_link">
+          <p>Ссылка для приглашения</p>
+          <%= text_field_tag :invite_link, invite_url(@team.invite) %>
+          <button data-clipboard-target="#invite_link" id="copy_button">Копировать</button>
         </div>
       </div>
     </div>

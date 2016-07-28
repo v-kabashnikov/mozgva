@@ -145,10 +145,20 @@ $( document ).ready(function() {
     else { 
       $('body').removeClass("modal-open-noscroll");
     }
-  })
+  });
+
   $('.modal').on('hide.bs.modal', function () {
       $('body').removeClass("modal-open-noscroll");
-  })
+  });
 
+  var cb = new Clipboard('#copy_button');
+  cb.on('success', function(event) {
+  	$(event.trigger).attr('disabled', true)
+    event.trigger.textContent = 'Скопировано';
+    window.setTimeout(function() {
+        event.trigger.textContent = 'Копировать';
+        $(event.trigger).attr('disabled', false)
+    }, 2000);
+});
 
 });

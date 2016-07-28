@@ -18,6 +18,7 @@ class TeamsController < ApplicationController
   end
 
   def my_team
+    set_city
     @team = current_user.team
     return redirect_to root_path unless @team
     render 'show'

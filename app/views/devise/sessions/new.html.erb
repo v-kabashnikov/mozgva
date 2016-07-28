@@ -17,6 +17,7 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
+  <%= hidden_field_tag :invite, params[:invite] if params[:invite] %>
 
   <div class="actions">
     <%= f.submit "Log in" %>

@@ -36,7 +36,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <%= f.hidden_field_tag :invite, @invite if @invite %>
+  <%= hidden_field_tag :invite, @team.invite if @team %>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

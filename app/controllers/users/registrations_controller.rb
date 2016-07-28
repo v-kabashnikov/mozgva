@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
   	super
   	if resource && @team && !@team.full?
-  		Member.create(user: resource, team: team)
+  		Member.create(user: resource, team: @team)
   	end
   end
 
