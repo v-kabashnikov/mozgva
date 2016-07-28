@@ -104,28 +104,28 @@
 	</div>
 	<div class="mainWrap">
 		<div class="quest">
-			<div class="ask">
+			<div class="desriptQuest">
 				<article>Кейтеринг</article>
 				<p>Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Это не было сном. Его комната, настоящая, разве что слишком маленькая, но обычная комната, мирно покоилась в своих четырех хорошо знакомых стенах.</p>
-				<img class="img-responsive" src="<%= asset_path('korporat/pic.png') %>"/>
 			</div>
+			<div class="imgQuest" style="background-image:url(<%= asset_path('korporat/pic.png') %>);"></div>
 			<div class="answer">
 				<article>Кто автор?</article>
-				<div class="ans1">
+				<div class="ans true">
 					<%= radio_button_tag(:selectAns, "first") %>
 					<%= label_tag(:selectAns_first, "Франс Снейдерс") %>
 					<div class="descr">
 						Это, конечно же, Франс Снейдерс. Фламандский живописец, мастер натюрмортов и анималистических композиций в стиле барокко. Вам бы на Мозгву с такими знаниями!
 					</div>
 				</div>
-				<div class="ans2"> 
+				<div class="ans">
 					<%= radio_button_tag(:selectAns, "second") %>
 					<%= label_tag(:selectAns_second, "Джакомо Леги") %>
 					<div class="descr">
 						Нет, правильный ответ - Франс Снейдерс.
 					</div>
 				</div>
-				<div class="ans3">
+				<div class="ans">
 					<%= radio_button_tag(:selectAns, "third") %>
 					<%= label_tag(:selectAns_third, "Ян Рус") %>
 					<div class="descr">
@@ -135,7 +135,19 @@
 			</div>
 			
 		</div>
-		<div class="gallery">FF</div>
+		<div class="gallery">
+			<div class="desriptPhotoVideo">
+				<article>Кейтеринг</article>
+				<p>Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Это не было сном. Его комната, настоящая, разве что слишком маленькая, но обычная комната, мирно покоилась в своих четырех хорошо знакомых стенах.</p>
+			</div>
+			<iframe width="100%" height="315" src="https://www.youtube.com/embed/ZTz5GO3--JM" frameborder="0" allowfullscreen></iframe>
+			<ul class="photos">
+				<li style="background-image:url(<%= asset_path('korporat/pic.png') %>);"></li>
+				<li style="background-image:url(<%= asset_path('korporat/pic.png') %>);"></li>
+			</ul>
+			</div>
+			
+		</div>
 	</div>
 	<footer class="korporatF">
 		<ul>
