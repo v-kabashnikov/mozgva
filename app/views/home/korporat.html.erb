@@ -1,0 +1,152 @@
+<section class="topInfo korporat">
+	<div class="contentWrap">
+		<a class="whiteBorderBtn" href="">Войти</a>
+		<h1>Корпоратив</h1>
+	</div>
+</section>
+
+<section class="korporatSek">
+	<ul class="navigationWrap">
+		<li><a href="">Лиги</a></li>
+		<li><a href="">Сертификаты</a></li>
+		<li><a href="">Рейтинг команд</a></li>
+		<li><a href="">Корпоратив</a></li>
+		<li><a href="">Франшиза и спонсорство</a></li>
+	</ul>
+	<div class="mainWrap">
+		<div class="widget">
+			<h2>Мозгва<br/>для коллег!</h2>
+			<a href="" class="btnBlue">
+				Хочу!
+			</a>
+			<p class="phone">Если у Вас есть вопрос:<br/> 
+			<span>8 800 000 000</span></p>
+			<div class="bottom">
+				<sub>Дуэт ведущих</sub>
+				<article>РИС</article>
+				<p>Слова про наших: могут провести все мероприятие <br/>и что если на английском, то поможем</p>
+				<ul class="social">
+					<li>
+			            <a href="">
+			              <img src="<%= asset_path('symbol/fb.png') %>" />
+			            </a>
+			          </li>
+			          <li>
+			            <a href="">
+			              <img src="<%= asset_path('symbol/twiter.png') %>" />
+			            </a>
+			          </li>
+			          <li>
+			            <a href="">
+			              <img src="<%= asset_path('symbol/vk.png') %>" />
+			            </a>
+			          </li>
+				</ul>
+				
+			</div>
+		</div>
+		<div class="infoBlock ">
+			<div class="square">
+				<article>Вместимость<br/> одной Мозгвы</article>
+				<img src="<%= asset_path('korporat/kolvo.png') %>"/>
+			</div>
+			<div class="square threeEl">
+				<article>Предлагаемая<br/> площадка</article>
+				<img src="<%= asset_path('korporat/location.png') %>"/>
+				<p>Бар & Ресторан «Coin-Hall» или опенэйр, например</p>
+			</div>
+			<div class="square threeEl">
+				<article>Вы - представитель<br/> агенства</article>
+				<img src="<%= asset_path('symbol/download.png') %>"/>
+				<div class="wrapDownload">
+					<div class="item">
+						<span>.PDF (5 Мб)</span><br/>
+						<a href="">скачать райдер</a>
+					</div>
+					<div class="item">
+						<span>.PDF (5 Мб)</span><br/>
+						<a href="">скачать слайд</a>
+					</div>
+				</div>
+			</div>
+			<div class="square threeEl">
+				<article>Условия<br/> сотрудничества</article>
+				<img src="<%= asset_path('symbol/download.png') %>"/>
+				<div class="wrapDownload">
+					<div class="item">
+						<span>.PDF (5 Мб)</span><br/>
+						<a href="">скачать</a>
+					</div>
+				</div>
+			</div>
+			<div class="infoText">
+				<article>Про контент</article>
+				<p>Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый, выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него перед глазами. «Что со мной случилось?» – подумал он. Это не было сном. Его комната, настоящая, разве что слишком маленькая, но обычная комната, мирно покоилась в своих четырех хорошо знакомых стенах.</p>
+				<a href="">Написать авторам</a>
+			</div>
+		</div>
+	</div>
+	<div class="wrapPartnerSec">
+		<div class="partnerCarousel">
+			<div class="item">
+				<img src="<%= asset_path('partners/kaspersky.png') %>" />
+				<p>Касперский</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/microsoft.png') %>" />
+				<p>Майкрософт</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/publicis.png') %>" />
+				<p>Публицис</p>
+			</div>
+		</div>
+	</div>
+	<div class="mainWrap">
+		<div class="quest">
+			<div class="ask">
+				<article>Кейтеринг</article>
+				<p>Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное насекомое. Это не было сном. Его комната, настоящая, разве что слишком маленькая, но обычная комната, мирно покоилась в своих четырех хорошо знакомых стенах.</p>
+				<img class="img-responsive" src="<%= asset_path('korporat/pic.png') %>"/>
+			</div>
+			<div class="answer">
+				<article>Кто автор?</article>
+				<div class="ans1">
+					<%= radio_button_tag(:selectAns, "first") %>
+					<%= label_tag(:selectAns_first, "Франс Снейдерс") %>
+					<div class="descr">
+						Это, конечно же, Франс Снейдерс. Фламандский живописец, мастер натюрмортов и анималистических композиций в стиле барокко. Вам бы на Мозгву с такими знаниями!
+					</div>
+				</div>
+				<div class="ans2"> 
+					<%= radio_button_tag(:selectAns, "second") %>
+					<%= label_tag(:selectAns_second, "Джакомо Леги") %>
+					<div class="descr">
+						Нет, правильный ответ - Франс Снейдерс.
+					</div>
+				</div>
+				<div class="ans3">
+					<%= radio_button_tag(:selectAns, "third") %>
+					<%= label_tag(:selectAns_third, "Ян Рус") %>
+					<div class="descr">
+						Нет, правильный ответ - Франс Снейдерс.
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="gallery">FF</div>
+	</div>
+	<footer class="korporatF">
+		<ul>
+			<li>
+				<div><img src="<%= asset_path('symbol/like.png') %>"/><span>Лойс</span></div>
+				<div class="tag">#этомозвадетка</div>
+			</li>
+			<li>
+				<div><img src="<%= asset_path('symbol/location.png') %>"/><span>москва</span></div>
+				<img src="<%= asset_path('calendar/logo.png') %>"/>
+			</li>
+		</ul>
+	</footer>
+</section>
