@@ -1,0 +1,9 @@
+<% ratings.each do |rating| %>
+	<tr>
+	    <td><%= rating[:name] %></td> 
+	    <td><%= rating[:percent].round(2) %>%</td>
+	    <td><%= rating[:scores] %></td>
+	    <td><%= rating[:games] %></td>
+	    <td><img src="<%= asset_path('img_venki/3-Золото.png')%>"></td>
+	</tr>
+<% end %>

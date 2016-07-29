@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
+  get '/rating', to: 'team_ratings#rating', as: :rating
   root 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

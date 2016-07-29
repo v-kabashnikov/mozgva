@@ -8,10 +8,17 @@ class Team < ApplicationRecord
   has_many :waiting_invitations, ->{ waiting }, class_name: 'Invitation'
   has_many :invited_users, through: :waiting_invitations, class_name: "User", source: :user
   has_many :game_registrations, dependent: :destroy
+  has_many :team_ratings, dependent: :destroy
 
   before_create :set_invite
 
   validates :name, presence: true, uniqueness: true
+
+  rails_admin do
+    edit do
+      exclude_fields :team_ratings
+    end
+  end
 
   def full?
     members_count + invitations_count >= MAX_MEMBERS_COUNT

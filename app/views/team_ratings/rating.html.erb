@@ -1,0 +1,68 @@
+<section class="reit" >
+    <div class="container_16 reit_title" style="">
+      <h1>Рейтинг <br> команд</h1>
+    </div>
+    <div class="container_16" style="text-align: right;">
+      <img src="<%= asset_path('logo.png')%>" alt="" style="padding: 10px 0 30px 0;">
+    </div>
+</section>  
+<div class="container_16 section_1" 
+      <h3>Обладатели венков</h3>
+      <ul class="text-center" style="font-family: 'graublauslab-bolduploadedfile' !important;">
+        <li><img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>" alt="">
+        <p>>70%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Голубой-d.png')%>" alt="">
+        <p>70-75%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Бронза-d.png')%>" alt="">
+        <p>75-80%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Серебро-d.png')%>" alt="">
+        <p>80-85%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Золото-d.png')%>" alt="">
+        <p> &lt;85% </p></li>
+      </ul>
+  <!-- <div class="row">
+    <div class="col-md-12"> -->
+     <table style="margin-top: 50px; margin-bottom: 100px;">
+      <thead>
+        <tr>
+          <td>Команды</td>
+          <td>Качество<br>игры</td>
+          <td>Количество<br> баллов</td>
+          <td>Количество<br> игр</td>
+          <td></td>
+        </tr>
+      </thead>
+      <%= render partial: "teams", locals: {ratings: @ratings}%>
+    </table>
+</div>
+
+<div class="container_16 section_1" >
+        <h3>Претенденты</h3>
+        <ul>
+          <!-- <li><img src="../img_venki/1-Зеленый.png" alt=""></li>
+          <li><img src="../img_venki/1-Голубой.png" alt=""></li>
+          <li><img src="../img_venki/1-Бронза.png" alt=""></li>
+          <li><img src="../img_venki/1-Серебро.png" alt=""></li>
+          <li><img src="../img_venki/1-Золото.png" alt=""></li> -->
+        </ul>
+    <!-- <div class="row">
+      <div class="col-md-12"> -->
+       <table style="margin-top: 50px; margin-bottom: 100px;">
+        <thead>
+          <tr>
+            <td>Команды</td>
+            <td>Качество<br>игры</td>
+            <td>Количество<br> баллов</td>
+            <td>Количество<br> игр</td>
+            <td></td>
+          </tr>
+        </thead>
+          <tr>
+            <td>Партизаны Пармезана       </td>
+            <td>74,74%</td>
+            <td>198</td>
+            <td>7</td>
+            <td></td>
+          </tr>
+      </table>
+</div>
