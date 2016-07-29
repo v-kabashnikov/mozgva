@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
+  get '/rating', to: 'team_ratings#rating', as: :rating
   root 'home#index'
 
   get '/i/:invite', to: 'invitations#invite_reg', as: :invite
