@@ -53,6 +53,10 @@ ru:
         title: "Детали %{model_label} '%{object_label}'"
         menu: "Просмотр"
         breadcrumb: "%{object_label}"
+      multiple_upload:
+        title: "Загрузка фотографий"
+        menu: "Загрузка фотографий"
+        breadcrumb: "Загрузка фотографий %{model_label_plural}"
       show_in_app:
         menu: "Показать в приложении"
       new:

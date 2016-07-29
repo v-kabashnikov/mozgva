@@ -58,6 +58,14 @@ $( document ).ready(function() {
 	  }
 	});
 
+	$(".remove_member").on("ajax:success", function(e, data, status, xhr){
+		$('#member_' + data['member']['id']).remove();
+	});
+
+	$(".remove_invitation").on("ajax:success", function(e, data, status, xhr){
+		$('#invitation_' + data['invitation']['id']).remove();
+	});
+
 	addFormDropdown("div#update_city");
 	addFormDropdown("div#games_filter");
 	addFormLink("a.get_teams_list", displayTeamsList);
@@ -137,10 +145,55 @@ $( document ).ready(function() {
     else { 
       $('body').removeClass("modal-open-noscroll");
     }
-  })
+  });
+
   $('.modal').on('hide.bs.modal', function () {
       $('body').removeClass("modal-open-noscroll");
-  })
+  });
 
+  var cb = new Clipboard('#copy_button');
+  cb.on('success', function(event) {
+  	$(event.trigger).attr('disabled', true)
+    event.trigger.textContent = 'Скопировано';
+    window.setTimeout(function() {
+        event.trigger.textContent = 'Копировать';
+        $(event.trigger).attr('disabled', false)
+    }, 2000);
+	});
 
+	var edit_form = $('#edit_user');
+	if(edit_form.length > 0){
+		fields_for_confirmation = ["user_email", "user_password"];
+		var email = edit_form.find('#user_email').val();
+		$('#edit_user').on('keyup', '#user_email', function(){
+			var form = $(this).parents('form');
+			var passes = form.find('.email_changed');
+			if($(this).val() != email){
+				passes.show();
+				passes.find('input').attr('required', true);
+			}
+			else if(!$("#user_password").val()){
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
+		});
+		$('#edit_user').on('keyup', '#user_password', function(){
+			var form = $(this).parents('form');
+			var passes = form.find('.password_changed');
+			if($(this).val()){
+				passes.show();
+				passes.find('input').attr('required', true);
+			}
+			else if($("#user_email").val() == email ){
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
+			else{
+				passes = passes.not('.email_changed');
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
+		});
+	}
+	
 });

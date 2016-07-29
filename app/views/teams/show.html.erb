@@ -16,7 +16,9 @@
 </section>
 <section class="topInfo team">
   <div class="contentWrap">
-    <a href="#" class="start_edit">Редактировать</a>
+    <% if current_user.member.captain? %>
+      <a href="#" class="start_edit">Редактировать</a>
+    <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
   <ul class="contentWrap">
@@ -27,13 +29,19 @@
   <div class="contentWrap">
     <ul class="faceParth">
       <% @team.members.each do |member| %>
-        <li>
+        <li id="member_<%= member.id %>">
+          <% if current_user.member.captain? && !member.captain? %>
+            <%= link_to '❌', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+          <% end %>
           <div class="avatar"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
       <% @team.invitations.each do |inv| %>
-        <li class="not_member">
+        <li class="not_member" id="invitation_<%= inv.id %>">
+          <% if current_user.member.captain? %>
+            <%= link_to '❌', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+          <% end %>
           <div class="avatar"></div>
           <p><%= inv.user.name %></p>
         </li>

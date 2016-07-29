@@ -1,0 +1,37 @@
+<div class="modal fade in" id="edit_profile">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="text-center">Профиль</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for(current_user, url: registration_path(:user), html: {id: 'edit_user', :'data-type' => 'json', method: :put}, remote: true) do |f| %>
+          <div class="input_wrapper">
+            <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
+          </div>
+          <div class="input_wrapper">
+            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true %>
+          </div>
+          <div class="input_wrapper">
+            <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
+          </div>
+          <div class="input_wrapper">
+            <%= f.password_field :password, placeholder: 'Пароль', class: "modalInput", autocomplete: "off" %>
+          </div>
+          <div class="input_wrapper password_changed" style="display:none">
+            <%= f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: "modalInput", autocomplete: "off" %>
+          </div>
+          <div class="input_wrapper password_changed email_changed" style="display:none">
+            <%= f.password_field :current_password, placeholder: 'Текущий пароль', class: "modalInput", autocomplete: "off" %>
+          </div>
+          <%= f.submit "Сохранить", class: "blueBtn" %>
+        <% end %>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>
