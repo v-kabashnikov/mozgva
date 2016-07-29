@@ -119,13 +119,42 @@
       <div class="square">
         <div class="head">
           <article>Банк команды</article>
-          <a href="">Пополнить счет</a>
         </div>
         <div class="body">
-          <p class="currentPrice">5 000</p>
+          <div class="rezultOfRangeWrap">
+              <img src="<%= asset_path('symbol/ticket.png') %>"/> x <span id="rezultOfRange"></span>
+          </div>
+          <div class="sliderFuck">
+            <p id="minRange"></p>
+            <input type="range" min="1" max="9" step="1" id="rangevalue" onchange="arduino()" />
+            <p id="maxRange"></p>
+          </div>
+          <script type="text/javascript">
+            $(document).ready(function(){
+              document.getElementById("rezultOfRange").innerHTML = document.getElementById("rangevalue").value;
+              document.getElementById("minRange").innerHTML = document.getElementById("rangevalue").min;
+              document.getElementById("maxRange").innerHTML = document.getElementById("rangevalue").max;
+              document.getElementById("rezultOfPrice").innerHTML = document.getElementById("rangevalue").value*500;
+
+            });
+            function arduino() {
+                document.getElementById("rezultOfRange").innerHTML = document.getElementById("rangevalue").value;
+                var ticket = 500;
+                var kol = document.getElementById("rangevalue").value;
+                var sum = ticket*kol;
+
+                document.getElementById("rezultOfPrice").innerHTML = sum;
+                
+
+
+            };
+          </script>
+          
+          
+          <p class="currentPrice" id="rezultOfPrice"></p>
         </div>
         <div class="foot bg">
-          <p>Итого:<span class="priceShow"> 2 400</span></p>
+          <p>На счету:<span class="priceShow"> 2 400</span></p>
           <a href="" class="roundBtn">Оплатить игру</a>
         </div>
       </div>
