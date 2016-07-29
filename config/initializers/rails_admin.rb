@@ -1,3 +1,5 @@
+require Rails.root.join('lib', 'rails_admin', 'multiple_upload.rb')
+
 RailsAdmin.config do |config|
 
   config.main_app_name = ["Mozgva"]
@@ -29,6 +31,9 @@ RailsAdmin.config do |config|
     dashboard                     # mandatory
     index                         # mandatory
     new
+    multiple_upload do
+      only Game
+    end
     export
     bulk_delete
     show

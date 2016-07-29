@@ -1,0 +1,9 @@
+- @game.photos.each do |photo|
+  = link_to image_tag('https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/delete.png', alt: 'Удалить', style:  "height: 20px; width 20px;"), rails_admin.multiple_upload_url(@abstract_model.to_param, pid: photo.id), method: :delete, data: { confirm: "Вы уверены?" }
+  =image_tag photo.image.url, style: "height: 100px; width 100px;"
+
+
+= simple_form_for(rails_admin.multiple_upload_url(@abstract_model.to_param), html: { multipart: true }) do |f|
+  = f.input :game_id, :as => :hidden, :input_html => { :name => "game_id", :value => @object.id}
+  = file_field_tag('game_photos_file', multiple: true, name: "game[photos_attributes][][image]")
+  = f.submit :submit, value: 'Загрузить', name: 'Upload', :class => 'btn btn-primary'

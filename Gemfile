@@ -14,7 +14,8 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'russian', '~> 0.6.0'
 gem 'paperclip', '~> 5.0'
 gem 'aws-sdk', '~> 2.4', '>= 2.4.2'
-
+gem 'rails_admin_multiple_upload', :path => '../rails_admin_multiple_upload'
+gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'devise', '~> 4.2'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'
