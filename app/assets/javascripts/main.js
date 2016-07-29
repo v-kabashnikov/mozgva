@@ -167,26 +167,29 @@ $( document ).ready(function() {
 		var email = edit_form.find('#user_email').val();
 		$('#edit_user').on('keyup', '#user_email', function(){
 			var form = $(this).parents('form');
-			console.log($(this).val());
-			var passes = form.find('.password_changed');
+			var passes = form.find('.email_changed');
 			if($(this).val() != email){
 				passes.show();
 				passes.find('input').attr('required', true);
 			}
-			else{
+			else if(!$("#user_password").val()){
 				passes.hide();
 				passes.find('input').removeAttr('required');
 			}
 		});
 		$('#edit_user').on('keyup', '#user_password', function(){
 			var form = $(this).parents('form');
-			console.log($(this).val());
 			var passes = form.find('.password_changed');
 			if($(this).val()){
 				passes.show();
 				passes.find('input').attr('required', true);
 			}
+			else if($("#user_email").val() == email ){
+				passes.hide();
+				passes.find('input').removeAttr('required');
+			}
 			else{
+				passes = passes.not('.email_changed');
 				passes.hide();
 				passes.find('input').removeAttr('required');
 			}
