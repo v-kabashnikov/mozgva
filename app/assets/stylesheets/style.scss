@@ -1818,6 +1818,10 @@ footer.korporatF {
 			}
 			li {
 				text-align: center;
+				position: relative;
+				a {
+					margin:0;
+				}
 				.avatar {
 					width:140px;
 					height:140px;
@@ -1837,11 +1841,20 @@ footer.korporatF {
 					}
 				}				
 				a.control {
-					font-size: 17px;
+					font-size: 18px;
 					margin: auto;
-					position: absolute;
 					opacity: .4;
+					transition:opacity .4s;
 					border-bottom: 0;
+					&:before {
+						font-family: FontAwesome;
+						content:"\f00d";
+						color:#fff;
+						padding:10px;
+						position: absolute;
+						right:0;
+						top:-25px;
+					}
 				}
 				&:hover a.control{
 					opacity: .9;
