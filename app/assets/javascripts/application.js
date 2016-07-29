@@ -7,3 +7,4 @@
 //= require sign_in_up
 //= require teams
 //= require clipboard
+//= require phone_confirmation

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_scope :user do
-    get '/users/send_confirmation' => "users/registrations#send_confirmation"
+    patch '/users/send_confirmation' => "users/registrations#send_confirmation", as: :send_confirmation
+    post '/users/check_confirmation' => "users/registrations#check_confirmation", as: :check_confirmation
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

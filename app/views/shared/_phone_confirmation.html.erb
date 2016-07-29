@@ -7,15 +7,20 @@
       </div>
       <div class="modal-body">
         <div id="send_confirmation">
-          <%= form_for current_user, url: {controller: 'users/registrations', action: 'send_confirmation'}, remote: true do |f| %>
-            <%= f.text_field :phone, placeholder: 'Телефон', autofocus: true, class: 'modalInput' %>
+          <%= form_for current_user, url: {controller: 'users/registrations', action: 'send_confirmation', :'data-type' => 'json'}, remote: true, html: {id: 'send_confirmation_form'} do |f| %>
+            <div class="input_wrapper">
+              <%= f.text_field :phone, placeholder: 'Телефон', autofocus: true, class: 'modalInput' %>
+            </div>
             <%= f.submit 'Прислать мне код', class: 'blueBtn' %>
           <% end %>
         </div>
         <div id="check_confirmation" style="display:none">
-          <%= form_tag :check_confirmation do %>
-            <%= text_field_tag :code, nil, placeholder: 'Проверочный код', class: 'modalInput' %>
-            <% submit_tag 'Отправить', class: 'blueBtn' %>
+          <%= form_tag :check_confirmation, remote: true, id: 'check_confirmation_form' do %>
+            <div class="input_wrapper">
+              <%= text_field_tag :code, nil, placeholder: 'Проверочный код', class: 'modalInput' %>
+            </div>
+            <%= submit_tag 'Отправить', class: 'blueBtn' %>
+            <%= link_to 'Исправить телефон', '#', id: 'fix_phone' %>
           <% end %>
         </div>
       </div>

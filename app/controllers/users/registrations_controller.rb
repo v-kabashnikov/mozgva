@@ -20,17 +20,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def send_confirmation
-    current_user.update(account_update_params)
-    code = current_user.generate_confirmation_code
-    # send_code(code)
+    phone = Phone.new(params[:user][:phone])
+    if params[:user][:phone].present? && phone.valid?
+      current_user.update(phone: phone.formatted_phone)
+      code = current_user.generate_confirmation_code
+      sms = SmsTwilio.new.send(phone.formatted_phone, code)
+      info = sms.info
+      if sms.status == 'ok'
+        render json: { status: :ok, user: { phone: current_user.phone } }
+      else
+        render json: { status: :error, error: 'Ошибка при отправке SMS' }, status: 500
+      end
+    else
+      render json: { status: :error, errors: { phone: 'Неверный формат телефона' } }, status: 406
+    end
   end
 
   def check_confirmation
-    if params[:code].present? && params[:code] == current_user.code
-      current_user.update(phone_confirmed_at: Time.now)
+    if params[:code].present? && params[:code] == current_user.confirmation_code
+      current_user.update(phone_confirmed_at: Time.now, confirmation_code: nil)
       render json: { status: :ok }
     else
-      render json: { status: :error, code: 'Неверный код' }
+      render json: { status: :errors, errors: { code: 'Неверный код' } }, status: 406
     end
   end
 
@@ -57,7 +68,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def account_update_params
     fields = [:name, :phone, :avatar, :email]
-    fields + [:password, :password_confirmation, :current_password] if params[:password].present?
+    fields += [:password, :password_confirmation, :current_password] if params[:user][:password].present?
     params.require(:user).permit(fields)
   end
 end
