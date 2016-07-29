@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
+  devise_scope :user do
+    get '/users/send_confirmation' => "users/registrations#send_confirmation"
+  end
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]
   resources :game_registrations, only: [:create]
+  resources :members, only: [:destroy]
   resources :teams, only: [:create, :destroy, :update] do
     get 'list', on: :collection
   end
@@ -23,5 +28,7 @@ Rails.application.routes.draw do
   put '/users/update_city', to: 'users#update_city', as: :update_city
   get '/rating', to: 'team_ratings#rating', as: :rating
   root 'home#index'
+
+  get '/i/:invite', to: 'invitations#invite_reg', as: :invite
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

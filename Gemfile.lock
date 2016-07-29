@@ -60,6 +60,7 @@ GEM
     builder (3.2.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
+    clipboard-rails (1.5.10)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
@@ -235,6 +236,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (~> 2.4, >= 2.4.2)
   bootstrap-sass (~> 3.3, >= 3.3.6)
+  clipboard-rails (~> 1.4)
   coffee-rails (~> 4.2)
   devise (~> 4.2)
   figaro (~> 1.1, >= 1.1.1)

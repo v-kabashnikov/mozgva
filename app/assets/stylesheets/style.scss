@@ -1884,8 +1884,18 @@ footer.korporatF {
 						opacity: .6;
 					}
 				}				
-				a {
+				a.control {
+					font-size: 17px;
 					margin: auto;
+					position: absolute;
+					opacity: .4;
+					border-bottom: 0;
+				}
+				&:hover a.control{
+					opacity: .9;
+				}
+				a.control:hover{
+					opacity: 1;
 				}
 				p {
 					font-family: $mainFontBold;
