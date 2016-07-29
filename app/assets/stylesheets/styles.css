@@ -1,0 +1,738 @@
+@import url('../fonts/stylesheet.css');
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/*---FlexBox---
+  @flex: flex, flex-inline
+  --------------------------*/
+/*---Flexbox Direction---
+  @type: row, column
+  Direction: normal, reverse
+  --------------------------*/
+/*---Flexbox Wrap---
+  @wrap: wrap, nowrap, wrap-reverse
+  --------------------------*/
+/*---Flexbox Justify Content---
+  @justify-content: start, end, center, space-between, space-around
+
+  *FIXME* - Creates duplicate CSS
+  --------------------------*/
+/*---Flexbox Align Items---
+  @align-items: center, baseline, stretch, start, end
+  --------------------------*/
+/*---Flexbox Align Content---
+  @align-items: start, end, center, space-between, space-around
+
+  *FIXME* - Creates duplicate CSS
+  --------------------------*/
+/*** reset ***********/
+html,
+body,
+ul,
+ol,
+li,
+dl,
+dt,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+a,
+img,
+label {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+header,
+section,
+footer,
+aside,
+nav,
+article {
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.bl {
+  font-family: "graublauslab-reguuploadedfile";
+}
+.blb {
+  font-family: "graublauslab-bolduploadedfile";
+}
+.bsbi {
+  font-family: "graublauslab-bolditalicuploadedfile";
+}
+.bs {
+  font-family: "graublausans-reguuploadedfile";
+}
+.bsb {
+  font-family: "graublausans-bolduploadedfile";
+}
+h1 {
+  font-family: "graublauslab-bolduploadedfile";
+}
+body {
+  font-size: 18px;
+  font-family: "graublausans-reguuploadedfile";
+}
+body.hidden {
+  overflow: hidden;
+}
+*:focus {
+  outline: none;
+}
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+/*** standart classes *****/
+p {
+  line-height: 1.2;
+}
+a {
+  color: #020000;
+}
+*:focus {
+  outline: none;
+}
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+.tdn {
+  text-decoration: none;
+}
+.tdn:hover {
+  text-decoration: underline;
+}
+.tdu {
+  text-decoration: underline;
+}
+.tdu:hover {
+  text-decoration: none;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.wrapper {
+  max-width: 1230px;
+  margin: 0 auto;
+  position: relative;
+}
+.reflection {
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+}
+/* =start
+---------------------------*/
+.start {
+  background: #df2929;
+  color: #ffffff;
+  font-size: 36px;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.start .container {
+  padding: 25px 0 80px;
+}
+.start .wrap {
+  /*display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  */
+  position:relative;
+  display: block;
+  /*-webkit-box-pack: space-between;
+  -moz-box-pack: space-between;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  padding-left: 25px;
+  padding-right: 25px;*/
+  min-height:95px;
+  
+}
+.start .date p {
+  font-family: "graublauslab-bolduploadedfile";
+  padding-bottom: 12px;
+}
+.start .date{
+  position:absolute;
+  left:25px;
+}
+
+.start .place {
+  font-size: 16px;
+}
+.start .place a {
+  background: url(../images/location.png) no-repeat left top;
+  display: block;
+  padding-left: 40px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.start .place a span {
+  font-family: "graublauslab-bolduploadedfile";
+}
+.start .place a span:hover .ul1 {
+  left: 5rem;
+  
+}
+.start .place a span:hover .ul2 {
+  left: 25rem;
+  
+}
+.start .place a span ul {
+  position: absolute;
+  left: -25rem;
+  background-color: #4F53FF;
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  height: 300px;
+  -moz-transition: left 1s 0.1s ease;
+  -o-transition: left 1s 0.1s ease;
+  -webkit-transition: left 1s 0.1s ease;
+
+}
+.start .logo {
+  font-size: 12px;
+  left:50%;
+  position:absolute;
+  margin-left:-100px;
+}
+.start .logo div {
+  font-size: 45px;
+  font-family: "graublauslab-bolditalicuploadedfile";
+ /* margin-left: -10px;*/
+}
+.start .stat {
+  font-family: "graublauslab-bolduploadedfile";
+  line-height: 1;
+  position:absolute;
+  right:25px;
+}
+.start .stat span {
+  color: #ffbb44;
+}
+.start .mozgva {
+  font-family: "graublauslab-bolduploadedfile";
+  left: 50%;
+  margin-left: -480px;
+  padding-bottom: 12px;
+  position: absolute;
+  top: 24%;
+}
+.start .mozgva .info {
+  border: 15px solid #ffffff;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+.start .mozgva .info:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  margin-left:-12px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #ffffff;
+}
+.start .mozgva .info p {
+  font-size: 70px;
+  line-height: .8;
+}
+.start .mozgva .info a {
+  -webkit-border-radius: 45px;
+  -moz-border-radius: 45px;
+  border-radius: 45px;
+  background: #ffffff;
+  color: #df2929;
+  display: block;
+  float: none;
+  font-size: 30px;
+  line-height: 53px;
+  margin: 30px auto 0;
+  padding: 0 25px;
+  text-decoration: none;
+}
+.start:after {
+  content: "";
+  background:url(../images/arrow_64d.png) no-repeat;
+  display: block;
+  position: absolute;
+  top: 85%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin-left:-32px;
+  
+}
+.start .wrapper {
+  height: 100%;
+  min-height: 100%;
+}
+.start .like {
+  -webkit-border-radius: 45px;
+  -moz-border-radius: 45px;
+  border-radius: 45px;
+  background: #EB7E7E;
+  bottom: 20px;
+  height: 32px;
+  min-width: 134px;
+  padding: 10px 15px 10px 10px;
+  position: absolute;
+  right: 20px;
+  z-index:100;
+}
+.start .like img {
+  vertical-align: top;
+}
+.start .like div .share {
+  float: left;
+}
+.start .like .b-share {
+  padding-left: 0 !important;
+}
+.start .like .b-share__handle {
+  background: #ffbb44;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+}
+.start .like .b-share__handle:hover {
+  background: #ffbb44;
+}
+.start .like .b-share_theme_counter .b-share {
+  vertical-align: top;
+}
+.start .like .b-share-btn__wrap {
+  margin-left: 0;
+  margin-right: 12px;
+  margin-top: 0px;
+}
+.start .like .b-share_theme_counter .b-share-icon_vkontakte {
+  background-position: 3px -55px;
+}
+.start .like .b-share_theme_counter .b-share-icon_facebook {
+  background-position: 0 3px;
+}
+.start .like .b-share-counter {
+  display: none !important;
+}
+/* =/start
+---------------------------*/
+/* =/whatis
+---------------------------*/
+.whatis {
+  background: url(../images/tilda.png) no-repeat 18px 160px, url(../images/a.png) no-repeat right -60px top -100px #ffbb44;
+  line-height: 1.2;
+  overflow: hidden;
+  padding-bottom: 52px;
+}
+.whatis header {
+  font-family: "graublauslab-bolduploadedfile";
+  background: url(../images/top.png) no-repeat center 26px;
+  padding: 97px 0 16px;
+  text-align: center;
+}
+.whatis header h1 {
+  font-size: 60px;
+  color: #df2929;
+  line-height: .9;
+}
+.whatis header h2 {
+  font-size: 36px;
+  padding-top: 35px;
+}
+.whatis .cell {
+  display: inline-block;
+  padding-left:15px;
+  padding-right: 10px;
+  vertical-align: top;
+  width: 29%;
+}
+
+/* =whatis
+---------------------------*/
+/* =intellect
+---------------------------*/
+.intellect {
+  background: #a21eff;
+  color: #ffffff;
+  overflow: hidden;
+  min-height: 467px;
+  padding-bottom: 60px;
+}
+.intellect header {
+  font-family: "graublauslab-bolduploadedfile";
+  float: left;
+  padding: 50px 0 30px 38px;
+  position: relative;
+}
+.intellect header h1 {
+  font-size: 100px;
+  line-height: .75;
+}
+.intellect header:after {
+  content: ";)";
+  display: block;
+  position: absolute;
+  left: 48px;
+  top: 308px;
+  font-family: "graublauslab-bolduploadedfile";
+  font-size: 78px;
+}
+.intellect .text {
+  padding-top: 16px;
+}
+.intellect .text p {
+  line-height: 1.2;
+}
+.intellect .carousel {
+  background: #ffbb44;
+  border: 15px solid #ffffff;
+  color: #000000;
+  margin-top: 55px;
+  padding: 25px 40px 40px 50px;
+  width: 35%;
+}
+.intellect .carousel .title {
+  font-family: "graublauslab-bolduploadedfile";
+  font-size: 36px;
+  padding-bottom: 20px;
+}
+.intellect .carousel .title span {
+  color: #df2929;
+}
+.intellect .carousel .answer {
+  margin-top: 80px;
+  color: #df2929;
+}
+.intellect #intellect {
+  padding-top: 60px;
+}
+.intellect .owl-controls {
+  position: absolute;
+  top: 8px;
+  left: 0;
+}
+.intellect .owl-pagination .owl-page {
+  background: url(../images/prevnext.png) no-repeat left top;
+  display: inline-block;
+  height: 16px;
+  margin-right: 12px;
+  width: 17px;
+}
+.intellect .owl-pagination .active {
+  background-position: -29px top;
+}
+/* =/intellect
+---------------------------*/
+/* =bar
+---------------------------*/
+.bar {
+  background: url(../images/amp.png) no-repeat -50px -70px #ff534f;
+  color: #ffffff;
+  min-height: 522px;
+}
+.bar header {
+  padding-top: 115px;
+}
+.bar .quote {
+  position: absolute;
+  right: 58px;
+  top: -30px;
+  z-index: 2;
+}
+.bar h1 {
+  font-size: 140px;
+  padding-bottom: 20px;
+}
+/* =/bar
+---------------------------*/
+/* =olympiada
+---------------------------*/
+.olympiada {
+  background: url(../images/olymp-bg.png) no-repeat right -20px top 35px #4f53ff;
+  color: #ffffff;
+  min-height: 825px;
+  overflow: hidden;
+}
+.olympiada header {
+  padding-top: 55px;
+}
+.olympiada h1 {
+  font-size: 136px;
+  line-height: .75;
+}
+.olympiada .text {
+  padding-top: 45px;
+}
+.olympiada .container_block{
+position:relative;
+width:960px;
+margin-top:280px;
+margin-left:auto;
+margin-right:auto;
+min-height:150px;
+}
+
+.olympiada .block{
+position:relative;
+width:300px;
+min-height:70px;
+margin-right:5px;
+margin-left:15px;
+float:left;
+margin-bottom:30px;
+}
+
+
+.olympiada .block .colv{
+width:100px;
+height:70px;
+float:left;
+color:#FFBB44;
+font-size:60px;
+line-height:70px;
+font-weight:700;
+text-shadow:-1px -1px 0 #FFBB44,1px -1px 0 #FFBB44,-1px 1px 0 #FFBB44,1px 1px 0 #FFBB44;
+letter-spacing: 3px;
+text-align:center;
+}
+
+.olympiada .block span{
+float:left;
+color:#FFBB44;
+font-size:26px;
+line-height:28px;
+font-weight:700;
+text-shadow:-0.5px -0.5px 0 #FFBB44,0px -0px 0 #FFBB44,-0.5px 0.5px 0 #FFBB44,0px 0px 0 #FFBB44;
+text-align:right;
+float:right;
+padding-right:15px;
+margin-top:-8px;
+}
+
+.olympiada .block .texts{
+width:180px;
+height:70px;
+float:left;
+padding-top:20px;
+}
+
+/* =/olympiada
+---------------------------*/
+/* =kontakts
+---------------------------*/
+.kontakts {
+  background:#000000;
+  color: #ffffff;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.kontakts .text {
+  padding-top: 30px;
+}
+
+.kontakts .text p{
+  font-size:26px;
+}
+
+/* =/kontakts
+---------------------------*/
+.olympiada,
+.bar,
+.intellect {
+  clear: both;
+}
+.row {
+  overflow: hidden;
+}
+#reg form {
+  width: 822px;
+  margin: 6.5% auto 0;
+}
+#reg form input[type="text"] {
+  border: 5px solid #000000;
+  color: #000000;
+  font-family: graublausans-reguuploadedfile;
+  font-size: 18px;
+  height: 60px;
+  margin-top: 14px;
+  padding: 0;
+  text-align: center;
+  width: 370px;
+}
+#reg form input[type="submit"] {
+  font-family: "graublauslab-bolduploadedfile";
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  background: #df2929;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 36px;
+  height: 80px;
+  margin-top: 67px;
+  padding: 0 90px;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+#reg form input[type="submit"]:hover {
+  opacity: .85;
+}
+#reg form .title {
+  font-family: "graublauslab-bolduploadedfile";
+  color: #df2929;
+  font-size: 100px;
+  padding-bottom: 30px;
+}
+
+#reg form .column {
+  width: 381px;
+}
+#reg form .column:first-child {
+  margin-right: 60px;
+}
+#reg form .column p {
+  padding-top: 30px;
+  padding-left: 18px;
+  text-align: left;
+  font-size: 19px;
+}
+#reg .thank {
+  font-size: 22px;
+  margin-top: 25%;
+}
+#reg .thank p {
+  margin-top: 10px;
+}
+.jqmWindow {
+  background: #ffffff;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow:auto;
+}
+.jqmWindow .jqmClose {
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  display: block;
+}
+label.error {
+  display: none !important;
+}
+input.error {
+  border-color: red !important;
+}
+@media (min-height: 831px) {
+  .start .mozgva .info {
+	
+    padding-top: 85px;
+    padding-bottom: 57px;
+	padding-left:45px;
+	padding-right:45px;
+  }
+  .start .mozgva .info p {
+    font-size: 130px;
+  }
+  .container_16 .grid_14
+{
+	margin-left:10px;
+	
+}
+.start .mozgva .info a {
+  -webkit-border-radius: 45px;
+  -moz-border-radius: 45px;
+  border-radius: 45px;
+  background: #ffffff;
+  color: #df2929;
+  display: block;
+  float: none;
+  font-size: 30px;
+  line-height: 83px;
+  margin: 60px auto 0;
+  padding: 0 25px;
+  text-decoration: none;
+}
+
+ 
+}
+
+@media (min-width: 1231px) {
+
+.whatis {
+  background: url(../images/tilda.png) no-repeat 200px 160px, url(../images/a.png) no-repeat right -60px top -100px #ffbb44;
+
+} 
+ 
+}
+
+
+a#123 {
+color: fff;
+}
+
+p#date2 {
+    font-size: 20px;
+}
+
+
+.ss-form-entry.radio-new {
+    margin-top: 25px;
+}
+
+span.cash {
+    font-size: 15px;
+}

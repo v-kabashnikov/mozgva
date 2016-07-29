@@ -1,9 +1,3 @@
-require "rails_admin_multiple_upload/engine"
-
-module RailsAdminMultipleUpload
-  # Your code goes here...
-end
-
 require 'rails_admin/config/actions'
 
 module RailsAdmin
