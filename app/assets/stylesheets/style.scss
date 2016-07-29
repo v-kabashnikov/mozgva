@@ -1774,8 +1774,9 @@ footer.korporatF {
 		max-width:1200px;
 		margin: auto;
 		justify-content: space-between;
-		padding:0 50px;
+		padding:0;
 		.teamNav {
+			text-align: center;
 			a {
 				border-bottom: 1px solid;
 			}

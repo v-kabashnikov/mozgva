@@ -63,7 +63,7 @@ article {
 ul {
   list-style: none;
 }
-.bl {
+/*.bl {
   font-family: "graublauslab-reguuploadedfile";
 }
 .blb {
@@ -84,8 +84,8 @@ h1 {
 body {
   font-size: 18px;
   font-family: "graublausans-reguuploadedfile";
-}
-body.hidden {
+}*/
+/*body.hidden {
   overflow: hidden;
 }
 *:focus {
@@ -95,7 +95,7 @@ input::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-/*** standart classes *****/
+
 p {
   line-height: 1.2;
 }
