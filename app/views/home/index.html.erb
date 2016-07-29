@@ -48,7 +48,7 @@
 			<div class="wrapSelectCityMonth">
 				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
 				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="put" data-action="<%=update_city_path%>">
-					<span data-value="<%# @city.id %>"><%# @city.name %></span>
+					<span data-value="<%= @city.id %>"><%= @city.name %></span>
 			    <ul class="dropdown" tabindex="1" data-name="city_id">
 		    		<% City.all.each do |city| %>
 			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
@@ -117,7 +117,7 @@
 	      <div class="left">
 	        <div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
 	          <div id="dd" class="wrapper-dropdown" tabindex="1">
-	            <span data-current-value="<%# @city.id %>"><%# @city.name %></span>
+	            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 	              	<ul class="dropdown" tabindex="1" data-name="city_id">
 			    	<% City.all.each do |city| %>
 		        		<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>

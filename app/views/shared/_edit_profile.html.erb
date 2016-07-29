@@ -1,3 +1,41 @@
+<style>
+  .upload {
+  position: relative;
+  display: inline-block;
+}
+
+.upload label {
+  color: #5F626A;
+  cursor: pointer;
+  width: 90px;
+  height: 90px;
+  position: relative;
+  display: block;
+  border: 3px dashed #5F626A;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: background ease .5s;
+  pointer-events: none; /*This for FF*/
+}
+
+.input-file {
+  opacity: 0; /*This*/
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.add-image {
+  display: block;
+  width: 100%;
+  margin: 30px auto;
+  text-align: center;
+  font-size: 11px;
+  font-family: sans-serif;
+}
+</style>
+
 <div class="modal fade in" id="edit_profile">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -9,7 +47,7 @@
         <h2 class="text-center">Профиль</h2>
       </div>
       <div class="modal-body">
-        <%= form_for(current_user, url: registration_path(:user), html: {id: 'edit_user', :'data-type' => 'json', method: :put}, remote: true) do |f| %>
+        <%= form_for(current_user, authenticity_token: true, url: registration_path(:user), html: {id: 'edit_user', :'data-type' => 'json', method: :put}, remote: true) do |f| %>
           <div class="input_wrapper">
             <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
           </div>
@@ -18,6 +56,18 @@
           </div>
           <div class="input_wrapper">
             <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
+          </div>
+          <div class="input_wrapper">
+           
+            <div class="upload" upload-image="">
+              <%= f.file_field :avatar, placeholder: 'Телефон', class: "modalInput input-file ng-pristine ng-valid ng-touched", id: 'files', name:"files" %>
+              <label for="files">
+                <span class="add-image">
+                  Добавить <br> Аватар
+                </span>
+                <output id="list"></output>
+              </label>
+            </div>
           </div>
           <div class="input_wrapper">
             <%= f.password_field :password, placeholder: 'Пароль', class: "modalInput", autocomplete: "off" %>

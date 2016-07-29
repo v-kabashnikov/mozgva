@@ -11,6 +11,7 @@ class Team < ApplicationRecord
   has_many :team_ratings, dependent: :destroy
 
   before_create :set_invite
+  # before_create :set_invite
 
   validates :name, presence: true, uniqueness: true
 
@@ -47,10 +48,15 @@ class Team < ApplicationRecord
   end
   
   private
+
   def set_invite
     self.invite = loop do
       inv = generate_invite
       break inv unless Team.find_by_invite inv
     end
   end
+
+  # def set_avatar
+  #   self.avatar = loop do
+  # end    
 end

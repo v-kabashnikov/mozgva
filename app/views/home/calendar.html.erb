@@ -14,24 +14,25 @@
 	</ul>
 	<div class="calendarWrap">
 		<div class="sideBar">
-			<div class="wrapSelectCityMonth">
-				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="put" data-action="<%=update_city_path%>">
-					<span data-value="<%= @city.id %>"><%= @city.name %></span>
-			    <ul class="dropdown" tabindex="1" data-name="city_id">
-		    		<% City.all.each do |city| %>
-			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-			      <% end %>
-			    </ul>
-				</div>
-				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="put" data-action="<%=update_city_path%>">
-					<span data-value="<%= @city.id %>"><%= @city.name %></span>
-			    <ul class="dropdown" tabindex="1" data-name="city_id">
-		    		<% City.all.each do |city| %>
-			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-			      <% end %>
-			    </ul>
-				</div>
-			</div>
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+			
+	          <div id="dd" class="wrapper-dropdown" tabindex="1">
+	            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+	              	<ul class="dropdown" tabindex="1" data-name="city_id">
+			    	<% City.all.each do |city| %>
+		        		<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+		      		<% end %>
+			    	</ul>
+	          </div>
+	          <div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
+	            <span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+	              <ul class="dropdown" tabindex="1" data-name="year_month">
+				    <% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+					<% end %>	
+	              </ul>
+	          </div>
+	        ​</div> <!--AND SELECT SITY & MONTH-->
 			<div class="phoneHelp">
 				<p>Если у вас есть вопрос: <br/> 88 000 000 0</p>
 			</div>
@@ -49,264 +50,9 @@
 			</div>
 		</div>
 		<div class="eventsParth">
-			<div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
-		    <div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
-		    <div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
-		    <div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
-		    <div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
-		    <div class="itemGame">
-				<ul class="navDayGame" role="tablist">
-					<p>2 игры в этот день</p>
-					<li role="presentation" class="active"><a href="#day1_it_1" aria-controls="day1_it_1" role="tab" data-toggle="tab"></a>
-					</li>
-					<li role="presentation"><a href="#day1_it_2" aria-controls="day1_it_2" role="tab" data-toggle="tab"></a>
-				    </li>
-				</ul>
-		      	<div class="tab-content">
-		        	<div role="tabpanel" class="tab-pane fade in active" id="day1_it_1">
-		           		<span class="date">23 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"Название игры"</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		          	<div role="tabpanel" class="tab-pane fade" id="day1_it_2">
-		           		<span class="date">25 Пн</span>
-						<ul class="top">
-							<li>Игра</li>
-							<li><span class="num">43</span><span>"другое Название "</span></li>
-							<li><span><img src="<%= asset_path('noticeSec/location.png')%>"/></span>Москва лужники</li>
-							<li><span><img src="<%= asset_path('noticeSec/price.png')%>"/></span>4545 руб.</li>
-							<li><span><img src="<%= asset_path('noticeSec/time.png')%>"/></span>34435345</li>
-						</ul>
-						<ul class="bottom">
-							<li><a href="#sign_in" class="roundBtn" data-toggle="modal">Участвовать</a>
-							</li>
-							<li><a href="#teams_list" class="get_teams_list" data-value="" data-name="game_id" data-action="" data-toggle="modal">Список команд</a>
-							</li>
-						</ul>
-		        	</div>
-		      	</div>
-		    </div>
+			<div class="gamesTabs">
+	          <%= render 'games/tabs' %>
+	        </div>
 		    <div class="loadMore">
 		    	<span></span>
 		    	<span></span>
