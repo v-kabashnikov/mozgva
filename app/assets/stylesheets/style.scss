@@ -1684,15 +1684,6 @@ footer.korporatF {
 		margin:30px;
 	}
 }
-// @media only screen and (min-width: 1400px) {
-// 	.calendarSec {
-// 		.calendarWrap {
-// 			.eventsParth {
-// 				
-// 			}
-// 		}
-// 	}
-// }
 
 ////////////// franchise PAGE
 .topInfo.franchise {
@@ -2644,27 +2635,29 @@ footer.korporatF {
 		
 	}
 	.modal-body{
+		.modalInput {
+			text-align: center;
+			background-color: transparent;
+			border:0;
+			border-bottom: 2px solid;
+			padding:8px 5px;
+			color:$blue;
+			display: block;
+			max-width:220px;
+			width:100%;
+			&:-webkit-autofill {
+	        	-webkit-box-shadow: inset 0 0 0 50px #fff !important;
+	        	-webkit-text-fill-color: $blue !important;
+	        	color: $blue !important;
+	      	}
+		}
 		form {
 			display: flex;
 			justify-content: space-between;
 			flex-direction: column;
 			align-items: center;
 			.modalInput {
-				text-align: center;
-				background-color: transparent;
-				border:0;
-				border-bottom: 2px solid;
-				padding:8px 5px;
-				color:$blue;
-				display: block;
-				max-width:220px;
-				width:100%;
 				margin-bottom:15px;
-				&:-webkit-autofill {
-		        	-webkit-box-shadow: inset 0 0 0 50px #fff !important;
-		        	-webkit-text-fill-color: $blue !important;
-		        	color: $blue !important;
-		      	}
 			}
 
 			input[type=checkbox]:checked + label:before {
@@ -2716,7 +2709,6 @@ footer.korporatF {
 	    flex-direction: column;
 	    align-items: flex-end;
 	    justify-content: center;
-	    
 	    cursor: pointer;
 	span {
 		background-color:#fff;
@@ -2735,5 +2727,51 @@ footer.korporatF {
 		span {
 			background-color:$redLight;
 		}
+	}
+}
+.email_search {
+	.result {
+		max-width:230px;
+		margin: auto;
+		margin-bottom:10px;
+	}
+}
+.invite_link {
+	max-width:230px;
+	margin: auto;
+	p {
+	}
+	.copyWrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height:70px;
+		align-items: center;
+		margin: 0 0 20px;
+		.modalInput {
+			text-align: left;
+			padding:8px 0;
+		}
+		input,a {
+			margin:0 auto 0 0;
+		}
+	}
+}
+.new_invitation {
+	max-width:230px;
+	margin: auto;
+}
+.inviteBtn {
+	background-color: transparent;
+	border:0;
+}
+.copyBtn,.inviteBtn {
+	color:#000;
+	opacity:.7;
+	border-bottom: 1px solid;
+	transition:opacity .4s;
+	cursor: pointer;
+	&:hover {
+		opacity:1;
 	}
 }
