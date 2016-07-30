@@ -2,13 +2,16 @@ class Game < ApplicationRecord
   belongs_to :place
   belongs_to :league
   has_one :city, through: :place
+  has_many :photos
   has_many :game_registrations, dependent: :destroy
   has_many :teams, through: :game_registrations
   has_many :members, through: :teams
   has_many :team_ratings, dependent: :destroy
 
+  accepts_nested_attributes_for :photos, :allow_destroy => true
   accepts_nested_attributes_for :team_ratings, allow_destroy: true
-  
+
+
   enum status: { 'checking' => 'checking', 'open' => 'open', 'canceled' => 'canceled', 'ended' => 'ended' }
 
   scope :main, ->{ where main: true }
@@ -17,7 +20,7 @@ class Game < ApplicationRecord
   validates_uniqueness_of :number
 
   def status_enum
-    ['checking', 'open', 'canceled', 'ended']
+    self.class.statuses.to_a
   end
 
   def self.upcoming_games city = nil
@@ -44,7 +47,7 @@ class Game < ApplicationRecord
     if res.any?
       max_scores = res.sort_by { |r| r[:scores] }.last[:scores]
 
-      res.each do |r| 
+      res.each do |r|
         r[:percent] = (r[:scores] / max_scores.to_f) * 100.0
       end
     end

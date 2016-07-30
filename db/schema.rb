@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(version: 20160729153704) do
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.integer  "game_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "caption"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["game_id"], name: "index_photos_on_game_id", using: :btree
+  end
+
   create_table "places", force: :cascade do |t|
     t.string   "name"
     t.string   "site"

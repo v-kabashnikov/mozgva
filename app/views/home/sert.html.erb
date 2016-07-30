@@ -1,0 +1,64 @@
+<section class="topInfo franchise">
+	<div class="contentWrap">
+		<a class="whiteBorderBtn" href="">Войти</a>
+		<h1>Сертификат</h1>
+	</div>
+</section>
+
+<section class="franchiseSec">
+	<ul class="navigationWrap">
+		<li><a href="">Лиги</a></li>
+		<li><a href="">Сертификаты</a></li>
+		<li><a href="">Рейтинг команд</a></li>
+		<li><a href="">Корпоратив</a></li>
+		<li><a href="">Франшиза и спонсорство</a></li>
+	</ul>
+	<div class="mainWrap sert">
+		<div class="AboutSertWrap">
+			<article>Дарите<br/> Мозгву!</article>
+			<p>Забудьте про цветы. У нас можно купить подарочные сертификаты на 3-х, 6-х и 9-х участников. Забрать сертификаты можно на одной из игр или у нас в офисе в р-не Третьяковской.</p>
+			<img src="<%= asset_path('sert/sert.png') %>" class="img-responsive"/>
+		</div>
+		<div class="formSert">
+			<form>
+				<div class="formWrap">
+					<input class="lineInput" placeholder="Имя" type="text" name="name" />
+					<input class="lineInput" placeholder="Почта" type="mail" name="mail" />
+					<input class="lineInput" placeholder="Телефон" type="text" name="phone" />
+					<div class="selectWrap">
+						<article>Хочу подарить</article>
+						<input type="radio" name="kolvo" id="three" value="three">
+						<label for="three">Игру для 3-х</label>
+
+						<input type="radio" name="kolvo" id="six" value="six">
+						<label for="six">Игру для 6-х</label>
+
+						<input type="radio" name="kolvo" id="nine" value="nine">
+						<label for="nine">Игру для 9-х</label>
+					</div>
+					<div class="selectWrap">
+						<article>Предпочитаю забрать</article>
+						<input type="radio" name="takeAway" id="onGame" value="onGame">
+						<label for="onGame">На игре</label>
+						<input type="radio" name="takeAway" id="independently" value="independently">
+						<label for="independently">Самостоятельно</label>
+					</div>
+					<input type="submit" class="redBtn" value="Подарить" name="" />
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<footer class="franchiseF">
+		<ul>
+			<li>
+				<div><img src="<%= asset_path('symbol/like.png') %>"/><span>Лойс</span></div>
+				<div class="tag">#этомозвадетка</div>
+			</li>
+			<li>
+				<div><img src="<%= asset_path('symbol/location.png') %>"/><span>москва</span></div>
+				<img src="<%= asset_path('calendar/logo.png') %>"/>
+			</li>
+		</ul>
+	</footer>
+</section>

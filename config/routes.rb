@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/calendar', to: 'home#calendar', as: :calendar
   get '/franchise', to: 'home#franchise', as: :franchise
   get '/korporat', to: 'home#korporat', as: :korporat
+  get '/sert', to: 'home#sert', as: :sert
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
