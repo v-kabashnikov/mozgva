@@ -6,6 +6,14 @@
    # sendgrid
    SENDGRID_USERNAME: app324221@heroku.com
    SENDGRID_PASSWORD: sdfkj82jahuj2
+   # s3 credentials
+   S3_BUCKET_NAME: mozgva-staging
+   AWS_ACCESS_KEY_ID: JASDJN13ADKWIMS8AD
+   AWS_SECRET_ACCESS_KEY: sjYhsa87askAs+sakduJSADB7hHJbda82sadkj23
+   # twilio
+   TWILIO_ACCOUNT_SID: ASDADJnu18jasnjdbj1ubjsanm
+   TWILIO_AUTH_TOKEN: sjdugy23hnyvb1h238hjasd891
+   TWILIO_PHONE: '+18023283233'
  development:
    <<: *default
  test:
@@ -13,6 +21,7 @@
  production:
    <<: *default
    HOST: mozgva.dshop24.ru
+   S3_BUCKET_NAME: mozgva
    DATABASE_USERNAME: deployer
    DATABASE_PASSWORD: deployer_password
    SECRET_KEY_BASE: 2b7713b6644d5d69bf217570a3b1af7b8816c58194e8246cfd85835c28cf1a28a580d8180cc5514cf7a018373dac3118e3596d23c002abb14a8ee15707ebd462

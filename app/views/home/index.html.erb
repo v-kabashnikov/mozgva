@@ -27,7 +27,11 @@
 							<% if current_user.team %>
 								<%= link_to("Моя команда", my_team_path) %>
 							<% else %>
-								<%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+								<% if current_user.phone_confirmed_at %>
+									<%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+								<% else %>
+									<a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
+								<% end %>
 							<% end %>
 						</div>
 					</span>		
@@ -254,6 +258,7 @@
 	<% else %>
 		<%= render 'shared/edit_profile' %>
 		<%= render 'shared/team_modal' unless current_user.team %>
+		<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
 		<%= render 'shared/invitations_modal' if current_user.invitations.present? %>	
 	<% end %>
 	<%= render 'shared/errors_modal' %>
