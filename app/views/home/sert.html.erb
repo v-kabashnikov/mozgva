@@ -7,11 +7,12 @@
 
 <section class="franchiseSec">
 	<ul class="navigationWrap">
-		<li><a href="">Лиги</a></li>
-		<li><a href="">Сертификаты</a></li>
-		<li><a href="">Рейтинг команд</a></li>
-		<li><a href="">Корпоратив</a></li>
-		<li><a href="">Франшиза и спонсорство</a></li>
+		<li><%= link_to root_path do %>Главная<% end %></li>
+		<li><%= link_to leagues_path do %>Лиги<% end %></li>
+		<li><%= link_to calendar_path do %>Календарь игр<% end %></li>
+		<li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+		<li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+		<li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
 	</ul>
 	<div class="mainWrap sert">
 		<div class="AboutSertWrap">
@@ -56,7 +57,7 @@
 				<div class="tag">#этомозвадетка</div>
 			</li>
 			<li>
-				<div><img src="<%= asset_path('symbol/location.png') %>"/><span>москва</span></div>
+				<div><img src="<%= asset_path('symbol/location.png') %>"/><span data-current-value="<%= @city.id %>"><%= @city.name %></span></div>
 				<img src="<%= asset_path('calendar/logo.png') %>"/>
 			</li>
 		</ul>
