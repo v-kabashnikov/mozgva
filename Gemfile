@@ -17,6 +17,7 @@ gem 'paperclip', '~> 5.0'
 gem 'aws-sdk', '~> 2.4', '>= 2.4.2'
 gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'font-awesome-sass'
+gem 'twilio-ruby', '~> 4.11', '>= 4.11.1'
 gem 'devise', '~> 4.2'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'

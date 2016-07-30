@@ -169,11 +169,12 @@ $( document ).ready(function() {
 			var form = $(this).parents('form');
 			var passes = form.find('.email_changed');
 			if($(this).val() != email){
-				passes.show();
+				passes.slideDown('fast');
 				passes.find('input').attr('required', true);
 			}
 			else if(!$("#user_password").val()){
-				passes.hide();
+				console.log('44');
+				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
 			}
 		});
@@ -181,16 +182,16 @@ $( document ).ready(function() {
 			var form = $(this).parents('form');
 			var passes = form.find('.password_changed');
 			if($(this).val()){
-				passes.show();
+				passes.slideDown('fast');
 				passes.find('input').attr('required', true);
 			}
 			else if($("#user_email").val() == email ){
-				passes.hide();
+				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
 			}
 			else{
 				passes = passes.not('.email_changed');
-				passes.hide();
+				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
 			}
 		});
