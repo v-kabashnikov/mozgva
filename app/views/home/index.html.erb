@@ -14,7 +14,7 @@
 	<div class="contentWrapper">
 		<div class="line">
 			<div class="authorizationWrap" >
-				
+
 				<% if current_user %>
 					<span>
 						<img src="<%= asset_path('lightningSec/lightning.png') %>">
@@ -34,7 +34,7 @@
 								<% end %>
 							<% end %>
 						</div>
-					</span>		
+					</span>
 				<% else %>
 					<span>
 						<img src="<%= asset_path('lightningSec/lightning.png') %>">
@@ -71,31 +71,31 @@
 			<%= link_to sert_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/gifts.png') %>">
-				<p>Подарочные<br/> сертификаты</p>	
+				<p>Подарочные<br/> сертификаты</p>
 			</div>
 			<% end %>
 			<%= link_to rating_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/rang.png') %>">
-				<p>Рейтинг<br/> команд</p>	
+				<p>Рейтинг<br/> команд</p>
 			</div>
 			<% end %>
 			<%= link_to calendar_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/calendar.png') %>">
-				<p>Календарь игр</p>	
+				<p>Календарь игр</p>
 			</div>
 			<% end %>
 			<%= link_to korporat_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/korporat.png') %>">
-				<p>Корпоратив</p>	
+				<p>Корпоратив</p>
 			</div>
 			<% end %>
 			<%= link_to franchise_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/connect.png') %>">
-				<p>Франшиза<br/> и спонсорство</p>	
+				<p>Франшиза<br/> и спонсорство</p>
 			</div>
 			<% end %>
 		</div>
@@ -143,7 +143,7 @@
 	              <ul class="dropdown" tabindex="1" data-name="year_month">
 				    <% @months.each do |month| %>
 						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
-					<% end %>	
+					<% end %>
 	              </ul>
 	          </div>
 	        ​</div> <!--AND SELECT SITY & MONTH-->
@@ -165,26 +165,24 @@
 	          </div>
 	          <div class="body">
 	              <ul class="tabNav">
-	                <li class="active"><a href="#tab1" data-toggle="tab">20 сентября</a></li>
-	                <li><a href="#tab2" data-toggle="tab">21 сентября</a></li>
-	                <li><a href="#tab3" data-toggle="tab">22 сентября</a></li>
+	              <% @past_games.each_with_index do |game, i|%>
+	              	<%months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
+	                <li <%='class="active"' if i == 0%>><a href="#tab<%=i+1%>" data-toggle="tab"><%=game.when.strftime("%d")%> <%=months_hash[game.when.month]%></a></li>
+	                <%end%>
+
 	              </ul>
 	              <div class="tab-content">
-	              <div class="tab-pane active" id="tab1">
-	                <p>320 штук</p>
-	                <div class="center">
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/1.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/2.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/3.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/4.jpg')%>);"></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="tab-pane" id="tab2">Tab 2 content...</div>
-	              <div class="tab-pane" id="tab3">Tab 3 content...</div>
+	              <% @past_games.each_with_index do |game, i|%>
+		              <div class="tab-pane <%='active' if i == 0%>" id="tab<%=i+1%>">
+		                <p><%=game.photos.count%> штук</p>
+		                <div class="center">
+		                <%game.photos.each do |photo|%>
+		                  <div><div class="photoItemWrap" style="background-image:url(<%=photo.image.url%>);"></div>
+		                  </div>
+		                  <%end%>
+		                </div>
+		              </div>
+								<%end%>
 	            </div>
 	          </div>
 	        </div>
@@ -194,7 +192,7 @@
 	        </div>
 	        <div class="adParthBottom">
 	          <div class="carouselWrap">
-	            
+
 	            <div class="teamsCarousel">
 	            	<div class="item">
 	            		<img src="<%= asset_path('ad/cherries.png')%>"/>
@@ -215,7 +213,7 @@
 	            	</div>
 	            </div>
 	          </div>
-	        </div> 
+	        </div>
 		</div>
 	</div>
 	<div class="wrapPartnerSec">
@@ -256,7 +254,7 @@
 </section>
 
 
-	
+
 	<% unless current_user %>
 		<%= render 'shared/sign_in' %>
 		<%= render 'shared/sign_up' %>
@@ -265,7 +263,7 @@
 		<%= render 'shared/edit_profile' %>
 		<%= render 'shared/team_modal' unless current_user.team %>
 		<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-		<%= render 'shared/invitations_modal' if current_user.invitations.present? %>	
+		<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
 	<% end %>
 	<%= render 'shared/errors_modal' %>
 	<%= render 'shared/teams_modal' %>
