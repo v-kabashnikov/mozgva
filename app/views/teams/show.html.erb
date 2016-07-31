@@ -40,7 +40,7 @@
       <% @team.invitations.each do |inv| %>
         <li class="not_member" id="invitation_<%= inv.id %>">
           <% if current_user.member.captain? %>
-            <%= link_to '❌', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+            <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
           <% end %>
           <div class="avatar"></div>
           <p><%= inv.user.name %></p>
