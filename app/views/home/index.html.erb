@@ -165,25 +165,15 @@
 	          </div>
 
 	          <div class="body">
-	          		 <div id="mySliderTabs">
-  <!-- Unordered list representing the tabs -->
-									  <ul>
-									    <li><a href="#1" data-toggle="tab">The Grand Canyon</a></li>
-									    <li><a href="#2" data-toggle="tab">The Taj Mahal</a></li>
-									    <li><a href="#3" data-toggle="tab">Big Ben</a></li>
-									    <li><a href="#4">The Grand Canyon</a></li>
-									    <li><a href="#5">The Taj Mahal</a></li>
-									    <li><a href="#6">Big Ben</a></li>
-									    <li><a href="#7">Big Ben</a></li>
-									  </ul>
-									</div>
-	              <ul class="tabNav">
-	              <%months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
-	              <% @past_games.each_with_index do |game, i|%>
-	                <li <%='class="active"' if i == 0%>><a href="#tab<%=i+1%>" data-toggle="tab"><%=game.when.strftime("%d")%> <%=months_hash[game.when.month]%></a></li>
-	                <%end%>
+	          	  <div id="mySliderTabs" >
+	          	  	<%months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
+						<ul class="tabNav">
+						  <% @past_games.each_with_index do |game, i|%>
+						    <li <%='class=active' if i == 0%>><a href="#tab<%=i+1%>" data-toggle="tab"><%=game.when.strftime("%d")%> <%=months_hash[game.when.month]%></a></li>
+						   <%end%>
+						</ul>
+				  </div>
 
-	              </ul>
 
 	              <div class="tab-content">
 	              <% @past_games.each_with_index do |game, i|%>
@@ -196,7 +186,7 @@
 		                  <%end%>
 		                </div>
 		              </div>
-								<%end%>
+				  <%end%>
 	            </div>
 	          </div>
 	        </div>
