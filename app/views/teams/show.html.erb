@@ -227,7 +227,7 @@
           <%@month_array.each_with_index do |month, i|%>
           <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
            <div class="AlbomItmWrapper">
-           <%@past_games.where("to_char(games.when, 'MM') = ?", '07').each do |game|%>
+           <%@past_games.where("to_char(games.when, 'MM') = ?", '07').order(when: :asc).each do |game|%>
              <%if game.photos.count == 0%>
              <div class="AlbomItm photoShow">
                <img src="<%= asset_path('symbol/plenka.png') %>" />
