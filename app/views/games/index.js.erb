@@ -1,13 +1,4 @@
 $(".gamesTabs").html("<%= j render 'games/tabs' %>");
-$('.gamesCarousel').slick({
-  rows: 2,
-  arrows:false,
-  dots:true,
-  variableWidth:true,
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  variableWidth: true
-});
 <% if @city && @curr_month %>
 	span = $('#games_filter').find('#dd span');
 	span.text("<%=@city.name%>");

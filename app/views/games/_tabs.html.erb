@@ -52,3 +52,7 @@
       </div>
     </div>
 <% end %>
+
+<% if @game_groups_count > 4 %>
+  <%= link_to 'Все игры', calendar_path %>
+<% end %>
