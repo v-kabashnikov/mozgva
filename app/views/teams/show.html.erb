@@ -22,9 +22,9 @@
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
   <ul class="contentWrap">
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
+    <% @team.achievments.each do |ach| %>
+      <li><%= image_tag ach.achievment_type.image.url, title: ach.date.strftime('%d.%m.%y') %></li>
+    <% end %>
   </ul>
   <div class="contentWrap">
     <ul class="faceParth">
