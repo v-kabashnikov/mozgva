@@ -26,7 +26,7 @@ class TeamsController < ApplicationController
     set_city
     @team = current_user.team
     return redirect_to root_path unless @team
-    @past_games = Game.joins(:game_registrations).where("game_registrations.team_id": @team.id).where('"when" < :now', now: DateTime.now)
+    @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now)
     @month_array =[]
     @past_games.each do |game|
       @month_array << game.when.strftime("%m").to_i
