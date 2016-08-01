@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  default_scope ->{ order('members.team_role IS NULL, members.team_role DESC')}
   belongs_to :user
   belongs_to :team
   after_create :delete_invitations
@@ -9,6 +10,10 @@ class Member < ApplicationRecord
 
   def captain?
     team_role == 'captain'
+  end
+
+  def boatswain?
+    team_role == 'boatswain'
   end
 
   private
