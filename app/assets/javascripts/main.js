@@ -1,4 +1,13 @@
 $( document ).ready(function() {
+
+	var slider = $("div#mySliderTabs").sliderTabs({
+  autoplay: false,
+  mousewheel: false,
+  indicators: true,
+  panelArrows: true,
+  panelArrowsShowOnHover: true
+
+});
 	$('a.disabled').click(function(e){
 		e.preventDefault();
 		e.stopPropagation();
@@ -34,7 +43,7 @@ $( document ).ready(function() {
 	        url: editable.data("action"),
 	        data: dataString + editable.text(),
 	        success: function(){}
-		    });            
+		    });
 			}
 		}
 	});
@@ -80,7 +89,7 @@ $( document ).ready(function() {
 		$('#teams_list').find('.modal-body').html(modalBody);
 	}
 
-	function addFormLink(selector, successFunction){	
+	function addFormLink(selector, successFunction){
 		$(selector).click(function(e){
 			el = $(this);
 			if(el.data("action")){
@@ -91,7 +100,7 @@ $( document ).ready(function() {
 	        url: el.data("action"),
 	        data: dataString + $(this).data("value"),
 	        success: successFunction
-		    });            
+		    });
 			}
 		});
 	}
@@ -108,13 +117,13 @@ $( document ).ready(function() {
 	// 	        url: el.data("action"),
 	// 	        data: dataString + $(this).data("value"),
 	// 	        success: successFunction
-	// 	    });            
+	// 	    });
 	// 		});
 	// 	}
 	// }
 
 
-	function addFormDropdown(selector, successFunction){		
+	function addFormDropdown(selector, successFunction){
 		$(selector).find('a').click(function(e){
 			el = $(selector);
 			method = el.data("method") || "post";
@@ -142,7 +151,7 @@ $( document ).ready(function() {
       // no-scroll
       $('body').addClass("modal-open-noscroll");
     }
-    else { 
+    else {
       $('body').removeClass("modal-open-noscroll");
     }
   });
@@ -196,5 +205,5 @@ $( document ).ready(function() {
 			}
 		});
 	}
-	
+
 });
