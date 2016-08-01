@@ -58,6 +58,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.2)
+    cancancan (1.15.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     clipboard-rails (1.5.10)
@@ -241,6 +242,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (~> 2.4, >= 2.4.2)
   bootstrap-sass (~> 3.3, >= 3.3.6)
+  cancancan (~> 1.15)
   clipboard-rails (~> 1.4)
   coffee-rails (~> 4.2)
   devise (~> 4.2)
