@@ -31,7 +31,8 @@
       <% @team.members.each do |member| %>
         <li id="member_<%= member.id %>">
           <% if current_user.member.captain? && !member.captain? %>
-            <%= link_to '❌', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+            <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+            <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
           <% end %>
           <div class="avatar"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
@@ -161,32 +162,23 @@
       <div class="square">
         <div class="head">
           <article>Контакты</article>
-          <a href="">Редактировать</a>
+          <!--<a href="">Редактировать</a>-->
         </div>
         <div class="body">
           <ul class="userInfo">
-            <li class="captain">
-              <div class="name">Коля</div>
-              <div class="phoneMail">
-                <div class="phone">
-                  <input type="text" name="phone" value="+7 987 666 66 66" />
+            <% @team.staff.each do |m| %>
+              <li class="<%= m.team_role %>">
+                <div class="name"><%= m.user.name %></div>
+                <div class="phoneMail">
+                  <div class="phone">
+                    <input type="text" name="phone" value="<%= m.user.phone %>" readonly />
+                  </div>
+                  <div class="mail">
+                    <input type="text" name="mail" value="<%= m.user.email %>" readonly />
+                  </div>
                 </div>
-                <div class="mail">
-                  <input type="text" name="mail" value="kolyan.the.captain@yandex.ru" />
-                </div>
-              </div>
-            </li>
-            <li class="subCaptain">
-              <div class="name">Юля</div>
-              <div class="phoneMail">
-                <div class="phone">
-                  <input type="text" name="phone" value="+7 987 666 66 66" />
-                </div>
-                <div class="mail">
-                  <input type="text" name="mail" value="jule.sub@yandex.ru" />
-                </div>
-              </div>
-            </li>
+              </li>
+            <% end %>
           </ul>
         </div>
         <ul class="foot">

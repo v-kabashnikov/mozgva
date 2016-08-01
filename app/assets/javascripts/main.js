@@ -71,6 +71,12 @@ $( document ).ready(function() {
 		$('#member_' + data['member']['id']).remove();
 	});
 
+	$(".make_boatswain").on("ajax:success", function(e, data, status, xhr){
+		$('.faceParth .boatswain').removeClass('boatswain');
+		$('#member_' + data['member']['id'] + ' p').addClass('boatswain');
+		$('#member_' + data['member']['id'] + ' p')
+	});
+
 	$(".remove_invitation").on("ajax:success", function(e, data, status, xhr){
 		$('#invitation_' + data['invitation']['id']).remove();
 	});

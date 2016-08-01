@@ -9,6 +9,7 @@ class Phone
   end
   private
   def validate!
+    return @valid = false unless @phone.present?
     lookup_client = Twilio::REST::LookupsClient.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
     begin
       number = lookup_client.phone_numbers.get(@phone)
