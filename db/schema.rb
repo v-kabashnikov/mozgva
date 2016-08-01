@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729153704) do
+ActiveRecord::Schema.define(version: 20160801124652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievment_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "achievments", force: :cascade do |t|
+    t.integer  "team_id"
+    t.integer  "achievment_type_id"
+    t.date     "date"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["achievment_type_id"], name: "index_achievments_on_achievment_type_id", using: :btree
+    t.index ["team_id"], name: "index_achievments_on_team_id", using: :btree
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -122,6 +142,8 @@ ActiveRecord::Schema.define(version: 20160729153704) do
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'role' for column 'role'
 
+  add_foreign_key "achievments", "achievment_types"
+  add_foreign_key "achievments", "teams"
   add_foreign_key "game_registrations", "games"
   add_foreign_key "game_registrations", "teams"
   add_foreign_key "games", "leagues"
