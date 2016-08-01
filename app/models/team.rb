@@ -24,6 +24,10 @@ class Team < ApplicationRecord
     members_count + invitations_count >= MAX_MEMBERS_COUNT
   end
 
+  def captain
+    members.where(team_role: 'captain').first.user
+  end
+
   def places
     MAX_MEMBERS_COUNT - members_count - invitations_count
   end
