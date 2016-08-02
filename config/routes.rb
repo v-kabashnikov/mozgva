@@ -23,10 +23,10 @@ Rails.application.routes.draw do
     end
   end
   get '/team', to: 'teams#my_team', as: :my_team
-  get '/calendar', to: 'home#calendar', as: :calendar
-  get '/franchise', to: 'home#franchise', as: :franchise
-  get '/korporat', to: 'home#korporat', as: :korporat
-  get '/sert', to: 'home#sert', as: :sert
+  get '/calendar', to: 'home#calendar'
+  get '/franchise', to: 'home#franchise'
+  get '/korporat', to: 'home#korporat'
+  get '/sert', to: 'home#sert'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
