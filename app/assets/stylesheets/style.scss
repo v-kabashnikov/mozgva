@@ -192,28 +192,7 @@ a.disabled{
 		.line {
 			display: flex;
 			justify-content: space-between;
-			.authorizationWrap {
-				span {
-					display: flex;
-					align-items: center;
-					img {
-					margin-right:20px;
-					}
-					.links {
-						display: flex;
-						flex-direction: column;
-						a {
-							cursor: pointer;
-							color:#fff;
-							text-decoration: none;
-							&:focus {
-								outline:none;
-							}
-
-						}
-					}	
-				}
-			}
+			
 			.logoWrap {
 				text-align: center;
 				padding-right: 50px;
@@ -811,7 +790,7 @@ select::-ms-expand {
 
 $grey: #262626;
 
-$h1: 8.3rem;
+$h1: 7.5rem;
 $h2: 5rem;
 $h3: 4rem;
 $h4: 3rem;
@@ -1330,7 +1309,28 @@ input[type=range]::-moz-focus-outer {
 }
 
 ////////////// COMMON STYLES
+.authorizationWrap {
+	span {
+		display: flex;
+		align-items: center;
+		img {
+		margin-right:20px;
+		}
+		.links {
+			display: flex;
+			flex-direction: column;
+			a {
+				cursor: pointer;
+				color:#fff;
+				text-decoration: none;
+				&:focus {
+					outline:none;
+				}
 
+			}
+		}	
+	}
+}
 .itemGame {
 	min-width:240px;
 	max-width:240px;
@@ -1471,8 +1471,9 @@ input[type=range]::-moz-focus-outer {
 			color:#fff;
 			text-align: center;
 			margin: 0 auto 0 -83px;
+			line-height: 65px;
 		}
-		a {
+		.btnWrap {
 			margin: 0 auto 0 0;
 		}
 	}	
@@ -1522,8 +1523,14 @@ input[type=range]::-moz-focus-outer {
 	padding:8px 20px;
 	color:#fff;
 	display: block;
+	text-align: center;
+	transition:background-color .4s, border .4s;
+	cursor: pointer;
 	&:hover {
 		color:#fff;
+		background-color:rgba(255,255,255,.3);
+		border:2px solid transparent;
+
 	}
 }
 .btnBlue {
@@ -1690,11 +1697,20 @@ footer.korporatF {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			width:900px;
+			width:820px;
+			.gamesTabs {
+				width:100%;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				.itemGame {
+					margin:0 0 30px;
+				}
+			}
 		}
 	}
 	.loadMore {
-		margin:30px;
+		margin:30px 0 0;
 	}
 }
 
@@ -2560,13 +2576,71 @@ footer.korporatF {
 	}
 
 }
+
+.mainWrap.invite {
+	min-height: calc(100vh - 395px);
+	font-size:14px;
+	padding:0 0 50px;
+	label {
+		font-weight:200;
+		margin-bottom:10px;
+		span {
+			color:rgba(255,255,255,.6);
+			font-style: italic;
+		}
+	}
+	article {
+		font-size:$h4;
+		font-family:$GraublauSansDisplayLtFont;
+	 span {
+	 	color:$redLight;
+	 	font-size:$h1;
+		font-family:$mainFontBold;
+		text-align: center;
+	 }
+	 h2 {
+
+	 }
+	}
+	.AboutInviteWrap {
+		h2 {
+			font-size:20px;
+			font-family:$GraublauSansDisplayLtFont;
+			margin-bottom:20px;
+			span {
+				color:red;
+				font-size:22px;
+				font-family:$mainFontBold;
+			}
+		}
+		ul {
+			li {
+				position: relative;
+				&:before {
+					position: absolute;
+					content:"\f04d";
+					font-family: FontAwesome;
+					color: red;
+				  	font-size: 8px;
+				    top:5px;
+				    left: -15px;
+
+
+				}
+			}	
+		}
+	}
+}
+
 ////// SERTIFICATE PAGE
-.mainWrap.sert {
+.mainWrap.sert,
+.mainWrap.invite {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-.AboutSertWrap {
+
+.AboutSertWrap,.AboutInviteWrap {
 	color:#fff;
 	width:100%;
 	max-width:500px;
@@ -2597,6 +2671,7 @@ footer.korporatF {
 		border:0;
 		margin: 0 0 20px 0;
 		width:230px;
+		color:#fff;
 		background-color: transparent;
 		border-bottom: 1px solid;
 	}
