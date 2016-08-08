@@ -1,0 +1,74 @@
+
+@media screen and (max-width:1250px) {
+
+	.headInfo {
+		.contentWrapper {
+			.line {
+				justify-content: space-around;
+			}
+		}
+	}
+
+	/*CALENDAR PAGE*/
+	.calendarSec {
+		.calendarWrap {
+			justify-content: space-around;
+			.eventsParth {
+				max-width:600px;
+			}
+		}
+	}  
+
+	/*SERT PAGE*/
+	.mainWrap.sert {
+		max-width: 900px;
+
+	}
+
+	/*KORPORT PAGE*/
+
+	.korporatSek {
+		.mainWrap {
+			flex-wrap: wrap;
+			flex-direction: column-reverse;
+		}
+		.widget {
+			margin:20px auto;
+		}
+		.infoBlock,.gallery {
+			margin: auto;
+		}
+		.quest {
+			margin:40px auto 0 ;
+		}
+	}
+	/*TEAM PAGE*/
+	.teamSec {
+		.contentWrap {
+			flex-wrap: wrap;
+			justify-content: center;
+			.left.Success {
+				margin-bottom:30px;
+				max-width: 600px;
+
+			}
+		}
+	}
+
+	footer {
+		ul {
+			justify-content: space-around;
+		}
+	}
+	.navigationWrap {
+		li {
+			flex:1 1;
+		}
+	}
+	.wrapPartnerSec {
+		max-width:580px;
+	}
+
+}
+
+

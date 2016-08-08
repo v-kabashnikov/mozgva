@@ -92,17 +92,33 @@
 				<div class="tag">#этомозвадетка</div>
 			</li>
 			<li>
-				<div><img src="<%= asset_path('symbol/location.png') %>"/><span data-current-value="<%= @city.id %>"><%= @city.name %></span></div>
+				<!--SELECT SITY & MONTH
+				<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+					<div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+						<ul class="dropdown" tabindex="1" data-name="city_id">
+							<% City.all.each do |city| %>
+							<li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+							<% end %>
+						</ul>
+					</div>
+					<div style="display:none">
+						<span data-current-value="4">4</span>
+						<ul data-name="max_groups"><li></li></ul>
+					</div>
+				</div>
+				AND SELECT SITY & MONTH-->
 				<img src="<%= asset_path('calendar/logo.png') %>"/>
 			</li>
 		</ul>
 	</footer>
 </section>
-
+<%= render 'shared/sert_order' %>
 <% unless current_user %>
 <%= render 'shared/sign_in' %>
 <%= render 'shared/sign_up' %>
 <%= render 'shared/restore_password' %>
+<%= render 'shared/user_agree' %>
 <% else %>
 <%= render 'shared/edit_profile' %>
 <%= render 'shared/team_modal' unless current_user.team %>
@@ -111,3 +127,5 @@
 <% end %>
 <%= render 'shared/errors_modal' %>
 <%= render 'shared/teams_modal' %>
+
+

@@ -16,6 +16,7 @@ $GraublauSansDisplayBdFont:GraublauSansDispBd;
   font-style: normal;
   font-weight: normal;
 }
+input::-webkit-validation-bubble-message { display: none; }
 @font-face {
   font-family: GraublauSlab-Bold;
   src: asset-url("GraublauSlabPro/GraublauSlab-Bold.otf");
@@ -108,6 +109,7 @@ button:visited {
 a.disabled{
 	cursor: default;
 }
+
 .lightningSection {
 	background-color:$blue;
 	background-image:asset-url('lightningSec/bgRight.png');
@@ -146,7 +148,6 @@ a.disabled{
 	background-color:$redHard;
 	padding:40px 0;
 	.wrapSelectCityMonth {
-		width:0;
 		display: block;
 		margin:0;
 		.wrapper-dropdown {
@@ -192,12 +193,6 @@ a.disabled{
 		.line {
 			display: flex;
 			justify-content: space-between;
-			
-			.logoWrap {
-				text-align: center;
-				padding-right: 50px;
-
-			}
 			&.SomeTabs {
 				margin-top:50px;
 				.item {
@@ -548,6 +543,62 @@ a.disabled{
 	}
 }
 
+footer {
+	ul {
+		li {
+			img {
+				margin: 0 0 0 auto;
+			}
+		}
+	}
+	.wrapSelectCityMonth  {
+		.wrapper-dropdown.dropup {
+			margin: auto;
+			display: flex;
+    		flex-direction: column-reverse;
+			border-bottom:0;
+			&:before {
+				content: "";
+			    width: 19px;
+			    height: 19px;
+			    position: absolute;
+			    background-image:asset-url("symbol/location.png");
+			    background-repeat: no-repeat;
+			    left: 0;
+			    top: 20px;
+			    // margin-top:2px;
+			}
+			&.active {
+				&:before {
+					transform: rotate(0deg);
+	    			margin-top: -6px;
+    			}
+			}
+			.dropdown {
+				position: relative;
+				display: flex;
+    			flex-direction: column-reverse;
+    			align-items: flex-start;
+    			padding-bottom: 10px;
+    			li {
+    				width:100%;
+    				a {
+    					width:100%;
+    				}
+    				&:last-child {
+    					a {
+    						border-top:1px solid #000;
+    					}
+    					
+    				}
+    			}
+
+			}
+		}
+	}
+
+} 
+
 
 @media screen and (max-width: 1400px) {
 	.noticeSection {
@@ -701,8 +752,9 @@ footer {
 	padding: 15px 35px;
 	cursor: pointer;
 	color:#fff;
-	&:focus {
+	&:focus,&:hover {
 		outline:none;
+		color:#fff;
 	}
 	display: block;
 }
@@ -728,11 +780,6 @@ footer {
 	}
 }
 @media only screen and (min-width: 1600px) {
-	// .gamesCarousel {
-	// 	.slick-slide{
-	// 		padding: 0 60px;
-	// 	}
-	// }
 	.infoSecWrap {
 		max-width:80vw;
 		margin: auto;
@@ -1483,6 +1530,7 @@ input[type=range]::-moz-focus-outer {
 	justify-content: center;
 	align-items: center;
 	margin:0 0 50px;
+	text-align: center;
 	li {
 		margin: 0 20px;
 		a {
@@ -1590,7 +1638,7 @@ footer.korporatF {
 		li {
 			display: flex;
 			align-items: center;
-			justify-content:space-around;
+			justify-content:space-between;
 			width:320px;
 			margin:0;
 			span {
@@ -1722,6 +1770,9 @@ footer.korporatF {
 	border:10px solid $yellow;
 	background-color:$darkBlue;
 	padding:50px 0 0;
+	.mainWrap {
+		justify-content: space-between;
+	}
 }
 
 .infoBlock {
@@ -1796,11 +1847,14 @@ footer.korporatF {
 
 .navTeamSec {
 	background-color:$redLight;
+	padding:40px 0 20px;
 	.headWrapper {
 		display: flex;
 		max-width:1200px;
 		margin: auto;
 		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
 		padding:0;
 		.teamNav {
 			text-align: center;
@@ -1810,28 +1864,19 @@ footer.korporatF {
 		}
 		ul {
 			color:#fff;
-			margin:30px auto 30px 0;
-			&:first-child{
-				margin:30px auto 30px 0;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				background-color:rgba(255,255,255,.3);
-				border-radius:50px;
-				li {
-					margin: 0 10px;
-					&:first-child {
-						margin:0 10px 0 0;
-					}
-					&:last-child {
-						margin:0 20px 0 10px;
-					}
-
-				}
-			}
+			margin:30px 0;
+			align-items: center;
 		}
 	}
 }
+@media screen and (max-width: 1200px) {
+	.navTeamSec {
+		.headWrapper {
+		}
+	}
+
+}
+
 .topInfo.team {
 	background-color:$redLight;
 	position: relative;
@@ -2002,10 +2047,9 @@ footer.korporatF {
 	padding: 150px 0 0;
 	.contentWrap {
 		display: flex;
-		justify-content: center;
-		.left,.right {
-			margin:0 15px;
-		}
+		justify-content: space-between;
+		max-width:1200px;
+		margin: auto;
 		.left {
 			width:100%;
 			max-width:550px;
@@ -2256,9 +2300,13 @@ footer.korporatF {
 		}
 		.photoHead {
 			background-color: transparent;
-			padding:30px;
+			padding:30px 5px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			color:#fff;
 			height:80px;
+			width:100%;
 			h3 {
 				color:#fff;
 				margin:0 auto 0 0;
@@ -2640,14 +2688,57 @@ footer.korporatF {
 }
 
 ////// SERTIFICATE PAGE
-.mainWrap.sert,
+
 .mainWrap.invite {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+.mainWrap.sert {
+	flex-direction: column;
+	.descriptSert {
+		color:#fff;
+		max-width:600px;
+		margin:0 0 20px 5px;
+		article {
+			font-family:$GraublauSansDisplayRegFont;
+			font-size:18px;
+			margin-bottom:10px;
+		}
+		p {
+			font-size:16px;
+			font-family:$GraublauSansDisplayLtFont;
+		}
+	}
+	.itemsWrap {
+		display: flex;
+		justify-content: flex-start;
+		.itemSert {
+			margin:0 50px 0 0;
+			ul {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin:10px 5px;
+				li {
+					color:#fff;
+					font-family:$GraublauSansDisplayLtFont;
+					font-size:16px;
+					&:first-child {
+						line-height:23px;
+						span {
+							font-size:30px;
+							font-family:$mainFontBold;
+							letter-spacing:1.5px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
-.AboutSertWrap,.AboutInviteWrap {
+.AboutInviteWrap{
 	color:#fff;
 	width:100%;
 	max-width:500px;
@@ -2662,62 +2753,64 @@ footer.korporatF {
 		margin:30px auto 0;
 	}
 }
+.AboutSertWrap {
+	width:100%;
+}
 .formSert {
 	color:#fff;
 	width:100%;
 	max-width:500px;
 }
-.formWrap {
-	width:100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	.lineInput {
-		text-align: center;
-		border:0;
-		margin: 0 0 20px 0;
-		width:230px;
-		color:#fff;
-		background-color: transparent;
-		border-bottom: 1px solid;
-	}
-	.selectWrap {
-		margin:20px 0 0;
-		display: flex;
-		flex-direction: column;
-		max-width:230px;
-		article {
-			font-size:$h5;
-			margin:0 0 10px;
-			line-height:$h5;
-		}
-		label {
-			width:230px;
-			position: relative;
-			&:before{
-				position: absolute;
-				top:0;
-				bottom:0;
-				width:10px;
-				height:10px;
-				background-color:#fff;
-				border-radius:50%;
-				margin:auto 0;
-				left:-20px;
-				content:"";
-				transition:background-color .4s;
-			}
-		}
-		input[type=radio]:checked + label:before {
-			background-color:$redLight;
-
-		}
-	}
-	input[type=submit] {
-		margin-top:20px;
-	}
-}
+// .formWrap {
+// 	width:100%;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: center;
+// 	align-items: center;
+// 	.lineInput {
+// 		text-align: center;
+// 		border:0;
+// 		margin: 0 0 20px 0;
+// 		width:230px;
+// 		color:#fff;
+// 		background-color: transparent;
+// 		border-bottom: 1px solid;
+// 	}
+// 	.selectWrap {
+// 		margin:20px 0 0;
+// 		display: flex;
+// 		flex-direction: column;
+// 		max-width:230px;
+// 		article {
+// 			font-size:$h5;
+// 			margin:0 0 10px;
+// 			line-height:$h5;
+// 		}
+// 		label {
+// 			width:230px;
+// 			position: relative;
+// 			&:before{
+// 				position: absolute;
+// 				top:0;
+// 				bottom:0;
+// 				width:10px;
+// 				height:10px;
+// 				background-color:#fff;
+// 				border-radius:50%;
+// 				margin:auto 0;
+// 				left:-20px;
+// 				content:"";
+// 				transition:background-color .4s;
+// 			}
+// 		}
+// 		input[type=radio]:checked + label:before {
+// 			background-color:$redLight;
+// 		}
+// 	}
+// 	input[type=submit] {
+// 		margin-top:20px;
+// 	}
+// }
 
 ///// MODALS
 
@@ -2754,7 +2847,10 @@ footer.korporatF {
 		}
 	}
 }
-
+.thankU {
+	display: none;
+	padding:40px 20px;
+}
 .modal-content {
 	background-color:#fff;
 	.modal-header {
@@ -2796,7 +2892,8 @@ footer.korporatF {
 				margin-bottom:15px;
 			}
 
-			input[type=checkbox]:checked + label:before {
+			input[type=checkbox]:checked + label:before,
+			input[type=radio]:checked + label:before {
 				background-color:$redLight;
 				border:1px solid $redLight;
 			}
@@ -2822,6 +2919,12 @@ footer.korporatF {
 					bottom:0;
 					transition:background-color .4s,border .4s;
 
+				}
+				&.error_label {
+					&:before {
+						background-color:#000;
+						border:1px solid #000;
+					}
 				}
 			}
 			.agreeWrap {
@@ -2850,8 +2953,24 @@ footer.korporatF {
 					color:$blue;
 				}
 			}
+			.selectWrap {
+				margin-top:30px;
+			}
+			input[type=submit] {
+				margin:30px auto;
+			}
+		}	
+	}
+	.modal-footer {
+		padding:0;
+		display: flex;
+		justify-content: center;
+		border:0;
+		.alert-danger {
+			background-color: transparent;
+			border-color:#000;
+			color: #000;
 		}
-		
 	}
 }
 

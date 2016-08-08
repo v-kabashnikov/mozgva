@@ -106,6 +106,7 @@ $( document ).ready(function() {
 		});
 	}
 
+
 	// function addFormDropdown(selector, successFunction){
 	// 	el = $(selector);
 	// 	if(el.data("action")){
@@ -232,6 +233,4 @@ $( document ).ready(function() {
 	    }
 	  ]
 	});
-	
-
 });
