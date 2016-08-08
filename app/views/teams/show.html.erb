@@ -52,7 +52,7 @@
             <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
             <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
           <% end %>
-          <div class="avatar"></div>
+          <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
@@ -61,7 +61,7 @@
           <% if current_user.member.captain? %>
             <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
           <% end %>
-          <div class="avatar"></div>
+          <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
           <p><%= inv.user.name %></p>
         </li>
       <% end %>

@@ -31,10 +31,23 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :avatar %> <i>Edit avatar</i><br />
+    <%= f.file_field :avatar %>
+  </div>
+
+
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
-<% end %>
+
+ <% end %>
+
+
+
+  
+
 
 <h3>Cancel my account</h3>
 
