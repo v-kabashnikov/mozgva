@@ -1,5 +1,5 @@
 <div class="modal fade in" id="sign_up">
-  <div class="modal-dialog">
+  <div class="modal-dialog registration">
     <div class="modal-content">
       <div class="modal-header">
         <div class="closeModal" data-dismiss="modal">
@@ -14,7 +14,7 @@
             <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
           </div>
           <div class="input_wrapper">
-            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true %>
+            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true,pattern: false %>
           </div>
           <div class="input_wrapper">
             <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
@@ -25,10 +25,14 @@
           <div class="input_wrapper">
             <%= f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: "modalInput", required: true, autocomplete: "off" %>
           </div>
-          <%= check_box_tag :user_pers_agree %>
+          <%= check_box_tag :user_pers_agree,'agree', true %>
           <%= f.label :pers_agree, "Согласен с обработкой перс.данных" %>
-          <%= check_box_tag :user_user_agree %>
-          <%= f.label :user_agree, "Согласен с пользовательским соглашением" %>
+          <div class="agreeWrap">
+          <%= check_box_tag :user_user_agree,'agree', true %>
+          
+          <%= f.label :user_agree, "Согласен с " %>
+          <span><%= link_to "пользовательским соглашением", '#user_agree', 'data-toggle' => 'modal' %></span>
+          </div>
           <%= f.submit "Регистрация", class: "blueBtn" %>
         <% end %>
       </div>

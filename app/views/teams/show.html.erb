@@ -1,16 +1,34 @@
 <section class="navTeamSec">
   <div class="headWrapper">
-    <ul>
-      <li><%= link_to "Выйти", destroy_user_session_path, method: :delete, class: 'whiteBorderBtn' %></li>
-      <li>Лига: <span>Чемпионы</span></li>
-      <li>Очки: <span>345 3535 54</span></li>
-    </ul>
+    <div class="btnWrap authorizationWrap">
+      <% if current_user %>
+      <span>
+        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <div class="links">
+          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+          <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+          <% if current_user.invitations.present? %>
+          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% end %>
+        </div>
+      </span>
+      <% else %>
+      <span>
+        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <div class="links">
+          <a href="#sign_in" data-toggle="modal">Войти</a>
+          <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+        </div>
+      </span>
+      <% end %>
+    </div>
     <ul class="navigationWrap teamNav">
-      <li><a href="">Календарь игр</a></li>
-      <li><a href="">Лиги</a></li>
-      <li><a href="">Сертификаты</a></li>
-      <li><a href="">Рейтинг команд</a></li>
-      <li><a href="">Франшиза и спонсорство</a></li>
+      <li><%= link_to root_path do %>Главная<% end %></li>
+      <li><%= link_to calendar_path do %>Календарь игр<% end %></li>
+      <li><%= link_to leagues_path do %>Лиги<% end %></li>
+      <li><%= link_to sert_path do %>Сертификаты<% end %></li>
+      <li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+      <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
     </ul>
   </div>
 </section>
@@ -22,16 +40,17 @@
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
   <ul class="contentWrap">
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
-      <li><img src="<%= asset_path('team/achif.png') %>" /></li>
+    <% @team.achievments.each do |ach| %>
+      <li><%= image_tag ach.achievment_type.image.url, title: ach.date.strftime('%d.%m.%y') %></li>
+    <% end %>
   </ul>
   <div class="contentWrap">
     <ul class="faceParth">
       <% @team.members.each do |member| %>
         <li id="member_<%= member.id %>">
           <% if current_user.member.captain? && !member.captain? %>
-            <%= link_to '❌', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+            <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+            <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
           <% end %>
           <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
@@ -40,7 +59,7 @@
       <% @team.invitations.each do |inv| %>
         <li class="not_member" id="invitation_<%= inv.id %>">
           <% if current_user.member.captain? %>
-            <%= link_to '❌', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+            <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
           <% end %>
           <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
           <p><%= inv.user.name %></p>
@@ -58,7 +77,7 @@
             </div>
           </a>
         </li>
-    <% end %>      
+    <% end %>
     </ul>
   </div>
 </section>
@@ -92,7 +111,7 @@
           <div role="tabpanel" class="tab-pane fade" id="position">123123</div>
           <div role="tabpanel" class="tab-pane fade" id="statistic">dsad</div>
         </div>
-        
+
       </div>
     </div>
     <div class="right">
@@ -144,13 +163,13 @@
                 var sum = ticket*kol;
 
                 document.getElementById("rezultOfPrice").innerHTML = sum;
-                
+
 
 
             };
           </script>
-          
-          
+
+
           <p class="currentPrice" id="rezultOfPrice"></p>
         </div>
         <div class="foot bg">
@@ -161,32 +180,23 @@
       <div class="square">
         <div class="head">
           <article>Контакты</article>
-          <a href="">Редактировать</a>
+          <!--<a href="">Редактировать</a>-->
         </div>
         <div class="body">
           <ul class="userInfo">
-            <li class="captain">
-              <div class="name">Коля</div>
-              <div class="phoneMail">
-                <div class="phone">
-                  <input type="text" name="phone" value="+7 987 666 66 66" />
+            <% @team.staff.each do |m| %>
+              <li class="<%= m.team_role %>">
+                <div class="name"><%= m.user.name %></div>
+                <div class="phoneMail">
+                  <div class="phone">
+                    <input type="text" name="phone" value="<%= m.user.phone %>" readonly />
+                  </div>
+                  <div class="mail">
+                    <input type="text" name="mail" value="<%= m.user.email %>" readonly />
+                  </div>
                 </div>
-                <div class="mail">
-                  <input type="text" name="mail" value="kolyan.the.captain@yandex.ru" />
-                </div>
-              </div>
-            </li>
-            <li class="subCaptain">
-              <div class="name">Юля</div>
-              <div class="phoneMail">
-                <div class="phone">
-                  <input type="text" name="phone" value="+7 987 666 66 66" />
-                </div>
-                <div class="mail">
-                  <input type="text" name="mail" value="jule.sub@yandex.ru" />
-                </div>
-              </div>
-            </li>
+              </li>
+            <% end %>
           </ul>
         </div>
         <ul class="foot">
@@ -209,52 +219,47 @@
       </div>
     </div>
   </div>
+  <!--В разработке
   <div class="contentWrap">
-      <div class="left photoHead">
+      <div class="photoHead">
         <h3>Фото с наших игр</h3>
-      </div>
-      <div class="right photoHead">
         <p>Наша команда участвовала <span class="red">8</span> раз</p>
       </div>
   </div>
-  <div class="contentWrap">
+   <div class="contentWrap">
       <div class="full">
 
         <div class="photoArchive">
           <h4>2016</h4>
           <ul class="navPhotoArchive" role="tablist">
-            <li role="presentation" class="active"><a href="#month1" role="tab" data-toggle="tab">Апрель</a></li>
-            <li role="presentation"><a href="#month2" role="tab" data-toggle="tab">Март</a></li>
-            <li role="presentation"><a href="#month3" role="tab" data-toggle="tab">Февраль</a></li>
-            <li role="presentation"><a href="#month4" role="tab" data-toggle="tab">Январь</a></li>
+            <%months_hash = {1=> 'Январь', 2 => 'Февраль', 3 => 'Март', 4=> 'Апрель', 5 => 'Май', 6 => 'Июнь', 7 => 'Июль',  8 => 'Август',  9 => 'Сентябрь',  10 => 'Октябрь',  11 => 'Ноябрь',  12 => 'Декабрь'}%>
+             <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
+            <%@month_array.each_with_index do |month, i|%>
+            <li role="presentation" class="<%='active' if i==0%>"><a href="#month<%=month%>" role="tab" data-toggle="tab"><%=months_hash[month]%></a></li>
+            <%end%>
           </ul>
         </div>
         <div class="tab-content albom">
-          <div role="tabpanel" class="tab-pane fade in active" id="month1">
+
+          <%@month_array.each_with_index do |month, i|%>
+          <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
            <div class="AlbomItmWrapper">
+           <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).each do |game|%>
+             <%if game.photos.count == 0%>
              <div class="AlbomItm photoShow">
                <img src="<%= asset_path('symbol/plenka.png') %>" />
-               <h4>Проявляем фотопленку <br/> за 22 апреля</h4>
+               <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
                <a href="">таблица результатов игры</a>
              </div>
-             <div class="AlbomItm" style="background-image:url('<%= asset_path('team/photoBg.png') %>'); ">
+             <%else%>
+             <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
                <div class="albomInfo">
-                 <span>21 апреля</span>
-                 <span>320 фото</span>
+                 <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                 <span><%=game.photos.count%></span>
                </div>
              </div>
-             <div class="AlbomItm" style="background-image:url('<%= asset_path('team/photoBg.png') %>'); ">
-               <div class="albomInfo">
-                 <span>21 апреля</span>
-                 <span>320 фото</span>
-               </div>
-             </div>
-             <div class="AlbomItm" style="background-image:url('<%= asset_path('team/photoBg.png') %>'); ">
-               <div class="albomInfo">
-                 <span>21 апреля</span>
-                 <span>320 фото</span>
-               </div>
-             </div>
+             <%end%>
+            <%end%>
             </div>
             <div class="loadMore">
               <span></span>
@@ -262,19 +267,10 @@
               <span></span>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="month2">
-           БЛЯЯЯЯЯ2
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="month3">
-           БЛЯЯЯЯЯ3
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="month4">
-           БЛЯЯЯЯЯ4
-          </div>
+          <%end%>
         </div>
       </div>
-     <!--  <div class="right"></div> -->
-  </div>
+  </div> В РАЗРАБОТКЕ-->
   <footer class="calendarF">
     <ul>
       <li>
@@ -282,7 +278,22 @@
         <div class="tag">#этомозвадетка</div>
       </li>
       <li>
-        <div><img src="<%= asset_path('symbol/location.png') %>"/><span>москва</span></div>
+        <!--SELECT SITY & MONTH
+        <div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+          <div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+            <ul class="dropdown" tabindex="1" data-name="city_id">
+              <% City.all.each do |city| %>
+              <li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+              <% end %>
+            </ul>
+          </div>
+          <div style="display:none">
+            <span data-current-value="4">4</span>
+            <ul data-name="max_groups"><li></li></ul>
+          </div>
+        </div>
+        AND SELECT SITY & MONTH-->
         <img src="<%= asset_path('calendar/logo.png') %>"/>
       </li>
     </ul>
@@ -293,4 +304,18 @@
 
 <%= render 'shared/team_modal' %>
 <%= render 'shared/invite_modal' unless @team.full? %>
+
+<% unless current_user %>
+<%= render 'shared/sign_in' %>
+<%= render 'shared/sign_up' %>
+<%= render 'shared/restore_password' %>
+<%= render 'shared/user_agree' %>
+<% else %>
+<%= render 'shared/edit_profile' %>
+<%= render 'shared/team_modal' unless current_user.team %>
+<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
+<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
+<% end %>
+<%= render 'shared/errors_modal' %>
+<%= render 'shared/teams_modal' %>
 

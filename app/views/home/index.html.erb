@@ -1,8 +1,8 @@
 <section class="lightningSection">
 	<div class="contentWrapper">
 		<p>
-		<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
-		Молния!
+			<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
+			Молния!
 		</p>
 		<div class="imgWrapp">
 			<img class="left" src="<%= asset_path('lightningSec/bgLeft.png') %>">
@@ -14,48 +14,54 @@
 	<div class="contentWrapper">
 		<div class="line">
 			<div class="authorizationWrap" >
-				
 				<% if current_user %>
-					<span>
-						<img src="<%= asset_path('lightningSec/lightning.png') %>">
-						<div class="links">
-							<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-							<%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-							<% if current_user.invitations.present? %>
-								<%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
-							<% end %>
-							<% if current_user.team %>
-								<%= link_to("Моя команда", my_team_path) %>
-							<% else %>
-								<%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
-							<% end %>
-						</div>
-					</span>		
+				<span>
+					<img src="<%= asset_path('lightningSec/lightning.png') %>">
+					<div class="links">
+						<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+						<%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+						<% if current_user.invitations.present? %>
+						<%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+						<% end %>
+						<% if current_user.team %>
+						<%= link_to("Моя команда", my_team_path) %>
+						<% else %>
+						<% if current_user.phone_confirmed_at %>
+						<%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+						<% else %>
+						<a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
+						<% end %>
+						<% end %>
+					</div>
+				</span>
 				<% else %>
-					<span>
-						<img src="<%= asset_path('lightningSec/lightning.png') %>">
-						<div class="links">
-							<a href="#sign_in" data-toggle="modal">Войти</a>
-							<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
-						</div>
-					</span>
-		  	<% end %>
+				<span>
+					<img src="<%= asset_path('lightningSec/lightning.png') %>">
+					<div class="links">
+						<a href="#sign_in" data-toggle="modal">Войти</a>
+						<a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+					</div>
+				</span>
+				<% end %>
 			</div>
 
 			<div class="logoWrap">
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<div class="wrapSelectCityMonth">
-				<!-- <img src="<%= asset_path('symbol/location.png') %>"/> -->
-				<div class="wrapper-dropdown" tabindex="1" id="update_city" data-method="put" data-action="<%=update_city_path%>">
-					<span data-value="<%= @city.id %>"><%= @city.name %></span>
-			    <ul class="dropdown" tabindex="1" data-name="city_id">
-		    		<% City.all.each do |city| %>
-			        <li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-			      <% end %>
-			    </ul>
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
+				<div class="update_city wrapper-dropdown" tabindex="1">
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
 				</div>
-			</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div>
+			</div> <!--AND SELECT SITY & MONTH-->
 		</div>
 		<div class="line SomeTabs">
 			<%= link_to leagues_path do %>
@@ -64,26 +70,36 @@
 				<p>Лиги</p>
 			</div>
 			<% end %>
+			<%= link_to sert_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/gifts.png') %>">
-				<p>Подарочные<br/> сертификаты</p>	
+				<p>Подарочные<br/> сертификаты</p>
 			</div>
+			<% end %>
+			<%= link_to rating_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/rang.png') %>">
-				<p>Рейтинг<br/> команд</p>	
+				<p>Рейтинг<br/> команд</p>
 			</div>
+			<% end %>
+			<%= link_to calendar_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/calendar.png') %>">
-				<p>Календарь игр</p>	
+				<p>Календарь игр</p>
 			</div>
+			<% end %>
+			<%= link_to korporat_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/korporat.png') %>">
-				<p>Корпоратив</p>	
+				<p>Корпоратив</p>
 			</div>
+			<% end %>
+			<%= link_to franchise_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/connect.png') %>">
-				<p>Франшиза<br/> и спонсорство</p>	
+				<p>Франшиза<br/> и спонсорство</p>
 			</div>
+			<% end %>
 		</div>
 
 	</div>
@@ -93,7 +109,7 @@
 		<div class="infoWrap">
 			<h1>Это Мозгва,<br/> детка</h1>
 			<p>Мозгва — это 10 000 участников и 245 команд!<br/>
-			Это еще что-нибудь, например!</p>
+				Это еще что-нибудь, например!</p>
 		</div>
 		<span class="tag">#ЭтоМозгваДетка</span>
 		<ul class="cycles">
@@ -102,7 +118,7 @@
 		</ul>
 		<a class="like">
 			<img src="<%= asset_path('symbol/like.png') %>" />
-				Лойс
+			Лойс
 		</a>
 		<div class="playBtn">
 			<img src="<%= asset_path('aboutSec/play.png') %>"/>
@@ -114,109 +130,130 @@
 
 <section class="noticeSection">
 	<div class="fullWrapp">
-	      <div class="left">
-	        <div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
-	          <div id="dd" class="wrapper-dropdown" tabindex="1">
-	            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
-	              	<ul class="dropdown" tabindex="1" data-name="city_id">
-			    	<% City.all.each do |city| %>
-		        		<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-		      		<% end %>
-			    	</ul>
-	          </div>
-	          <div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
-	            <span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
-	              <ul class="dropdown" tabindex="1" data-name="year_month">
-				    <% @months.each do |month| %>
-						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
-					<% end %>	
-	              </ul>
-	          </div>
-	        ​</div> <!--AND SELECT SITY & MONTH-->
-	        <div class="gamesTabs">
-	          <%= render 'games/tabs' %>
-	        </div>
-	      </div>
-	      <div class="right">
-	        <div class="noticCarosel">
-	          <%= render 'games/main_carousel' %>
-	        </div>
-	      </div>
-	</div>
-	<div class="fullWrapp">
 		<div class="left">
-			<div class="photoTabs">
-	          <div class="head">
-	            <h2>Фоточки</h2>
-	          </div>
-	          <div class="body">
-	              <ul class="tabNav">
-	                <li class="active"><a href="#tab1" data-toggle="tab">20 сентября</a></li>
-	                <li><a href="#tab2" data-toggle="tab">21 сентября</a></li>
-	                <li><a href="#tab3" data-toggle="tab">22 сентября</a></li>
-	              </ul>
-	              <div class="tab-content">
-	              <div class="tab-pane active" id="tab1">
-	                <p>320 штук</p>
-	                <div class="center">
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/1.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/2.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/3.jpg')%>);"></div>
-	                  </div>
-	                  <div><div class="photoItemWrap" style="background-image:url(<%= asset_path('photosOfEvent/4.jpg')%>);"></div>
-	                  </div>
-	                </div>
-	              </div>
-	              <div class="tab-pane" id="tab2">Tab 2 content...</div>
-	              <div class="tab-pane" id="tab3">Tab 3 content...</div>
-	            </div>
-	          </div>
-	        </div>
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
+				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="update_month wrapper-dropdown" style="right:0" tabindex="1">
+					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+					<ul class="dropdown" tabindex="1" data-name="year_month">
+						<% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div>
+			</div> <!--AND SELECT SITY & MONTH-->
+			<div class="gamesTabs">
+				<%= render 'games/tabs' %>
+			</div>
+			<% if @game_groups_count > 4 %>
+			  <%= link_to 'Все игры', calendar_path %>
+			<% end %>
 		</div>
 		<div class="right">
-			<div class="adParthTop" style="background-image:url(<%= asset_path('ad/heineken.png')%>);">
-	        </div>
-	        <div class="adParthBottom">
-	          <div class="carouselWrap">
-	            
-	            <div class="teamsCarousel">
-	            	<div class="item">
-	            		<img src="<%= asset_path('ad/cherries.png')%>"/>
-	            		<ul>
-	            			<li style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></li>
-	            			<li style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></li>
-	            			<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
-	            			<li style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></li>
-	            			<li style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></li>
-	            			<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
-	            		</ul>
-	            	</div>
-	            	<div class="item">
-	            		<img src="<%= asset_path('ad/cherries.png')%>"/>
-	            	</div>
-	            	<div class="item">
-	            		<img src="<%= asset_path('ad/cherries.png')%>"/>
-	            	</div>
-	              <!-- 
-	              <div class="item" ></div>
-	              <div class="item" ></div>
-	              <div class="item" ></div> -->
-	            </div>
-	          </div>
-	        </div> 
+			<div class="noticCarosel">
+				<%= render 'games/main_carousel' %>
+			</div>
+		</div>
+	</div>
+	<!-- ДОРАБОТКА <div class="fullWrapp trash">
+		<div class="left">
+			<div class="photoTabs">
+				<div class="head">
+					<h2>Фоточки</h2>
+				</div>
+				<div class="body">
+					<ul class="headTabNav" id="mySliderTabs">
+						<%# @past_games.order(when: :asc).each_with_index do |game, i|%>
+						<%#months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
+						<li>
+							<input type="radio"  name="tabNav" id="tab<%#=i+1%>"/>
+							<label for="tab<%#=i+1%>" class="title tab<%#=i+1%> <%#='current' if i == 0%>">
+								<%#=game.when.strftime("%d")%> <%#=months_hash[game.when.month]%>
+							</label>
+							
+						</li>
+						<%#end%>
+					</ul>
+					<%# @past_games.order(when: :asc).each_with_index do |game, i|%>
+					<div class="tabs tab<%#=i+1%> <%#='visible' if i == 0%>">
+						<p><%#=game.photos.count%> штук</p>
+						<div class="center">
+						<%#game.photos.each do |photo|%>
+							<div>
+								<div class="photoItemWrap" style="background-image:url(<%#=photo.image.url%>);"></div>
+							</div>
+			              <%#end%>
+			            </div>
+					</div>
+					<%#end%>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="adParthTop" style="background-image:url(<%#= asset_path('ad/heineken.png')%>);">
+			</div>
+			<div class="adParthBottom">
+				<div class="carouselWrap">
+
+					<div class="teamsCarousel">
+						<div class="item">
+							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+							<ul>
+								<li style="background-image:url(<%#= asset_path('ad/ava0.png')%>);"></li>
+								<li style="background-image:url(<%#= asset_path('ad/ava2.png')%>);"></li>
+								<li style="background-image:url(<%#= asset_path('ad/ava3.png')%>);"></li>
+								<li style="background-image:url(<%#= asset_path('ad/ava4.png')%>);"></li>
+								<li style="background-image:url(<%#= asset_path('ad/ava5.png')%>);"></li>
+								<li style="background-image:url(<%#= asset_path('ad/ava3.png')%>);"></li>
+							</ul>
+						</div>
+						<div class="item">
+							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+						</div>
+						<div class="item">
+							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> ДОРАБОТКА -->
+	<div class="wrapPartnerSec">
+		<div class="partnerCarousel">
+			<div class="item">
+				<img src="<%= asset_path('partners/kaspersky.png') %>" />
+				<p>Касперский</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/microsoft.png') %>" />
+				<p>Майкрософт</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/publicis.png') %>" />
+				<p>Публицис</p>
+			</div>
 		</div>
 	</div>
 	<footer>
 		<div class="fullWrapp">
 			<div class="left">
 				<ul>
-					<li><a href="">Календарь игр</a></li>
-					<li><a href="">Лиги</a></li>
-					<li><a href="">Сертификаты</a></li>
-					<li><a href="">Рейтинг команд</a></li>
-					<li><a href="">Франшиза и спонсорство</a></li>
+					<li><a href="/calendar">Календарь игр</a></li>
+					<li><a href="/leagues">Лиги</a></li>
+					<li><a href="/sert">Сертификаты</a></li>
+					<li><a href="/rating">Рейтинг команд</a></li>
+					<li><a href="/franchise">Франшиза и спонсорство</a></li>
 				</ul>
 			</div>
 			<div class="right">
@@ -230,15 +267,17 @@
 </section>
 
 
-	
+
 	<% unless current_user %>
-		<%= render 'shared/sign_in' %>
-		<%= render 'shared/sign_up' %>
-		<%= render 'shared/restore_password' %>
+	<%= render 'shared/sign_in' %>
+	<%= render 'shared/sign_up' %>
+	<%= render 'shared/restore_password' %>
+	<%= render 'shared/user_agree' %>
 	<% else %>
-		<%= render 'shared/edit_profile' %>
-		<%= render 'shared/team_modal' unless current_user.team %>
-		<%= render 'shared/invitations_modal' if current_user.invitations.present? %>	
+	<%= render 'shared/edit_profile' %>
+	<%= render 'shared/team_modal' unless current_user.team %>
+	<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
+	<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
 	<% end %>
 	<%= render 'shared/errors_modal' %>
 	<%= render 'shared/teams_modal' %>

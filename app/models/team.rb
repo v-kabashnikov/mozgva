@@ -9,6 +9,7 @@ class Team < ApplicationRecord
   has_many :invited_users, through: :waiting_invitations, class_name: "User", source: :user
   has_many :game_registrations, dependent: :destroy
   has_many :team_ratings, dependent: :destroy
+  has_many :achievments, dependent: :destroy
 
   before_create :set_invite
   # before_create :set_invite
@@ -23,6 +24,14 @@ class Team < ApplicationRecord
 
   def full?
     members_count + invitations_count >= MAX_MEMBERS_COUNT
+  end
+
+  def captain
+    members.where(team_role: 'captain').first.user
+  end
+
+  def staff
+    members.where.not(team_role: nil)
   end
 
   def places

@@ -1,38 +1,36 @@
 $(document).ready(function(){
+	$('.headTabNav input[type=radio]').click(function() {
+	  if (this.checked) {
+	  	$('div.tabs').removeClass("visible");
+	  	$('.body div.'+this.id).addClass("visible");
+	  	
+	  	$('.title').removeClass("current");
+	  	$('.title.'+this.id).addClass("current");
+	  } 
+	  $('.center .slick-track').each(function (e) {
+        $('.center.slick-slider').each(function() {
+          $(this).slick("getSlick").refresh();
+        });
+      });
+	});
+	$("#phoneOfUser").inputmask("+7(999)999-99-99");
+
+
+	$("#mySliderTabs").slick({
+		arrows:false,
+	  	dots:false,
+	  	slidesToShow: 3,
+	  	slidesToScroll: 3
+	});
+	$('.dropup .dropdown').css( "margin-top", function() {
+	  return ($('.dropup .dropdown').height() * -1)-10;
+	});
 	$(":radio[name='selectAns']").click(function(){
 	  $(":radio[name='selectAns']").attr('disabled','disabled');
 	});
 	$('.noticCarosel').slick({
-		slidesToShow: 1,
-	  slidesToScroll: 1,
+		
 	  arrows:true
-	});
-
-	$('.center').slick({
-	  centerMode: true,
-	  centerPadding: '60px',
-	  slidesToShow: 3,
-	  slidesToScroll: 1,
-	  responsive: [
-	    {
-	      breakpoint: 768,
-	      settings: {
-	        arrows: false,
-	        centerMode: true,
-	        centerPadding: '40px',
-	        slidesToShow: 3
-	      }
-	    },
-	    {
-	      breakpoint: 480,
-	      settings: {
-	        arrows: false,
-	        centerMode: true,
-	        centerPadding: '40px',
-	        slidesToShow: 1
-	      }
-	    }
-	  ]
 	});
 
 	$('.teamsCarousel').slick({
@@ -89,13 +87,32 @@ DropDown.prototype = {
 	}
 }
 $(function() {
-	var dd = new DropDown($('#dd'));
-	dd = new DropDown($('#dd2'));
-	dd = new DropDown( $('#update_city'));
+	var dd = new DropDown($('.update_month'));
+	dd = new DropDown( $('.update_city'));
 	$(document).click(function() {
 		$('.wrapper-dropdown').removeClass('active');
 	});
 });
+
+
+function giftFun(a) {
+	if (a=='на троих') {
+		$( "#group_171784543_1").prop('checked', true);
+	} if (a=='на шестерых') {
+		$( "#group_171784543_2").prop('checked', true);
+	} if (a=='на девятерых') {
+		$( "#group_171784543_3").prop('checked', true);
+	}
+}
+
+function thankU() {
+	$('#sertForm').css( "display","none");
+	$('.thankU').css( "display","block");
+}
+
+
+
+
 
 
 

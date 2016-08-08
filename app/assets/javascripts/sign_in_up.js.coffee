@@ -5,10 +5,8 @@ $ ->
     if(form.find('#user_name').val().length > 0 && form.find('#user_email').val().length > 0 )
       event.preventDefault();
       if(!form.find("#user_pers_agree").prop( "checked" ))
-        console.log(1)
         error_messages.push "Вы должны согласиться с обработкой персональных данных"
       if(!form.find("#user_user_agree").prop( "checked" ))
-        console.log(2)
         error_messages.push "Вы должны согласиться с пользовательским соглашением"
       console.log(error_messages)
       if error_messages.length > 0
@@ -19,6 +17,9 @@ $ ->
   )
   $("form#sign_in_user, form#sign_up_user, form#edit_user").bind("ajax:success", (event, xhr, settings) ->
     if $(this).attr('id') == 'edit_user'
+      $(this).find('.password_changed').hide()
+      $(this).find('input[type=password]').val('')
+      $(this).find('.error_label').remove()
       $(this).parents('.modal').modal('hide')
     else
       window.location = '/'

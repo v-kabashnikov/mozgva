@@ -18,14 +18,17 @@
           <div class="invitation" style="display: none;">
             <%= form_for Invitation.new do |f| %>
               <%= f.hidden_field :user_id %>
-              <%= f.submit 'Пригласить', class: 'blueBtn' %>
+              <%= f.submit 'Пригласить', class: 'inviteBtn' %>
             <% end %>
           </div>
         </div>
         <div class="invite_link">
           <p>Ссылка для приглашения</p>
+          <div class="copyWrap">
           <%= text_field_tag :invite_link, invite_url(@team.invite), class: 'modalInput', readonly: true %>
-          <button data-clipboard-target="#invite_link" id="copy_button" class="blueBtn">Копировать</button>
+          <a data-clipboard-target="#invite_link" id="copy_button" class="copyBtn">Копировать</a>
+          </div>
+          
         </div>
       </div>
     </div>

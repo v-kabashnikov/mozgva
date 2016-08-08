@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
   devise_scope :user do
-    get '/users/send_confirmation' => "users/registrations#send_confirmation"
+    patch '/users/send_confirmation' => "users/registrations#send_confirmation", as: :send_confirmation
+    post '/users/check_confirmation' => "users/registrations#check_confirmation", as: :check_confirmation
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :leagues, only: [:index]
   resources :game_registrations, only: [:create]
-  resources :members, only: [:destroy]
+  resources :members, only: [:destroy] do
+    put 'set_boatswain', on: :member, as: :set_boatswain
+  end
   resources :teams, only: [:create, :destroy, :update] do
     get 'list', on: :collection
   end
@@ -20,9 +23,10 @@ Rails.application.routes.draw do
     end
   end
   get '/team', to: 'teams#my_team', as: :my_team
-  get '/calendar', to: 'home#calendar', as: :calendar
-  get '/franchise', to: 'home#franchise', as: :franchise
-  get '/korporat', to: 'home#korporat', as: :korporat
+  get '/calendar', to: 'home#calendar'
+  get '/franchise', to: 'home#franchise'
+  get '/korporat', to: 'home#korporat'
+  get '/sert', to: 'home#sert'
   devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city

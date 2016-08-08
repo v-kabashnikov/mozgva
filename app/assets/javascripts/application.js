@@ -2,8 +2,10 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require slick.min
+//= require jquery.inputmask
 //= require custom
 //= require main
 //= require sign_in_up
 //= require teams
 //= require clipboard
+//= require phone_confirmation
