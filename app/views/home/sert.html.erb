@@ -45,39 +45,34 @@
 		<li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
 	</ul>
 	<div class="mainWrap sert">
-		<div class="AboutSertWrap">
-			<article>Дарите<br/> Мозгву!</article>
+		<div class="descriptSert">
+			<article>Отличная идея для подарка!</article>
 			<p>Забудьте про цветы. У нас можно купить подарочные сертификаты на 3-х, 6-х и 9-х участников. Забрать сертификаты можно на одной из игр или у нас в офисе в р-не Третьяковской.</p>
-			<img src="<%= asset_path('sert/sert.png') %>" class="img-responsive"/>
 		</div>
-		<div class="formSert">
-			<form action="https://docs.google.com/a/dshop24.ru/forms/d/e/1FAIpQLSeZxiGLT1FngyMp-CPTMkXSPwPFdVPcLHsOPbkIwm09jOA7Tw/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">
-				<div class="formWrap">
-					<input class="lineInput" placeholder="Имя" type="text" name="entry.1500946687" id="entry_1500946687" />
-					<input class="lineInput" placeholder="Почта" type="mail" name="mail" />
-					<input class="lineInput" placeholder="Телефон" type="text" name="phone" />
-					<div class="selectWrap">
-						<article>Хочу подарить</article>
-						<input type="radio" name="kolvo" id="three" value="three">
-						<label for="three">Игру для 3-х</label>
-
-						<input type="radio" name="kolvo" id="six" value="six">
-						<label for="six">Игру для 6-х</label>
-
-						<input type="radio" name="kolvo" id="nine" value="nine">
-						<label for="nine">Игру для 9-х</label>
-					</div>
-					<div class="selectWrap">
-						<article>Предпочитаю забрать</article>
-						<input type="radio" name="takeAway" id="onGame" value="onGame">
-						<label for="onGame">На игре</label>
-						<input type="radio" name="takeAway" id="independently" value="independently">
-						<label for="independently">Самостоятельно</label>
-					</div>
-					<input type="submit" class="redBtn" value="Подарить" name="" />
-				</div>
-
-			</form>
+		<div class="itemsWrap">
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert3.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на троих<br/> <span class="price">1 500</span></li>
+					<li>
+						<a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на троих')">Заказать</a>
+					</li>
+				</ul>
+			</div>
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert6.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на шестерых<br/> <span class="price">3 000</span></li>
+					<li><a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на шестерых')">Заказать</a></li>
+				</ul>
+			</div>
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert9.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на девятерых<br/> <span class="price">4 500</span></li>
+					<li><a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на девятерых')">Заказать</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<footer class="franchiseF">
@@ -87,7 +82,22 @@
 				<div class="tag">#этомозвадетка</div>
 			</li>
 			<li>
-				<div><img src="<%= asset_path('symbol/location.png') %>"/><span data-current-value="<%= @city.id %>"><%= @city.name %></span></div>
+				<!--SELECT SITY & MONTH
+				<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+					<div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+						<ul class="dropdown" tabindex="1" data-name="city_id">
+							<% City.all.each do |city| %>
+							<li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+							<% end %>
+						</ul>
+					</div>
+					<div style="display:none">
+						<span data-current-value="4">4</span>
+						<ul data-name="max_groups"><li></li></ul>
+					</div>
+				</div>
+				AND SELECT SITY & MONTH-->
 				<img src="<%= asset_path('calendar/logo.png') %>"/>
 			</li>
 		</ul>
@@ -98,6 +108,7 @@
 <%= render 'shared/sign_in' %>
 <%= render 'shared/sign_up' %>
 <%= render 'shared/restore_password' %>
+<%= render 'shared/user_agree' %>
 <% else %>
 <%= render 'shared/edit_profile' %>
 <%= render 'shared/team_modal' unless current_user.team %>
@@ -106,3 +117,5 @@
 <% end %>
 <%= render 'shared/errors_modal' %>
 <%= render 'shared/teams_modal' %>
+<%= render 'shared/sert_order' %>
+

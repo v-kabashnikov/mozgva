@@ -49,7 +49,7 @@
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
 			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
-				<div id="dd" class="wrapper-dropdown" tabindex="1">
+				<div class="update_city wrapper-dropdown" tabindex="1">
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
 						<% City.all.each do |city| %>
@@ -132,7 +132,7 @@
 	<div class="fullWrapp">
 		<div class="left">
 			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
-				<div id="dd" class="wrapper-dropdown" tabindex="1">
+				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
 						<% City.all.each do |city| %>
@@ -140,7 +140,7 @@
 						<% end %>
 					</ul>
 				</div>
-				<div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
+				<div class="update_month wrapper-dropdown" style="right:0" tabindex="1">
 					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
 					<ul class="dropdown" tabindex="1" data-name="year_month">
 						<% @months.each do |month| %>
