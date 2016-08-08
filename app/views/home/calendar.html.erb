@@ -45,31 +45,33 @@
 	</ul>
 	<div class="calendarWrap">
 		<div class="sideBar">
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"> <!--SELECT SITY & MONTH-->
-					<div id="dd" class="wrapper-dropdown" tabindex="1">
-						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
-						<ul class="dropdown" tabindex="1" data-name="city_id">
-							<% City.all.each do |city| %>
-							<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
-							<% end %>
-						</ul>
-					</div>
-					<div id="dd2" class="wrapper-dropdown" style="right:0" tabindex="1">
-						<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
-						<ul class="dropdown" tabindex="1" data-name="year_month">
-							<% @months.each do |month| %>
-							<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
-							<% end %>
-						</ul>
-					</div>
-					<div style="display:none">
-						<span data-current-value="4">4</span>
-						<ul data-name="max_groups"><li></li></ul>
-					</div>
-					​</div>
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
+				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="update_month wrapper-dropdown" style="right:0" tabindex="1">
+					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+					<ul class="dropdown" tabindex="1" data-name="year_month">
+						<% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div>
+			</div> <!--AND SELECT SITY & MONTH-->
+					​
 			<div class="phoneHelp">
 				<p>Если у вас есть вопрос: <br/> 88 000 000 0</p>
 			</div>
+
 			<div class="franchise">
 				<a href="/franchise">
 					<ul>
@@ -87,11 +89,24 @@
 			<div class="gamesTabs">
 				<%= render 'games/tabs' %>
 			</div>
-		    <!-- <div class="loadMore">
-		    	<span></span>
-		    	<span></span>
-		    	<span></span>
-		    </div> -->
+		</div>
+		<div class="mobShowInfo">
+			<div class="phoneHelp">
+				<p>Если у вас есть вопрос: <br/> 88 000 000 0</p>
+			</div>
+			
+			<div class="franchise">
+				<a href="/franchise">
+					<ul>
+						<li>Хочу<br/> свою<br/> Мозгву</li>
+						<li>Речь идет<br/> о франшизе</li>
+					</ul>
+				</a>
+			</div>
+			<div class="adAppisode">
+				<img src="<%= asset_path('calendar/appisode.png') %>">
+				<span>Приложение для мозгвичей, сериалов любителей для!</span>
+			</div>
 		</div>
 	</div>
 	<footer class="calendarF">

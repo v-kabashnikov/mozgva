@@ -39,7 +39,16 @@ $(document).ready(function(){
 	});
 	$('.partnerCarousel').slick({
 	  slidesToShow: 3,
-	  slidesToScroll: 3
+	  slidesToScroll: 3,
+	  responsive: [
+	    {
+	      breakpoint: 1280,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1
+	      }
+	    }
+	  ]
 	});
 	$('.gamesCarousel').slick({
 	  rows: 2,
