@@ -44,8 +44,19 @@ $(document).ready(function(){
 	  ]
 	});
 	$('.faceCarousel').slick({
-		slidesToShow: 1,
-	    slidesToScroll: 1
+		slidesToShow: 3,
+	    slidesToScroll: 3,
+	    arrows:false,
+	    dots:true,
+	    responsive: [{
+	      breakpoint: 768,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1,
+	        arrows:false,
+	        dots:true
+	      }
+	    }]
 	});
 
 	$('.teamsCarousel').slick({

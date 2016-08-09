@@ -44,9 +44,8 @@
       <li><%= image_tag ach.achievment_type.image.url, title: ach.date.strftime('%d.%m.%y') %></li>
     <% end %>
   </ul>
-  <div class="contentWrap">
+  <div class="contentWrap desctop">
     <ul class="faceParth">
-      <!-- <div class="faceCarousel"> -->
       <% @team.members.each do |member| %>
         <li id="member_<%= member.id %>">
           <% if current_user.member.captain? && !member.captain? %>
@@ -57,6 +56,7 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
+      
       <% @team.invitations.each do |inv| %>
         <li class="not_member" id="invitation_<%= inv.id %>">
           <% if current_user.member.captain? %>
@@ -66,7 +66,7 @@
           <p><%= inv.user.name %></p>
         </li>
       <% end %>
-     <!--  </div> -->
+
       <% unless @team.full? %>
         <li>
           <a href="#invite_modal" data-toggle="modal">
@@ -79,7 +79,44 @@
             </div>
           </a>
         </li>
-    <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="contentWrap mobile">
+    <ul class="faceParth">
+     <div class="faceCarousel">
+      <% @team.members.each do |member| %>
+        <li id="member_<%= member.id %>">
+          <div class="uswerWrap">
+          <% if current_user.member.captain? && !member.captain? %>
+            <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
+            <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
+          <% end %>
+          <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
+          <p class="<%= member.team_role %>"><%= member.user.name %></p>
+          </div>
+        </li>
+      <% end %>
+      
+      <% @team.invitations.each do |inv| %>
+        <li class="not_member" id="invitation_<%= inv.id %>">
+          <div class="uswerWrap">
+          <% if current_user.member.captain? %>
+            <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+          <% end %>
+          <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
+          <p><%= inv.user.name %></p>
+          </div>
+        </li>
+      <% end %>
+
+
+      </div>
+
+      <% unless @team.full? %>
+          <a href="#invite_modal" class="addPerson" data-toggle="modal">еще <%= "#{@team.places} #{Russian.p(@team.places, "место", "места", "мест")}" %>
+          </a>
+      <% end %>
     </ul>
   </div>
 </section>

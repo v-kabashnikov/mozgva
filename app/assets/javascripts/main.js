@@ -234,28 +234,31 @@ $( document ).ready(function() {
 	  ]
 	});
 
-	// function showFile(e) {
-	// 	// console.log('e', e);
- //    	var files = e.target.files;
- //    	// console.log('files', files);
-	//     for (var i = 0; i<1;  i++) {
-	//     	var f = files[i];
-	//    	  console.log(f);
-	//    	  console.log(f.type.match('image.*'));
-	//       if (!f.type.match('image.*')) continue;
-	//       var fr = new FileReader();
-	//       fr.onload = (function(theFile) {
-	//         return function(e) {
-	//           // var li = document.createElement('li');
-	//           // li.innerHTML = "<img src='" + e.target.result + "' />";
-	//           document.getElementById('list').setAttribute('src', e.target.result)
-	//           document.getElementById('list').setAttribute('style', 'width: 250px; height: auto;');
-	//         };
-	//       })(f);
+	function showFile(e) {
+		console.log('e', e);
+    	var files = e.target.files;
+    	// console.log('files', files);
+	    for (var i = 0; i<1;  i++) {
+	    	var f = files[i];
+	   	  console.log(f);
+	   	  console.log(f.type.match('image.*'));
+	      if (!f.type.match('image.*')) continue;
+	      var fr = new FileReader();
+	      fr.onload = (function(theFile) {
+	        return function(e) {
+	          // var li = document.createElement('li');
+	          // li.innerHTML = "<img src='" + e.target.result + "' />";
+	          document.getElementById('list').setAttribute('src', e.target.result)
+	          document.getElementById('list').setAttribute('style', 'width: 250px; height: auto;');
+	        };
+	      })(f);
 	 
-	//       fr.readAsDataURL(f);
-	//     }
- //  	}
- 
- // document.getElementById('user_avatar').addEventListener('change', showFile, false);
+	      fr.readAsDataURL(f);
+	    }
+  	}
+
+
+	$( "#user_avatar" ).change(function(event) {
+		showFile(event);
+	});
 });

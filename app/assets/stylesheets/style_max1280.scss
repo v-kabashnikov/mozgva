@@ -95,6 +95,41 @@
 		}
 	}
 	/*TEAM PAGE*/
+.topInfo.team .contentWrap .faceParth li:not(:first-child) {
+	margin-left:0;
+}
+
+	.topInfo.team {
+		.contentWrap {
+			h1,a {
+				margin:auto;
+			}
+			.addPerson {
+				margin:0 auto 20px;
+			}
+		}
+		.contentWrap.mobile {
+			display: block;
+			.faceParth {
+				text-align: center;
+				display: block;
+				margin:0;
+				li {
+					text-align: center;
+					margin:20px 0 0;
+					.uswerWrap {
+						max-width: 140px;
+						position: relative;
+						margin: auto;
+					}
+
+				}
+			}
+		}
+		.contentWrap.desctop {
+			display: none;
+		}
+	}
 	.navTeamSec {
 		.headWrapper {
 			flex-direction: column;
@@ -112,42 +147,6 @@
 			}
 		}
 	}
-	.topInfo.team {
-		.contentWrap {
-			.faceParth {
-				li {
-					.avatar {
-						width:49px;
-						height:49px;
-						a.control {
-							opacity:0;
-						}
-					}
-					&:last-child{
-						.avatar { 
-							.sub {
-								top: 55px;
-								width: 49px;
-								left: 0;
-								color: #fff;
-								opacity:0;
-								transition:opacity .4s;
-							}
-							&:hover,&:focus {
-								.sub { 
-									opacity:1
-								}
-							}
-						}
-
-					}
-				}
-				li:not(:first-child) {
-					margin-left: -22px;
-				}
-			}
-		}
-	}  
 	
 
 	// franchise PAGE //
@@ -211,6 +210,10 @@
 				margin-top:20px;
 			}
 		}
+		ul.contentWrap {
+			min-height:auto;
+		}
+		
 	}
 
 	.navigationWrap {
@@ -416,6 +419,16 @@
 	}
 
 	// TEAM PAGE //
+
+	.navTeamSec {
+		.headWrapper {
+			.teamNav {
+				a {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
 
 	.teamSec {
 		ul.contentWrap {

@@ -1921,28 +1921,25 @@ footer.korporatF {
 		}
 	}
 }
-@media screen and (max-width: 1200px) {
-	.navTeamSec {
-		.headWrapper {
-		}
-	}
-
-}
 
 .topInfo.team {
 	background-color:$redLight;
 	position: relative;
+	.contentWrap.mobile {
+		display: none;
+	}
 	.contentWrap {
 		height: auto;
 		.faceParth {
 			display: flex;
-			margin: 30px 0 -115px;
+			margin: 30px 0 -130px;
 			li:not(:first-child){
 				margin-left:-30px;
 			}
 			li {
 				text-align: center;
 				position: relative;
+				margin:20px 0;
 				a {
 					margin:0;
 				}
