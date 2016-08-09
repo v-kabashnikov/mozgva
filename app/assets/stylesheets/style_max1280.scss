@@ -6,9 +6,49 @@
 			.line {
 				justify-content: space-around;
 			}
+
 		}
 	}
+	.topInfo {
+		.contentWrap {
+			h1 {
+				font-size:5em;
+			}
+		}
+	}
+	// INVITE PAGE
 
+	.AboutInviteWrap {
+		text-align: center;
+	}
+
+	//MAIN PAGE //
+	.headInfo {
+		.SomeTabs {
+			flex-wrap: wrap;
+			a {
+				margin:10px 20px 20px;
+			}
+		}
+	}
+	.aboutSec {
+		h1 {
+			font-size:110px;
+			line-height:100px;
+		}
+		p {
+			max-width: 200px;
+			margin: auto;
+		}
+	}
+	.noticeSection {
+		.fullWrapp {
+			flex-wrap: wrap;
+			.left,.right {
+				margin:0 auto 30px;
+			}
+		}
+	}
 	/*CALENDAR PAGE*/
 	.calendarSec {
 		.calendarWrap {
@@ -21,8 +61,20 @@
 
 	/*SERT PAGE*/
 	.mainWrap.sert {
-		max-width: 900px;
-
+		max-width:90vw;
+		.itemsWrap {
+			.itemSert {
+				ul {
+					flex-wrap: wrap;
+					justify-content: center;
+					li:first-child{
+						margin:0 auto 20px;
+					}
+				}
+			}
+			// flex-wrap: wrap;
+			// justify-content: space-between;
+		}
 	}
 
 	/*KORPORT PAGE*/
@@ -43,8 +95,49 @@
 		}
 	}
 	/*TEAM PAGE*/
+.topInfo.team .contentWrap .faceParth li:not(:first-child) {
+	margin-left:0;
+}
+
+	.topInfo.team {
+		.contentWrap {
+			h1,a {
+				margin:auto;
+			}
+			.addPerson {
+				margin:0 auto 20px;
+			}
+		}
+		.contentWrap.mobile {
+			display: block;
+			.faceParth {
+				text-align: center;
+				display: block;
+				margin:0;
+				li {
+					text-align: center;
+					margin:20px 0 0;
+					.uswerWrap {
+						max-width: 140px;
+						position: relative;
+						margin: auto;
+					}
+
+				}
+			}
+		}
+		.contentWrap.desctop {
+			display: none;
+		}
+	}
+	.navTeamSec {
+		.headWrapper {
+			flex-direction: column;
+		}
+	}
 	.teamSec {
 		.contentWrap {
+			max-width:90vw;
 			flex-wrap: wrap;
 			justify-content: center;
 			.left.Success {
@@ -54,15 +147,34 @@
 			}
 		}
 	}
+	
 
+	// franchise PAGE //
+	.franchiseSec {
+		.mainWrap {
+			flex-wrap: wrap;
+			max-width:90vw;
+			.infoBlock {
+				margin: auto;
+				justify-content: center;
+				.rectangle,.square {
+					width:100%;
+					height:auto;
+					margin-bottom:20px;
+				}
+			}
+			.widget {
+				width:100%;
+				margin: auto;
+				.btnBlue {
+					margin-bottom:30px;
+				}
+			}
+		}
+	}
 	footer {
 		ul {
 			justify-content: space-around;
-		}
-	}
-	.navigationWrap {
-		li {
-			flex:1 1;
 		}
 	}
 	.wrapPartnerSec {
@@ -70,5 +182,304 @@
 	}
 
 }
+
+@media screen and (max-width:790px) {
+	footer {
+		max-width:90vw;
+		.tag {
+			display: none;
+		}
+	}
+	.mainWrap {
+		max-width:90vw;
+	}
+	.wrapPartnerSec {
+		max-width:90vw;
+	}
+	.topInfo {
+		.contentWrap {
+			flex-wrap: wrap;
+			height: auto;
+			min-height:150px;
+			h1 {
+				margin: 20px auto;
+				font-size: 3em;
+				line-height: 40px;
+			}
+			.btnWrap {
+				margin-top:20px;
+			}
+		}
+		ul.contentWrap {
+			min-height:auto;
+		}
+		
+	}
+
+	.navigationWrap {
+		flex-wrap: wrap;
+		margin:0 auto 50px;
+		li {
+			margin:auto;
+			width:100%;
+			border-bottom: 1px solid;
+			a {
+				padding: 15px;
+				display: block;
+				transition:background-color .4s;
+				&:hover {
+					background-color:rgba(0,0,0,.1);
+				}
+			}
+			&.calendarIgr {
+				background-image: none;
+				a:hover {
+					background-image: none;
+				}
+			}
+		}
+	}
+	
+
+	// KORPORAT PAGE //
+
+	.korporatSek {
+		padding:0;
+		.mainWrap {
+			.infoBlock  {
+				justify-content: center;
+			}
+			.widget {
+				h2 {
+					font-size: 4rem;
+				}
+				
+			}
+			.gallery {
+				.photos {
+					flex-wrap: wrap;
+					li {
+						height:40vh;
+						width:100%;
+						margin-bottom:10px;
+					}
+				}
+			}
+			.quest {
+				width:100%;
+				.answer {
+					label {
+						margin-left: 20px;
+					}
+				}
+			}
+		}
+	}
+	/*SERT PAGE*/
+	.franchiseSec {
+		padding:0;
+	}
+	.mainWrap.sert {
+		.itemsWrap {
+			flex-wrap: wrap;
+			.itemSert {
+				margin: 20px auto 0;
+			}
+		}
+	}
+
+	/*CALENDAR PAGE*/
+
+	.calendarSec {
+		padding:0;
+		.calendarWrap {
+			max-width:90vw;
+			flex-wrap: wrap;
+			.mobShowInfo {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				flex-direction: column;
+				align-items: center;
+				text-align: center;
+				.adAppisode {
+					flex-wrap: wrap;
+					align-items: center;
+					width: 150px;
+					text-align: center;
+					justify-content: center;
+					flex-direction: column;
+				}
+			}
+			.gamesTabs {
+				justify-content: center;
+			}
+			.sideBar {
+				.wrapSelectCityMonth {
+					flex-direction: column;
+				}
+				.adAppisode,.franchise,.phoneHelp {
+					display: none;
+					justify-content: center;
+					display: flex;
+					flex-direction: column;
+				}
+
+			}
+		}
+	}
+
+	// MAin PAGE //
+	.lightningSection {
+		display: none;
+	}
+	.headInfo {
+		.contentWrapper{
+			.line {
+				&.mobDIF {
+					align-items: center;
+					flex-direction: column-reverse;
+					height: 170px;
+					.wrapSelectCityMonth {
+						display: none;
+					}
+				}
+				
+				&.SomeTabs {
+					margin-top:30px;
+					.item {
+						height:auto;
+						p {
+							height:auto;
+						}
+						 
+					}
+				} 
+			}
+		}
+	} 
+
+	.aboutSec {
+		padding: 50px 0 95px;
+		.contentWrapper {
+			.tag,.cycles,.like {
+				display: none;
+			}
+			h1 {
+				font-size: 60px;
+				line-height: 50px;
+			}
+		}
+	}
+
+	.noticeSection {
+		.fullWrapp {
+			margin-top:30px;
+			.wrapSelectCityMonth {
+				flex-direction: column;
+			}
+		}
+		.gamesTabs {
+			justify-content: center;
+			.itemGame {
+				max-width: 210px;
+				margin: 0 30px 30px;
+				min-width: auto;	
+			}
+		}
+		.noticCarosel {
+			.roundWrap {
+				width:100%;
+				height:auto;
+				border-radius:0;
+				padding: 30px 0;
+				li {
+					&:nth-child(3) {
+						font-size:50px;
+						line-height:40px;
+					}
+					&:nth-child(4) {
+						font-size:70px;
+						line-height:70px;
+						margin-bottom:30px;
+					}
+				}
+			}
+		}
+		footer {
+			.left {
+				ul {
+					flex-direction: column;
+					li:not(:last-child) {
+						margin-bottom:10px;
+					}
+				}
+			}
+		}
+	}
+
+	// TEAM PAGE //
+
+	.navTeamSec {
+		.headWrapper {
+			.teamNav {
+				a {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
+
+	.teamSec {
+		ul.contentWrap {
+			height:auto;
+			min-height:auto;
+		}
+		.contentWrap {
+			
+			.Success {
+				.teamSuccessTabs {
+					.navTeamSuccess {
+						margin: 0 10px;
+						li {
+							margin: auto;
+							text-align: center;
+						}
+					}
+				}
+			}
+			.right {
+				flex-direction: column;
+				.square {
+					width:100%;
+					max-width:none;
+					margin-bottom:30px;
+					input[type="range"] {
+						width:90%;
+					}
+				}
+				.rectangle {
+					a.price {
+						top: 30px;
+						left: 30px;
+					}
+					.ad {
+						li {
+							&:nth-child(2) {
+								font-size:22px;
+								line-height: 25px;
+							}
+							&:nth-child(3) {
+								font-size:60px;
+								line-height:50px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 
 

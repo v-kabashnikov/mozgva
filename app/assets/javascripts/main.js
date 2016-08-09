@@ -261,7 +261,4 @@ $( document ).ready(function() {
 	$( "#user_avatar" ).change(function(event) {
 		showFile(event);
 	});
-
-	
-	
 });

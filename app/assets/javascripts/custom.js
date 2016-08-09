@@ -14,6 +14,7 @@ $(document).ready(function(){
       });
 	});
 	$("#phoneOfUser").inputmask("+7(999)999-99-99");
+	$("#user_phone").inputmask("+7(999)999-99-99");
 
 
 	$("#mySliderTabs").slick({
@@ -29,8 +30,33 @@ $(document).ready(function(){
 	  $(":radio[name='selectAns']").attr('disabled','disabled');
 	});
 	$('.noticCarosel').slick({
-		
-	  arrows:true
+	  arrows:true,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1,
+	        arrows:false,
+	        dots:true
+	      }
+	    }
+	  ]
+	});
+	$('.faceCarousel').slick({
+		slidesToShow: 3,
+	    slidesToScroll: 3,
+	    arrows:false,
+	    dots:true,
+	    responsive: [{
+	      breakpoint: 768,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1,
+	        arrows:false,
+	        dots:true
+	      }
+	    }]
 	});
 
 	$('.teamsCarousel').slick({
@@ -39,7 +65,16 @@ $(document).ready(function(){
 	});
 	$('.partnerCarousel').slick({
 	  slidesToShow: 3,
-	  slidesToScroll: 3
+	  slidesToScroll: 3,
+	  responsive: [
+	    {
+	      breakpoint: 1280,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1
+	      }
+	    }
+	  ]
 	});
 	$('.gamesCarousel').slick({
 	  rows: 2,
