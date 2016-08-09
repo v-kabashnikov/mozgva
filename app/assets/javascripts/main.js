@@ -235,7 +235,7 @@ $( document ).ready(function() {
 	});
 
 	function showFile(e) {
-		// console.log('e', e);
+		console.log('e', e);
     	var files = e.target.files;
     	// console.log('files', files);
 	    for (var i = 0; i<1;  i++) {
@@ -256,6 +256,12 @@ $( document ).ready(function() {
 	      fr.readAsDataURL(f);
 	    }
   	}
- 
-  document.getElementById('user_avatar').addEventListener('change', showFile, false);
+
+
+	$( "#user_avatar" ).change(function(event) {
+		showFile(event);
+	});
+
+	
+	
 });
