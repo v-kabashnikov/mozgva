@@ -2074,7 +2074,6 @@ footer.korporatF {
 		}
 	}
 	ul.contentWrap {
-		padding-top:20px;
 		align-items:flex-start;
 		li {
 			margin:0 20px;
@@ -2813,56 +2812,58 @@ footer.korporatF {
 	width:100%;
 	max-width:500px;
 }
-// .formWrap {
-// 	width:100%;
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: center;
-// 	align-items: center;
-// 	.lineInput {
-// 		text-align: center;
-// 		border:0;
-// 		margin: 0 0 20px 0;
-// 		width:230px;
-// 		color:#fff;
-// 		background-color: transparent;
-// 		border-bottom: 1px solid;
-// 	}
-// 	.selectWrap {
-// 		margin:20px 0 0;
-// 		display: flex;
-// 		flex-direction: column;
-// 		max-width:230px;
-// 		article {
-// 			font-size:$h5;
-// 			margin:0 0 10px;
-// 			line-height:$h5;
-// 		}
-// 		label {
-// 			width:230px;
-// 			position: relative;
-// 			&:before{
-// 				position: absolute;
-// 				top:0;
-// 				bottom:0;
-// 				width:10px;
-// 				height:10px;
-// 				background-color:#fff;
-// 				border-radius:50%;
-// 				margin:auto 0;
-// 				left:-20px;
-// 				content:"";
-// 				transition:background-color .4s;
-// 			}
-// 		}
-// 		input[type=radio]:checked + label:before {
-// 			background-color:$redLight;
-// 		}
-// 	}
-// 	input[type=submit] {
-// 		margin-top:20px;
-// 	}
-// }
+
+// FOR INVITE PAGE
+.formWrap {
+	width:100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.lineInput {
+		text-align: center;
+		border:0;
+		margin: 0 0 20px 0;
+		width:230px;
+		color:#fff;
+		background-color: transparent;
+		border-bottom: 1px solid;
+	}
+	.selectWrap {
+		margin:20px 0 0;
+		display: flex;
+		flex-direction: column;
+		max-width:230px;
+		article {
+			font-size:$h5;
+			margin:0 0 10px;
+			line-height:$h5;
+		}
+		label {
+			width:230px;
+			position: relative;
+			&:before{
+				position: absolute;
+				top:0;
+				bottom:0;
+				width:10px;
+				height:10px;
+				background-color:#fff;
+				border-radius:50%;
+				margin:auto 0;
+				left:-20px;
+				content:"";
+				transition:background-color .4s;
+			}
+		}
+		input[type=radio]:checked + label:before {
+			background-color:$redLight;
+		}
+	}
+	input[type=submit] {
+		margin-top:20px;
+	}
+}
 
 ///// MODALS
 

@@ -14,6 +14,7 @@ $(document).ready(function(){
       });
 	});
 	$("#phoneOfUser").inputmask("+7(999)999-99-99");
+	$("#user_phone").inputmask("+7(999)999-99-99");
 
 
 	$("#mySliderTabs").slick({
@@ -29,8 +30,22 @@ $(document).ready(function(){
 	  $(":radio[name='selectAns']").attr('disabled','disabled');
 	});
 	$('.noticCarosel').slick({
-		
-	  arrows:true
+	  arrows:true,
+	  responsive: [
+	    {
+	      breakpoint: 768,
+	      settings: {
+	        slidesToShow: 1,
+	        slidesToScroll: 1,
+	        arrows:false,
+	        dots:true
+	      }
+	    }
+	  ]
+	});
+	$('.faceCarousel').slick({
+		slidesToShow: 1,
+	    slidesToScroll: 1
 	});
 
 	$('.teamsCarousel').slick({
