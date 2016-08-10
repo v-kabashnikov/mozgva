@@ -28,6 +28,7 @@ class HomeController < ApplicationController
     @main_games = Game.main.order(:when)
     @past_games = Game.where('"when" < :now', now: DateTime.now)
   end
+  
 
   def calendar
   	@curr_month = [Date.today.strftime('%Y-%m'), MONTH_NAMES[Date.today.strftime('%m').to_i - 1]]

@@ -13,8 +13,8 @@ $(document).ready(function(){
         });
       });
 	});
-	$("#phoneOfUser").inputmask("+7(999)999-99-99");
-	$("#user_phone").inputmask("+7(999)999-99-99");
+	$("#phoneOfUser").mask("+7(999)999-99-99");
+	$("#user_phone").mask("+7(999)999-99-99");
 
 
 	$("#mySliderTabs").slick({
@@ -63,6 +63,12 @@ $(document).ready(function(){
 	  slidesToShow: 1,
 	  slidesToScroll: 1
 	});
+	$('.teamGameCarousel').slick({
+	  slidesToShow: 1,
+	  slidesToScroll: 1
+	});
+
+	
 	$('.partnerCarousel').slick({
 	  slidesToShow: 3,
 	  slidesToScroll: 3,

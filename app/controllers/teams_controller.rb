@@ -25,6 +25,7 @@ class TeamsController < ApplicationController
   def my_team
     set_city
     @team = current_user.team
+    @main_games = Game.main.order(:when)
     return redirect_to root_path unless @team
     @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now)
     @month_array =[]
@@ -48,6 +49,16 @@ class TeamsController < ApplicationController
   def list
     @teams = Game.find(params[:game_id]).teams
   end
+
+  # def time
+  #   @curr_month = [Date.today.strftime('%Y-%m'), MONTH_NAMES[Date.today.strftime('%m').to_i - 1]]
+  #   @game_groups = Game.grouped_games(@city, @curr_month.first)
+  #   @game_groups_count = @game_groups.count
+  #   @game_groups = @game_groups.first(4)
+  #   @months = Game.where('games.when > ?', Time.now).select("to_char(games.when, 'YYYY-MM') as month").distinct.order('month').map{|m| [m.month, MONTH_NAMES[m.month.split('-').second.to_i-1]]}
+  #   @main_games = Game.main.order(:when)
+  #   @past_games = Game.where('"when" < :now', now: DateTime.now)
+  # end
 
   private
 
