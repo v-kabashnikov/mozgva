@@ -3,7 +3,7 @@
     <div class="btnWrap authorizationWrap">
       <% if current_user %>
       <span>
-        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <img src="<%= asset_path('symbol/lock.png') %>">
         <div class="links">
           <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
           <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
@@ -14,7 +14,7 @@
       </span>
       <% else %>
       <span>
-        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <img src="<%= asset_path('symbol/lock.png') %>">
         <div class="links">
           <a href="#sign_in" data-toggle="modal">Войти</a>
           <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
@@ -153,27 +153,37 @@
 
       </div>
     </div>
+    
+      
     <div class="right">
-      <div class="rectangle">
-        <a href="" class="teamList">Список команд</a>
-        <a class="location">
-          <span>
-            <img src="<%= asset_path('symbol/map.png') %>" />
-          </span>
-          Бар  Ресторан «Coin-Hall
-        </a>
-        <a class="price">
-          <span>
-            <img src="<%= asset_path('symbol/ticket.png') %>"/>
-          </span>
-          500 руб.
-        </a>
-        <ul class="ad">
-          <li>Когда играем?</li>
-          <li>2 апреля</li>
-          <li>20:30</li>
-        </ul>
+    <div class="carouselHere">
+      <div class="teamGameCarousel">
+      <% @main_games.each do |game| %>
+      
+        <div class="rectangle">
+          <a href="" class="teamList">Список команд</a>
+          <a class="location">
+            <span>
+              <img src="<%= asset_path('symbol/map.png') %>" />
+            </span>
+            <%= game.place.name %>
+          </a>
+          <a class="price">
+            <span>
+              <img src="<%= asset_path('symbol/ticket.png') %>"/>
+            </span>
+            <%= game.price %> руб.
+          </a>
+          <ul class="ad">
+            <li>Когда играем?</li>
+            <li><%= l(game.when, format: '%e %B') %></li>
+            <li><%= game.when.strftime("%H:%M") %></li>
+          </ul>
+        </div>
+        <% end %>
       </div>
+    </div>
+    
       <div class="square">
         <div class="head">
           <article>Банк команды</article>
@@ -252,6 +262,7 @@
           </li>
         </ul>
       </div>
+    
     </div>
   </div>
   <!--В разработке
@@ -329,7 +340,9 @@
           </div>
         </div>
         AND SELECT SITY & MONTH-->
+        <%= link_to root_path do %>
         <img src="<%= asset_path('calendar/logo.png') %>"/>
+        <% end %>
       </li>
     </ul>
   </footer>

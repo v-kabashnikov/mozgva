@@ -235,7 +235,7 @@ $( document ).ready(function() {
 	});
 
 	function showFile(e) {
-		console.log('e', e);
+		// console.log('e', e);
     	var files = e.target.files;
     	// console.log('files', files);
 	    for (var i = 0; i<1;  i++) {
@@ -246,10 +246,8 @@ $( document ).ready(function() {
 	      var fr = new FileReader();
 	      fr.onload = (function(theFile) {
 	        return function(e) {
-	          // var li = document.createElement('li');
-	          // li.innerHTML = "<img src='" + e.target.result + "' />";
-	          document.getElementById('list').setAttribute('src', e.target.result)
-	          document.getElementById('list').setAttribute('style', 'width: 250px; height: auto;');
+	          $('.add-image').html("");
+	          $('.avatarWrap').css({'background-image': 'url(' + e.target.result + ')','border':'3px dashed transparent'});
 	        };
 	      })(f);
 	 

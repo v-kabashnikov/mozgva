@@ -1,43 +1,6 @@
-<style>
-  .upload {
-  position: relative;
-  display: inline-block;
-}
-
-.upload label {
-  color: #5F626A;
-  cursor: pointer;
-  width: 90px;
-  height: 90px;
-  position: relative;
-  display: block;
-  border: 3px dashed #5F626A;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: background ease .5s;
-  pointer-events: none; /*This for FF*/
-}
-
-.input-file {
-  opacity: 0; /*This*/
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.add-image {
-  display: block;
-  width: 100%;
-  margin: 30px auto;
-  text-align: center;
-  font-size: 11px;
-  font-family: sans-serif;
-}
-</style>
 
 <div class="modal fade in" id="edit_profile">
-  <div class="modal-dialog">
+  <div class="modal-dialog registration">
     <div class="modal-content">
       <div class="modal-header">
         <div class="closeModal" data-dismiss="modal">
@@ -61,13 +24,14 @@
            
             <div class="upload" upload-image="">
               <%= f.file_field :avatar, placeholder: 'Телефон', class: "modalInput input-file ng-pristine ng-valid ng-touched" %>
-              <label for="user_avatar">
+              <img src='' id='list' style="display:none; ">
+              <label for="user_avatar" class="avatarWrap">
                 <span class="add-image">
                   Добавить <br> Аватар
                 </span>
                 <!-- <output id="list"></output> -->
               </label>
-              <img src='' id='list' style="display:none; ">
+              
             </div>
           </div>
           <div class="input_wrapper">

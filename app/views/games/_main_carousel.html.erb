@@ -6,7 +6,7 @@
         <span><img src="<%= asset_path('noticeSec/locationCarousel.png') %>"/></span><%= game.place.name %>
       </li>
       <li><%= l(game.when, format: '%e %B') %></li>
-      <li><%= game.when.strftime("%H : %M") %></li>
+      <li><%= game.when.strftime("%H:%M") %></li>
       <li>
         <% if current_user %>
           <% 
