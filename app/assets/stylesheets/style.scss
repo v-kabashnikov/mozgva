@@ -2506,6 +2506,28 @@ footer.korporatF {
 .topInfo.korporat {
 	background-color:$redLight;
 }
+
+.teamGameCarousel {
+	.slick-arrow {
+		&:before {
+			font-family: FontAwesome;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-size: 25px;
+    		line-height: 0;
+		}
+	}
+	.slick-prev {
+		&:before {
+			content: "\f104";
+		}
+	}
+	.slick-next {
+		&:before {
+			content: "\f105";
+		}
+	}
+}
 .korporatSek {
 	border:10px solid $redLight;
 	background-color:$darkBlue;

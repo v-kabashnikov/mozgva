@@ -219,8 +219,8 @@
           <p class="currentPrice" id="rezultOfPrice"></p>
         </div>
         <div class="foot bg">
-          <p>На счету:<span class="priceShow"> 2 400</span></p>
-          <a href="" class="roundBtn">Оплатить игру</a>
+          <p>На счету:<span class="priceShow"> O </span></p>
+          <a class="roundBtn" href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Оплатить игру</a>
         </div>
       </div>
       <div class="square">
@@ -348,7 +348,9 @@
   </footer>
 </section>
 
-
+<div id="disable" class="hide">
+    Все еще в разработке 
+</div>
 
 <%= render 'shared/team_modal' %>
 <%= render 'shared/invite_modal' unless @team.full? %>

@@ -65,7 +65,9 @@ $(document).ready(function(){
 	});
 	$('.teamGameCarousel').slick({
 	  slidesToShow: 1,
-	  slidesToScroll: 1
+	  slidesToScroll: 1,
+	  fade: true,
+  	  cssEase: 'linear'
 	});
 
 	
@@ -151,7 +153,16 @@ function thankU() {
 	$('.thankU').css( "display","block");
 }
 
-
+$('[rel="popover"]').popover({
+    container: 'body',
+    html: true,
+    content: function () {
+        var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
+        return clone; 
+    }
+}).click(function(e) {
+    e.preventDefault();
+});
 
 
 
