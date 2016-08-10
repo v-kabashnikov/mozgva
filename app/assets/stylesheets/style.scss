@@ -752,10 +752,8 @@ footer {
 	width: 100px;
 	cursor: pointer;
 	display: block;
-	&:focus {
+	&:focus, &:hover{
 		outline:none;
-	}
-	&:hover {
 		color:#fff;
 	}
 }
@@ -1371,6 +1369,17 @@ input[type=range]::-moz-focus-outer {
 }
 
 ////////////// COMMON STYLES
+.popover {
+	background-image:asset-url("calendar/frBg.png");
+	width:auto;
+	height:auto;
+	max-width:150px;
+	padding:30px 10px;
+	background-size:80%;
+	background-position: center;
+	background-repeat: no-repeat;
+	text-align: center;
+}
 .authorizationWrap {
 	span {
 		display: flex;
@@ -2505,6 +2514,28 @@ footer.korporatF {
 ////////////// TEAM PAGE
 .topInfo.korporat {
 	background-color:$redLight;
+}
+
+.teamGameCarousel {
+	.slick-arrow {
+		&:before {
+			font-family: FontAwesome;
+		    font-style: normal;
+		    font-weight: normal;
+		    font-size: 25px;
+    		line-height: 0;
+		}
+	}
+	.slick-prev {
+		&:before {
+			content: "\f104";
+		}
+	}
+	.slick-next {
+		&:before {
+			content: "\f105";
+		}
+	}
 }
 .korporatSek {
 	border:10px solid $redLight;
