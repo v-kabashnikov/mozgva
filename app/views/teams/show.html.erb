@@ -25,9 +25,9 @@
     <ul class="navigationWrap teamNav">
       <li><%= link_to root_path do %>Главная<% end %></li>
       <li><%= link_to calendar_path do %>Календарь игр<% end %></li>
-      <li><%= link_to leagues_path do %>Лиги<% end %></li>
+      <li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Лиги</a></li>
       <li><%= link_to sert_path do %>Сертификаты<% end %></li>
-      <li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+      <li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Рейтинг команд</a></li>
       <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
     </ul>
   </div>
@@ -130,10 +130,14 @@
             <a href="#reyting" aria-controls="reyting" role="tab" data-toggle="tab">Общий рейтинг</a>
           </li>
           <li role="presentation">
-            <a href="#position" aria-controls="position" role="tab" data-toggle="tab">Положение в лиге</a>
+          <a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">
+            <!-- <a href="#position" aria-controls="position" role="tab" data-toggle="tab"> -->
+            Положение в лиге</a>
           </li>
           <li role="presentation">
-            <a href="#statistic" aria-controls="statistic" role="tab" data-toggle="tab">Статистика</a>
+            <!-- <a href="#statistic" aria-controls="statistic" role="tab" data-toggle="tab"> -->
+            <a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">
+            Статистика</a>
           </li>
         </ul>
         <div class="tab-content">
@@ -161,7 +165,9 @@
       <% @main_games.each do |game| %>
       
         <div class="rectangle">
-          <a href="" class="teamList">Список команд</a>
+          <!-- <a href="" class="teamList"> -->
+          <a href="" class="teamList" rel="popover" data-trigger="focus" data-popover-content="#disable">
+          Список команд</a>
           <a class="location">
             <span>
               <img src="<%= asset_path('symbol/map.png') %>" />
@@ -348,9 +354,7 @@
   </footer>
 </section>
 
-<div id="disable" class="hide">
-    Все еще в разработке 
-</div>
+
 
 <%= render 'shared/team_modal' %>
 <%= render 'shared/invite_modal' unless @team.full? %>

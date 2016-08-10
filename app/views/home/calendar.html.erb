@@ -38,9 +38,9 @@
 <section class="calendarSec">
 	<ul class="navigationWrap">
 		<li><%= link_to root_path do %>Главная<% end %></li>
-		<li><%= link_to leagues_path do %>Лиги<% end %></li>
+		<li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Лиги</a></li>
 		<li><%= link_to sert_path do %>Сертификаты<% end %></li>
-		<li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+		<li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Рейтинг команд</a></li>
 		<li><%= link_to korporat_path do %>Корпоратив<% end %></li>
 		<li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
 	</ul>
@@ -79,10 +79,10 @@
 					</ul>
 				</a>
 			</div>
-			<div class="adAppisode">
-				<img src="<%= asset_path('calendar/appisode.png') %>">
+			<!--<div class="adAppisode">
+				<img src="<%#= asset_path('calendar/appisode.png') %>">
 				<span>Приложение для мозгвичей, сериалов любителей для!</span>
-			</div>
+			</div>-->
 		</div>
 		<div class="eventsParth">
 			<div class="gamesTabs">

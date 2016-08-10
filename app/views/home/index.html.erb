@@ -64,24 +64,24 @@
 			</div> <!--AND SELECT SITY & MONTH-->
 		</div>
 		<div class="line SomeTabs">
-			<%= link_to leagues_path do %>
+			<a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">
 			<div class="item">
 				<img src="<%= asset_path('header/ligi.png') %>">
 				<p>Лиги</p>
 			</div>
-			<% end %>
+			</a>
 			<%= link_to sert_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/gifts.png') %>">
 				<p>Подарочные<br/> сертификаты</p>
 			</div>
 			<% end %>
-			<%= link_to rating_path do %>
+			<a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">
 			<div class="item">
 				<img src="<%= asset_path('header/rang.png') %>">
 				<p>Рейтинг<br/> команд</p>
 			</div>
-			<% end %>
+			</a>
 			<%= link_to calendar_path do %>
 			<div class="item">
 				<img src="<%= asset_path('header/calendar.png') %>">
@@ -250,9 +250,9 @@
 			<div class="left">
 				<ul>
 					<li><a href="/calendar">Календарь игр</a></li>
-					<li><a href="/leagues">Лиги</a></li>
+					<li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Лиги</a></li>
 					<li><a href="/sert">Сертификаты</a></li>
-					<li><a href="/rating">Рейтинг команд</a></li>
+					<li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Рейтинг команд</a></li>
 					<li><a href="/franchise">Франшиза и спонсорство</a></li>
 				</ul>
 			</div>
