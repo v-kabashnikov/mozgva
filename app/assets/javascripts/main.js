@@ -260,3 +260,6 @@ $( document ).ready(function() {
 		showFile(event);
 	});
 });
+
+var a2a_config = a2a_config || {};
+a2a_config.locale = "ru";

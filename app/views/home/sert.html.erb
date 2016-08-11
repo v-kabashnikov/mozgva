@@ -78,7 +78,28 @@
 	<footer class="franchiseF">
 		<ul>
 			<li>
-				<div><img src="<%= asset_path('symbol/like.png') %>"/><span>Лойс</span></div>
+				<div class="dropup like">
+					<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+				  </button>
+				  <ul class="dropdown-menu a2a_kit">
+				  	<li>
+				  		<a class="a2a_button_vk" href="">
+				  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_twitter" href="#">
+				  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_facebook" href="#">
+				  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+				  		</a>
+				  	</li>
+				  </ul>
+				</div>
 				<div class="tag">#этомозвадетка</div>
 			</li>
 			<li>

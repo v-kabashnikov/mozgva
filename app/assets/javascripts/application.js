@@ -9,3 +9,4 @@
 //= require teams
 //= require clipboard
 //= require phone_confirmation
+//= require a2a.js
