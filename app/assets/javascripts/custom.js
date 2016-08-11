@@ -42,6 +42,7 @@ $(document).ready(function(){
 	});
 	$('.noticCarosel').slick({
 	  arrows:true,
+	  fade:true,
 	  responsive: [
 	    {
 	      breakpoint: 768,
@@ -78,7 +79,14 @@ $(document).ready(function(){
 	  slidesToShow: 1,
 	  slidesToScroll: 1,
 	  fade: true,
-  	  cssEase: 'linear'
+	    responsive: [{
+	      breakpoint: 768,
+	      settings: {
+	        arrows:false,
+	        dots:true
+	      }
+	    }]
+
 	});
 
 	

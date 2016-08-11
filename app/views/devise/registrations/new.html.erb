@@ -71,12 +71,12 @@
 
       
 
-      <label for="user_password">
+     <!--  <label for="user_password">
         Пароль 
         <% if @minimum_password_length %>
           <span>(минимум <%= @minimum_password_length %> символов)</span>
         <% end %>
-      </label>
+      </label> -->
       
       <%= f.password_field :password, placeholder: 'Пароль', class: "lineInput", autocomplete: "off" %>
 
