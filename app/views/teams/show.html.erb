@@ -184,6 +184,12 @@
             <li>Когда играем?</li>
             <li><%= l(game.when, format: '%e %B') %></li>
             <li><%= game.when.strftime("%H:%M") %></li>
+            <li class="showOnlyMob">
+              <span><img src="<%= asset_path('symbol/ticket.png') %>"/></span><%= game.price %> руб.
+            </li>
+            <li class="showOnlyMob">
+              <span><img src="<%= asset_path('symbol/map.png') %>" /></span><%= game.place.name %>
+            </li>
             
 
           </ul>

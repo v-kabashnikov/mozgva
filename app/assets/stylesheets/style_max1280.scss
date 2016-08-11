@@ -136,6 +136,7 @@
 		}
 	}
 	.teamSec {
+		padding-top:50px;
 		.contentWrap {
 			max-width:90vw;
 			flex-wrap: wrap;
@@ -360,6 +361,9 @@
 					.wrapSelectCityMonth {
 						display: none;
 					}
+					.authorizationWrap {
+						margin-top:30px;
+					}
 				}
 				
 				&.SomeTabs {
@@ -461,6 +465,10 @@
 						li {
 							margin: auto;
 							text-align: center;
+							a {
+								padding: 5px;
+								font-size: 12px;
+							}
 						}
 					}
 				}
@@ -475,10 +483,33 @@
 						width:90%;
 					}
 				}
+				.teamGameCarousel {
+					.slick-dots {
+						bottom: 5px;
+						li {
+							width:15px;
+							height:15px;
+							button {
+								width:15px;
+								height:15px;
+								&:before {
+									width:15px;
+									height:15px;
+									background-color:#fff;
+									border-radius:50%;
+									content:"";
+								}
+							}
+						}
+					}
+				}
 				.rectangle {
-					a.price {
-						top: 30px;
-						left: 30px;
+					height:auto;
+					margin:0;
+					a.price,
+					a.location,
+					a.teamList  {
+						display: none;
 					}
 					.ad {
 						li {
@@ -489,6 +520,15 @@
 							&:nth-child(3) {
 								font-size:60px;
 								line-height:50px;
+							}
+						}
+						.showOnlyMob {
+							display: flex;
+							justify-content:center;
+							align-items:center;
+							margin-top: 15px;
+							span {
+								margin-right:20px;
 							}
 						}
 					}
