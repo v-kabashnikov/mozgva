@@ -1,15 +1,5 @@
 $(document).ready(function(){
-
-	$('[rel="popover"]').popover({
-    container: 'body',
-    html: true,
-    content: function () {
-        var clone = $($(this).data('popover-content')).clone(true).removeClass('hide');
-        return clone; 
-    }
-	}).click(function(e) {
-	    e.preventDefault();
-	});
+	$('a[data-toggle="popover"]').popover();
 	$('.headTabNav input[type=radio]').click(function() {
 	  if (this.checked) {
 	  	$('div.tabs').removeClass("visible");
