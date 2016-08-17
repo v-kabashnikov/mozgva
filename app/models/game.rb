@@ -4,7 +4,9 @@ class Game < ApplicationRecord
   has_one :city, through: :place
   has_many :photos
   has_many :game_registrations, dependent: :destroy
-  has_many :teams, through: :game_registrations
+  has_many :teams, through: :game_registrations, 
+            before_remove: :destroy_team_rating, 
+            after_add: :create_team_rating
   has_many :members, through: :teams
   has_many :team_ratings, dependent: :destroy
 
@@ -41,17 +43,38 @@ class Game < ApplicationRecord
 
   def calculate_team_ratings
     res = []
-    self.team_ratings.each do |tr|
-      res << {game_id: self.id, team_id: tr.team.id, name: tr.team.name, scores: tr.scores}
-    end
-    if res.any?
+    if team_ratings.any?
+      team_ratings.each do |tr|
+        res << {game_id: self.id, team_id: tr.team.id, name: tr.team.name, scores: tr.sum_points}
+      end
+      #same_games = Game.where(number: self.number)
       max_scores = res.sort_by { |r| r[:scores] }.last[:scores]
 
-      res.each do |r|
-        r[:percent] = (r[:scores] / max_scores.to_f) * 100.0
-      end
+      res.each {|r| r[:percent] = (r[:scores]/max_scores.to_f)*100.0}
     end
 
-    return res
+    res
   end
+
+  def self.calculate_all_team_ratings
+    res = []
+    
+    all.each do |game|
+      res << game.calculate_team_ratings if game.team_ratings.any?
+    end
+    res
+  end
+
+protected
+
+  def create_team_rating(obj)
+    puts obj.id
+    TeamRating.create(game_id: self.id, team_id: obj.id)
+  end
+  
+  def destroy_team_rating(obj)
+    tr = team_ratings.where(game_id: self.id, team_id: obj.id).first
+    tr.destroy if tr.present?
+  end
+
 end

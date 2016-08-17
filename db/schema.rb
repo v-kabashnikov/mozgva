@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801124652) do
+ActiveRecord::Schema.define(version: 20160817082625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20160801124652) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "main",              default: false,      null: false
+    t.integer  "question_set"
     t.index ["league_id"], name: "index_games_on_league_id", using: :btree
     t.index ["place_id"], name: "index_games_on_place_id", using: :btree
   end
@@ -119,11 +120,17 @@ ActiveRecord::Schema.define(version: 20160801124652) do
   end
 
   create_table "team_ratings", force: :cascade do |t|
-    t.integer  "scores",     default: 0
     t.integer  "team_id"
     t.integer  "game_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "round_one",   default: 0
+    t.integer  "round_two",   default: 0
+    t.integer  "round_three", default: 0
+    t.integer  "round_four",  default: 0
+    t.integer  "round_five",  default: 0
+    t.integer  "round_six",   default: 0
+    t.integer  "round_seven", default: 0
     t.index ["game_id"], name: "index_team_ratings_on_game_id", using: :btree
     t.index ["team_id"], name: "index_team_ratings_on_team_id", using: :btree
   end
