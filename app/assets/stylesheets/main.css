@@ -186,13 +186,13 @@ background: url(../images/tilda.png) no-repeat 200px 160px, url(../images/a.png)
 	text-align: center;
 	color: rgb(255, 255, 255);
 	padding-top: 40px;
-	font-family: "graublauslab-bolduploadedfile";
+	font-family: "graublauslab-bold";
 	margin: 0;
 }
 .section_1 h3 {
 	color:#1c3cff;
 	float:left;
-	font-family: "graublauslab-bolduploadedfile";
+	font-family: "graublauslab-bold";
 	font-size: 40px;
 	padding-top: 25px;
 	padding-bottom: 50px;
@@ -218,24 +218,24 @@ background: url(../images/tilda.png) no-repeat 200px 160px, url(../images/a.png)
 	width: 36%;
 	font-size: 18px;
 	font-weight: 400;
-	font-family: "graublausans-bolduploadedfile";
+	font-family: "graublausans-bold";
 }
 .section_1 table tr td:nth-child(2) {
 	width: 20%;
 	font-size: 48px;
-	font-family: "graublauslab-bolduploadedfile";
+	font-family: "graublauslab-bold";
 	font-weight: 800;
 }
 .section_1 table tr td:nth-child(3) {
 	width: 20%;
 	font-size: 48px;
-	font-family: "graublauslab-bolduploadedfile";
+	font-family: "graublauslab-bold";
 	font-weight: 800;
 }
 .section_1 table tr td:nth-child(4) {
 	width: 20%;
 	font-size: 48px;
-	font-family: "graublauslab-bolduploadedfile";
+	font-family: "graublauslab-bold";
 	font-weight: 800;
 }
 .section_1 table tr td:nth-child(5) {
@@ -246,7 +246,7 @@ background: url(../images/tilda.png) no-repeat 200px 160px, url(../images/a.png)
 .section_1 table thead tr td{
 	font-weight: 400 !important;;
 	color: #df2929;	
-	font-family: "graublauslab-bolduploadedfile" !important;
+	font-family: "graublauslab-bold" !important;
 	font-size: 18px !important;
 	line-height: 1;
 }
@@ -260,7 +260,7 @@ background: url(../images/tilda.png) no-repeat 200px 160px, url(../images/a.png)
 
 .btn_reit {
 	font-size: 40px !important;
-	font-family: "graublauslab-bolduploadedfile" !important;
+	font-family: "graublauslab-bold" !important;
 	background-size: cover !important;
 	border-radius: 100px !important;
 	border: none;

@@ -15,6 +15,17 @@ RailsAdmin.config do |config|
   ## == Cancan ==
   config.authorize_with :cancan
 
+  config.model 'Game' do
+    edit do
+      fields :number, :question_set, :place, :name, :league, :price, :when, :status
+      fields :max_people_number, :max_teams_number, :main, :city, :photos
+      fields :game_registrations, :teams, :members
+      field :team_ratings do
+        partial "team_ratings_partial"
+      end
+    end
+  end
+
   ## == Pundit ==
   # config.authorize_with :pundit
 

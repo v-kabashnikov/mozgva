@@ -2,12 +2,16 @@ class TeamRating < ApplicationRecord
   belongs_to :team
   belongs_to :game
 
-  validates_presence_of :scores, :team_id, :game_id
+  #validates_presence_of :team_id, :game_id
 
   rails_admin do
     edit do
-      field :scores
       field :team
+      fields :round_one, :round_two, :round_three, :round_four, :round_five, :round_six, :round_seven
     end
+  end
+
+  def sum_points
+  	round_one + round_two + round_three + round_four + round_five + round_six + round_seven
   end
 end

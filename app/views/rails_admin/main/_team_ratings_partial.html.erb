@@ -1,0 +1,52 @@
+<div class="col-sm-10 controls">
+
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>Team</th>
+	      <th>1</th>
+	      <th>2</th>
+	      <th>3</th>
+	      <th>4</th>
+	      <th>5</th>
+	      <th>6</th>
+	      <th>7</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% form.object.team_ratings.sort {|q, a| q.sum_points <=> a.sum_points}.reverse.each_with_index do |tr, i| %>
+		  <%= fields_for tr do |tr_form| %>
+
+			<tr>
+				<input type="hidden" value="<%= tr.team.id %>" name="game[team_ratings_attributes][<%= i %>][team_id]" id="game_team_ratings_attributes_<%= i %>_team_id">
+				<input type="hidden" value="<%= tr.id %>" name="game[team_ratings_attributes][<%= i %>][id]" id="game_team_ratings_attributes_<%= i %>_id">
+		      <td>
+		      	<%= tr.team.name %>
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_one %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_one]" id="game_team_ratings_attributes_<%= i%>_round_one">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_two %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_two]" id="game_team_ratings_attributes_<%= i%>_round_two">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_three %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_three]" id="game_team_ratings_attributes_<%= i%>_round_three">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_four %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_four]" id="game_team_ratings_attributes_<%= i%>_round_four">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_five %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_five]" id="game_team_ratings_attributes_<%= i%>_round_five">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_six %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_six]" id="game_team_ratings_attributes_<%= i%>_round_six">
+		      </td>
+		      <td>
+		      	<input value="<%= tr.round_seven %>" class="form-control" type="number" name="game[team_ratings_attributes][<%= i %>][round_seven]" id="game_team_ratings_attributes_<%= i%>_round_seven">
+		      </td>
+		    </tr>
+	      <% end %>
+		<% end %>
+	  </tbody>
+	</table>
+</div>
