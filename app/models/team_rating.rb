@@ -2,8 +2,6 @@ class TeamRating < ApplicationRecord
   belongs_to :team
   belongs_to :game
 
-  #validates_presence_of :team_id, :game_id
-
   rails_admin do
     edit do
       field :team

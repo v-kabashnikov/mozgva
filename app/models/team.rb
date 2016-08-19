@@ -12,7 +12,6 @@ class Team < ApplicationRecord
   has_many :achievments, dependent: :destroy
 
   before_create :set_invite
-  # before_create :set_invite
 
   validates :name, presence: true, uniqueness: true
 

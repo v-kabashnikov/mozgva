@@ -18,7 +18,7 @@ class Game < ApplicationRecord
 
   scope :main, ->{ where main: true }
 
-  validates_presence_of :max_people_number, :max_teams_number
+  #validates_presence_of :max_people_number, :max_teams_number
   validates_uniqueness_of :number
 
   def status_enum
@@ -63,6 +63,47 @@ class Game < ApplicationRecord
       res << game.calculate_team_ratings if game.team_ratings.any?
     end
     res
+  end
+
+  def self.import
+    xlsx = Roo::Excelx.new("rating.xlsx")
+    spreadsheet = xlsx.sheet(0)
+    header = spreadsheet.row(2)
+
+    game_parsing = true
+
+    (2..spreadsheet.last_row).each do |i|
+      if !spreadsheet.row(i).first.nil? && !spreadsheet.row(i)[1].nil?
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+
+        if game_parsing
+          game_num = row.values[0].is_a?(String) ? row.values[0].split.last : row.values[0].to_s
+          game = Game.find_by(number: game_num) || Game.create(number: game_num)
+          game_parsing = false
+        else
+          team_name = row.values[0]
+          team = Team.find_by(name: team_name) || Team.create(name: team_name)
+          game.teams << team
+          game.save
+
+          team_rating = TeamRating.find_by(game_id: game.id, team_id: team.id)
+          team_rating.update(round_one: h[1], round_two: h[2], round_three: h[3],
+                   round_four: h[4], round_five: h[5], round_six: h[6],
+                   round_seven: h[7])
+        end
+      else
+        game_parsing = true
+      end
+    end
+  end
+
+  def self.open_spreadsheet(file)
+    case File.extname(file.original_filename)
+    when ".csv" then Roo::Csv.new(file.path, nil, :ignore)
+    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
+    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
+    else raise "Unknown file type: #{file.original_filename}"
+    end
   end
 
 protected
