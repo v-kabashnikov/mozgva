@@ -78,7 +78,9 @@ class Game < ApplicationRecord
 
         if game_parsing
           game_num = row.values[0].is_a?(String) ? row.values[0].split.last : row.values[0].to_s
-          game = Game.find_by(number: game_num) || Game.create(number: game_num)
+          same_games = Game.where(number: game_num)
+          game = Game.new(number: game_num, question_set: (same_games.count + 1))
+
           game_parsing = false
         else
           team_name = row.values[0]
