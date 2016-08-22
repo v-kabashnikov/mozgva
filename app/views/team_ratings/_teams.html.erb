@@ -1,9 +1,131 @@
 <% ratings.each do |rating| %>
-	<tr>
-	    <td><%= rating[:name] %></td> 
-	    <td><%= rating[:percent].round(2) %>%</td>
-	    <td><%= rating[:scores] %></td>
+	<tr id="<%= rating[:name] %>">
+	    <td class="tName"><%= rating[:name] %></td> 
+	    <td class="tPercent"><%= rating[:percent].round(2) %>%</td>
+	    <td class="tScores"><%= rating[:scores] %></td>
 	    <td><%= rating[:games] %></td>
-	    <td><img src="<%= asset_path('img_venki/3-Золото.png')%>"></td>
+	    <td class="achivmentsWrapp">
+	    <% if rating[:percent].round(2) < 70 %>
+	    	<% if rating[:scores] < 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<% elsif rating[:scores] > 2000 %>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<% elsif rating[:scores] > 1000 %>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<% elsif rating[:scores] > 500 %>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<% elsif rating[:scores] > 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>"/>
+	    	<% end %>
+	    	
+		<% end %>
+		<% if rating[:percent].round(2) >= 70 and rating[:percent].round(2) < 75 %>
+			<% if rating[:scores] < 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<% elsif rating[:scores] > 2000 %>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<% elsif rating[:scores] > 1000 %>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<% elsif rating[:scores] > 500 %>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<% elsif rating[:scores] > 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Голубой-d.png')%>"/>
+	    	<% end %>
+	    <% end %>
+	    <% if rating[:percent].round(2) >= 75 and rating[:percent].round(2) < 80 %>
+	    	<% if rating[:scores] < 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<% elsif rating[:scores] > 2000 %>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<% elsif rating[:scores] > 1000 %>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<% elsif rating[:scores] > 500 %>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<% elsif rating[:scores] > 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Бронза-d.png')%>"/>
+	    	<% end %>
+	    <% end %>
+	    <% if rating[:percent].round(2) >= 80 and rating[:percent].round(2) < 85 %>
+	    	<% if rating[:scores] < 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<% elsif rating[:scores] > 2000 %>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<% elsif rating[:scores] > 1000 %>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<% elsif rating[:scores] > 500 %>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<% elsif rating[:scores] > 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Серебро-d.png')%>"/>
+	    	<% end %>
+	    	
+	    <% end %>
+	    <% if rating[:percent].round(2) >= 85 %>
+	    	<% if rating[:scores] < 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<% elsif rating[:scores] > 2000 %>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<% elsif rating[:scores] > 1000 %>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<% elsif rating[:scores] > 500 %>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<% elsif rating[:scores] > 300 %>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<img src="<%= asset_path('img_venki/1-Золото-d.png')%>"/>
+	    	<% end %>
+	    	
+	    
+	    <% end %>
+
+
+	    </td>
 	</tr>
 <% end %>
