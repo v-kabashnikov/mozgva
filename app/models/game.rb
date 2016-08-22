@@ -78,13 +78,16 @@ class Game < ApplicationRecord
 
         if game_parsing
           game_num = row.values[0].is_a?(String) ? row.values[0].split.last : row.values[0].to_s
+          game_num = game_num.to_s.strip
           same_games = Game.where(number: game_num)
           @game = Game.new(number: game_num, question_set: (same_games.count + 1))
 
           game_parsing = false
         else
-          team_name = row.values[0]
-          team = Team.find_by(name: team_name) || Team.create(name: team_name)
+          team_name = row.values[0].to_s.strip
+          team = Team.where('lower(name) = lower(?)', team_name.downcase).first || Team.create(name: team_name)
+          p team.name
+          p i
           @game.teams << team
           @game.save
 
