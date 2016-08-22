@@ -79,19 +79,19 @@ class Game < ApplicationRecord
         if game_parsing
           game_num = row.values[0].is_a?(String) ? row.values[0].split.last : row.values[0].to_s
           same_games = Game.where(number: game_num)
-          game = Game.new(number: game_num, question_set: (same_games.count + 1))
+          @game = Game.new(number: game_num, question_set: (same_games.count + 1))
 
           game_parsing = false
         else
           team_name = row.values[0]
           team = Team.find_by(name: team_name) || Team.create(name: team_name)
-          game.teams << team
-          game.save
+          @game.teams << team
+          @game.save
 
-          team_rating = TeamRating.find_by(game_id: game.id, team_id: team.id)
-          team_rating.update(round_one: h[1], round_two: h[2], round_three: h[3],
-                   round_four: h[4], round_five: h[5], round_six: h[6],
-                   round_seven: h[7])
+          team_rating = TeamRating.find_by(game_id: @game.id, team_id: team.id)
+          team_rating.update(round_one: row[1], round_two: row[2], round_three: row[3],
+                   round_four: row[4], round_five: row[5], round_six: row[6],
+                   round_seven: row[7])
         end
       else
         game_parsing = true
@@ -99,19 +99,10 @@ class Game < ApplicationRecord
     end
   end
 
-  def self.open_spreadsheet(file)
-    case File.extname(file.original_filename)
-    when ".csv" then Roo::Csv.new(file.path, nil, :ignore)
-    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
-    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
-    else raise "Unknown file type: #{file.original_filename}"
-    end
-  end
-
 protected
 
   def create_team_rating(obj)
-    puts obj.id
+    self.save
     TeamRating.create(game_id: self.id, team_id: obj.id)
   end
   
