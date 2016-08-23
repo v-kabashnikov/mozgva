@@ -342,6 +342,10 @@ a.disabled{
 		color:#fff;
 		transition:color .4s;
 		text-align: right;
+		margin: auto;
+		display: block;
+		max-width: 150px;
+		text-align: center;
 		&:hover,&:focus {
 			color:$redLight;
 		}
