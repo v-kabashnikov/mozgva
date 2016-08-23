@@ -75,8 +75,9 @@
         <% @ratings = @ratings.sort {|a, q| q[:percent] <=> a[:percent]} %>
         <%= render partial: "teams", locals: {ratings: @ratings}%>
       </table>
-      <div class="areaOfRating mpbile">
-        
+      <div class="areaOfRating mobile">
+        <% @ratings = @ratings.sort {|a, q| q[:percent] <=> a[:percent]} %>
+        <%= render partial: "teams-mob", locals: {ratings: @ratings}%>
       </div>
     </div>
   </div>
