@@ -72,7 +72,7 @@
             <td>Количество<br> игр</td>
           </tr>
         </thead>
-        <% @ratings = @ratings.sort {|a, q| q[:scores] <=> a[:scores]} %>
+        <% @ratings = @ratings.sort {|a, q| q[:percent] <=> a[:percent]} %>
         <%= render partial: "teams", locals: {ratings: @ratings}%>
       </table>
     </div>
