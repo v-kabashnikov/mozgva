@@ -63,7 +63,7 @@
       </ul>
     </div>
     <div class="ratingOfWins">
-      <table class="tableOfRating">
+      <table class="tableOfRating desctop">
         <thead>
           <tr>
             <td>Команды</td>
@@ -75,6 +75,9 @@
         <% @ratings = @ratings.sort {|a, q| q[:percent] <=> a[:percent]} %>
         <%= render partial: "teams", locals: {ratings: @ratings}%>
       </table>
+      <div class="areaOfRating mpbile">
+        
+      </div>
     </div>
   </div>
 </section>
