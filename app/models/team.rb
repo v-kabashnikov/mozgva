@@ -56,6 +56,7 @@ class Team < ApplicationRecord
   end
 
   def self.pick_up_team_ratings game_team_ratings
+    Rails.cache.fetch("pick_up_team_ratings", expires_in: 1.hours) do
     res = []
     all.each do |team|
       sum_scores = 0
@@ -75,6 +76,7 @@ class Team < ApplicationRecord
       end
     end
     res
+  end
   end
   
   private

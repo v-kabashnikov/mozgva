@@ -19,7 +19,6 @@ class Game < ApplicationRecord
   scope :main, ->{ where main: true }
 
   #validates_presence_of :max_people_number, :max_teams_number
-  validates_uniqueness_of :number
 
   def status_enum
     self.class.statuses.to_a
@@ -47,7 +46,6 @@ class Game < ApplicationRecord
       team_ratings.each do |tr|
         res << {game_id: self.id, team_id: tr.team.id, name: tr.team.name, scores: tr.sum_points}
       end
-      #same_games = Game.where(number: self.number)
       max_scores = res.sort_by { |r| r[:scores] }.last[:scores]
 
       res.each {|r| r[:percent] = (r[:scores]/max_scores.to_f)*100.0}
@@ -57,12 +55,13 @@ class Game < ApplicationRecord
   end
 
   def self.calculate_all_team_ratings
-    res = []
-    
-    all.each do |game|
-      res << game.calculate_team_ratings if game.team_ratings.any?
+    Rails.cache.fetch("calculate_all_team_ratings", expires_in: 1.hours) do
+      res = []
+      all.each do |game|
+        res << game.calculate_team_ratings if game.team_ratings.any?
+      end
+      res
     end
-    res
   end
 
   def self.import
@@ -86,8 +85,6 @@ class Game < ApplicationRecord
         else
           team_name = row.values[0].to_s.strip
           team = Team.where('lower(name) = lower(?)', team_name.downcase).first || Team.create(name: team_name)
-          p team.name
-          p i
           @game.teams << team
           @game.save
 
