@@ -173,6 +173,18 @@
 			}
 		}
 	}
+	
+	.ratingSection {
+		.titleTable {
+			max-width: 95vw;
+			margin: 30px auto;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			.blueBtn {
+				margin:20px 0;
+			}
+		}
+	}
 	footer {
 		ul {
 			justify-content: space-around;
@@ -427,6 +439,7 @@
 				}
 			}
 		}
+
 		footer {
 			.left {
 				ul {
@@ -536,7 +549,16 @@
 			}
 		}
 	}
-
+	.ratingSection {
+		.titleTable {
+			text-align: center;
+			ul {
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+		}
+	}
 	///// MODALS
 
 	.modal {
@@ -558,6 +580,8 @@
 			}
 		}
 	}
+
+
 }
 
 

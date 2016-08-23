@@ -172,7 +172,7 @@
 				<%= render 'games/tabs' %>
 			</div>
 			<% if @game_groups_count > 4 %>
-			  <%= link_to 'Все игры', calendar_path %>
+			  <%= link_to 'Все игры' , calendar_path, :class => "allGames" %>
 			<% end %>
 		</div>
 		<div class="right">
