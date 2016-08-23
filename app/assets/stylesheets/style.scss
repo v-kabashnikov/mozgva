@@ -807,8 +807,9 @@ footer {
 	cursor: pointer;
 	display: block;
 	color:#fff;
-	&:focus {
+	&:hove,&:focus {
 		outline:none;
+		color:#fff;
 	}
 }
 	
@@ -2822,6 +2823,70 @@ footer.korporatF {
 	}
 }
 
+////// RATING PAGE
+
+.topInfo {
+	&.rating {
+		background-color: $redLight;
+	}
+}
+.ratingSection {
+	.mainWrap {
+		flex-direction: column;
+	}
+	.navigationWrap {
+		margin:0;
+		padding:0 0 30px;
+		background-color:$redLight;
+	}
+	.tableOfRating {
+		width:100%;
+		thead {
+			font-family:$mainFontBold;
+			color:$redHard;
+			font-size:18px;
+		}
+		tbody {
+			td {
+				font-size:16px;
+				font-family:$mainFont;
+				&.tName {
+					font-size:18px;
+					font-family:$mainFontBold;
+				}
+				&.tPercent {
+					font-size:28px;
+					font-family:$mainFontBold;
+				}
+			}
+		}
+
+	}
+	.titleTable {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width:100%;
+		font-family:$mainFontBold;
+		margin:50px 0;
+		h2 {
+			margin:0;
+			font-size:42px;
+			color:$blue;
+		}
+		ul {
+			display: flex;
+			text-align: center;
+			li {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				
+			}
+		}
+	}
+}
+
 ////// SERTIFICATE PAGE
 
 .mainWrap.invite {
@@ -3239,5 +3304,133 @@ footer.korporatF {
 	cursor: pointer;
 	&:hover {
 		opacity:1;
+	}
+}
+
+
+.faq_first_screen {
+  background-color: #0000ff;
+  margin-bottom:50px;
+  position: relative;
+  font-family:$GraublauSansDisplayLtFont;
+  h1 {
+  	font-family:$mainFontBold;
+  	font-size: 6rem;
+  }
+  .closeBack {
+    position: absolute;
+    z-index:22;
+    top:30px;
+    right:30px;
+    cursor: pointer;
+    img {
+      width:30px;
+      height:auto;
+    }
+  }
+  .contentWrap {
+    color:#fff;
+    padding:80px 0;
+    background-image:asset-url("faq/4uvak.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size:45% auto;
+    background-position: right -55px;
+    p {
+      max-width:450px;
+      font-size:18px;
+      padding-top:30px;
+    }
+  }
+}
+
+.faq_two_screen {
+	font-family:$GraublauSansDisplayLtFont;
+  .details {
+    margin:0 0 50px;
+    h4 {
+      font-size:32px;
+      font-family:$mainFontBold;
+      margin-bottom:20px;
+    }
+    p {
+      font-size:16px;
+    }
+    h5 {
+      margin:20px auto 10px;
+      font-size:26px;
+      font-family:$mainFontBold;
+    }
+    ul {
+      li {
+        font-size:16px;
+        b {
+          font-family:$GraublauSansDisplayBdFont;
+        }
+      }
+    }
+    table {
+      margin:20px 0 30px;
+      tr {
+        display: flex;
+        align-items: baseline;
+        td {
+          border-top:0;
+          min-width:180px;
+
+          img {
+            margin-right:20px;
+          }
+          &:last-child {
+            min-width:auto;
+            max-width:350px;
+          }
+        }
+
+        b {
+        	font-family:$GraublauSansDisplayBdFont;
+        }
+      }
+    }
+    ul.descOfmedal {
+      li {
+        display: flex;
+        justify-content: flex-start;
+        text-align: right;
+        max-width:900px;
+        align-items: baseline;
+        img {
+          margin-right:15px;
+        }
+        span {
+          text-align: left;
+          width:190px;
+        }
+      }
+    }
+  }
+}
+.end_faq {
+  background-color: #0000ff;
+  .wrrr {
+    padding:30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      color:#fff;
+      font-size:32px;
+      font-family:$GraublauSansDisplayBdFont;
+    }
+  }
+}
+
+.achivmentsWrapp {
+	max-width:120px;
+	img {
+		max-width:50px;
+		&:not(:first-child) {
+			margin-left:-10px;
+		}
 	}
 }

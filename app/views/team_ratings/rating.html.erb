@@ -1,14 +1,55 @@
-<section class="reit" >
-    <div class="container_16 reit_title" style="">
-      <h1>Рейтинг <br> команд</h1>
+
+<section class="topInfo rating">
+  <div class="contentWrap">
+    <div class="btnWrap authorizationWrap">
+      <% if current_user %>
+      <span>
+        <img src="<%= asset_path('symbol/lock.png') %>">
+        <div class="links">
+          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+          <%= link_to "Профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+          <% if current_user.invitations.present? %>
+          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% end %>
+          <% if current_user.team %>
+          <%= link_to("Команда", my_team_path) %>
+          <% else %>
+          <% if current_user.phone_confirmed_at %>
+          <%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+          <% else %>
+          <a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
+          <% end %>
+          <% end %>
+        </div>
+      </span>
+      <% else %>
+      <span>
+        <img src="<%= asset_path('symbol/lock.png') %>">
+        <div class="links">
+          <a href="#sign_in" data-toggle="modal">Войти</a>
+          <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+        </div>
+      </span>
+      <% end %>
     </div>
-    <div class="container_16" style="text-align: right;">
-      <img src="<%= asset_path('logo.png')%>" alt="" style="padding: 10px 0 30px 0;">
-    </div>
-</section>  
-<div class="container_16 section_1">
-      <h3>Обладатели венков</h3>
-      <ul class="text-center" style="font-family: 'graublauslab-bold' !important;">
+    <h1>Рейтинг<br/> команд</h1>
+  </div>
+</section>
+
+<section class="ratingSection">
+<ul class="navigationWrap">
+    <li><%= link_to root_path do %>Главная<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+    <li class="calendarIgr"><%= link_to calendar_path do %>Календарь игр<% end %></li>
+    <li><%= link_to sert_path do %>Сертификаты<% end %></li>
+    <li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+    <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+  </ul>
+  <div class="mainWrap">
+    <div class="titleTable">
+      <h2>Обладатели венков</h2>
+      <a href="/faq" class="blueBtn">В чем соль?</a>
+      <ul>
         <li><img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>" alt="">
         <p>>70%</p></li>
         <li><img src="<%= asset_path('img_venki/1-Голубой-d.png')%>" alt="">
@@ -20,34 +61,28 @@
         <li><img src="<%= asset_path('img_venki/1-Золото-d.png')%>" alt="">
         <p> &lt;85% </p></li>
       </ul>
-  <!-- <div class="row">
-    <div class="col-md-12"> -->
-     <table style="margin-top: 50px; margin-bottom: 100px;">
-      <thead>
-        <tr>
-          <td>Команды</td>
-          <td>Качество<br>игры</td>
-          <td>Количество<br> баллов</td>
-          <td>Количество<br> игр</td>
-          <td></td>
-        </tr>
-      </thead>
-      <% @ratings = @ratings.sort {|a, q| q[:scores] <=> a[:scores]} %>
-      <%= render partial: "teams", locals: {ratings: @ratings}%>
-    </table>
-</div>
+    </div>
+    <div class="ratingOfWins">
+      <table class="tableOfRating">
+        <thead>
+          <tr>
+            <td>Команды</td>
+            <td>Качество<br>игры</td>
+            <td>Количество<br> баллов</td>
+            <td>Количество<br> игр</td>
+          </tr>
+        </thead>
+        <% @ratings = @ratings.sort {|a, q| q[:scores] <=> a[:scores]} %>
+        <%= render partial: "teams", locals: {ratings: @ratings}%>
+      </table>
+    </div>
+  </div>
+</section>
 
-<div class="container_16 section_1" >
+<!-- <div class="container_16 section_1" >
         <h3>Претенденты</h3>
         <ul>
-          <!-- <li><img src="../img_venki/1-Зеленый.png" alt=""></li>
-          <li><img src="../img_venki/1-Голубой.png" alt=""></li>
-          <li><img src="../img_venki/1-Бронза.png" alt=""></li>
-          <li><img src="../img_venki/1-Серебро.png" alt=""></li>
-          <li><img src="../img_venki/1-Золото.png" alt=""></li> -->
         </ul>
-    <!-- <div class="row">
-      <div class="col-md-12"> -->
        <table style="margin-top: 50px; margin-bottom: 100px;">
         <thead>
           <tr>
@@ -59,4 +94,19 @@
           </tr>
         </thead>
       </table>
-</div>
+</div> -->
+
+
+  <% unless current_user %>
+  <%= render 'shared/sign_in' %>
+  <%= render 'shared/sign_up' %>
+  <%= render 'shared/restore_password' %>
+  <%= render 'shared/user_agree' %>
+  <% else %>
+  <%= render 'shared/edit_profile' %>
+  <%= render 'shared/team_modal' unless current_user.team %>
+  <%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
+  <%= render 'shared/invitations_modal' if current_user.invitations.present? %>
+  <% end %>
+  <%= render 'shared/errors_modal' %>
+  <%= render 'shared/teams_modal' %>

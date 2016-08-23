@@ -107,24 +107,6 @@ $( document ).ready(function() {
 	}
 
 
-	// function addFormDropdown(selector, successFunction){
-	// 	el = $(selector);
-	// 	if(el.data("action")){
-	// 		dataString = el.find("ul").data("name") + "=";
-	// 		method = el.data("method") || "post";
-	// 		el.find('a').click(function(e){
-	// 			e.preventDefault();
-	// 	    $.ajax({
-	// 	        type: method,
-	// 	        url: el.data("action"),
-	// 	        data: dataString + $(this).data("value"),
-	// 	        success: successFunction
-	// 	    });
-	// 		});
-	// 	}
-	// }
-
-
 	function addFormDropdown(selector, successFunction){
 		$(selector).find('a').click(function(e){
 			el = $(selector);

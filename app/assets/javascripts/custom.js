@@ -147,6 +147,7 @@ $(function() {
 });
 
 
+
 function giftFun(a) {
 	if (a=='на троих') {
 		$( "#group_171784543_1").prop('checked', true);
