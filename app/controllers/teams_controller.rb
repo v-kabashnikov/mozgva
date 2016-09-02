@@ -33,6 +33,7 @@ class TeamsController < ApplicationController
       @month_array << game.when.strftime("%m").to_i
     end
     @month_array = @month_array.uniq
+    @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins(:photos).last
     render 'show'
   end
 

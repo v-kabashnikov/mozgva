@@ -274,7 +274,6 @@
     </div>
   </div>
 <!-- START upd Vlad gallery -->
-<div class="test-team-gallery">
   <div class="contentWrap">
     <div class="photoHead">
       <h3>Фото с наших игр</h3>
@@ -282,6 +281,26 @@
     </div>
   </div>
   <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
+  <% if @past_games.count == 0 %>
+    <div class="contentWrap">
+      <div class="elseGame">
+        <p>Скоро вы сможете искать на фото себя, а пока посмотрите как это было <%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></p>
+        <p><%=@last_game.name%></p>
+      </div>
+    </div>
+    <div class="contentWrap">
+      <% if @last_game.photos.first%>
+      <div class="AlbomItmWrapper">
+        <div class="AlbomItm AlbomItmCenter" style="background-image:url('<%= @last_game.photos.first.image.url %>'); ">
+          <div class="albomInfo">
+            <span><%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></span>
+            <span><%=@last_game.photos.count%> фото</span>
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  <%else%>
   <div class="contentWrap">
     <div class="full">
       <div class="photoArchive">
@@ -308,7 +327,7 @@
                 <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
                   <div class="albomInfo">
                     <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
-                    <span><%=game.photos.count%></span>
+                    <span><%=game.photos.count%> фото</span>
                   </div>
                 </div>
               <%end%>
@@ -326,7 +345,7 @@
                   <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
                     <div class="albomInfo">
                       <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
-                      <span><%=game.photos.count%></span>
+                      <span><%=game.photos.count%> фото</span>
                     </div>
                   </div>
                 <%end%>
@@ -339,11 +358,11 @@
             </a>
           </div>
         </div>
-      <%end%>
+        <%end%>
+      </div>
     </div>
+  <%end%>
   </div>
-</div>
-</div>
   <script>
     $(function() {
       $(".loadMore").click(function() {

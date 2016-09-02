@@ -2445,6 +2445,12 @@ footer.korporatF {
 				color:$redLight;
 			}
 		}
+		.elseGame{
+			p{
+				color:#fff;
+			}
+		}
+
 		.photoArchive {
 			background-color:#12151b;
 			width:100%;
@@ -2554,6 +2560,9 @@ footer.korporatF {
 					max-width:200px;
 					text-align: center;
 				}
+			}
+			.AlbomItmCenter{
+				margin:0 auto !important;
 			}
 			.photoHidden{
 			margin-top:30px;
