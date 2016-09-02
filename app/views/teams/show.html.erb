@@ -56,7 +56,7 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
-      
+
       <% @team.invitations.each do |inv| %>
         <li class="not_member" id="invitation_<%= inv.id %>">
           <% if current_user.member.captain? %>
@@ -97,7 +97,7 @@
           </div>
         </li>
       <% end %>
-      
+
       <% @team.invitations.each do |inv| %>
         <li class="not_member" id="invitation_<%= inv.id %>">
           <div class="uswerWrap">
@@ -157,13 +157,13 @@
 
       </div>
     </div>
-    
-      
+
+
     <div class="right">
     <div class="carouselHere">
       <div class="teamGameCarousel">
       <% @main_games.each do |game| %>
-      
+
         <div class="rectangle">
           <!-- <a href="" class="teamList"> -->
           <a href="" class="teamList" rel="popover" data-trigger="focus" data-popover-content="#disable">
@@ -190,14 +190,14 @@
             <li class="showOnlyMob">
               <span><img src="<%= asset_path('symbol/map.png') %>" /></span><%= game.place.name %>
             </li>
-            
+
 
           </ul>
         </div>
         <% end %>
       </div>
     </div>
-    
+
       <div class="square">
         <div class="head">
           <article>Банк команды</article>
@@ -270,61 +270,90 @@
           </li>
         </ul>
       </div>
-    
+
     </div>
   </div>
-  <!--В разработке
+<!-- START upd Vlad gallery -->
+<div class="test-team-gallery">
   <div class="contentWrap">
-      <div class="photoHead">
-        <h3>Фото с наших игр</h3>
-        <p>Наша команда участвовала <span class="red">8</span> раз</p>
-      </div>
+    <div class="photoHead">
+      <h3>Фото с наших игр</h3>
+      <p>Наша команда участвовала <span class="red"><%= @past_games.count%></span> раз</p>
+    </div>
   </div>
-   <div class="contentWrap">
-      <div class="full">
-
-        <div class="photoArchive">
-          <h4>2016</h4>
-          <ul class="navPhotoArchive" role="tablist">
-            <%months_hash = {1=> 'Январь', 2 => 'Февраль', 3 => 'Март', 4=> 'Апрель', 5 => 'Май', 6 => 'Июнь', 7 => 'Июль',  8 => 'Август',  9 => 'Сентябрь',  10 => 'Октябрь',  11 => 'Ноябрь',  12 => 'Декабрь'}%>
-             <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
-            <%@month_array.each_with_index do |month, i|%>
-            <li role="presentation" class="<%='active' if i==0%>"><a href="#month<%=month%>" role="tab" data-toggle="tab"><%=months_hash[month]%></a></li>
-            <%end%>
-          </ul>
-        </div>
-        <div class="tab-content albom">
-
+  <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
+  <div class="contentWrap">
+    <div class="full">
+      <div class="photoArchive">
+        <h4>2016</h4>
+        <ul class="navPhotoArchive" role="tablist">
+          <%months_hash = {1=> 'Январь', 2 => 'Февраль', 3 => 'Март', 4=> 'Апрель', 5 => 'Май', 6 => 'Июнь', 7 => 'Июль',  8 => 'Август',  9 => 'Сентябрь',  10 => 'Октябрь',  11 => 'Ноябрь',  12 => 'Декабрь'}%>
           <%@month_array.each_with_index do |month, i|%>
-          <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
-           <div class="AlbomItmWrapper">
-           <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).each do |game|%>
-             <%if game.photos.count == 0%>
-             <div class="AlbomItm photoShow">
-               <img src="<%= asset_path('symbol/plenka.png') %>" />
-               <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
-               <a href="">таблица результатов игры</a>
-             </div>
-             <%else%>
-             <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
-               <div class="albomInfo">
-                 <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
-                 <span><%=game.photos.count%></span>
-               </div>
-             </div>
-             <%end%>
-            <%end%>
-            </div>
-            <div class="loadMore">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
+            <li role="presentation" class="<%='active' if i==0%>"><a href="#month<%=month%>" role="tab" data-toggle="tab"><%=months_hash[month]%></a></li>
           <%end%>
-        </div>
+        </ul>
       </div>
-  </div> В РАЗРАБОТКЕ-->
+      <div class="tab-content albom">
+        <%@month_array.each_with_index do |month, i|%>
+        <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
+          <div class="AlbomItmWrapper">
+            <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).limit(4).each do |game|%>
+              <%if game.photos.count == 0%>
+                <div class="AlbomItm photoShow">
+                  <img src="<%= asset_path('symbol/plenka.png') %>" />
+                  <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
+                  <a href="">таблица результатов игры</a>
+                </div>
+              <%else%>
+                <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                  <div class="albomInfo">
+                    <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                    <span><%=game.photos.count%></span>
+                  </div>
+                </div>
+              <%end%>
+            <%end%>
+            <%@game_count = @past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).count%>
+            <%if @game_count > 4 %>
+              <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).last(@game_count-4).each do |game|%>
+                <%if game.photos.count == 0%>
+                  <div class="AlbomItm photoHidden">
+                    <img src="<%= asset_path('symbol/plenka.png') %>" />
+                    <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
+                    <a href="">таблица результатов игры</a>
+                  </div>
+                <%else%>
+                  <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                    <div class="albomInfo">
+                      <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                      <span><%=game.photos.count%></span>
+                    </div>
+                  </div>
+                <%end%>
+              <%end%>
+            <%end%>
+            <a href="#loadMore" class="loadMore">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+</div>
+  <script>
+    $(function() {
+      $(".loadMore").click(function() {
+        $(".photoHidden").slideToggle("fast");
+        $(this).prevAll(".photoHidden").toggleClass("active-photo");
+        $(this).toggleClass("active"); return false;
+      });
+    });
+  </script>
+<!-- END Vlad upd  team-gallery -->
   <footer class="calendarF">
     <ul>
       <li>

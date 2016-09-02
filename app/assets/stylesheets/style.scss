@@ -293,7 +293,7 @@ a.disabled{
 			}
 		}
 	}
-	
+
 	.playBtn {
 		display: flex;
 		height:0;
@@ -336,7 +336,7 @@ a.disabled{
 		margin:50px auto 0;
 		display: flex;
 		flex-wrap: wrap;
-		
+
 	}
 	.allGames {
 		color:#fff;
@@ -397,7 +397,7 @@ a.disabled{
 					font-size: 18px;
 					cursor: pointer;
 				}
-			}			
+			}
 		}
 		.my-game .roundWrap{
 			background-color: lighten($blue, 20%);
@@ -580,7 +580,7 @@ a.disabled{
 				}
 			}
 
-		}	
+		}
 	}
 	footer {
 		background-color: transparent;
@@ -640,7 +640,7 @@ footer {
     					a {
     						border-top:1px solid #000;
     					}
-    					
+
     				}
     			}
 
@@ -648,7 +648,7 @@ footer {
 		}
 	}
 
-} 
+}
 
 
 @media screen and (max-width: 1400px) {
@@ -713,7 +713,7 @@ footer {
 				    color: #9e9e9e;
 				    padding: 10px;
 				    transition:background .4s;
-				    border: 1px solid #000;	
+				    border: 1px solid #000;
 				    border-top: 0;
 		    	}
 		    	&:hover {
@@ -776,7 +776,7 @@ footer {
 			span {
 				margin-right:15px;
 			}
-			
+
 		}
 	}
 }
@@ -824,7 +824,7 @@ footer {
 		color:#fff;
 	}
 }
-	
+
 @media only screen and (min-width: 1250px) {
 
 	.infoSecWrap {
@@ -860,7 +860,7 @@ footer {
 	-webkit-appearance: none;
     background-repeat: no-repeat;
     -moz-appearance: none;
-    text-indent: 0.01px; 
+    text-indent: 0.01px;
     text-overflow: '';
     /* for IE */
     -ms-appearance: none;
@@ -880,7 +880,7 @@ select::-ms-expand {
 	background-color: #e81011;
 	font-size: 1.8rem;
 }
-  
+
 
 
 //-----end fonts
@@ -962,7 +962,7 @@ $yellow: #ffae0f;
 			padding-bottom: 20px;
 		}
 		p {
-			padding: 3px 0; 
+			padding: 3px 0;
 			span {
 				color: $yellow;
 			}
@@ -977,12 +977,12 @@ $yellow: #ffae0f;
 			}
 		}
 		img {
-			margin: 20px auto; 
+			margin: 20px auto;
 		}
 		a {
 					text-decoration: underline;
 		}
-		
+
 		.red_block {
 			background-color: $dark_red;
 			margin: 20px -20px 0;
@@ -995,7 +995,7 @@ $yellow: #ffae0f;
 					border: 2px solid $light_red;
 				}
 			}
-			
+
 		}
 		.right_left {
 			padding: 0;
@@ -1014,7 +1014,7 @@ $yellow: #ffae0f;
 			}
 		}
 		.slider_x5 {
-			margin: 5px auto; 
+			margin: 5px auto;
 		}
 		.float_left, .float_right  {
 			padding-top: 20px;
@@ -1030,9 +1030,9 @@ $yellow: #ffae0f;
 	margin-top: 15px;
 	border-radius: 7px;
 	img {
-		margin: 50px auto; 
+		margin: 50px auto;
 	}
-	
+
 
 }
 
@@ -1183,7 +1183,7 @@ $yellow: #ffae0f;
 	ul {
 		li {
 			display: inline-block;
-			padding: 7px 15px; 
+			padding: 7px 15px;
 		}
 		.activ {
 			border-radius: 50px;
@@ -1212,7 +1212,7 @@ $yellow: #ffae0f;
 		}
 		ul {
 			padding: 0 !important;
-			margin: 0 !important; 
+			margin: 0 !important;
 			li {
 				display: block;
 			}
@@ -1264,7 +1264,7 @@ $yellow: #ffae0f;
 	padding: 10px 10px 10px 50px;
 	border-radius: 5px;
 	margin-top: 15px;
-	
+
 	.red_line {
 		border-bottom: 2px solid red;
 		padding-bottom: 5px;
@@ -1286,7 +1286,7 @@ $yellow: #ffae0f;
 			margin-top: -51px;
 		}
 	}
-	
+
 }
 .foto_galery {
 	.wrapp_text_franchiz {
@@ -1398,10 +1398,10 @@ input[type="range"]:focus {
   border:none;
   outline:none;
 }
-input[type='range'], 
-input[type='range']:focus, 
-input[type='range']:active, 
-input[type='range']::-moz-focus-inner, 
+input[type='range'],
+input[type='range']:focus,
+input[type='range']:active,
+input[type='range']::-moz-focus-inner,
 input[type='range']:-moz-focusring,
 input[type=range]::-moz-focus-outer {
     border: 0;
@@ -1440,7 +1440,7 @@ input[type=range]::-moz-focus-outer {
 				}
 
 			}
-		}	
+		}
 	}
 }
 .itemGame {
@@ -1474,7 +1474,7 @@ input[type=range]::-moz-focus-outer {
 				a {
 					background-color:#fff;
 				}
-				
+
 			}
 		}
 	}
@@ -1500,7 +1500,7 @@ input[type=range]::-moz-focus-outer {
 			ul.top {
 				padding:20px;
 				font-family:$GraublauSansDisplayLtFont;
-				
+
 				li {
 					&:nth-child(1) {
 						font-style: italic;
@@ -1523,10 +1523,10 @@ input[type=range]::-moz-focus-outer {
 						}
 					}
 					&:nth-child(3) {
-						margin-bottom:10px;								
+						margin-bottom:10px;
 					}
 					&:nth-child(4) {
-						margin-bottom:10px;								
+						margin-bottom:10px;
 					}
 					span {
 						img {
@@ -1557,7 +1557,7 @@ input[type=range]::-moz-focus-outer {
 					color:#fff;
 					padding:3px 0;
 					text-decoration: none;
-					
+
 				}
 			}
 		}
@@ -1588,7 +1588,7 @@ input[type=range]::-moz-focus-outer {
 		.btnWrap {
 			margin: 0 auto 0 0;
 		}
-	}	
+	}
 }
 .navigationWrap {
 	display: flex;
@@ -1835,7 +1835,7 @@ footer.korporatF {
 				font-size:14px;
 				color:#fff;
 				font-family:$GraublauSansDisplayLtFont;
-				
+
 			}
 		}
 		.sideBar {
@@ -1927,7 +1927,7 @@ footer.korporatF {
 		&:not(:last-child){
 			margin:0 0 30px 0;
 		}
-	}	
+	}
 }
 .franchiseSec {
 	.widget {
@@ -2022,7 +2022,7 @@ footer.korporatF {
 					p {
 						opacity: .6;
 					}
-				}				
+				}
 				a.control {
 					font-size: 18px;
 					margin: auto;
@@ -2129,7 +2129,7 @@ footer.korporatF {
 						color:#000;
 						font-size:11px;
 					}
-					
+
 				}
 			}
 		}
@@ -2300,7 +2300,7 @@ footer.korporatF {
 					li:nth-child(2) {
 						font-size:48px;
 						line-height:50px;
-						
+
 					}
 					li:nth-child(3) {
 						font-size:110px;
@@ -2331,7 +2331,7 @@ footer.korporatF {
 						&:hover {
 							color:#fff;
 						}
-						
+
 					}
 				}
 				.body {
@@ -2415,7 +2415,7 @@ footer.korporatF {
 
 					}
 				}
-			} 
+			}
 		}
 
 		.full {
@@ -2490,7 +2490,7 @@ footer.korporatF {
    					}
    				}
    			}
-   			
+
 		}
 		.tab-content.albom {
 			width:100%;
@@ -2555,10 +2555,19 @@ footer.korporatF {
 					text-align: center;
 				}
 			}
-
+			.photoHidden{
+			margin-top:30px;
+			display: none;
+			}
+			.active span{
+				background-color: red;
+			}
+			.active-photo{
+				display: flex !important;
+			}
 
 		}
-		
+
 	}
 }
 ////////////// TEAM PAGE
@@ -2753,7 +2762,7 @@ footer.korporatF {
 				}
 			}
 		}
-		
+
 		input:checked ~ .descr {
 			height:auto;
 			min-height:20px;
@@ -2830,7 +2839,7 @@ footer.korporatF {
 
 
 				}
-			}	
+			}
 		}
 	}
 }
@@ -2893,7 +2902,7 @@ footer.korporatF {
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
-				
+
 			}
 		}
 	}
@@ -3097,7 +3106,7 @@ footer.korporatF {
 					    }
 					}
 				}
-			}	
+			}
 		}
 	}
 }
@@ -3133,7 +3142,7 @@ footer.korporatF {
 			font-family: $mainFontBold;
 			font-size:40px;
 		}
-		
+
 	}
 	.modal-body{
 		.modalInput {
@@ -3229,7 +3238,7 @@ footer.korporatF {
 			input[type=submit] {
 				margin:30px auto;
 			}
-		}	
+		}
 	}
 	.modal-footer {
 		padding:0;
@@ -3264,7 +3273,7 @@ footer.korporatF {
 			transform:rotate(45deg);
 			margin: -2px 0 0 0;
 		}
-		
+
 	}
 	&:hover {
 		span {
@@ -3425,7 +3434,7 @@ footer.korporatF {
 
 .areaOfRating.mobile {
   display: none;
-} 
+}
 .end_faq {
   background-color: #0000ff;
   .wrrr {
