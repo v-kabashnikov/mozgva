@@ -1,0 +1,43 @@
+<a href="#x" class="overlay" id="win2-<%= game.id%>"></a>
+<div class="popup">
+  <div  class="rg-gallery" >
+    <div class="rg-thumbs">
+      <div class="es-carousel-wrapper" data-item="<%= game.id %>">
+        <div class="es-carousel">
+          <ul class="<%=game.id%>">
+          <% game.photos.each do |photo| %>
+            <li>
+              <a href="#">
+                <img src="<%= photo.image.url%>" data-large="<%= photo.image.url%>" alt="image"
+                    <%if photo.caption%>
+                      data-description="<%= photo.caption%>"
+                    <%else%>
+                      data-description=" "
+                    <%end%>/>
+              </a>
+            </li>
+          <%end%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script class="img-wrapper-tmpl" type="text/x-jquery-tmpl">
+    <div class="rg-image-wrapper">
+      {{if itemsCount > 1}}
+        <div class="rg-image-nav">
+          <a href="#" class="rg-image-nav-prev">Previous Image</a>
+          <a href="#" class="rg-image-nav-next">Next Image</a>
+        </div>
+      {{/if}}
+      <div class="rg-image"></div>
+      <div class="rg-loading"></div>
+      <div class="rg-caption-wrapper">
+        <div class="rg-caption" style="display:none;">
+          <p></p>
+        </div>
+      </div>
+    </div>
+  </script>
+  <a class="close" title="Закрыть" href="#close"></a>
+</div>
