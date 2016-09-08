@@ -7,8 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @team
     	if !@team.full?
 	      if current_user
-	        Member.create(user: current_user, team: team)
-	        return redirect_to my_team_path
+          Invitation.create(user: current_user, inviter: @team.captain, team: @team))
+	        return redirect_to root_path
 	      end
 	    else
 	    	flash[:errors] << 'Команда уже заполнена :('
@@ -48,7 +48,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
   	super
   	if resource && @team && !@team.full?
-  		Member.create(user: resource, team: @team)
+      Invitation.create(user: current_user, inviter: @team.captain, team: @team))
+  		# Member.create(user: resource, team: @team)
   	end
   end
 
@@ -59,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_team
-  	@team = Team.find_by(invite: params[:invite]) if params[:invite].present?
+  	@team = Team.find_by(invite: session[:invite]) if session[:invite].present?
   end
 
   def sign_up_params
