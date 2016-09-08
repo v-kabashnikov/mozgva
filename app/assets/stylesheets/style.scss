@@ -2525,9 +2525,6 @@ footer.korporatF {
 				background-position:center;
 				background-repeat: no-repeat;
 				&:nth-child(2n-1) {
-					margin:0;
-				}
-				&:nth-child(2n) {
 					margin:0 0 30px 0;
 				}
 				&:last-child {
@@ -3468,3 +3465,62 @@ footer.korporatF {
 		}
 	}
 }
+
+
+// start gallery-team
+.gallery-box{
+  width:600px;
+  padding:25px 0 0;
+  margin:0 auto;
+}
+.view{
+  position:relative;
+  margin:0 0 5px;
+}
+.big-image img{
+  display:block;
+  width:600px;
+  height:300px;
+}
+.prev, .next{
+  position:absolute;
+  width:40px;
+  height:40px;
+}
+.prev{
+  bottom:20px;
+  left:20px;
+  background:asset-url("leftPanelArrow.png") no-repeat;
+}
+.next{
+  bottom:20px;
+  right:20px;
+  background:asset-url("rightPanelArrow.png") no-repeat;
+}
+.thumbnails{
+  width:605px;
+}
+.thumbnails a{
+  float:left;
+  margin:0 5px 0 0;
+}
+.thumbnails a img{
+  width:70px;
+  height:39px;
+  border: 2px solid transparent;
+  display:block;
+}
+.thumbnails .active img{
+  border-color:#069;
+}
+
+.full-v{
+	width: 100%;
+	height: 100%;
+	border-bottom: none !important;
+}
+
+.modal-dialog{
+	max-width: none !important;
+}
+//end gallery-team

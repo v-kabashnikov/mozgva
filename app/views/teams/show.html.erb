@@ -292,11 +292,14 @@
       <% if @last_game.photos.first%>
       <div class="AlbomItmWrapper">
         <div class="AlbomItm AlbomItmCenter" style="background-image:url('<%= @last_game.photos.first.image.url %>'); ">
-          <div class="albomInfo">
-            <span><%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></span>
-            <span><%=@last_game.photos.count%> фото</span>
-          </div>
+          <a href="" data-toggle="modal" data-target=".bs-modal-<%=@last_game.id%>" class="full-v">
+            <div class="albomInfo">
+              <span><%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></span>
+              <span><%=@last_game.photos.count%> фото</span>
+            </div>
+          </a>
         </div>
+        <%= render partial: "shared/gallery",locals: {game: @last_game}  %>
       </div>
       <%end%>
     </div>
@@ -325,11 +328,14 @@
                 </div>
               <%else%>
                 <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
-                  <div class="albomInfo">
-                    <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
-                    <span><%=game.photos.count%> фото</span>
-                  </div>
+                  <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+                    <div class="albomInfo">
+                      <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                      <span><%=game.photos.count%> фото</span>
+                    </div>
+                  </a>
                 </div>
+                <%= render partial: "shared/gallery",locals: {game: game}  %>
               <%end%>
             <%end%>
             <%@game_count = @past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).count%>
@@ -342,12 +348,15 @@
                     <a href="">таблица результатов игры</a>
                   </div>
                 <%else%>
-                  <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                  <div class="AlbomItm photoHidden" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                  <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
                     <div class="albomInfo">
                       <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
                       <span><%=game.photos.count%> фото</span>
                     </div>
+                    </a>
                   </div>
+                  <%= render partial: "shared/gallery",locals: {game: game}  %>
                 <%end%>
               <%end%>
             <%end%>
@@ -372,6 +381,41 @@
       });
     });
   </script>
+<!-- gallery script -->
+<script>
+$(function() {
+    function a(c, d, a, f) {
+        var e = c.length,
+            b = 0;
+        c.each(function(g, a) {
+            $("img", a).on("click", function(e) {
+                e.preventDefault();
+                b = g;
+$(d).stop().animate({opacity: 0}, 400, function() {
+         d.src = a.href; $(d).animate({opacity: 1}, 400);
+});
+                c.removeClass("active");
+                $(a).addClass("active")
+            })
+        });
+        a.click(function(a) {
+            a.preventDefault();
+            b--;
+            b < 0 && (b = e - 1);
+            $("img", c.eq(b)).click()
+        });
+        f.click(function(a) {
+            a.preventDefault();
+            b++;
+            b %= e;
+            $("img", c.eq(b)).click()
+        })
+    }
+    $(".gallery-box").each(function(c, d) {
+        a($(".thumbnails a", d), $(".big-image img", d)[0], $(".prev", d), $(".next", d))
+    })
+});
+</script>
 <!-- END Vlad upd  team-gallery -->
   <footer class="calendarF">
     <ul>
