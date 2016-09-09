@@ -26,7 +26,7 @@ class Team < ApplicationRecord
   end
 
   def captain
-    members.where(team_role: 'captain').first.user
+    members.where(team_role: 'captain').first.try(:user)
   end
 
   def staff

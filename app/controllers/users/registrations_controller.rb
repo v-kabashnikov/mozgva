@@ -3,18 +3,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :set_team, only: [:new, :create]
 
   def new
-  	flash[:errors] = []
-    if @team
-    	if !@team.full?
-	      if current_user
-          Invitation.create(user: current_user, inviter: @team.captain, team: @team))
-	        return redirect_to root_path
-	      end
-	    else
-	    	flash[:errors] << 'Команда уже заполнена :('
-	    end
-    elsif params[:invite].present?
-      flash[:errors] << 'Неверный код инвайта'
+    flash[:errors] = []
+    if session[:invite].present? && @team
+      flash[:errors] << 'Команда уже заполнена :(' if @team.full?
+    else
+      flash[:errors] << 'Неверный код инвайта' if session[:invite]
     end
     super
   end
@@ -46,11 +39,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-  	super
-  	if resource && @team && !@team.full?
-      Invitation.create(user: current_user, inviter: @team.captain, team: @team))
-  		# Member.create(user: resource, team: @team)
-  	end
+    super
+    if resource && resource.persisted?
+      Invitation.create(user: resource, inviter: @team.captain, team: @team) if @team && !@team.full?
+      session[:invite] = nil    
+    end    
   end
 
   private
@@ -60,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_team
-  	@team = Team.find_by(invite: session[:invite]) if session[:invite].present?
+    @team = Team.find_by(invite: session[:invite]) if session[:invite].present?
   end
 
   def sign_up_params
