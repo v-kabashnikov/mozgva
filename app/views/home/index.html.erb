@@ -181,7 +181,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- ДОРАБОТКА <div class="fullWrapp trash">
+<!-- 	 ДОРАБОТКА  --><div class="fullWrapp trash">
 		<div class="left">
 			<div class="photoTabs">
 				<div class="head">
@@ -189,61 +189,102 @@
 				</div>
 				<div class="body">
 					<ul class="headTabNav" id="mySliderTabs">
-						<%# @past_games.order(when: :asc).each_with_index do |game, i|%>
-						<%#months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
+						<% @past_games.order(when: :asc).each_with_index do |game, i|%>
+						<%months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
 						<li>
-							<input type="radio"  name="tabNav" id="tab<%#=i+1%>"/>
-							<label for="tab<%#=i+1%>" class="title tab<%#=i+1%> <%#='current' if i == 0%>">
-								<%#=game.when.strftime("%d")%> <%#=months_hash[game.when.month]%>
+							<input type="radio"  name="tabNav" id="tab<%=i+1%>"/>
+							<label for="tab<%=i+1%>" class="title tab<%=i+1%> <%='current' if i == 0%>">
+								<%=game.when.strftime("%d")%> <%=months_hash[game.when.month]%>
 							</label>
-							
+
 						</li>
-						<%#end%>
+						<%end%>
 					</ul>
-					<%# @past_games.order(when: :asc).each_with_index do |game, i|%>
-					<div class="tabs tab<%#=i+1%> <%#='visible' if i == 0%>">
-						<p><%#=game.photos.count%> штук</p>
+					<% @past_games.order(when: :asc).each_with_index do |game, i|%>
+					<div class="tabs tab<%=i+1%> <%='visible' if i == 0%>">
+						<p><%=game.photos.count%> штук</p>
 						<div class="center">
-						<%#game.photos.each do |photo|%>
+						<%game.photos.each do |photo|%>
+						<a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
 							<div>
-								<div class="photoItemWrap" style="background-image:url(<%#=photo.image.url%>);"></div>
+								<div class="photoItemWrap" style="background-image:url(<%=photo.image.url%>);"></div>
 							</div>
-			              <%#end%>
-			            </div>
+						</a>
+			       <%end%>
+			       </div>
 					</div>
-					<%#end%>
+						<% if game.photos.first %>
+							<%= render partial: "shared/gallery",locals: {game: game}  %>
+						<%end%>
+					<%end%>
 				</div>
 			</div>
 		</div>
+<!-- gallery script -->
+<script>
+$(function() {
+    function a(c, d, a, f) {
+        var e = c.length,
+            b = 0;
+        c.each(function(g, a) {
+            $("img", a).on("click", function(e) {
+                e.preventDefault();
+                b = g;
+$(d).stop().animate({opacity: 0}, 400, function() {
+         d.src = a.href; $(d).animate({opacity: 1}, 400);
+});
+                c.removeClass("active");
+                $(a).addClass("active")
+            })
+        });
+        a.click(function(a) {
+            a.preventDefault();
+            b--;
+            b < 0 && (b = e - 1);
+            $("img", c.eq(b)).click()
+        });
+        f.click(function(a) {
+            a.preventDefault();
+            b++;
+            b %= e;
+            $("img", c.eq(b)).click()
+        })
+    }
+    $(".gallery-box").each(function(c, d) {
+        a($(".thumbnails a", d), $(".big-image img", d)[0], $(".prev", d), $(".next", d))
+    })
+});
+</script>
+<!-- end gallery script -->
 		<div class="right">
-			<div class="adParthTop" style="background-image:url(<%#= asset_path('ad/heineken.png')%>);">
+			<div class="adParthTop" style="background-image:url(<%= asset_path('ad/heineken.png')%>);">
 			</div>
 			<div class="adParthBottom">
 				<div class="carouselWrap">
 
 					<div class="teamsCarousel">
 						<div class="item">
-							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
 							<ul>
-								<li style="background-image:url(<%#= asset_path('ad/ava0.png')%>);"></li>
-								<li style="background-image:url(<%#= asset_path('ad/ava2.png')%>);"></li>
-								<li style="background-image:url(<%#= asset_path('ad/ava3.png')%>);"></li>
-								<li style="background-image:url(<%#= asset_path('ad/ava4.png')%>);"></li>
-								<li style="background-image:url(<%#= asset_path('ad/ava5.png')%>);"></li>
-								<li style="background-image:url(<%#= asset_path('ad/ava3.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
 							</ul>
 						</div>
 						<div class="item">
-							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
 						</div>
 						<div class="item">
-							<img src="<%#= asset_path('ad/cherries.png')%>"/>
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div> ДОРАБОТКА -->
+	</div> <!-- ДОРАБОТКА -->
 	<div class="wrapPartnerSec">
 		<div class="partnerCarousel">
 			<div class="item">
