@@ -1,6 +1,6 @@
 <% ratings.each do |rating| %>
 	<tr id="<%= rating[:name] %>">
-	    <td class="tName"><%= rating[:name] %></td> 
+	    <td class="tName"><%= link_to rating[:name], team_path(rating[:id]) %></td> 
 	    <td class="tPercent"><%= rating[:percent].round(2) %>%</td>
 	    <td class="tScores"><%= rating[:scores] %></td>
 	    <td><%= rating[:games] %></td>
