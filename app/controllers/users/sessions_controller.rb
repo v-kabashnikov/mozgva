@@ -3,9 +3,10 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
   	super
-  	@team = Team.find_by(invite: params[:invite]) if params[:invite].present?
+  	@team = Team.find_by(invite: session[:invite]) if session[:invite].present?
   	if resource && @team && !@team.full?
-  		Member.create(user: resource, team: @team)
+  		Invitation.create(user: resource, inviter: @team.captain, team: @team)
   	end
+    session[:invite] = nil
   end
 end
