@@ -8,6 +8,7 @@ class Team < ApplicationRecord
   has_many :waiting_invitations, ->{ waiting }, class_name: 'Invitation'
   has_many :invited_users, through: :waiting_invitations, class_name: "User", source: :user
   has_many :game_registrations, dependent: :destroy
+  has_many :games, through: :game_registrations
   has_many :team_ratings, dependent: :destroy
   has_many :achievments, dependent: :destroy
 
@@ -72,7 +73,7 @@ class Team < ApplicationRecord
       end
       if sum_games > 0
         average_percent = sum_percent / sum_games.to_f
-        res << {name: team.name, scores: sum_scores, percent: average_percent, games: sum_games}
+        res << {name: team.name, scores: sum_scores, percent: average_percent, games: sum_games, id: team.id}
       end
     end
     res

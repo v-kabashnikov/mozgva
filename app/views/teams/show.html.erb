@@ -2,24 +2,24 @@
   <div class="headWrapper">
     <div class="btnWrap authorizationWrap">
       <% if current_user %>
-      <span>
-        <img src="<%= asset_path('symbol/lock.png') %>">
-        <div class="links">
-          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-          <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-          <% if current_user.invitations.present? %>
-          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
-          <% end %>
-        </div>
-      </span>
+        <span>
+          <img src="<%= asset_path('symbol/lock.png') %>">
+          <div class="links">
+            <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+            <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+            <% if current_user.invitations.present? %>
+            <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+            <% end %>
+          </div>
+        </span>
       <% else %>
-      <span>
-        <img src="<%= asset_path('symbol/lock.png') %>">
-        <div class="links">
-          <a href="#sign_in" data-toggle="modal">Войти</a>
-          <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
-        </div>
-      </span>
+        <span>
+          <img src="<%= asset_path('symbol/lock.png') %>">
+          <div class="links">
+            <a href="#sign_in" data-toggle="modal">Войти</a>
+            <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+          </div>
+        </span>
       <% end %>
     </div>
     <ul class="navigationWrap teamNav">
@@ -34,7 +34,7 @@
 </section>
 <section class="topInfo team">
   <div class="contentWrap">
-    <% if current_user.member.captain? %>
+    <% if current_user && current_user.member?(@team) && current_user.member.captain? %>
       <a href="#" class="start_edit">Редактировать</a>
     <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
@@ -48,7 +48,7 @@
     <ul class="faceParth">
       <% @team.members.each do |member| %>
         <li id="member_<%= member.id %>">
-          <% if current_user.member.captain? && !member.captain? %>
+          <% if current_user && current_user.member.captain? && !member.captain? %>
             <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
             <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
           <% end %>
@@ -56,18 +56,19 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
-      
-      <% @team.invitations.each do |inv| %>
-        <li class="not_member" id="invitation_<%= inv.id %>">
-          <% if current_user.member.captain? %>
-            <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-          <% end %>
-          <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-          <p><%= inv.user.name %></p>
-        </li>
+      <% if current_user && current_user.member?(@team) %>
+        <% @team.invitations.each do |inv| %>
+          <li class="not_member" id="invitation_<%= inv.id %>">
+            <% if current_user.member.captain? %>
+              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+            <% end %>
+            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
+            <p><%= inv.user.name %></p>
+          </li>
+        <% end %>
       <% end %>
 
-      <% unless @team.full? %>
+      <% if current_user && current_user.member?(@team) && !@team.full? %>
         <li>
           <a href="#invite_modal" data-toggle="modal">
             <div class="avatar">
@@ -88,7 +89,7 @@
       <% @team.members.each do |member| %>
         <li id="member_<%= member.id %>">
           <div class="uswerWrap">
-          <% if current_user.member.captain? && !member.captain? %>
+          <% if current_user && current_user.member?(@team) && current_user.member.captain? && !member.captain? %>
             <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
             <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
           <% end %>
@@ -98,22 +99,24 @@
         </li>
       <% end %>
       
-      <% @team.invitations.each do |inv| %>
-        <li class="not_member" id="invitation_<%= inv.id %>">
-          <div class="uswerWrap">
-          <% if current_user.member.captain? %>
-            <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-          <% end %>
-          <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-          <p><%= inv.user.name %></p>
-          </div>
-        </li>
+      <% if current_user && current_user.member?(@team) %>
+        <% @team.invitations.each do |inv| %>
+          <li class="not_member" id="invitation_<%= inv.id %>">
+            <div class="uswerWrap">
+            <% if current_user.member.captain? %>
+              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
+            <% end %>
+            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
+            <p><%= inv.user.name %></p>
+            </div>
+          </li>
+        <% end %>
       <% end %>
 
 
       </div>
 
-      <% unless @team.full? %>
+      <% if current_user && current_user.member?(@team) && !@team.full? %>
           <a href="#invite_modal" class="addPerson" data-toggle="modal">еще <%= "#{@team.places} #{Russian.p(@team.places, "место", "места", "мест")}" %>
           </a>
       <% end %>
@@ -123,7 +126,7 @@
 <section class="teamSec">
   <div class="contentWrap">
     <div class="left Success">
-      <h4>Наши успехи</h4>
+      <h4><%= (current_user && current_user.member?(@team)) ? 'Наши успехи' : 'Успехи команды' %></h4>
       <div class="teamSuccessTabs">
         <ul class="navTeamSuccess" role="tablist">
           <li role="presentation" class="active">
@@ -159,10 +162,11 @@
     </div>
     
       
+    <% if current_user && current_user.member?(@team) %>
     <div class="right">
-    <div class="carouselHere">
+     <div class="carouselHere">
       <div class="teamGameCarousel">
-      <% @main_games.each do |game| %>
+      <% @team.games.upcoming_games.each do |game| %>
       
         <div class="rectangle">
           <!-- <a href="" class="teamList"> -->
@@ -197,7 +201,6 @@
         <% end %>
       </div>
     </div>
-    
       <div class="square">
         <div class="head">
           <article>Банк команды</article>
@@ -271,60 +274,9 @@
         </ul>
       </div>
     
-    </div>
+     </div>
+    <% end %>
   </div>
-  <!--В разработке
-  <div class="contentWrap">
-      <div class="photoHead">
-        <h3>Фото с наших игр</h3>
-        <p>Наша команда участвовала <span class="red">8</span> раз</p>
-      </div>
-  </div>
-   <div class="contentWrap">
-      <div class="full">
-
-        <div class="photoArchive">
-          <h4>2016</h4>
-          <ul class="navPhotoArchive" role="tablist">
-            <%months_hash = {1=> 'Январь', 2 => 'Февраль', 3 => 'Март', 4=> 'Апрель', 5 => 'Май', 6 => 'Июнь', 7 => 'Июль',  8 => 'Август',  9 => 'Сентябрь',  10 => 'Октябрь',  11 => 'Ноябрь',  12 => 'Декабрь'}%>
-             <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
-            <%@month_array.each_with_index do |month, i|%>
-            <li role="presentation" class="<%='active' if i==0%>"><a href="#month<%=month%>" role="tab" data-toggle="tab"><%=months_hash[month]%></a></li>
-            <%end%>
-          </ul>
-        </div>
-        <div class="tab-content albom">
-
-          <%@month_array.each_with_index do |month, i|%>
-          <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
-           <div class="AlbomItmWrapper">
-           <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).each do |game|%>
-             <%if game.photos.count == 0%>
-             <div class="AlbomItm photoShow">
-               <img src="<%= asset_path('symbol/plenka.png') %>" />
-               <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
-               <a href="">таблица результатов игры</a>
-             </div>
-             <%else%>
-             <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
-               <div class="albomInfo">
-                 <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
-                 <span><%=game.photos.count%></span>
-               </div>
-             </div>
-             <%end%>
-            <%end%>
-            </div>
-            <div class="loadMore">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          <%end%>
-        </div>
-      </div>
-  </div> В РАЗРАБОТКЕ-->
   <footer class="calendarF">
     <ul>
       <li>
@@ -353,22 +305,6 @@
         <div class="tag">#этомозвадетка</div>
       </li>
       <li>
-        <!--SELECT SITY & MONTH
-        <div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
-          <div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
-            <span data-current-value="<%= @city.id %>"><%= @city.name %></span>
-            <ul class="dropdown" tabindex="1" data-name="city_id">
-              <% City.all.each do |city| %>
-              <li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
-              <% end %>
-            </ul>
-          </div>
-          <div style="display:none">
-            <span data-current-value="4">4</span>
-            <ul data-name="max_groups"><li></li></ul>
-          </div>
-        </div>
-        AND SELECT SITY & MONTH-->
         <%= link_to root_path do %>
         <img src="<%= asset_path('calendar/logo.png') %>"/>
         <% end %>

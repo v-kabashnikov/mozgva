@@ -15,7 +15,7 @@
             <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
           </div>
           <div class="input_wrapper">
-            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true %>
+            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true, autocomplete: "off" %>
           </div>
           <div class="input_wrapper">
             <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="input_wrapper">
-            <%= f.password_field :password, placeholder: 'Пароль', class: "modalInput", autocomplete: "off" %>
+            <%= f.password_field :password, placeholder: 'Изменить пароль', class: "modalInput", autocomplete: "off" %>
           </div>
           <div class="input_wrapper password_changed" style="display:none">
             <%= f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: "modalInput", autocomplete: "off" %>
