@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :members, only: [:destroy] do
     put 'set_boatswain', on: :member, as: :set_boatswain
   end
-  resources :teams, only: [:create, :destroy, :update] do
+  resources :teams, only: [:create, :destroy, :update, :show] do
     get 'list', on: :collection
   end
   get 'games/filter', to: 'games#filter', as: :games_filter
