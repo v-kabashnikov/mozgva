@@ -51,6 +51,12 @@ class TeamsController < ApplicationController
     @teams = Game.find(params[:game_id]).teams
   end
 
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+    redirect_to root_url
+  end
+
   # def time
   #   @curr_month = [Date.today.strftime('%Y-%m'), MONTH_NAMES[Date.today.strftime('%m').to_i - 1]]
   #   @game_groups = Game.grouped_games(@city, @curr_month.first)

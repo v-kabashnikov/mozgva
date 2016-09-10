@@ -7,6 +7,10 @@
         <div class="links">
           <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
           <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } %>
+          <% if current_user.member.captain? %>
+           <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
+          <%end%>
           <% if current_user.invitations.present? %>
           <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
           <% end %>
