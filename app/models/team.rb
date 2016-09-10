@@ -58,26 +58,32 @@ class Team < ApplicationRecord
 
   def self.pick_up_team_ratings game_team_ratings
     Rails.cache.fetch("pick_up_team_ratings", expires_in: 1.hours) do
-    res = []
-    all.each do |team|
-      sum_scores = 0
-      sum_percent = 0.0
-      sum_games = 0
-      game_team_ratings.each do |game_tr|
-        team_result = game_tr.find{|i| i[:name] == team.name}
-        if team_result.present?
-          sum_scores += team_result[:scores]
-          sum_percent += team_result[:percent]
-          sum_games += 1
+      top = []
+      pretendents = []
+      all.each do |team|
+        sum_scores = 0
+        sum_percent = 0.0
+        sum_games = 0
+        game_team_ratings.each do |game_tr|
+          team_result = game_tr.find{|i| i[:name] == team.name}
+          if team_result.present?
+            sum_scores += team_result[:scores]
+            sum_percent += team_result[:percent]
+            sum_games += 1
+          end
+        end
+        if sum_games > 0
+          average_percent = sum_percent / sum_games.to_f
+          average_percent = 0.0 if average_percent.nan?
+          if sum_scores >= 200.0
+            top << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games: sum_games, id: team.id}
+          elsif sum_scores >= 100.0
+            pretendents << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games: sum_games, id: team.id}
+          end
         end
       end
-      if sum_games > 0
-        average_percent = sum_percent / sum_games.to_f
-        res << {name: team.name, scores: sum_scores, percent: average_percent, games: sum_games, id: team.id}
-      end
+      return top, pretendents
     end
-    res
-  end
   end
   
   private
