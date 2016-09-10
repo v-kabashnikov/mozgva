@@ -40,6 +40,10 @@ class Game < ApplicationRecord
     games.group_by.group_by{ |g| g.when.strftime("%d.%m.%Y") }
   end
 
+  def max_score
+    TeamRating.where(game_id: id).map(&:sum_points).sort.last
+  end
+
   def calculate_team_ratings
     res = []
     if team_ratings.any?
@@ -67,35 +71,28 @@ class Game < ApplicationRecord
   def self.import
     xlsx = Roo::Excelx.new("rating.xlsx")
     spreadsheet = xlsx.sheet(0)
-    header = spreadsheet.row(2)
-
-    game_parsing = true
+    header = spreadsheet.row(1)
 
     (2..spreadsheet.last_row).each do |i|
-      if !spreadsheet.row(i).first.nil? && !spreadsheet.row(i)[1].nil?
-        row = Hash[[header, spreadsheet.row(i)].transpose]
+      row = Hash[[header, spreadsheet.row(i)].transpose]
 
-        if game_parsing
-          game_num = row.values[0].is_a?(String) ? row.values[0].split.last : row.values[0].to_s
-          game_num = game_num.to_s.strip
-          same_games = Game.where(number: game_num)
-          @game = Game.new(number: game_num, question_set: (same_games.count + 1))
+      game_num = row.values[10]
+      game = Game.find_by(number: game_num) || Game.create(number: game_num)
 
-          game_parsing = false
-        else
-          team_name = row.values[0].to_s.strip
-          team = Team.where('lower(name) = lower(?)', team_name.downcase).first || Team.create(name: team_name)
-          @game.teams << team
-          @game.save
-
-          team_rating = TeamRating.find_by(game_id: @game.id, team_id: team.id)
-          team_rating.update(round_one: row[1], round_two: row[2], round_three: row[3],
-                   round_four: row[4], round_five: row[5], round_six: row[6],
-                   round_seven: row[7])
+      team_name = row.values[0].to_s.strip
+      team = Team.find_by(name: team_name) || Team.create(name: team_name)
+      begin
+        unless GameRegistration.where(game_id: game.id, team_id: team.id).any?
+          game.teams << team
+          game.save
         end
-      else
-        game_parsing = true
       end
+
+
+      team_rating = TeamRating.find_by(game_id: game.id, team_id: team.id)
+      team_rating.update(round_one: row.values[1], round_two: row.values[2], round_three: row.values[3],
+                         round_four: row.values[4], round_five: row.values[5], round_six: row.values[6],
+                         round_seven: row.values[7])
     end
   end
 
