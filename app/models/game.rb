@@ -71,7 +71,7 @@ class Game < ApplicationRecord
   def self.import
     xlsx = Roo::Excelx.new("rating.xlsx")
     spreadsheet = xlsx.sheet(0)
-    header = spreadsheet.row(1)
+    header = ["team", 1, 2, 3, 4, 5, 6, 7, "scores", "place", "game", "max_score", "percent"]
 
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
