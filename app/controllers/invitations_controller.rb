@@ -39,7 +39,11 @@ class InvitationsController < ApplicationController
     #   redirect_to new_user_registration_path
     # end
     # redirect_to new_user_registration_path(invite: params[:invite])
-    redirect_to new_user_registration_path(invite: params[:invite])
+    if current_user
+      redirect_to edit_user_registration_path(invite: params[:invite])
+    else
+      redirect_to new_user_registration_path(invite: params[:invite])
+    end
   end
 
   private
