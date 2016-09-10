@@ -68,8 +68,8 @@ class Game < ApplicationRecord
     end
   end
 
-  def self.import
-    xlsx = Roo::Excelx.new("rating.xlsx")
+  def self.import(file)
+    xlsx = Roo::Excelx.new(file)
     spreadsheet = xlsx.sheet(0)
     header = ["team", 1, 2, 3, 4, 5, 6, 7, "scores", "place", "game", "max_score", "percent"]
 
