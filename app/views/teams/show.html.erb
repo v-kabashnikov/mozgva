@@ -2,16 +2,20 @@
   <div class="headWrapper">
     <div class="btnWrap authorizationWrap">
       <% if current_user %>
-        <span>
-          <img src="<%= asset_path('symbol/lock.png') %>">
-          <div class="links">
-            <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-            <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-            <% if current_user.invitations.present? %>
-            <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
-            <% end %>
-          </div>
-        </span>
+      <span>
+        <img src="<%= asset_path('symbol/lock.png') %>">
+        <div class="links">
+          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+          <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } %>
+          <% if current_user.member.captain? %>
+           <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
+          <%end%>
+          <% if current_user.invitations.present? %>
+          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% end %>
+        </div>
+      </span>
       <% else %>
         <span>
           <img src="<%= asset_path('symbol/lock.png') %>">
@@ -67,7 +71,6 @@
           </li>
         <% end %>
       <% end %>
-
       <% if current_user && current_user.member?(@team) && !@team.full? %>
         <li>
           <a href="#invite_modal" data-toggle="modal">
@@ -98,7 +101,6 @@
           </div>
         </li>
       <% end %>
-      
       <% if current_user && current_user.member?(@team) %>
         <% @team.invitations.each do |inv| %>
           <li class="not_member" id="invitation_<%= inv.id %>">
@@ -112,10 +114,7 @@
           </li>
         <% end %>
       <% end %>
-
-
       </div>
-
       <% if current_user && current_user.member?(@team) && !@team.full? %>
           <a href="#invite_modal" class="addPerson" data-toggle="modal">еще <%= "#{@team.places} #{Russian.p(@team.places, "место", "места", "мест")}" %>
           </a>
@@ -160,14 +159,11 @@
 
       </div>
     </div>
-    
-      
     <% if current_user && current_user.member?(@team) %>
     <div class="right">
      <div class="carouselHere">
       <div class="teamGameCarousel">
       <% @team.games.upcoming_games.each do |game| %>
-      
         <div class="rectangle">
           <!-- <a href="" class="teamList"> -->
           <a href="" class="teamList" rel="popover" data-trigger="focus" data-popover-content="#disable">
@@ -194,7 +190,7 @@
             <li class="showOnlyMob">
               <span><img src="<%= asset_path('symbol/map.png') %>" /></span><%= game.place.name %>
             </li>
-            
+
 
           </ul>
         </div>
@@ -273,10 +269,157 @@
           </li>
         </ul>
       </div>
-    
+
      </div>
     <% end %>
   </div>
+
+    </div>
+  </div>
+<!-- START upd Vlad gallery -->
+  <div class="contentWrap">
+    <div class="photoHead">
+      <h3>Фото с наших игр</h3>
+      <p>Наша команда участвовала <span class="red"><%= @past_games.count%></span> раз</p>
+    </div>
+  </div>
+  <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
+  <% if @past_games.count == 0 %>
+    <div class="contentWrap">
+      <div class="elseGame">
+        <p>Скоро вы сможете искать на фото себя, а пока посмотрите как это было <%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></p>
+        <p><%=@last_game.name%></p>
+      </div>
+    </div>
+    <div class="contentWrap">
+      <% if @last_game.photos.first%>
+      <div class="AlbomItmWrapper">
+        <div class="AlbomItm AlbomItmCenter" style="background-image:url('<%= @last_game.photos.first.image.url %>'); ">
+          <a href="" data-toggle="modal" data-target=".bs-modal-<%=@last_game.id%>" class="full-v">
+            <div class="albomInfo">
+              <span><%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></span>
+              <span><%=@last_game.photos.count%> фото</span>
+            </div>
+          </a>
+        </div>
+        <%= render partial: "shared/gallery",locals: {game: @last_game}  %>
+      </div>
+      <%end%>
+    </div>
+  <%else%>
+  <div class="contentWrap">
+    <div class="full">
+      <div class="photoArchive">
+        <h4>2016</h4>
+        <ul class="navPhotoArchive" role="tablist">
+          <%months_hash = {1=> 'Январь', 2 => 'Февраль', 3 => 'Март', 4=> 'Апрель', 5 => 'Май', 6 => 'Июнь', 7 => 'Июль',  8 => 'Август',  9 => 'Сентябрь',  10 => 'Октябрь',  11 => 'Ноябрь',  12 => 'Декабрь'}%>
+          <%@month_array.each_with_index do |month, i|%>
+            <li role="presentation" class="<%='active' if i==0%>"><a href="#month<%=month%>" role="tab" data-toggle="tab"><%=months_hash[month]%></a></li>
+          <%end%>
+        </ul>
+      </div>
+      <div class="tab-content albom">
+        <%@month_array.each_with_index do |month, i|%>
+        <div role="tabpanel" class="tab-pane fade <%='in active' if i == 0%>" id="month<%=month%>">
+          <div class="AlbomItmWrapper">
+            <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).limit(4).each do |game|%>
+              <%if game.photos.count == 0%>
+                <div class="AlbomItm photoShow">
+                  <img src="<%= asset_path('symbol/plenka.png') %>" />
+                  <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
+                  <a href="">таблица результатов игры</a>
+                </div>
+              <%else%>
+                <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                  <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+                    <div class="albomInfo">
+                      <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                      <span><%=game.photos.count%> фото</span>
+                    </div>
+                  </a>
+                </div>
+                <%= render partial: "shared/gallery",locals: {game: game}  %>
+              <%end%>
+            <%end%>
+            <%@game_count = @past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).count%>
+            <%if @game_count > 4 %>
+              <%@past_games.where("date_part('month', games.when) = ?", month).order(when: :asc).last(@game_count-4).each do |game|%>
+                <%if game.photos.count == 0%>
+                  <div class="AlbomItm photoHidden">
+                    <img src="<%= asset_path('symbol/plenka.png') %>" />
+                    <h4>Проявляем фотопленку <br/> за <%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></h4>
+                    <a href="">таблица результатов игры</a>
+                  </div>
+                <%else%>
+                  <div class="AlbomItm photoHidden" style="background-image:url('<%= game.photos.first.image.url %>'); ">
+                    <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+                      <div class="albomInfo">
+                        <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
+                        <span><%=game.photos.count%> фото</span>
+                      </div>
+                    </a>
+                  </div>
+                  <%= render partial: "shared/gallery",locals: {game: game}  %>
+                <%end%>
+              <%end%>
+            <%end%>
+            <a href="#loadMore" class="loadMore">
+              <span></span>
+              <span></span>
+              <span></span>
+            </a>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  <%end%>
+  </div>
+  <script>
+    $(function() {
+      $(".loadMore").click(function() {
+        $(".photoHidden").slideToggle("fast");
+        $(this).prevAll(".photoHidden").toggleClass("active-photo");
+        $(this).toggleClass("active"); return false;
+      });
+    });
+  </script>
+<!-- gallery script -->
+<script>
+$(function() {
+    function a(c, d, a, f) {
+        var e = c.length,
+            b = 0;
+        c.each(function(g, a) {
+            $("img", a).on("click", function(e) {
+                e.preventDefault();
+                b = g;
+$(d).stop().animate({opacity: 0}, 400, function() {
+         d.src = a.href; $(d).animate({opacity: 1}, 400);
+});
+                c.removeClass("active");
+                $(a).addClass("active")
+            })
+        });
+        a.click(function(a) {
+            a.preventDefault();
+            b--;
+            b < 0 && (b = e - 1);
+            $("img", c.eq(b)).click()
+        });
+        f.click(function(a) {
+            a.preventDefault();
+            b++;
+            b %= e;
+            $("img", c.eq(b)).click()
+        })
+    }
+    $(".gallery-box").each(function(c, d) {
+        a($(".thumbnails a", d), $(".big-image img", d)[0], $(".prev", d), $(".next", d))
+    })
+});
+</script>
+<!-- END Vlad upd  team-gallery -->
   <footer class="calendarF">
     <ul>
       <li>

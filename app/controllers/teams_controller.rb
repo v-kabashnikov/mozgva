@@ -31,12 +31,13 @@ class TeamsController < ApplicationController
     @team = current_user.team
     @main_games = Game.main.order(:when)
     return redirect_to root_path unless @team
-    @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now)
+    @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now).order('"when" DESC')
     @month_array =[]
     @past_games.each do |game|
       @month_array << game.when.strftime("%m").to_i
     end
     @month_array = @month_array.uniq
+    @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins(:photos).last
     render 'show'
   end
 
@@ -52,6 +53,12 @@ class TeamsController < ApplicationController
 
   def list
     @teams = Game.find(params[:game_id]).teams
+  end
+
+  def destroy
+    @team = Team.find(params[:id])
+    @team.destroy
+    redirect_to root_url
   end
 
   # def time
