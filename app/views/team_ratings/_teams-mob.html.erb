@@ -1,6 +1,6 @@
 <% ratings.each do |rating| %>
 	<ul class="itemTeam">
-	    <li><%= rating[:name] %></li> 
+	    <li><%= link_to rating[:name], teams_path(rating[:id]) %></li> 
 	    <li>
 	    	<div class="percent">
 	    	<h4>Кач-во игры</h4>

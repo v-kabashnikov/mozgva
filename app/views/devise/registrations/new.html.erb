@@ -49,8 +49,12 @@
   </ul>
   <div class="mainWrap invite">
     <div class="AboutInviteWrap">
-      <article>Приглашение пришло от команды<br/>
-      <%if @team %><span>&laquo<%= @team.name %>&raquo<% end %></span></article>
+      <% if @team %>
+        <article>
+          Приглашение пришло от команды<br/>
+          <span>&laquo<%= @team.name %>&raquo</span>
+        </article>
+      <% end %>
       <%= devise_error_messages! %>
       <% if flash[:errors] %>
         <% flash[:errors].each do |error| %>

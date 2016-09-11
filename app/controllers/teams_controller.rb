@@ -1,5 +1,9 @@
 class TeamsController < ApplicationController
-  before_action :authenticate_user!, except: [:list]
+  before_action :authenticate_user!, except: [:list, :show]
+
+  def show
+    @team = Team.find(params[:id])
+  end
 
   def create
     if current_user.phone_confirmed_at

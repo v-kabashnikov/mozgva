@@ -15,7 +15,7 @@
             <%= f.text_field :name, autofocus: true, placeholder: 'Имя', class: "modalInput", required: true %>
           </div>
           <div class="input_wrapper">
-            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true %>
+            <%= f.email_field :email, placeholder: 'Email', class: "modalInput", required: true, autocomplete: "off" %>
           </div>
           <div class="input_wrapper">
             <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
@@ -25,8 +25,8 @@
             <div class="upload" upload-image="">
               <%= f.file_field :avatar, placeholder: 'Avatar', class: "modalInput input-file ng-pristine ng-valid ng-touched" %>
               <img src='' id='list' style="display:none; ">
-              <label for="user_avatar" class="avatarWrap" style="background-image:url(<%=@current_user.avatar.url%>); border: 3px dashed transparent;">
-              <%unless @current_user.avatar %>
+              <label for="user_avatar" class="avatarWrap" style="background-image:url(<%=current_user.avatar.url%>); border: 3px dashed transparent;">
+              <%unless current_user.avatar %>
                 <span class="add-image">
                   Добавить <br> Аватар
                 </span>
@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="input_wrapper">
-            <%= f.password_field :password, placeholder: 'Пароль', class: "modalInput", autocomplete: "off" %>
+            <%= f.password_field :password, placeholder: 'Изменить пароль', class: "modalInput", autocomplete: "off" %>
           </div>
           <div class="input_wrapper password_changed" style="display:none">
             <%= f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: "modalInput", autocomplete: "off" %>

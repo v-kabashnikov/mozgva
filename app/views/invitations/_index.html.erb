@@ -8,7 +8,7 @@
   <% invitations.each do |inv| %>
     <tr>
       <td><%= inv.team.name %></td>
-      <td><%= "#{inv.inviter.name}(#{inv.inviter.email})" %></td>
+      <td><%= "#{inv.inviter.name}(#{inv.inviter.email})" if inv.inviter %></td>
       <td><%= link_to 'Принять', accept_invitation_path(inv) %></td>
       <td><%= link_to 'Отклонить', decline_invitation_path(inv) %></td>
     </tr>

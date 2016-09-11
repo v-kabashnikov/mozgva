@@ -26,23 +26,18 @@ class InvitationsController < ApplicationController
   end
 
   def invite_reg
-    # team = Team.find_by(invite: params[:invite])
-    # if team
-    #   if current_user
-    #     Member.create(user: current_user, team: team)
-    #     redirect_to my_team_path
-    #   else
-    #     redirect_to new_user_registration_path(invite: params[:invite])
-    #   end
-    # else
-    #   flash[:errors] = ['Неверный код инвайта']
-    #   redirect_to new_user_registration_path
-    # end
-    # redirect_to new_user_registration_path(invite: params[:invite])
-    if current_user
-      redirect_to edit_user_registration_path(invite: params[:invite])
+    team = Team.find_by(invite: params[:invite])
+    session[:invite] = params[:invite]
+    if team
+      if current_user
+        Invitation.create(user: current_user, inviter: team.captain, team: team)
+        session[:invite] = nil
+        redirect_to root_path
+      else
+        redirect_to new_user_registration_path
+      end
     else
-      redirect_to new_user_registration_path(invite: params[:invite])
+      redirect_to new_user_registration_path
     end
   end
 

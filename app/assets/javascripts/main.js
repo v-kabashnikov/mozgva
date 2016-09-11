@@ -166,9 +166,9 @@ $( document ).ready(function() {
 				passes.find('input').attr('required', true);
 			}
 			else if(!$("#user_password").val()){
-				console.log('44');
 				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
+				passes.find('input').val('');
 			}
 		});
 		$('#edit_user').on('keyup', '#user_password', function(){
@@ -181,11 +181,13 @@ $( document ).ready(function() {
 			else if($("#user_email").val() == email ){
 				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
+				passes.find('input').val('');
 			}
 			else{
 				passes = passes.not('.email_changed');
 				passes.slideUp('fast');
 				passes.find('input').removeAttr('required');
+				passes.find('input').val('');
 			}
 		});
 	}
