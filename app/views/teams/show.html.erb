@@ -12,8 +12,8 @@
            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
           <%end%>
           <% if current_user.invitations.present? %>
-          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
-          <% end %>
+          <%= link_to "#{@waiting_invitations.count} #{Russian.p(@waiting_invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+            <% end %>
         </div>
       </span>
       <% else %>
@@ -470,7 +470,7 @@ $(d).stop().animate({opacity: 0}, 400, function() {
 <%= render 'shared/edit_profile' %>
 <%= render 'shared/team_modal' unless current_user.team %>
 <%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
+<%= render partial: 'shared/invitations_modal', locals: { invitations: @waiting_invitations } if @waiting_invitations.present? %>
 <% end %>
 <%= render 'shared/errors_modal' %>
 <%= render 'shared/teams_modal' %>

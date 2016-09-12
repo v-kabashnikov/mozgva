@@ -9,19 +9,6 @@
         <h2 class="text-center">Пригласить</h2>
       </div>
       <div class="modal-body">
-        <div class="email_search">
-          <%= form_tag users_search_path, remote: true, id: 'email_users_search' do %>
-            <%= text_field_tag :email, nil, placeholder: 'Email', class: 'modalInput' %>
-            <%= submit_tag 'Искать', class: 'blueBtn' %>
-          <% end %>
-          <div class="result" style="display: none;"></div>
-          <div class="invitation" style="display: none;">
-            <%= form_for Invitation.new do |f| %>
-              <%= f.hidden_field :user_id %>
-              <%= f.submit 'Пригласить', class: 'inviteBtn' %>
-            <% end %>
-          </div>
-        </div>
         <div class="invite_link">
           <p>Ссылка для приглашения</p>
           <div class="copyWrap">

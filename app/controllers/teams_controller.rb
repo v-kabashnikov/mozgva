@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!, except: [:list, :show]
+  before_action :set_waiting_invitations
 
   def show
     @team = Team.find(params[:id])

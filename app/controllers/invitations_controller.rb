@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
 
   def accept
     current_user.accept @invitation
-    redirect_to :back
+    redirect_to my_team_path
   end
 
   def decline
@@ -27,11 +27,11 @@ class InvitationsController < ApplicationController
 
   def invite_reg
     team = Team.find_by(invite: params[:invite])
-    session[:invite] = params[:invite]
+    session['devise.invite'] = params[:invite]
     if team
       if current_user
         Invitation.create(user: current_user, inviter: team.captain, team: team)
-        session[:invite] = nil
+        session['devise.invite'] = nil
         redirect_to root_path
       else
         redirect_to new_user_registration_path

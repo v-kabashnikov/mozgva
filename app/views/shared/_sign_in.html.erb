@@ -18,11 +18,11 @@
             <a data-dismiss="modal" data-toggle="modal" data-target="#restore_password" aria-hidden="false" href="#">Забыли пароль?</a>
             <ul class="social">
               <li>
-                <a href="">
-                  <img src="<%= asset_path('symbol/fb.png') %>" />
-                </a>
+                <%= link_to user_facebook_omniauth_authorize_path do %>
+                  <%= image_tag 'symbol/fb.png' %>
+                <% end %>
               </li>
-              <li>
+              <!--<li>
                 <a href="">
                   <img src="<%= asset_path('symbol/twiter.png') %>" />
                 </a>
@@ -31,7 +31,7 @@
                 <a href="">
                   <img src="<%= asset_path('symbol/vk.png') %>" />
                 </a>
-              </li>
+              </li>-->
             </ul>
             
           <% end -%>

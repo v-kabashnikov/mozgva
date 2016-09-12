@@ -1,4 +1,3 @@
-
 <section class="topInfo franchise">
   <div class="contentWrap">
     <div class="btnWrap authorizationWrap">
@@ -32,7 +31,11 @@
       </span>
       <% end %>
     </div>
-    <h1>Приглашение<br/> в команду</h1>
+    <% if session[:invite] %>
+      <h1>Приглашение<br/> в команду</h1>
+    <% else %>
+      <h1>Регистрация</h1>
+     <% end %>
 
    <!--  <%# if @team %>&laquo<%#= @team.name %>&raquo<%# end %> -->
   </div>
@@ -89,6 +92,13 @@
 
       <%= hidden_field_tag :invite, @team.invite if @team %>
 
+     <ul class="social">
+      <li>
+        <%= link_to user_facebook_omniauth_authorize_path do %>
+          <%= image_tag 'symbol/fb.png' %>
+        <% end %>
+      </li>
+    </ul>
      <%= f.submit "Сохранить", class: "blueBtn" %>
     </div>
     <% end %>

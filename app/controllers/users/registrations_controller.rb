@@ -3,11 +3,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :set_team, only: [:new, :create, :edit, :update]
 
   def new
-    flash[:errors] = []
-    if session[:invite].present? && @team
-      flash[:errors] << 'Команда уже заполнена :(' if @team.full?
+    flash[:errors] ||= []
+    if session['devise.invite'].present? && @team
+      if @team.full?
+        flash.now[:errors] << 'Команда уже заполнена :('
+        session['devise.invite'] = nil
+      end
     else
-      flash[:errors] << 'Неверный код инвайта' if session[:invite]
+      flash.now[:errors] << 'Неверный код инвайта' if session['devise.invite']
+      session['devise.invite'] = nil
     end
     super
   end
@@ -55,7 +59,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if resource && resource.persisted?
       Invitation.create(user: resource, inviter: @team.captain, team: @team) if @team && !@team.full?
-      session[:invite] = nil    
     end    
   end
 
@@ -74,7 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_team
-    @team = Team.find_by(invite: session[:invite]) if session[:invite].present?
+    @team = Team.find_by(invite: session['devise.invite']) if session['devise.invite'].present?
   end
 
   def sign_up_params

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get '/korporat', to: 'home#korporat'
   get '/sert', to: 'home#sert'
   get '/faq', to: 'team_ratings#faq'
-  devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords'}
+  devise_for :users, controllers: {registrations: 'users/registrations', sessions: 'users/sessions', passwords: 'users/passwords', omniauth_callbacks: 'users/omniauth_callbacks'}
   post '/users/search', to: 'users#search', as: :users_search
   put '/users/update_city', to: 'users#update_city', as: :update_city
   get '/rating', to: 'team_ratings#rating', as: :rating

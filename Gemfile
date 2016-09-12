@@ -20,6 +20,8 @@ gem 'font-awesome-sass'
 gem 'twilio-ruby', '~> 4.11', '>= 4.11.1'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 1.15'
+gem 'omniauth-facebook'
+gem 'open_uri_redirections'
 gem 'roo'
 
 gem 'figaro', '~> 1.1', '>= 1.1.1'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818072026) do
+ActiveRecord::Schema.define(version: 20160912140418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160818072026) do
     t.datetime "image_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.text     "about"
   end
 
   create_table "achievments", force: :cascade do |t|
@@ -97,6 +98,15 @@ ActiveRecord::Schema.define(version: 20160818072026) do
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
+  create_table "omnilinks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_omnilinks_on_user_id", using: :btree
+  end
+
   create_table "photos", force: :cascade do |t|
     t.integer  "game_id"
     t.string   "image_file_name"
@@ -160,6 +170,7 @@ ActiveRecord::Schema.define(version: 20160818072026) do
   add_foreign_key "invitations", "users", column: "inviter_id"
   add_foreign_key "members", "teams"
   add_foreign_key "members", "users"
+  add_foreign_key "omnilinks", "users"
   add_foreign_key "places", "cities"
   add_foreign_key "teams", "leagues"
   add_foreign_key "users", "cities"
