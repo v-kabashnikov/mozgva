@@ -4,6 +4,8 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
+    @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now).order('"when" DESC')
+    @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins('left join photos on photos.game_id=games.id').last
   end
 
   def create
@@ -38,7 +40,7 @@ class TeamsController < ApplicationController
       @month_array << game.when.strftime("%m").to_i
     end
     @month_array = @month_array.uniq
-    @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins(:photos).last
+    @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins('left join photos on photos.game_id=games.id').last
     render 'show'
   end
 
