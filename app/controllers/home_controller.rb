@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @game_groups_count = @game_groups.count
     @game_groups = @game_groups.first(4)
     @main_games = Game.main.where('games.when > ?', Time.now).order(:when)
+    @past_games = Game.where('"when" < :now', now: DateTime.now)
   end
 
   def set_calend_vars

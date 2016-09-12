@@ -21,17 +21,19 @@
             <%= f.text_field :phone, placeholder: 'Телефон', class: "modalInput" %>
           </div>
           <div class="input_wrapper">
-           
+
             <div class="upload" upload-image="">
-              <%= f.file_field :avatar, placeholder: 'Телефон', class: "modalInput input-file ng-pristine ng-valid ng-touched" %>
+              <%= f.file_field :avatar, placeholder: 'Avatar', class: "modalInput input-file ng-pristine ng-valid ng-touched" %>
               <img src='' id='list' style="display:none; ">
-              <label for="user_avatar" class="avatarWrap">
+              <label for="user_avatar" class="avatarWrap" style="background-image:url(<%=current_user.avatar.url%>); border: 3px dashed transparent;">
+              <%unless current_user.avatar %>
                 <span class="add-image">
                   Добавить <br> Аватар
                 </span>
                 <!-- <output id="list"></output> -->
+              <%end%>
               </label>
-              
+
             </div>
           </div>
           <div class="input_wrapper">

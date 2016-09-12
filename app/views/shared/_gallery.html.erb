@@ -1,0 +1,22 @@
+<div class="modal fade bs-modal-<%=game.id%> " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="gallery-box">
+        <div class="view">
+          <div class="big-image"><img src="<%=game.photos.first.image.url%>"></div>
+            <% if game.photos.count > 1 %>
+              <a href="#" class="prev"></a>
+              <a href="#" class="next"></a>
+            <%end%>
+        </div>
+        <% if game.photos.count > 1 %>
+          <% game.photos.each do |photo| %>
+            <div class="thumbnails">
+                <a href="<%= photo.image.url%>"><img src="<%= photo.image.url%>" alt="<%=photo.caption%>"></a>
+            </div>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

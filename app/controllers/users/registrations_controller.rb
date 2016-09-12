@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :html, :json
-  before_action :set_team, only: [:new, :create]
+  before_action :set_team, only: [:new, :create, :edit, :update]
 
   def new
     flash[:errors] = []
@@ -8,6 +8,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       flash[:errors] << 'Команда уже заполнена :(' if @team.full?
     else
       flash[:errors] << 'Неверный код инвайта' if session[:invite]
+    end
+    super
+  end
+
+  def edit
+    flash[:errors] = []
+    if @team
+      if !@team.full?
+      else
+       flash[:errors] << 'Команда уже заполнена :('
+      end
+    elsif params[:invite].present?
+      flash[:errors] << 'Неверный код инвайта'
     end
     super
   end
@@ -44,6 +57,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       Invitation.create(user: resource, inviter: @team.captain, team: @team) if @team && !@team.full?
       session[:invite] = nil    
     end    
+  end
+
+  def update
+    if resource && @team && !@team.full?
+      Member.create(user: resource, team: @team)
+      return redirect_to my_team_path
+    end
+    super
   end
 
   private
