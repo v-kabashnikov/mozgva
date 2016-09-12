@@ -7,8 +7,8 @@
         <div class="links">
           <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
           <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } %>
-          <% if current_user.member.captain? %>
+          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } if current_user.member?(@team) %>
+          <% if current_user.member?(@team) && current_user.member.captain? %>
            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
           <%end%>
           <% if current_user.invitations.present? %>
@@ -31,7 +31,7 @@
       <li><%= link_to calendar_path do %>Календарь игр<% end %></li>
       <li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Лиги</a></li>
       <li><%= link_to sert_path do %>Сертификаты<% end %></li>
-      <li><a href="" rel="popover" data-trigger="focus" data-popover-content="#disable">Рейтинг команд</a></li>
+      <li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
       <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
     </ul>
   </div>
