@@ -1,8 +1,13 @@
 class MembersController < ApplicationController
   def destroy
     member = Member.find(params[:id])
+    this_member = current_user.member
     member.destroy
-    render json: { status: :ok, member: { id: member.id } }
+    if this_member == member
+      redirect_to root_url
+    else
+      render json: { status: :ok, member: { id: member.id } }
+    end
   end
 
   def set_boatswain
