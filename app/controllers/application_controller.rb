@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
       City.find_by(id: session[:city_id]) || City.first
     end
   end
+
+  def set_waiting_invitations
+    @waiting_invitations = current_user.invitations.waiting if current_user
+  end
 end

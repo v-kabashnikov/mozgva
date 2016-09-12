@@ -7,8 +7,8 @@
           <div class="links">
             <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
             <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-            <% if current_user.invitations.present? %>
-            <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+            <% if @waiting_invitations.present? %>
+            <%= link_to "#{@waiting_invitations.count} #{Russian.p(@waiting_invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
             <% end %>
           </div>
         </span>
@@ -327,7 +327,7 @@
 <%= render 'shared/edit_profile' %>
 <%= render 'shared/team_modal' unless current_user.team %>
 <%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
+<%= render partial: 'shared/invitations_modal', locals: { invitations: @waiting_invitations } if @waiting_invitations.present? %>
 <% end %>
 <%= render 'shared/errors_modal' %>
 <%= render 'shared/teams_modal' %>

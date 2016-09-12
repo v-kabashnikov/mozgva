@@ -1,3 +1,6 @@
+<% if current_user.team %>
+  <p>Вы не можете принимать приглашения, пока состоите в команде</p>
+<% end %>
 <table>
   <tr>
     <th>Команда</th>
@@ -9,7 +12,9 @@
     <tr>
       <td><%= inv.team.name %></td>
       <td><%= "#{inv.inviter.name}(#{inv.inviter.email})" if inv.inviter %></td>
-      <td><%= link_to 'Принять', accept_invitation_path(inv) %></td>
+      <% unless current_user.team %>
+        <td><%= link_to 'Принять', accept_invitation_path(inv) %></td>
+      <% end %>
       <td><%= link_to 'Отклонить', decline_invitation_path(inv) %></td>
     </tr>
   <% end %>
