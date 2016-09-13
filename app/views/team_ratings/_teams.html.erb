@@ -3,7 +3,7 @@
 	    <td class="tName"><%= link_to rating[:name], team_path(rating[:id]) %></td> 
 	    <td class="tPercent"><%= rating[:percent].round(2) %>%</td>
 	    <td class="tScores"><%= rating[:scores] %></td>
-	    <td><%= rating[:games] %></td>
+	    <td><%= rating[:games_count] %></td>
 	    <td class="achivmentsWrapp">
 	    <% if rating[:percent].round(2) < 70 %>
 	    	<% if rating[:scores] < 300 %>

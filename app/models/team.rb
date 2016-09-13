@@ -1,5 +1,7 @@
 class Team < ApplicationRecord
   MAX_MEMBERS_COUNT = 9
+  MIN_TOP_SCORE = 200
+  MIN_RATING_SCORE = 100
 
   belongs_to :league, optional: true
   has_many :members, dependent: :destroy
@@ -56,6 +58,41 @@ class Team < ApplicationRecord
     Member.create(user: user, team: self)
   end
 
+  def self.sql_pick_up_team_ratings
+      query = <<-SQL
+      WITH team_ratings_sum (id, team_id, game_id, SUM) AS
+        (SELECT team_ratings.id,
+                team_ratings.team_id,
+                team_ratings.game_id,
+                team_ratings.round_one+team_ratings.round_two+team_ratings.round_three+team_ratings.round_four+team_ratings.round_five+team_ratings.round_six+team_ratings.round_seven
+         FROM team_ratings),
+           games_scores (id, max_score) AS
+        (SELECT games.id,
+                max(team_ratings_sum.sum)
+         FROM games
+         INNER JOIN team_ratings_sum ON team_ratings_sum.game_id=games.id
+         GROUP BY games.id),
+           team_rating_percents (id, team_id, game_id, SUM, percent) AS
+        (SELECT team_ratings_sum.id,
+                team_ratings_sum.team_id,
+                team_ratings_sum.game_id,
+                team_ratings_sum.sum, (team_ratings_sum.sum::float/nullif(games_scores.max_score, 0)*100)
+         FROM team_ratings_sum
+         INNER JOIN games_scores ON games_scores.id=team_ratings_sum.game_id)
+      SELECT teams.*,
+             sum(team_rating_percents.sum) AS scores,
+             avg(team_rating_percents.percent) AS percent,
+             count(team_rating_percents.id) AS games_count
+      FROM teams
+      LEFT JOIN team_rating_percents ON teams.id=team_rating_percents.team_id
+      GROUP BY teams.id
+      HAVING sum(team_rating_percents.sum) >= ?
+      ORDER BY avg(team_rating_percents.percent) DESC
+    SQL
+    res = find_by_sql([query, MIN_RATING_SCORE])
+    return res.select{ |t| t.scores >= MIN_TOP_SCORE }, res.select{ |t| t.scores < MIN_TOP_SCORE && t.scores >= MIN_RATING_SCORE }
+  end
+
   def self.pick_up_team_ratings game_team_ratings
     Rails.cache.fetch("pick_up_team_ratings", expires_in: 1.hours) do
       top = []
@@ -76,9 +113,9 @@ class Team < ApplicationRecord
           average_percent = sum_percent / sum_games.to_f
           average_percent = 0.0 if average_percent.nan?
           if sum_scores >= 200.0
-            top << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games: sum_games, id: team.id}
+            top << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games_count: sum_games, id: team.id}
           elsif sum_scores >= 100.0
-            pretendents << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games: sum_games, id: team.id}
+            pretendents << {name: team.name, scores: sum_scores.to_i, percent: average_percent, games_count: sum_games, id: team.id}
           end
         end
       end
