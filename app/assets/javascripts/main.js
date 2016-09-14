@@ -11,6 +11,8 @@ $( document ).ready(function() {
 	});
 	$('.start_edit').on('click', function(e){
 		e.preventDefault();
+		$(this).toggle();
+		$(this).parent().find('.save').toggle();
 		var editable = $(this).parent().find('.editable');
 		editable.attr('contenteditable', 'true');
 		var range = document.createRange();
@@ -21,6 +23,25 @@ $( document ).ready(function() {
 		sel.removeAllRanges();
     sel.addRange(range);
     editable[0].focus();
+	});
+	$('.save').on('click', function(e){
+		e.preventDefault();
+		var editable = $(this).parent().find('.editable');
+		editable.attr('contenteditable', 'false');
+		editable.data('');
+
+		if(editable.data("action")){
+			dataString = editable.data("name") + "=";
+			method = editable.data("method") || "put";
+	    $.ajax({
+        type: method,
+        url: editable.data("action"),
+        data: dataString + editable.text(),
+        success: function(){}
+	    });
+		}
+		$(this).toggle();
+		$(this).parent().find('.start_edit').toggle();
 	});
 
 	$('.editable').keydown(function(event){

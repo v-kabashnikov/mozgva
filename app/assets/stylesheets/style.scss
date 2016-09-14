@@ -2198,6 +2198,24 @@ footer.korporatF {
 				}
 				.tab-content {
 					div {
+						table.rating-position {
+							margin: 5%;
+							td{
+								padding: 3px 10px;
+							}
+							th{
+								padding: 7px 10px;
+							}
+							tr.current{
+								color: #FF0000;
+							}
+							a{
+								color:inherit;
+							}
+							a:hover{
+								text-decoration: underline;
+							}
+						}
 						&:nth-child(1) {
 							.wr {
 								background-image:asset-url('team/star_bg.png');

@@ -58,9 +58,11 @@ class Team < ApplicationRecord
     Member.create(user: user, team: self)
   end
 
-  def self.sql_pick_up_team_ratings
-      query = <<-SQL
-      WITH team_ratings_sum (id, team_id, game_id, SUM) AS
+  def self.with_scores_and_percent min_score = MIN_RATING_SCORE
+    query = <<-SQL
+      WITH 
+        existing_scope AS (#{existing_scope_sql}),
+        team_ratings_sum (id, team_id, game_id, SUM) AS
         (SELECT team_ratings.id,
                 team_ratings.team_id,
                 team_ratings.game_id,
@@ -85,11 +87,29 @@ class Team < ApplicationRecord
              count(team_rating_percents.id) AS games_count
       FROM teams
       LEFT JOIN team_rating_percents ON teams.id=team_rating_percents.team_id
+      INNER JOIN existing_scope ON existing_scope.id = teams.id
       GROUP BY teams.id
-      HAVING sum(team_rating_percents.sum) >= ?
-      ORDER BY avg(team_rating_percents.percent) DESC
+      #{"HAVING sum(team_rating_percents.sum) >= :min_score" if min_score}
+      ORDER BY avg(team_rating_percents.percent) DESC NULLS LAST
     SQL
-    res = find_by_sql([query, MIN_RATING_SCORE])
+    find_by_sql([query, { min_score: min_score }])
+  end
+
+  def with_scores_and_percent
+    Team.where(id: id).with_scores_and_percent(nil).first
+  end
+
+  def rating_position rating
+    res = rating || Team.sql_pick_up_team_ratings
+    pos_in_top = res.first.find_index{ |t| t.id == id }
+    pos_in_pret = res.second.find_index{ |t| t.id == id }
+    position = pos_in_top + 1 if pos_in_top
+    position ||= res.first.count + pos_in_pret + 1 if pos_in_pret
+    position
+  end
+
+  def self.sql_pick_up_team_ratings
+    res = with_scores_and_percent
     return res.select{ |t| t.scores >= MIN_TOP_SCORE }, res.select{ |t| t.scores < MIN_TOP_SCORE && t.scores >= MIN_RATING_SCORE }
   end
 
@@ -124,6 +144,11 @@ class Team < ApplicationRecord
   end
   
   private
+
+  def self.existing_scope_sql
+      # have to do this to get the binds interpolated. remove any ordering and just grab the ID
+      self.connection.unprepared_statement { self.reorder(nil).select("id").to_sql }
+   end
 
   def set_invite
     self.invite = loop do
