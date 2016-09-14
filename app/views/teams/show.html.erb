@@ -144,7 +144,41 @@
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="reyting">
-            <div class="wr">
+            <table class="rating-position">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                  <th>Кол-во игр</th>
+                  <th>Всего очков</th>
+                  <th>Качество игры</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @teams_top.each_with_index do |team, i| %>
+                  <tr class="<%= 'current' if team.id == @team.id %>" >
+                    <td class="counter"><%= i + 1 %></td>
+                    <td class="team-name"><%= link_to team.name, team_path(team) %></td>
+                    <td><%= team.games_count %></td>
+                    <td><%= team.scores %></td>
+                    <td><%= "#{team.percent.round(2)}%" %></td>
+                  </tr>
+                <% end %>
+                <% unless @team.in? @teams_top %>
+                  <tr>
+                    <td colspan="5">...</td>
+                  </tr>
+                  <tr class="current">
+                    <td class="counter"><%= @team.rating_position(@rating) || '∞' %></td>
+                    <td class="team-name"><%= link_to @team.name, team_path(@team) %></td>
+                    <td><%= @team.games_count %></td>
+                    <td><%= @team.scores || '-' %></td>
+                    <td><%= @team.games_count > 0 ? "#{@team.percent.to_f.round(2)}%" : '-' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <!--<div class="wr">
               <p>Для подсчета<br/> нужно еще <span> 2 игры</span> </p>
               <ul>
                 <li class="active"></li>
@@ -152,7 +186,7 @@
                 <li></li>
               </ul>
             </div>
-          </div>
+          </div>-->
           <div role="tabpanel" class="tab-pane fade" id="position">123123</div>
           <div role="tabpanel" class="tab-pane fade" id="statistic">dsad</div>
         </div>
@@ -284,7 +318,7 @@
     </div>
   </div>
   <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
-  <% if @past_games.count == 0 %>
+  <% if @past_games.count == 0 && @last_game %>
     <div class="contentWrap">
       <div class="elseGame">
         <p>Скоро вы сможете искать на фото себя, а пока посмотрите как это было <%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></p>
