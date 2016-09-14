@@ -40,6 +40,7 @@
   <div class="contentWrap">
     <% if current_user && current_user.member?(@team) && current_user.member.captain? %>
       <a href="#" class="start_edit">Редактировать</a>
+      <a href="#" class="save" style="display:none;">Сохранить</a>
     <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
@@ -185,8 +186,8 @@
                 <li></li>
                 <li></li>
               </ul>
-            </div>
-          </div>-->
+            </div>-->
+          </div>
           <div role="tabpanel" class="tab-pane fade" id="position">123123</div>
           <div role="tabpanel" class="tab-pane fade" id="statistic">dsad</div>
         </div>

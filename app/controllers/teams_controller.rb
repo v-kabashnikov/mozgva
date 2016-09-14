@@ -33,7 +33,9 @@ class TeamsController < ApplicationController
 
   def my_team
     set_city
-    @team = current_user.team
+    @rating = Team.sql_pick_up_team_ratings
+    @teams_top = @rating.first.first(10)
+    @team = current_user.team.with_scores_and_percent
     @main_games = Game.main.order(:when)
     return redirect_to root_path unless @team
     @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now).order('"when" DESC')
