@@ -420,6 +420,7 @@
     });
   </script>
 <!-- gallery script -->
+
 <script>
 $(function() {
     function a(c, d, a, f) {
@@ -430,6 +431,8 @@ $(function() {
                 e.preventDefault();
                 b = g;
 $(d).stop().animate({opacity: 0}, 400, function() {
+         var lphoto = $(a).data('src');
+         d.src = lphoto; $(d).animate({opacity: 1}, 400);
          d.src = a.href; $(d).animate({opacity: 1}, 400);
 });
                 c.removeClass("active");
