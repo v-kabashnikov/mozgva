@@ -1,6 +1,6 @@
 - @game.photos.each do |photo|
   = link_to image_tag('https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/delete.png', alt: 'Удалить', style:  "height: 20px; width 20px;"), rails_admin.multiple_upload_url(@abstract_model.to_param, pid: photo.id), method: :delete, data: { confirm: "Вы уверены?" }
-  =image_tag photo.image.url, style: "height: 100px; width 100px;"
+  =image_tag photo.image.url(:thumb), style: "height: 30px; width 30px;"
 
 
 = simple_form_for(rails_admin.multiple_upload_url(@abstract_model.to_param), html: { multipart: true }) do |f|
