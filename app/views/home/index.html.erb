@@ -205,7 +205,7 @@
 						<p><%=game.photos.count%> штук</p>
 						<div class="center">
 						<%game.photos.each do |photo|%>
-						<a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+						<a href="" data-toggle="modal" data-image="<%=photo.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=game.id%>" class="full-v">
 							<div>
 								<div class="photoItemWrap" style="background-image:url(<%=photo.image.url%>);"></div>
 							</div>
@@ -221,6 +221,15 @@
 			</div>
 		</div>
 <!-- gallery script -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".full-v").click(function () {
+      var main = $(this).attr('data-image');
+      var game = $(this).attr('data-game');
+      $('.'+game).children().attr('src',main);
+    });
+  });
+</script>
 <script>
 $(function() {
     function a(c, d, a, f) {
@@ -231,6 +240,8 @@ $(function() {
                 e.preventDefault();
                 b = g;
 $(d).stop().animate({opacity: 0}, 400, function() {
+         var lphoto = $(a).data('src');
+         d.src = lphoto; $(d).animate({opacity: 1}, 400);
          d.src = a.href; $(d).animate({opacity: 1}, 400);
 });
                 c.removeClass("active");

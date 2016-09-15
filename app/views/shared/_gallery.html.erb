@@ -3,18 +3,18 @@
     <div class="modal-content">
       <div class="gallery-box">
         <div class="view">
-          <div class="big-image"><img src="<%=game.photos.first.image.url%>"></div>
+          <div class="big-image game-<%=game.id%>"><img  src="" width="600" height="300"></div>
             <% if game.photos.count > 1 %>
               <a href="#" class="prev"></a>
               <a href="#" class="next"></a>
             <%end%>
         </div>
         <% if game.photos.count > 1 %>
-          <% game.photos.each do |photo| %>
-            <div class="thumbnails">
-                <a href="<%= photo.image.url%>"><img src="<%= photo.image.url%>" alt="<%=photo.caption%>"></a>
-            </div>
-          <%end%>
+          <div class="thumbnails">
+            <% game.photos.each do |photo| %>
+              <a href="<%= photo.image.url%>" data-src=""><img src="<%= photo.image.url(:thumb)%>" alt="<%=photo.caption%>"></a>
+            <%end%>
+          </div>
         <%end%>
       </div>
     </div>
