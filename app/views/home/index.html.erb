@@ -48,7 +48,7 @@
 			<div class="logoWrap">
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
+			<div class="wrapSelectCityMonth" id="update_city" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
 				<div class="update_city wrapper-dropdown" tabindex="1">
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
