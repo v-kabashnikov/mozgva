@@ -25,7 +25,8 @@ class Team < ApplicationRecord
   end
 
   def full?
-    members_count + invitations_count >= MAX_MEMBERS_COUNT
+    # members_count + invitations_count >= MAX_MEMBERS_COUNT
+    members_count >= MAX_MEMBERS_COUNT
   end
 
   def captain
@@ -37,7 +38,8 @@ class Team < ApplicationRecord
   end
 
   def places
-    MAX_MEMBERS_COUNT - members_count - invitations_count
+    # MAX_MEMBERS_COUNT - members_count - invitations_count
+    MAX_MEMBERS_COUNT - members_count
   end
 
   def generate_invite
@@ -54,7 +56,7 @@ class Team < ApplicationRecord
   end
 
   def add_member_checking user
-    Invitation.where(user: user).where.not(team: self).update_all(status: 'declined')
+    # Invitation.where(user: user).where.not(team: self).update_all(status: 'declined')
     Member.create(user: user, team: self)
   end
 

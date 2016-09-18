@@ -61,17 +61,6 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-          </li>
-        <% end %>
-      <% end %>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
         <li>
           <a href="#invite_modal" data-toggle="modal">
@@ -101,19 +90,6 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
           </div>
         </li>
-      <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <div class="uswerWrap">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-            </div>
-          </li>
-        <% end %>
       <% end %>
       </div>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
