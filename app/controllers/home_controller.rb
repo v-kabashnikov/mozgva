@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
   before_action :set_city
   before_action :set_calend_vars, only: [:index, :calendar]
-  before_action :set_waiting_invitations
 
   def index
     @game_groups_count = @game_groups.count
