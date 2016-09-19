@@ -1,6 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :html, :json
   after_action :inv, only: [:create]
+  before_action :get_invitations, only: [:create]
 
   def create
   	super
@@ -14,7 +15,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def inv
     unless current_user.team
-      if @waiting_invitations.present?
+      if @invitations.present?
         $INV = true
       else
         $INV = false
