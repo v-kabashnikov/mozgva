@@ -139,22 +139,3 @@
     </ul>
   </footer>
 </section>
-
-
-<%#= render "devise/shared/links" %>
-<% unless current_user %>
-<%= render 'shared/sign_in' %>
-<%= render 'shared/sign_up' %>
-<%= render 'shared/restore_password' %>
-<% else %>
-<%= render 'shared/edit_profile' %>
-<%= render 'shared/team_modal' unless current_user.team %>
-<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
-<% end %>
-<%= render 'shared/errors_modal' %>
-<%= render 'shared/teams_modal' %>
-
-
-
-
