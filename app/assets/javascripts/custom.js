@@ -14,8 +14,8 @@ $(document).ready(function(){
         });
       });
 	});
-	$("#phoneOfUser").mask("+7(999)999-99-99");
-	$("#user_phone").mask("+7(999)999-99-99");
+	// $("#phoneOfUser").mask("+7(999)999-99-99");
+	// $("#user_phone").mask("+7(999)999-99-99");
 
 
 	$("#mySliderTabs").slick({

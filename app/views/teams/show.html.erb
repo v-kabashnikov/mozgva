@@ -11,8 +11,8 @@
           <% if current_user.member?(@team) && current_user.member.captain? %>
            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
           <%end%>
-          <% if current_user.invitations.present? %>
-          <%= link_to "#{@waiting_invitations.count} #{Russian.p(@waiting_invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% if @invitations.present? %>
+          <%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
             <% end %>
         </div>
       </span>
@@ -40,6 +40,7 @@
   <div class="contentWrap">
     <% if current_user && current_user.member?(@team) && current_user.member.captain? %>
       <a href="#" class="start_edit">Редактировать</a>
+      <a href="#" class="save" style="display:none;">Сохранить</a>
     <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
   </div>
@@ -59,17 +60,6 @@
           <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
-      <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-          </li>
-        <% end %>
       <% end %>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
         <li>
@@ -101,19 +91,6 @@
           </div>
         </li>
       <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <div class="uswerWrap">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-            </div>
-          </li>
-        <% end %>
-      <% end %>
       </div>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
           <a href="#invite_modal" class="addPerson" data-toggle="modal">еще <%= "#{@team.places} #{Russian.p(@team.places, "место", "места", "мест")}" %>
@@ -144,14 +121,48 @@
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active" id="reyting">
-            <div class="wr">
+            <table class="rating-position">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Название</th>
+                  <th>Кол-во игр</th>
+                  <th>Всего очков</th>
+                  <th>Качество игры</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @teams_top.each_with_index do |team, i| %>
+                  <tr class="<%= 'current' if team.id == @team.id %>" >
+                    <td class="counter"><%= i + 1 %></td>
+                    <td class="team-name"><%= link_to team.name, team_path(team) %></td>
+                    <td><%= team.games_count %></td>
+                    <td><%= team.scores %></td>
+                    <td><%= "#{team.percent.round(2)}%" %></td>
+                  </tr>
+                <% end %>
+                <% unless @team.in? @teams_top %>
+                  <tr>
+                    <td colspan="5">...</td>
+                  </tr>
+                  <tr class="current">
+                    <td class="counter"><%= @team.rating_position(@rating) || '∞' %></td>
+                    <td class="team-name"><%= link_to @team.name, team_path(@team) %></td>
+                    <td><%= @team.games_count %></td>
+                    <td><%= @team.scores || '-' %></td>
+                    <td><%= @team.games_count > 0 ? "#{@team.percent.to_f.round(2)}%" : '-' %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <!--<div class="wr">
               <p>Для подсчета<br/> нужно еще <span> 2 игры</span> </p>
               <ul>
                 <li class="active"></li>
                 <li></li>
                 <li></li>
               </ul>
-            </div>
+            </div>-->
           </div>
           <div role="tabpanel" class="tab-pane fade" id="position">123123</div>
           <div role="tabpanel" class="tab-pane fade" id="statistic">dsad</div>
@@ -284,7 +295,7 @@
     </div>
   </div>
   <%months_hash_abs = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря'}%>
-  <% if @past_games.count == 0 %>
+  <% if @past_games.count == 0 && @last_game %>
     <div class="contentWrap">
       <div class="elseGame">
         <p>Скоро вы сможете искать на фото себя, а пока посмотрите как это было <%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></p>
@@ -295,7 +306,7 @@
       <% if @last_game.photos.first%>
       <div class="AlbomItmWrapper">
         <div class="AlbomItm AlbomItmCenter" style="background-image:url('<%= @last_game.photos.first.image.url %>'); ">
-          <a href="" data-toggle="modal" data-target=".bs-modal-<%=@last_game.id%>" class="full-v">
+          <a href="" data-toggle="modal" data-image="<%=game.photos.first.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=@last_game.id%>" class="full-v">
             <div class="albomInfo">
               <span><%=@last_game.when.strftime("%d")%> <%=months_hash_abs[@last_game.when.month]%></span>
               <span><%=@last_game.photos.count%> фото</span>
@@ -331,7 +342,7 @@
                 </div>
               <%else%>
                 <div class="AlbomItm" style="background-image:url('<%= game.photos.first.image.url %>'); ">
-                  <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+                  <a href="" data-toggle="modal" data-image="<%=game.photos.first.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=game.id%>" class="full-v">
                     <div class="albomInfo">
                       <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
                       <span><%=game.photos.count%> фото</span>
@@ -352,7 +363,7 @@
                   </div>
                 <%else%>
                   <div class="AlbomItm photoHidden" style="background-image:url('<%= game.photos.first.image.url %>'); ">
-                    <a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+                    <a href="" data-toggle="modal" data-image="<%=game.photos.first.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=game.id%>" class="full-v">
                       <div class="albomInfo">
                         <span><%=game.when.strftime("%d")%> <%=months_hash_abs[game.when.month]%></span>
                         <span><%=game.photos.count%> фото</span>
@@ -385,6 +396,16 @@
     });
   </script>
 <!-- gallery script -->
+<script type="text/javascript">
+//Стартовая картинка галереи
+$(document).ready(function(){
+    $(".full-v").click(function () {
+      var main = $(this).attr('data-image');
+      var game = $(this).attr('data-game');
+      $('.'+game).children().attr('src',main);
+    });
+  });
+</script>
 <script>
 $(function() {
     function a(c, d, a, f) {
@@ -395,6 +416,8 @@ $(function() {
                 e.preventDefault();
                 b = g;
 $(d).stop().animate({opacity: 0}, 400, function() {
+         var lphoto = $(a).data('src');
+         d.src = lphoto; $(d).animate({opacity: 1}, 400);
          d.src = a.href; $(d).animate({opacity: 1}, 400);
 });
                 c.removeClass("active");
@@ -456,22 +479,4 @@ $(d).stop().animate({opacity: 0}, 400, function() {
   </footer>
 </section>
 
-
-
-<%= render 'shared/team_modal' %>
 <%= render 'shared/invite_modal' unless @team.full? %>
-
-<% unless current_user %>
-<%= render 'shared/sign_in' %>
-<%= render 'shared/sign_up' %>
-<%= render 'shared/restore_password' %>
-<%= render 'shared/user_agree' %>
-<% else %>
-<%= render 'shared/edit_profile' %>
-<%= render 'shared/team_modal' unless current_user.team %>
-<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render partial: 'shared/invitations_modal', locals: { invitations: @waiting_invitations } if @waiting_invitations.present? %>
-<% end %>
-<%= render 'shared/errors_modal' %>
-<%= render 'shared/teams_modal' %>
-

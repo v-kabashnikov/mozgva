@@ -20,8 +20,8 @@
 					<div class="links">
 						<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 						<%= link_to "Профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-						<% if @waiting_invitations.present? %>
-						<%= link_to "#{@waiting_invitations.count} #{Russian.p(@waiting_invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+						<% if @invitations.present? %>
+						<%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
 						<% end %>
 						<% if current_user.team %>
 						<%= link_to("Команда", my_team_path) %>
@@ -45,10 +45,36 @@
 				<% end %>
 			</div>
 
+			<%if $INV == true%>
+        <script>
+          $(document).ready(function() {
+            $('#inv_modal').modal('show');
+          });
+        </script>
+        <div class="modal fade in" id="inv_modal"  style='display: none;'>
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button class="close" data-dismiss="modal">x</button>
+			          <h2 class="text-center">Вы получили приглашение в команду <%=@waiting_invitations.last.team.name%></h2>
+			        </div>
+			      	<div class="modal-body">
+			        	<h2>Вступить в команду?</h2>
+			         	<%= link_to 'Да', accept_invitation_path(@waiting_invitations.last) %>
+			         	<a href="" class="close" data-dismiss="modal">Нет</a>
+			        </div>
+			        <div class="modal-footer">
+			        </div>
+			      </div>
+			    </div>
+  			</div>
+      <% $INV = false%>
+      <% end%>
+
 			<div class="logoWrap">
 				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
 			</div>
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
+			<div class="wrapSelectCityMonth" id="update_city" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
 				<div class="update_city wrapper-dropdown" tabindex="1">
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
@@ -151,7 +177,7 @@
 <section class="noticeSection">
 	<div class="fullWrapp">
 		<div class="left">
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
 				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
@@ -210,7 +236,7 @@
 						<p><%=game.photos.count%> штук</p>
 						<div class="center">
 						<%game.photos.each do |photo|%>
-						<a href="" data-toggle="modal" data-target=".bs-modal-<%=game.id%>" class="full-v">
+						<a href="" data-toggle="modal" data-image="<%=photo.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=game.id%>" class="full-v">
 							<div>
 								<div class="photoItemWrap" style="background-image:url(<%=photo.image.url%>);"></div>
 							</div>
@@ -226,6 +252,15 @@
 			</div>
 		</div>
 <!-- gallery script -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".full-v").click(function () {
+      var main = $(this).attr('data-image');
+      var game = $(this).attr('data-game');
+      $('.'+game).children().attr('src',main);
+    });
+  });
+</script>
 <script>
 $(function() {
     function a(c, d, a, f) {
@@ -236,6 +271,8 @@ $(function() {
                 e.preventDefault();
                 b = g;
 $(d).stop().animate({opacity: 0}, 400, function() {
+         var lphoto = $(a).data('src');
+         d.src = lphoto; $(d).animate({opacity: 1}, 400);
          d.src = a.href; $(d).animate({opacity: 1}, 400);
 });
                 c.removeClass("active");
@@ -347,19 +384,3 @@ $(d).stop().animate({opacity: 0}, 400, function() {
 		</div>
 	</footer>
 </section>
-
-
-
-	<% unless current_user %>
-	<%= render 'shared/sign_in' %>
-	<%= render 'shared/sign_up' %>
-	<%= render 'shared/restore_password' %>
-	<%= render 'shared/user_agree' %>
-	<% else %>
-	<%= render 'shared/edit_profile' %>
-	<%= render 'shared/team_modal' unless current_user.team %>
-	<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-	<%= render partial: 'shared/invitations_modal', locals: { invitations: @waiting_invitations } if @waiting_invitations.present? %>
-	<% end %>
-	<%= render 'shared/errors_modal' %>
-	<%= render 'shared/teams_modal' %>

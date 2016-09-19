@@ -7,8 +7,8 @@
 				<div class="links">
 					<%= link_to "Выйти", destroy_user_session_path, method: :delete %>
 					<%= link_to "Профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-					<% if current_user.invitations.present? %>
-					<%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+					<% if @invitations.present? %>
+					<%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
 					<% end %>
 					<% if current_user.team %>
 					<%= link_to("Команда", my_team_path) %>
@@ -133,19 +133,3 @@
 		</ul>
 	</footer>
 </section>
-<%= render 'shared/sert_order' %>
-<% unless current_user %>
-<%= render 'shared/sign_in' %>
-<%= render 'shared/sign_up' %>
-<%= render 'shared/restore_password' %>
-<%= render 'shared/user_agree' %>
-<% else %>
-<%= render 'shared/edit_profile' %>
-<%= render 'shared/team_modal' unless current_user.team %>
-<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
-<% end %>
-<%= render 'shared/errors_modal' %>
-<%= render 'shared/teams_modal' %>
-
-

@@ -1,11 +1,17 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!, except: [:list, :show]
-  before_action :set_waiting_invitations
 
   def show
-    @team = Team.find(params[:id])
+    @rating = Team.sql_pick_up_team_ratings
+    @teams_top = @rating.first.first(10)
+    @team = Team.find(params[:id]).with_scores_and_percent || Team.find(params[:id])
     @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now).order('"when" DESC')
     @last_game = Game.where('"when" < :now', now: DateTime.now).order(when: :asc).joins('left join photos on photos.game_id=games.id').last
+    @month_array =[]
+    @past_games.each do |game|
+      @month_array << game.when.strftime("%m").to_i
+    end
+    @month_array = @month_array.uniq
   end
 
   def create
@@ -31,7 +37,9 @@ class TeamsController < ApplicationController
 
   def my_team
     set_city
-    @team = current_user.team
+    @rating = Team.sql_pick_up_team_ratings
+    @teams_top = @rating.first.first(10)
+    @team = current_user.team.with_scores_and_percent
     @main_games = Game.main.order(:when)
     return redirect_to root_path unless @team
     @past_games = Game.joins(:game_registrations).where("game_registrations.team_id" => @team.id).where('"when" < :now', now: DateTime.now).order('"when" DESC')
