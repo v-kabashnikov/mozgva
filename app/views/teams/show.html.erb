@@ -11,8 +11,8 @@
           <% if current_user.member?(@team) && current_user.member.captain? %>
            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
           <%end%>
-          <% if current_user.invitations.present? %>
-          <%= link_to "#{@waiting_invitations.count} #{Russian.p(@waiting_invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% if @invitations.present? %>
+          <%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
             <% end %>
         </div>
       </span>
@@ -61,17 +61,6 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
         </li>
       <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-          </li>
-        <% end %>
-      <% end %>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
         <li>
           <a href="#invite_modal" data-toggle="modal">
@@ -101,19 +90,6 @@
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
           </div>
         </li>
-      <% end %>
-      <% if current_user && current_user.member?(@team) %>
-        <% @team.invitations.each do |inv| %>
-          <li class="not_member" id="invitation_<%= inv.id %>">
-            <div class="uswerWrap">
-            <% if current_user.member.captain? %>
-              <%= link_to '', invitation_path(inv), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_invitation' %>
-            <% end %>
-            <div class="avatar" style="background-image: url('<%= inv.user.avatar.url(:small)%>')"></div>
-            <p><%= inv.user.name %></p>
-            </div>
-          </li>
-        <% end %>
       <% end %>
       </div>
       <% if current_user && current_user.member?(@team) && !@team.full? %>
@@ -503,22 +479,4 @@ $(d).stop().animate({opacity: 0}, 400, function() {
   </footer>
 </section>
 
-
-
-<%= render 'shared/team_modal' %>
 <%= render 'shared/invite_modal' unless @team.full? %>
-
-<% unless current_user %>
-<%= render 'shared/sign_in' %>
-<%= render 'shared/sign_up' %>
-<%= render 'shared/restore_password' %>
-<%= render 'shared/user_agree' %>
-<% else %>
-<%= render 'shared/edit_profile' %>
-<%= render 'shared/team_modal' unless current_user.team %>
-<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
-<%= render partial: 'shared/invitations_modal', locals: { invitations: @waiting_invitations } if @waiting_invitations.present? %>
-<% end %>
-<%= render 'shared/errors_modal' %>
-<%= render 'shared/teams_modal' %>
-

@@ -2,7 +2,7 @@ class Member < ApplicationRecord
   default_scope ->{ order('members.team_role IS NULL, members.team_role DESC')}
   belongs_to :user
   belongs_to :team
-  after_create :delete_invitations
+  # after_create :delete_invitations
 
   validates_with MembersCountValidator
   # validates :team, uniqueness: { scope: :user, message: "user can be in team only once" }

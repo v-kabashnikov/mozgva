@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :get_invitations
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to main_app.new_user_session_path, alert: exception.message
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_waiting_invitations
-    @waiting_invitations = current_user.invitations.waiting if current_user
+  def get_invitations
+    @invitations = current_user.invitations.waiting if current_user
   end
 end
