@@ -1,25 +1,81 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+<section class="topInfo franchise">
+  <div class="contentWrap">
+    <div class="btnWrap authorizationWrap">
+      <% unless current_user %>
+        <span>
+          <img src="<%= asset_path('lightningSec/lightning.png') %>">
+          <div class="links">
+            <a href="#sign_in" data-toggle="modal">Войти</a>
+            <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+          </div>
+        </span>
+      <% end %>
+    </div>
+    <h1>Изменить пароль</h1>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+</section>
+<section class="franchiseSec">
+  <ul class="navigationWrap">
+    <li><%= link_to root_path do %>Главная<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+    <li><%= link_to calendar_path do %>Календарь игр<% end %></li>
+    <li><%= link_to sert_path do %>Сертификаты<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Рейтинг команд</a></li>
+    <li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+    <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+  </ul>
+  <div class="mainWrap invite">
+    <div class="AboutInviteWrap">
+      <%= devise_error_messages! %>
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p class="error"><%= error %></p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="formSert">
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <div class="formWrap">
+          <%= f.hidden_field :reset_password_token %>
+          <%= f.password_field :password, autofocus: true, placeholder: 'Новый пароль', class: "lineInput", required: true, autocomplete: "off" %>
+          <%= f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: "lineInput", required: true, autocomplete: "off" %>
+          <%= f.submit "Сохранить", class: "blueBtn" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+  <footer class="franchiseF">
+    <ul>
+      <li>
+        <div class="dropup like">
+          <button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+          </button>
+          <ul class="dropdown-menu a2a_kit">
+            <li>
+              <a class="a2a_button_vk" href="">
+                <img src="<%= asset_path('symbol/vk.png') %>"/>
+              </a>
+            </li>
+            <li>
+              <a class="a2a_button_twitter" href="#">
+                <img src="<%= asset_path('symbol/twiter.png') %>"/>
+              </a>
+            </li>
+            <li>
+              <a class="a2a_button_facebook" href="#">
+                <img src="<%= asset_path('symbol/fb.png') %>"/>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tag">#этомозвадетка</div>
+      </li>
+      <li>
+        <%= link_to root_path do %>
+          <img src="<%= asset_path('calendar/logo.png') %>"/>
+        <% end %>
+      </li>
+    </ul>
+  </footer>
+</section>

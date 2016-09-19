@@ -1,7 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :html, :json
   after_action :inv, only: [:create]
-  before_action :set_waiting_invitations, only: [:create]
 
   def create
   	super
