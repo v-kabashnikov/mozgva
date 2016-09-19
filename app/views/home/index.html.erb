@@ -172,7 +172,7 @@
 <section class="noticeSection">
 	<div class="fullWrapp">
 		<div class="left">
-			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get"><!--SELECT SITY & MONTH-->
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
 				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
 					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
 					<ul class="dropdown" tabindex="1" data-name="city_id">
