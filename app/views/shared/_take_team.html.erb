@@ -9,11 +9,12 @@
         <h2 class="text-center">Завладеть командой</h2>
       </div>
       <div class="modal-body">
-        <%= form_for(@team, authenticity_token: true, url: take_team_path(@team), html: {id: 'take_team_form', method: :post}, remote: true) do |f| %>
+        <%= form_for(@team, authenticity_token: true, url: take_team_path(@team), html: {id: 'take_team_form', method: :post, class: 'take_team'}, remote: true) do |f| %>
           <div class="input_wrapper">
             <%= f.text_field :secret, autofocus: true, placeholder: 'Секретный код', class: "modalInput", required: true %>
           </div>
-          <%= f.submit "Отправить", class: "blueBtn" %>
+          <p style="display:none" class="warning_text">Вы будете удалены из вашей текущей команды. Вы уверены?</p>
+          <%= f.submit "Отправить", class: (current_user.team ? "blueBtn need_confirmation" : "blueBtn") %>
         <% end %>
       </div>
       <div class="modal-footer"></div>

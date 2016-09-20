@@ -76,7 +76,7 @@ class TeamsController < ApplicationController
       @team.update(secret: nil) if member.persisted?
       render json: { status: 'ok' }
     else
-      render json: { error: 'Неверный секретный код' }, status: 403 
+      render json: { error: 'Неверный секретный код' }, status: 406 
     end
   end
 
