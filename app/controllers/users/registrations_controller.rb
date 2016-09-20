@@ -1,6 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :html, :json
   before_action :set_team, only: [:new, :create, :edit, :update]
+  after_action :inv, only: [:create]
+  after_action :get_invitations, only: [:create]
 
   def new
     flash[:errors] ||= []
@@ -59,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     if resource && resource.persisted?
       Invitation.create(user: resource, inviter: @team.captain, team: @team) if @team && !@team.full?
-    end    
+    end
   end
 
   def update
