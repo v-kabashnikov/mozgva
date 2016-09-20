@@ -1,0 +1,22 @@
+<div class="modal fade in" id="take_team">
+  <div class="modal-dialog registration">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="text-center">Завладеть командой</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@team, authenticity_token: true, url: take_team_path(@team), html: {id: 'take_team_form', method: :post}, remote: true) do |f| %>
+          <div class="input_wrapper">
+            <%= f.text_field :secret, autofocus: true, placeholder: 'Секретный код', class: "modalInput", required: true %>
+          </div>
+          <%= f.submit "Отправить", class: "blueBtn" %>
+        <% end %>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

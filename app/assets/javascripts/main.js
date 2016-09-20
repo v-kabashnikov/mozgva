@@ -264,6 +264,38 @@ $( document ).ready(function() {
 	$( "#user_avatar" ).change(function(event) {
 		showFile(event);
 	});
+
+	// $("#take_team_form input[type=submit].need_confirmation").click(function(e){
+	// 	e.preventDefault();
+
+	// 	$("#take_team_form")
+	// });
+
+	$("#take_team_form").on("ajax:success", function(e, data, status, xhr){
+		location.reload();
+	}).on("ajax:error", function(e, data, status, xhr){
+		$(".error_label").remove();
+    $(this).children(".input_wrapper").removeClass("has_error");
+    error_messages = [];
+    console.log(xhr.responseJSON);
+    if(xhr.responseJSON['error']){      
+      error_messages = "<div class='alert alert-danger pull-left text-left'>" + xhr.responseJSON['error'] + "</div>"
+    }
+    else if(xhr.responseJSON['errors']){
+      form = $(this);
+      $.each(xhr.responseJSON["errors"], function(v, k){
+        el = form.find("#user_" + v).parent(".input_wrapper").first();
+        el.addClass("has_error");
+        el.prepend('<label class="error_label">' + k + '</label>');
+      })
+    }
+    else{
+      "<div class='alert alert-danger pull-left'>Unknown error</div>"
+    }
+    $(this).parents('.modal').find('.modal-footer').html(error_messages)
+	});
+
+
 });
 
 var a2a_config = a2a_config || {};

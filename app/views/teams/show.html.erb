@@ -43,6 +43,9 @@
       <a href="#" class="save" style="display:none;">Сохранить</a>
     <% end %>
     <h1 id="team_name_header" class="editable" data-name="team[name]" data-action="<%= team_path(@team) %>"><%= @team.name %></h1>
+    <% if current_user && !@team.captain %>
+      <%= link_to 'Завладеть командой', '#take_team', 'data-toggle' => 'modal' %>
+    <% end %>
   </div>
   <ul class="contentWrap">
     <% @team.achievments.each do |ach| %>
@@ -480,3 +483,4 @@ $(d).stop().animate({opacity: 0}, 400, function() {
 </section>
 
 <%= render 'shared/invite_modal' unless @team.full? %>
+<%= render 'shared/take_team' if current_user && !@team.captain %>

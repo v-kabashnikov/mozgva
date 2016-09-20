@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
   resources :teams, only: [:create, :destroy, :update, :show] do
     get 'list', on: :collection
+    post 'take', on: :member
   end
   get 'games/filter', to: 'games#filter', as: :games_filter
   delete 'games/:id/unregister', to: 'games#unregister', as: :game_unregister
