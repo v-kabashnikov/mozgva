@@ -5,9 +5,9 @@ $( document ).ready(function() {
 		e.stopPropagation();
 	})
 
-	$('[data-toggle="tab"],[data-toggle="pill"]').click(function() { 
-	    $(this).parent().children('.active[data-toggle="tab"],.active[data-toggle="pill"]').removeClass('active'); 
-	    $(this).addClass('current'); 
+	$('[data-toggle="tab"],[data-toggle="pill"]').click(function() {
+	    $(this).parent().children('.active[data-toggle="tab"],.active[data-toggle="pill"]').removeClass('active');
+	    $(this).addClass('current');
 	});
 	$('.start_edit').on('click', function(e){
 		e.preventDefault();
@@ -90,6 +90,12 @@ $( document ).ready(function() {
 	$(".make_boatswain").on("ajax:success", function(e, data, status, xhr){
 		$('.faceParth .boatswain').removeClass('boatswain');
 		$('#member_' + data['member']['id'] + ' p').addClass('boatswain');
+		$('#member_' + data['member']['id'] + ' p')
+	});
+
+	$(".make_captain").on("ajax:success", function(e, data, status, xhr){
+		$('.faceParth .captain').removeClass('captain');
+		$('#member_' + data['member']['id'] + ' p').addClass('captain');
 		$('#member_' + data['member']['id'] + ' p')
 	});
 
@@ -255,7 +261,7 @@ $( document ).ready(function() {
 	          $('.avatarWrap').css({'background-image': 'url(' + e.target.result + ')','border':'3px dashed transparent'});
 	        };
 	      })(f);
-	 
+
 	      fr.readAsDataURL(f);
 	    }
   	}
