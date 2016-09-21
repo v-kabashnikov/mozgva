@@ -7,9 +7,26 @@
         <div class="links">
           <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
           <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } if current_user.member?(@team) %>
           <% if current_user.member?(@team) && current_user.member.captain? %>
            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
+           <a href="#captain_error" data-toggle="modal">Выйти из команды</a>
+           <div class="modal fade in" id="captain_error">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">x</button>
+                  <h2 class="text-center">Возникли ошибки</h2>
+                </div>
+                <div class="modal-body">
+                  <p>Вы не можете выйти из команды пока являетесь ее капитаном</p>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+          </div>
+          <%else%>
+          <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } if current_user.member?(@team) %>
           <%end%>
           <% if @invitations.present? %>
           <%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
@@ -56,6 +73,7 @@
           <% if current_user && current_user.member.captain? && !member.captain? %>
             <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
             <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
+            <%= link_to '',  set_captain_member_path(member), method: :put, class: 'control make_captain', data: { confirm: 'Вы уверены что хотите лишиться всех привилегий и назначить нового капитана команды?' } unless member.captain?%>
           <% end %>
           <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>
@@ -85,6 +103,7 @@
           <% if current_user && current_user.member?(@team) && current_user.member.captain? && !member.captain? %>
             <%= link_to '', member_path(member), remote: true, method: :delete, data: { confirm: 'Вы уверены?' }, class: 'control remove_member' %>
             <%= link_to '', set_boatswain_member_path(member), remote: true, method: :put, class: 'control make_boatswain' unless member.boatswain? %>
+            <%= link_to '',  set_captain_member_path(member), method: :put, class: 'control make_captain', data: { confirm: 'Вы уверены что хотите лишиться всех привилегий и назначить нового капитана команды?' } unless member.captain?%>
           <% end %>
           <div class="avatar" style="background-image: url('<%= member.user.avatar.url(:small)%>')"></div>
           <p class="<%= member.team_role %>"><%= member.user.name %></p>

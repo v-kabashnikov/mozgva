@@ -18,4 +18,14 @@ class MembersController < ApplicationController
       render json: { status: :ok, member: { id: member.id } }
     end
   end
+
+  def set_captain
+    member = Member.find(params[:id])
+    if current_user.member.team_role == 'captain' && current_user.member.team == member.team
+      member.team.members.where(team_role: 'captain').update(team_role: nil)
+      member.update(team_role: 'captain')
+      redirect_to my_team_url
+    end
+  end
+
 end
