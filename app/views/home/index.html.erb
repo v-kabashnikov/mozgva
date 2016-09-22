@@ -56,11 +56,11 @@
 			      <div class="modal-content">
 			        <div class="modal-header">
 			          <button class="close" data-dismiss="modal">x</button>
-			          <h2 class="text-center">Вы получили приглашение в команду <%=@waiting_invitations.last.team.name%></h2>
+			          <h2 class="text-center">Вы получили приглашение в команду <%=@invitations.last.team.name%></h2>
 			        </div>
 			      	<div class="modal-body">
 			        	<h2>Вступить в команду?</h2>
-			         	<%= link_to 'Да', accept_invitation_path(@waiting_invitations.last) %>
+			         	<%= link_to 'Да', accept_invitation_path(@invitations.last) %>
 			         	<a href="" class="close" data-dismiss="modal">Нет</a>
 			        </div>
 			        <div class="modal-footer">

@@ -2048,6 +2048,12 @@ footer.korporatF {
 					    font-weight: 900;
 					    transform: rotate(-90deg);
 					}
+					&.make_captain:before {
+						content: "\f005";
+					    padding: 10px 10px;
+					    right: 37px;
+					    top: -29px;
+					}
 				}
 				&:hover a.control{
 					opacity: .9;
@@ -3098,6 +3104,12 @@ footer.korporatF {
 .thankU {
 	display: none;
 	padding:40px 20px;
+}
+
+.restore_password_success {
+	text-align: center;
+	font-size: 2rem;
+	padding: 1rem;
 }
 
 .modal-dialog {

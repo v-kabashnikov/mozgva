@@ -18,4 +18,14 @@ class ApplicationController < ActionController::Base
   def get_invitations
     @invitations = current_user.invitations.waiting if current_user
   end
+
+  def inv
+    unless current_user.team
+      if @invitations.present?
+        $INV = true
+      else
+        $INV = false
+      end
+    end
+  end
 end
