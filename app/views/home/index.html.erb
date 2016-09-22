@@ -1,1 +1,371 @@
-<h1>ГЛАВНАЯ</h1>
+<section class="lightningSection">
+	<div class="contentWrapper">
+		<p>
+			<span><img src="<%= asset_path('lightningSec/lightning.png') %>"></span>
+			Молния!
+		</p>
+		<div class="imgWrapp">
+			<img class="left" src="<%= asset_path('lightningSec/bgLeft.png') %>">
+		</div>
+		<h3>Начинается Чемпионат Мозгвы! Опа-опа!</h3>
+	</div>
+</section>
+<section class="headInfo">
+	<div class="contentWrapper">
+		<div class="line mobDIF">
+			<div class="authorizationWrap" >
+		    <%= render 'shared/topleft_menu' %>
+			</div>
+
+			<%if $INV == true%>
+        <script>
+          $(document).ready(function() {
+            $('#inv_modal').modal('show');
+          });
+        </script>
+        <div class="modal fade in" id="inv_modal"  style='display: none;'>
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button class="close" data-dismiss="modal">x</button>
+			          <h2 class="text-center">Вы получили приглашение в команду <%=@invitations.last.team.name%></h2>
+			        </div>
+			      	<div class="modal-body">
+			        	<h2>Вступить в команду?</h2>
+			         	<%= link_to 'Да', accept_invitation_path(@invitations.last) %>
+			         	<a href="" class="close" data-dismiss="modal">Нет</a>
+			        </div>
+			        <div class="modal-footer">
+			        </div>
+			      </div>
+			    </div>
+  			</div>
+      <% $INV = false%>
+      <% end%>
+
+			<div class="logoWrap">
+				<a href="/"><img src="<%= asset_path('logo.png') %>"></a>
+			</div>
+			<div class="wrapSelectCityMonth" id="update_city" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
+				<div class="update_city wrapper-dropdown" tabindex="1">
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div>
+			</div> <!--AND SELECT SITY & MONTH-->
+		</div>
+		<div class="line SomeTabs">
+			<a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">
+			<div class="item">
+				<img src="<%= asset_path('header/ligi.png') %>">
+				<p>Лиги</p>
+			</div>
+			</a>
+			<%= link_to sert_path do %>
+			<div class="item">
+				<img src="<%= asset_path('header/gifts.png') %>">
+				<p>Подарочные<br/> сертификаты</p>
+			</div>
+			<% end %>
+			<%= link_to rating_path do %>
+			<div class="item">
+				<img src="<%= asset_path('header/rang.png') %>">
+				<p>Рейтинг<br/> команд</p>
+			</div>
+			<% end %>
+			<%= link_to calendar_path do %>
+			<div class="item">
+				<img src="<%= asset_path('header/calendar.png') %>">
+				<p>Календарь игр</p>
+			</div>
+			<% end %>
+			<%= link_to korporat_path do %>
+			<div class="item">
+				<img src="<%= asset_path('header/korporat.png') %>">
+				<p>Корпоратив</p>
+			</div>
+			<% end %>
+			<%= link_to franchise_path do %>
+			<div class="item">
+				<img src="<%= asset_path('header/connect.png') %>">
+				<p>Франшиза<br/> и спонсорство</p>
+			</div>
+			<% end %>
+		</div>
+
+	</div>
+</section>
+<section class="aboutSec">
+	<div class="contentWrapper">
+		<div class="infoWrap">
+			<h1>Это Мозгва,<br/> детка</h1>
+			<p>Мозгва — это 10 000 участников и 245 команд!<br/>
+				Это еще что-нибудь, например!</p>
+		</div>
+		<span class="tag"><span>#</span>ЭтоМозгваДетка</span>
+		<ul class="cycles">
+			<li><img src="<%= asset_path('aboutSec/left.png') %>"></li>
+			<li><img src="<%= asset_path('aboutSec/right.png') %>"></li>
+		</ul>
+		<div class="dropup like">
+			<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+		  </button>
+		  <ul class="dropdown-menu a2a_kit">
+		  	<li>
+		  		<a class="a2a_button_vk" href="">
+		  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+		  		</a>
+		  	</li>
+		  	<li>
+		  		<a class="a2a_button_twitter" href="#">
+		  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+		  		</a>
+		  	</li>
+		  	<li>
+		  		<a class="a2a_button_facebook" href="#">
+		  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+		  		</a>
+		  	</li>
+		  </ul>
+		</div>
+		<div class="playBtn">
+			<a  href="" data-toggle="modal" data-target=".videoModal">
+			<img src="<%= asset_path('aboutSec/play.png') %>">
+			</a>
+		</div>
+	</div>
+</section>
+
+
+
+<section class="noticeSection">
+	<div class="fullWrapp">
+		<div class="left">
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
+				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="update_month wrapper-dropdown" style="right:0" tabindex="1">
+					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+					<ul class="dropdown" tabindex="1" data-name="year_month">
+						<% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div>
+			</div> <!--AND SELECT SITY & MONTH-->
+			<div class="gamesTabs">
+				<%= render 'games/tabs' %>
+			</div>
+			<% if @game_groups_count > 4 %>
+			  <%= link_to 'Все игры' , calendar_path, :class => "allGames" %>
+			<% end %>
+		</div>
+		<div class="right">
+			<div class="noticCarosel">
+				<%= render 'games/main_carousel' %>
+			</div>
+		</div>
+	</div>
+<!-- 	 ДОРАБОТКА  --><div class="fullWrapp trash">
+		<div class="left">
+			<div class="photoTabs">
+				<div class="head">
+					<h2>Фоточки</h2>
+				</div>
+				<div class="body">
+					<ul class="headTabNav" id="mySliderTabs">
+						<% @past_games.order(when: :asc).each_with_index do |game, i|%>
+						<%months_hash = {1=> 'Января', 2 => 'Февраля', 3 => 'Марта', 4=> 'Апреля', 5 => 'Мая', 6 => 'Июня', 7 => 'Июля',  8 => 'Августа',  9 => 'Сентября',  10 => 'Октября',  11 => 'Ноября',  12 => 'Декабря',}%>
+						<li>
+							<input type="radio"  name="tabNav" id="tab<%=i+1%>"/>
+							<label for="tab<%=i+1%>" class="title tab<%=i+1%> <%='current' if i == 0%>">
+								<%=game.when.strftime("%d")%> <%=months_hash[game.when.month]%>
+							</label>
+
+						</li>
+						<%end%>
+					</ul>
+					<% @past_games.order(when: :asc).each_with_index do |game, i|%>
+					<div class="tabs tab<%=i+1%> <%='visible' if i == 0%>">
+						<p><%=game.photos.count%> штук</p>
+						<div class="center">
+						<%game.photos.each do |photo|%>
+						<a href="" data-toggle="modal" data-image="<%=photo.image.url %>" data-game="game-<%=game.id%>" data-target=".bs-modal-<%=game.id%>" class="full-v">
+							<div>
+								<div class="photoItemWrap" style="background-image:url(<%=photo.image.url%>);"></div>
+							</div>
+						</a>
+			       <%end%>
+			       </div>
+					</div>
+						<% if game.photos.first %>
+							<%= render partial: "shared/gallery",locals: {game: game}  %>
+						<%end%>
+					<%end%>
+				</div>
+			</div>
+		</div>
+<!-- gallery script -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".full-v").click(function () {
+      var main = $(this).attr('data-image');
+      var game = $(this).attr('data-game');
+      $('.'+game).children().attr('src',main);
+    });
+  });
+</script>
+<script>
+$(function() {
+    function a(c, d, a, f) {
+        var e = c.length,
+            b = 0;
+        c.each(function(g, a) {
+            $("img", a).on("click", function(e) {
+                e.preventDefault();
+                b = g;
+$(d).stop().animate({opacity: 0}, 400, function() {
+         var lphoto = $(a).data('src');
+         d.src = lphoto; $(d).animate({opacity: 1}, 400);
+         d.src = a.href; $(d).animate({opacity: 1}, 400);
+});
+                c.removeClass("active");
+                $(a).addClass("active")
+            })
+        });
+        a.click(function(a) {
+            a.preventDefault();
+            b--;
+            b < 0 && (b = e - 1);
+            $("img", c.eq(b)).click()
+        });
+        f.click(function(a) {
+            a.preventDefault();
+            b++;
+            b %= e;
+            $("img", c.eq(b)).click()
+        })
+    }
+    $(".gallery-box").each(function(c, d) {
+        a($(".thumbnails a", d), $(".big-image img", d)[0], $(".prev", d), $(".next", d))
+    })
+});
+</script>
+<!-- end gallery script -->
+		<div class="right">
+			<div class="adParthTop" style="background-image:url(<%= asset_path('ad/heineken.png')%>);">
+			</div>
+			<div class="adParthBottom">
+				<div class="carouselWrap">
+
+					<div class="teamsCarousel">
+						<div class="item">
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
+							<ul>
+								<li style="background-image:url(<%= asset_path('ad/ava0.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava2.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava4.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava5.png')%>);"></li>
+								<li style="background-image:url(<%= asset_path('ad/ava3.png')%>);"></li>
+							</ul>
+						</div>
+						<div class="item">
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
+						</div>
+						<div class="item">
+							<img src="<%= asset_path('ad/cherries.png')%>"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!-- ДОРАБОТКА -->
+	<div class="wrapPartnerSec">
+		<div class="partnerCarousel">
+			<div class="item">
+				<img src="<%= asset_path('partners/kaspersky.png') %>" />
+				<p>Касперский</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/microsoft.png') %>" />
+				<p>Майкрософт</p>
+			</div>
+			<div class="item">
+				<img src="<%= asset_path('partners/publicis.png') %>" />
+				<p>Публицис</p>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="fullWrapp">
+			<div class="left">
+				<ul>
+					<li><a href="/calendar">Календарь игр</a></li>
+					<li><a tabindex="1" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+					<li><a href="/sert">Сертификаты</a></li>
+					<li><a href="/rating">Рейтинг команд</a></li>
+					<li><a href="/franchise">Франшиза и спонсорство</a></li>
+				</ul>
+			</div>
+			<div class="right">
+				<ul>
+					<li><div class="dropup like">
+						<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					    <img src="<%= asset_path('symbol/like.png') %>" />Первая бар-олимпиада
+						</button>
+						<ul class="dropdown-menu a2a_kit">
+						  	<li>
+						  		<a class="a2a_button_vk" href="">
+						  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+						  		</a>
+						  	</li>
+						  	<li>
+						  		<a class="a2a_button_twitter" href="#">
+						  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+						  		</a>
+						  	</li>
+						  	<li>
+						  		<a class="a2a_button_facebook" href="#">
+						  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+						  		</a>
+						  	</li>
+						</ul>
+					</div></li>
+					<li><img src="<%= asset_path('logoFooter.png') %>"/></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+</section>
+
+<div class="videoModal modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/hVY8MkL62mk" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>

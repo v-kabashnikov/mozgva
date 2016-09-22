@@ -1,0 +1,23 @@
+<div class="modal fade in" id="invite_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="text-center">Пригласить</h2>
+      </div>
+      <div class="modal-body">
+        <div class="invite_link">
+          <p>Ссылка для приглашения</p>
+          <div class="copyWrap">
+          <%= text_field_tag :invite_link, invite_url(@team.invite), class: 'modalInput', readonly: true %>
+          <a data-clipboard-target="#invite_link" id="copy_button" class="copyBtn">Копировать</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

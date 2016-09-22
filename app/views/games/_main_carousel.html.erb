@@ -1,0 +1,29 @@
+<% @main_games.each do |game| %>
+  <div id="mainGame<%=game.id%>" class="<%= 'my-game' if(current_user && current_user.participate?(game)) %>">
+    <ul class="roundWrap">
+      <li><%= "#{game.name}: #{game.city.name}" %></li>
+      <li>
+        <span><img src="<%= asset_path('noticeSec/locationCarousel.png') %>"/></span><%= game.place.name %>
+      </li>
+      <li><%= l(game.when, format: '%e %B') %></li>
+      <li><%= game.when.strftime("%H:%M") %></li>
+      <li>
+        <% if current_user %>
+          <% 
+            klass = 'roundBtn participateBtn'
+            unless game.open_for_reg?
+              klass += ' disabled'
+              title = "Регистрация закрыта"
+            end
+          %>
+          <% part = current_user.participate?(game) %>
+          <%= link_to 'Не участвовать', game_unregister_path(game), remote: true, class: 'roundBtn participateBtn', method: :delete, style: "display:#{part ? 'block' : 'none'}" %>        
+          <%= link_to 'Участвовать', game_registrations_path(game_id: game.id), remote: true, class: klass, method: :post, title: title, style: "display:#{part ? 'none' : 'block'}" %>
+        <% else %>
+          <a href="#sign_in" class="redBtn" data-toggle="modal">Участвовать</a>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+<% end %>
+

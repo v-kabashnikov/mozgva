@@ -3,21 +3,30 @@
   <head>
     <title>Mozgva</title>
     <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Мозгва"/>
+    <meta property="og:image" content="<%= asset_path('mozgvaShare.png') %>"/>
+    <meta property="og:description" content="#этомозгвадетка"/>
+    <meta property="og:url" content="https://mozgva-staging.herokuapp.com/">
+    <link rel="shortcut icon" href="<%= asset_path('favicon.ico') %>" type="image/x-icon">
   </head>
-
   <body>
-    <% if current_user %>
-  	  <%= "Hello, #{current_user.email}" %>
-  	  <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
-  	<% else %>
-  	  <%= link_to "Войти", "#sign_in", "data-toggle" => "modal", :class => 'btn btn-small' %>
-  	  <%= link_to "Регистрация", "#sign_up", "data-toggle" => "modal", :class => 'btn btn-small' %>
-  	  <%= render 'shared/sign_in' %>
-  	  <%= render 'shared/sign_up' %>
-  	<% end %>
     <%= yield %>
+    <% unless current_user %>
+      <%= render 'shared/sign_in' %>
+      <%= render 'shared/sign_up' %>
+      <%= render 'shared/restore_password' %>
+      <%= render 'shared/user_agree' %>
+    <% else %>
+      <%= render 'shared/edit_profile' %>
+      <%= render 'shared/team_modal' unless current_user.team %>
+      <%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
+      <%= render partial: 'shared/invitations_modal', locals: { invitations: @invitations } if @invitations.present? %>
+    <% end %>
+    <%= render 'shared/errors_modal' %>
+    <%= render 'shared/teams_modal' %>
   </body>
 </html>

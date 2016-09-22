@@ -1,0 +1,77 @@
+<section class="topInfo rating">
+  <div class="contentWrap">
+    <div class="btnWrap authorizationWrap">
+      <%= render 'shared/topleft_menu' %>
+    </div>
+    <h1>Рейтинг<br/> команд</h1>
+  </div>
+</section>
+
+<section class="ratingSection">
+<ul class="navigationWrap">
+    <li><%= link_to root_path do %>Главная<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+    <li class="calendarIgr"><%= link_to calendar_path do %>Календарь игр<% end %></li>
+    <li><%= link_to sert_path do %>Сертификаты<% end %></li>
+    <li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+    <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+  </ul>
+  <div class="mainWrap">
+    <div class="titleTable">
+      <h2>Обладатели венков</h2>
+      <a href="/faq" class="blueBtn">В чем соль?</a>
+      <ul>
+        <li><img src="<%= asset_path('img_venki/1-Зеленый-d.png')%>" alt="">
+        <p>>70%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Голубой-d.png')%>" alt="">
+        <p>70-75%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Бронза-d.png')%>" alt="">
+        <p>75-80%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Серебро-d.png')%>" alt="">
+        <p>80-85%</p></li>
+        <li><img src="<%= asset_path('img_venki/1-Золото-d.png')%>" alt="">
+        <p> &lt;85% </p></li>
+      </ul>
+    </div>
+    <div class="ratingOfWins">
+      <table class="tableOfRating desctop">
+        <thead>
+          <tr>
+            <td>Команды</td>
+            <td>Качество<br>игры</td>
+            <td>Количество<br> баллов</td>
+            <td>Количество<br> игр</td>
+          </tr>
+        </thead>
+        <%= render partial: "teams", locals: {ratings: @top}%>
+      </table>
+      <div class="areaOfRating mobile">
+        <%= render partial: "teams-mob", locals: {ratings: @top}%>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ratingSection">
+  <div class="mainWrap">
+    <div class="titleTable">
+      <h2>Претенденты</h2>
+    </div>
+    <div class="ratingOfWins">
+      <table class="tableOfRating desctop">
+        <thead>
+        <tr>
+          <td>Команды</td>
+          <td>Качество<br>игры</td>
+          <td>Количество<br> баллов</td>
+          <td>Количество<br> игр</td>
+        </tr>
+        </thead>
+        <%= render partial: "teams", locals: {ratings: @pretendents}%>
+      </table>
+      <div class="areaOfRating mobile">
+        <%= render partial: "teams-mob", locals: {ratings: @pretendents}%>
+      </div>
+    </div>
+  </div>
+</section>

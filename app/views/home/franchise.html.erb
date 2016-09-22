@@ -1,0 +1,107 @@
+<section class="topInfo franchise">
+	<div class="contentWrap">
+		<div class="btnWrap authorizationWrap">
+			<%= render 'shared/topleft_menu' %>
+		</div>
+		<h1>Франшиза<br/> и спонсорство</h1>
+	</div>
+</section>
+
+<section class="franchiseSec">
+	<ul class="navigationWrap">
+		<li><%= link_to root_path do %>Главная<% end %></li>
+		<li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+		<li><%= link_to sert_path do %>Сертификаты<% end %></li>
+		<li><%= link_to calendar_path do %>Календарь игр<% end %></li>
+		<li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+		<li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+		
+	</ul>
+	<div class="mainWrap">
+		<div class="infoBlock">
+			<div class="rectangle">
+				<article>Что такое Мозгва и чем это грозит?</article>
+				<p>
+				Друзья, мы начинаем серию удивительных репортажей о наших командах! В них мы будем рассказывать вам о тех, кто круче всех играет, дольше всех к нам ходит, ярче всех празднует последнее место, постоянно выигрывает наши термостаканы в инстаграм конкурсе. <br/>Ребята показывают такую игру, что захватывает дух. По нашему новому рейтингу Черешня – безоговорочный лидер с показателем 88% от максимального количества баллов, которые они вообще могли набрать. А значит,  пока Черешня на вершине, вход на Мозгву для Черешни свободный!
+				</p>
+			</div>
+			<div class="square">
+				<article>География<br/> Мозгвы</article>
+					<a href="">Москва</a>
+					<a href="">Берлин</a>
+					<a href="">Санкт-Петербург</a>
+			</div>
+			<div class="rectangle">
+				<article>Что требуется?</article>
+				<ul>
+					<li><span>ярче всех празднует последнее место, постоянно выигрывает наши термостаканы в инстаграм </span></li>
+					<li><span>разднует последнее место, постоянно выигры</span></li>
+					<li><span>всех празднует последнее место, постоянно выигрывает наши термоста</span></li>
+					<li><span>разднует постоянннует последнее место, постоянно выигры</span></li>
+				</ul>
+			</div>
+			<div class="square">
+				<article>Условия<br/> сотрудничества</article>
+				<a href="">
+					<img src="<%= asset_path('symbol/download.png') %>"/>
+				</a>
+				<a href="">скачать</a>
+				<span>.PDF (5 Мб)</span>
+			</div>
+		</div>
+		<div class="widget">
+			<h2>Хочу<br/> свою<br/> Мозгву</h2>
+			<a href="" class="btnBlue">
+				Хочу!
+			</a>
+		</div>
+	</div>
+	<footer class="franchiseF">
+		<ul>
+			<li>
+				<div class="dropup like">
+					<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+				  </button>
+				  <ul class="dropdown-menu a2a_kit">
+				  	<li>
+				  		<a class="a2a_button_vk" href="">
+				  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_twitter" href="#">
+				  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_facebook" href="#">
+				  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+				  		</a>
+				  	</li>
+				  </ul>
+				</div>
+				<div class="tag">#этомозвадетка</div>
+			</li>
+			<li>
+				<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+					<div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+						<ul class="dropdown" tabindex="1" data-name="city_id">
+							<% City.all.each do |city| %>
+							<li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+							<% end %>
+						</ul>
+					</div>
+					<div style="display:none">
+						<span data-current-value="4">4</span>
+						<ul data-name="max_groups"><li></li></ul>
+					</div>
+				</div>
+				<%= link_to root_path do %>
+				<img src="<%= asset_path('calendar/logo.png') %>"/>
+				<% end %>
+			</li>
+		</ul>
+	</footer>
+</section>

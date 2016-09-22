@@ -1,0 +1,125 @@
+
+<section class="topInfo franchise">
+  <div class="contentWrap">
+    <div class="btnWrap authorizationWrap">
+      <% if current_user %>
+      <span>
+        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <div class="links">
+          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+          <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+          <% if current_user.invitations.present? %>
+          <%= link_to "#{current_user.invitations.count} #{Russian.p(current_user.invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+          <% end %>
+          <% if current_user.team %>
+          <%= link_to("Моя команда", my_team_path) %>
+          <% else %>
+          <% if current_user.phone_confirmed_at %>
+          <%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+          <% else %>
+          <a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
+          <% end %>
+          <% end %>
+        </div>
+      </span>
+      <% else %>
+      <span>
+        <img src="<%= asset_path('lightningSec/lightning.png') %>">
+        <div class="links">
+          <a href="#sign_in" data-toggle="modal">Войти</a>
+          <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+        </div>
+      </span>
+      <% end %>
+    </div>
+    <h1>Приглашение<br/> в команду</h1>
+
+   <!--  <%# if @team %>&laquo<%#= @team.name %>&raquo<%# end %> -->
+  </div>
+</section>
+<section class="franchiseSec">
+  <ul class="navigationWrap">
+    <li><%= link_to root_path do %>Главная<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+    <li><%= link_to calendar_path do %>Календарь игр<% end %></li>
+    <li><%= link_to sert_path do %>Сертификаты<% end %></li>
+    <li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Рейтинг команд</a></li>
+    <li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+    <li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+  </ul>
+  <div class="mainWrap invite">
+    <div class="AboutInviteWrap">
+      <article>Приглашение пришло от команды<br/>
+      <%if @team %><span>&laquo<%= @team.name %>&raquo<% end %></span></article>
+      <%= devise_error_messages! %>
+      <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p class="error"><%= error %></p>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="formSert">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="formWrap">
+
+    <%= f.text_field :name, placeholder: 'Имя', class: "lineInput", required: true%>
+    <%= hidden_field_tag :invite, @team.invite if @team %>
+    <%= f.submit "Принять инвайт", class: "blueBtn" %>
+    </div>
+    <% end %>
+    </div>
+  </div>
+<footer class="franchiseF">
+    <ul>
+      <li>
+        <div class="dropup like">
+          <button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+          </button>
+          <ul class="dropdown-menu a2a_kit">
+            <li>
+              <a class="a2a_button_vk" href="">
+                <img src="<%= asset_path('symbol/vk.png') %>"/>
+              </a>
+            </li>
+            <li>
+              <a class="a2a_button_twitter" href="#">
+                <img src="<%= asset_path('symbol/twiter.png') %>"/>
+              </a>
+            </li>
+            <li>
+              <a class="a2a_button_facebook" href="#">
+                <img src="<%= asset_path('symbol/fb.png') %>"/>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="tag">#этомозвадетка</div>
+      </li>
+      <li>
+        <%= link_to root_path do %>
+        <img src="<%= asset_path('calendar/logo.png') %>"/>
+        <% end %>
+      </li>
+    </ul>
+  </footer>
+</section>
+
+
+<%#= render "devise/shared/links" %>
+<% unless current_user %>
+<%= render 'shared/sign_in' %>
+<%= render 'shared/sign_up' %>
+<%= render 'shared/restore_password' %>
+<% else %>
+<%= render 'shared/edit_profile' %>
+<%= render 'shared/team_modal' unless current_user.team %>
+<%= render 'shared/phone_confirmation' unless current_user.phone_confirmed_at %>
+<%= render 'shared/invitations_modal' if current_user.invitations.present? %>
+<% end %>
+<%= render 'shared/errors_modal' %>
+<%= render 'shared/teams_modal' %>
+
+
+
+

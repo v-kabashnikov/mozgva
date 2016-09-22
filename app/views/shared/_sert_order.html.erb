@@ -1,0 +1,39 @@
+<div class="modal fade in" id="sert_ordero">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="text-center">Заказ</h2>
+      </div>
+      <div class="modal-body">
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        <form action="https://docs.google.com/a/dshop24.ru/forms/d/e/1FAIpQLSeZxiGLT1FngyMp-CPTMkXSPwPFdVPcLHsOPbkIwm09jOA7Tw/formResponse" target="hidden_iframe" id="sertForm" onsubmit="thankU()">
+          <div class="formWrap">
+          <input class="modalInput" placeholder="Имя" type="text" name="entry.1500946687" id="nameOfUser" required />
+          <input class="modalInput" placeholder="Почта" type="email" name="entry.856017684" required />
+          <input class="modalInput" placeholder="Телефон" type="text" name="entry.273360251" id="phoneOfUser" />
+          <div class="selectWrap">
+            <article>Предпочитаю забрать</article>
+            <input type="radio" name="entry.99594" value="&#1085;&#1072; &#1080;&#1075;&#1088;&#1077;" id="group_99594_1" checked>
+            <label for="group_99594_1">На игре</label>
+            <input type="radio" name="entry.99594" value="&#1089;&#1072;&#1084;&#1086;&#1089;&#1090;&#1086;&#1103;&#1090;&#1077;&#1083;&#1100;&#1085;&#1086;" id="group_99594_2">
+            <label for="group_99594_2">Самостоятельно</label>
+          </div>
+          <div class="selectWrap">
+            <input type="radio" name="entry.171784543" value="&#1085;&#1072; 3-&#1080;&#1093;" id="group_171784543_1">
+            <input type="radio" name="entry.171784543" value="&#1085;&#1072; 6-&#1099;&#1093" id="group_171784543_2">
+            <input type="radio" name="entry.171784543" value="&#1085;&#1072; 9-&#1099;&#1093;" id="group_171784543_3">
+          </div>
+          <input type="submit" class="redBtn" value="Подарить"/>
+          </div>
+        </form>
+        <div class="thankU">
+          <h3>Спасибо!<br/> Мозгва скоро свяжется с Вами.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

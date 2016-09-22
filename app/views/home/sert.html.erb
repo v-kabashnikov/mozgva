@@ -1,0 +1,100 @@
+<section class="topInfo franchise">
+	<div class="contentWrap">
+		<div class="btnWrap authorizationWrap">
+			<%= render 'shared/topleft_menu' %>
+		</div>
+		<h1>Сертификат</h1>
+	</div>
+</section>
+
+<section class="franchiseSec">
+	<ul class="navigationWrap">
+		<li><%= link_to root_path do %>Главная<% end %></li>
+		<li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+		<li class="calendarIgr"><%= link_to calendar_path do %>Календарь игр<% end %></li>
+		<li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+		<li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+		<li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+	</ul>
+	<div class="mainWrap sert">
+		<div class="descriptSert">
+			<article>Отличная идея для подарка!</article>
+			<p>Забудьте про цветы. У нас можно купить подарочные сертификаты на 3-х, 6-х и 9-х участников. Забрать сертификаты можно на одной из игр или у нас в офисе в р-не Третьяковской.</p>
+		</div>
+		<div class="itemsWrap">
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert3.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на троих<br/> <span class="price">1 500</span></li>
+					<li>
+						<a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на троих')">Заказать</a>
+					</li>
+				</ul>
+			</div>
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert6.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на шестерых<br/> <span class="price">3 000</span></li>
+					<li><a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на шестерых')">Заказать</a></li>
+				</ul>
+			</div>
+			<div class="itemSert">
+				<img src="<%= asset_path('sert/sert9.png') %>" class="img-responsive"/>
+				<ul>
+					<li>на девятерых<br/> <span class="price">4 500</span></li>
+					<li><a href="#sert_ordero" data-toggle="modal" class="redBtn" onclick="giftFun('на девятерых')">Заказать</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer class="franchiseF">
+		<ul>
+			<li>
+				<div class="dropup like">
+					<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+				  </button>
+				  <ul class="dropdown-menu a2a_kit">
+				  	<li>
+				  		<a class="a2a_button_vk" href="">
+				  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_twitter" href="#">
+				  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_facebook" href="#">
+				  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+				  		</a>
+				  	</li>
+				  </ul>
+				</div>
+				<div class="tag">#этомозвадетка</div>
+			</li>
+			<li>
+				<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+					<div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+						<ul class="dropdown" tabindex="1" data-name="city_id">
+							<% City.all.each do |city| %>
+							<li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+							<% end %>
+						</ul>
+					</div>
+					<div style="display:none">
+						<span data-current-value="4">4</span>
+						<ul data-name="max_groups"><li></li></ul>
+					</div>
+				</div>
+				<%= link_to root_path do %>
+		        <img src="<%= asset_path('calendar/logo.png') %>"/>
+		        <% end %>
+			</li>
+		</ul>
+	</footer>
+</section>
+
+<%= render 'shared/sert_order' %>

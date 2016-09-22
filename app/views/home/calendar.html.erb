@@ -1,0 +1,130 @@
+
+<section class="topInfo calendar">
+	<div class="contentWrap">
+		<div class="btnWrap authorizationWrap">
+			<%= render 'shared/topleft_menu' %>
+		</div>
+		<h1>Календарь<br/> игр</h1>
+	</div>
+</section>
+<section class="calendarSec">
+	<ul class="navigationWrap">
+		<li><%= link_to root_path do %>Главная<% end %></li>
+		<li><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Все еще в разработке">Лиги</a></li>
+		<li><%= link_to sert_path do %>Сертификаты<% end %></li>
+		<li><%= link_to rating_path do %>Рейтинг команд<% end %></li>
+		<li><%= link_to korporat_path do %>Корпоратив<% end %></li>
+		<li><%= link_to franchise_path do %>Франшиза и спонсорство<% end %></li>
+	</ul>
+	<div class="calendarWrap">
+		<div class="sideBar">
+			<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=update_city_path%>" data-method="put"><!--SELECT SITY & MONTH-->
+				<div  class="update_city wrapper-dropdown" tabindex="1"><!-- id="dd" -->
+					<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+					<ul class="dropdown" tabindex="1" data-name="city_id">
+						<% City.all.each do |city| %>
+						<li><a href="#" data-value="<%= city.id %>"><%= city.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div class="update_month wrapper-dropdown" style="right:0" tabindex="1">
+					<span data-current-value="<%= @curr_month.first %>"><%= @curr_month.second %></span>
+					<ul class="dropdown" tabindex="1" data-name="year_month">
+						<% @months.each do |month| %>
+						<li><a href="#" data-value="<%= month.first %>"><%= month.second %></a></li>
+						<% end %>
+					</ul>
+				</div>
+				<div style="display:none">
+					<span data-current-value="4">4</span>
+					<ul data-name="max_groups"><li></li></ul>
+				</div> <!--AND SELECT SITY & MONTH-->
+		</div>
+			<div class="phoneHelp">
+				<p>Если у вас есть вопрос: <br/> 88 000 000 0</p>
+			</div>
+			<div class="franchise">
+				<a href="/franchise">
+					<ul>
+						<li>Хочу<br/> свою<br/> Мозгву</li>
+						<li>Речь идет<br/> о франшизе</li>
+					</ul>
+				</a>
+			</div>
+			<!--<div class="adAppisode">
+				<img src="<%#= asset_path('calendar/appisode.png') %>">
+				<span>Приложение для мозгвичей, сериалов любителей для!</span>
+			</div>-->
+		</div>
+
+		<div class="eventsParth">
+			<div class="gamesTabs">
+				<%= render 'games/tabs' %>
+			</div>
+		    <!-- <div class="loadMore">
+		    	<span></span>
+		    	<span></span>
+		    	<span></span>
+		    </div> -->
+		</div>
+		<div class="phoneHelp">
+			<p>Если у вас есть вопрос: <br/> 88 000 000 0</p>
+		</div>
+		<div class="franchise">
+			<a href="/franchise">
+				<ul>
+					<li>Хочу<br/> свою<br/> Мозгву</li>
+					<li>Речь идет<br/> о франшизе</li>
+				</ul>
+			</a>
+		</div>
+	</div>
+	<footer class="calendarF">
+		<ul>
+			<li>
+				<div class="dropup like">
+					<button type="button" class="Share" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <img src="<%= asset_path('symbol/like.png') %>" />Лойс
+				  </button>
+				  <ul class="dropdown-menu a2a_kit">
+				  	<li>
+				  		<a class="a2a_button_vk" href="">
+				  			<img src="<%= asset_path('symbol/vk.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_twitter" href="#">
+				  			<img src="<%= asset_path('symbol/twiter.png') %>"/>
+				  		</a>
+				  	</li>
+				  	<li>
+				  		<a class="a2a_button_facebook" href="#">
+				  			<img src="<%= asset_path('symbol/fb.png') %>"/>
+				  		</a>
+				  	</li>
+				  </ul>
+				</div>
+				<div class="tag">#этомозвадетка</div>
+			</li>
+			<li>
+				<div class="wrapSelectCityMonth" id="games_filter" data-action="<%=games_filter_path%>" data-method="get">
+					<div id="dd" class="update_city wrapper-dropdown dropup" tabindex="1">
+						<span data-current-value="<%= @city.id %>"><%= @city.name %></span>
+						<ul class="dropdown" tabindex="1" data-name="city_id">
+							<% City.all.each do |city| %>
+							<li><a href="#" data-value="<%= city.id %>" data-current-value="<%= @city.id %>"><%= city.name %></a></li>
+							<% end %>
+						</ul>
+					</div>
+					<div style="display:none">
+						<span data-current-value="4">4</span>
+						<ul data-name="max_groups"><li></li></ul>
+					</div>
+				</div>
+				<%= link_to root_path do %>
+				<img src="<%= asset_path('calendar/logo.png') %>"/>
+				<% end %>
+			</li>
+		</ul>
+	</footer>
+</section>

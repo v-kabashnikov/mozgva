@@ -1,6 +1,12 @@
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
-
+//= require slick.min
+//= require masked.min
+//= require custom
+//= require main
 //= require sign_in_up
+//= require teams
+//= require clipboard
+//= require phone_confirmation
+//= require a2a.js
