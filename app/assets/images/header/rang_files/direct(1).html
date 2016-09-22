@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://yadi.sk/direct.html?type=rtb-cv-tags_1_text_0&nonce=21101358183659613 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+}
+#yadisk-yap {
+    font: 13px/24px Arial, sans-serif;
+}
+</style>
+<script charset="utf-8" src="./watch.js"></script></head><body><div id="yadisk-yap"><iframe id="ya_partner_R-I-104220-11" width="240" height="400" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" src="./saved_resource.html"></iframe></div>
+<script>
+    (function(w, n) {
+        var NOAD_TIME = 24 * 60 * 60 * 1000; // один день
+        var NOAD_TIMEOUT = 5000;
+        var blocks = {
+            row: 'D-I-104220-5',
+            'row-mobile': 'D-I-104220-8',
+            rtb: 'R-104220-1',
+            'row-cv-tags_0_text_0': 'D-I-104220-15',
+            'row-cv-tags_1_text_0': 'D-I-104220-13',
+            'row-cv-tags_1_text_1': 'D-I-104220-12',
+            'rtb-cv-tags_0_text_0': 'R-I-104220-14',
+            'rtb-cv-tags_1_text_0': 'R-I-104220-11',
+            'rtb-cv-tags_1_text_1': 'R-I-104220-10'
+        };
+        var queryParams = getQueryParams(w.location.search);
+        var blockId = blocks[queryParams.type];
+        var blockParams = {
+            blockId: blockId,
+            renderTo: 'yadisk-yap',
+            cspNonce: queryParams.nonce,
+            onRender: function(data) {
+                parent.postMessage({
+                    id: queryParams.type,
+                    height: document.body.offsetHeight
+                }, location.origin);
+            }
+        };
+
+        if (!blockId) {
+            return;
+        }
+        if (queryParams.cv_text) {
+            blockParams.grab = queryParams.cv_text;
+        }
+
+        w[n] = w[n] || [];
+        w[n].push(function() {
+            Ya.Context.AdvManager.render(blockParams);
+            document.cookie = 'noad=; path=/; expires=' + (new Date(0)).toUTCString();
+        });
+        document.write('<sc'+'ript type="text/javascript" src="//an.yandex.ru/system/context.js"></sc'+'ript>');
+
+        setTimeout(function () {
+            var loaded = typeof Ya !== 'undefined' && Ya.Context && Ya.Context.AdvManager;
+            if (!loaded) {
+                var expiresDate = new Date(new Date().getTime() + NOAD_TIME);
+                document.cookie = 'noad=true; path=/; expires=' + expiresDate.toUTCString();
+            }
+        }, NOAD_TIMEOUT);
+
+        function getQueryParams(query) {
+            var res = {};
+            decodeURIComponent(query).replace(/([^?=&]+)(=([^&]*))?/g, function($0, $1, $2, $3) {
+                res[$1] = $3;
+            });
+            return res;
+        }
+    })(this, "yandexContextSyncCallbacks");
+</script><script type="text/javascript" src="./context.js"></script><script type="text/javascript" src="./context_static_r1230.js" id="//an.yandex.ru/resource/context_static_r1230.js"></script><script type="text/javascript" charset="utf-8" src="./104220(1)"></script><yatag style="overflow: hidden !important; position: absolute !important; left: -9999px !important; top: -9999px !important; width: 1px !important; height: 1px !important;"><iframe id="" width="1" height="1" sandbox="allow-same-origin allow-scripts" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" src="./match_r1230.html"></iframe></yatag>
+<yatag style="overflow: hidden !important; position: absolute !important; left: -9999px !important; top: -9999px !important; width: 1px !important; height: 1px !important;"><iframe id="" width="1" height="1" sandbox="allow-same-origin allow-scripts" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" src="./confirm_r1230.html"></iframe></yatag></body></html>
