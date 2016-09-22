@@ -1,0 +1,49 @@
+<span>
+  <img src="<%= asset_path('symbol/lock.png') %>">
+  <div class="links">
+    <% if current_user %>
+      <% if current_user.team %>
+        <% if @team && current_user.member?(@team) %>
+          <% if current_user.member.captain? %>
+            <%= link_to 'Удалить команду', team_path(@team), method: :delete, data: { confirm: 'Вы уверены?' }%>
+            <a href="#captain_error" data-toggle="modal">Выйти из команды</a>
+          <% else %>
+            <%= link_to 'Выйти из команды', member_path(@current_user.member), method: :delete, data: { confirm: 'Вы уверены?' } %>
+          <% end %>
+        <% else %>
+          <%= link_to("Команда", my_team_path) %>
+        <% end %>
+      <% else %>
+        <% if current_user.phone_confirmed_at %>
+          <%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
+        <% else %>
+          <a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
+        <% end %>
+      <% end %>
+      <% if @invitations.present? %>
+        <%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
+      <% end %>
+      <%= link_to "Редактировать профиль", '#edit_profile', 'data-toggle' => 'modal' %>
+      <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <a href="#sign_in" data-toggle="modal">Войти</a>
+      <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
+    <% end %>
+  </div>
+</span>
+
+<div class="modal fade in" id="captain_error">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">x</button>
+        <h2 class="text-center">Возникли ошибки</h2>
+      </div>
+      <div class="modal-body">
+        <p>Вы не можете выйти из команды пока являетесь ее капитаном</p>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

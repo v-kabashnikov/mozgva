@@ -71,15 +71,15 @@ class Game < ApplicationRecord
   def self.import(file)
     xlsx = Roo::Excelx.new(file)
     spreadsheet = xlsx.sheet(0)
-    header = ["team", 1, 2, 3, 4, 5, 6, 7, "scores", "place", "game", "max_score", "percent"]
+    header = ["team", "1", "2", "3", "4", "5", "6", "7", "scores", "place", "game", "max_score", "percent"]
 
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
 
-      game_num = row.values[10]
+      game_num = row["game"]
       game = Game.find_by(number: game_num) || Game.create(number: game_num)
 
-      team_name = row.values[0].to_s.strip
+      team_name = row["team"].to_s
       team = Team.find_by(name: team_name) || Team.create(name: team_name)
       begin
         unless GameRegistration.where(game_id: game.id, team_id: team.id).any?
@@ -90,9 +90,9 @@ class Game < ApplicationRecord
 
 
       team_rating = TeamRating.find_by(game_id: game.id, team_id: team.id)
-      team_rating.update(round_one: row.values[1], round_two: row.values[2], round_three: row.values[3],
-                         round_four: row.values[4], round_five: row.values[5], round_six: row.values[6],
-                         round_seven: row.values[7])
+      team_rating.update(round_one: row["1"], round_two: row["2"], round_three: row["3"],
+                         round_four: row["4"], round_five: row["5"], round_six: row["6"],
+                         round_seven: row["7"], max_score: row["max_score"])
     end
   end
 

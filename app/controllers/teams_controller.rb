@@ -68,12 +68,13 @@ class TeamsController < ApplicationController
 
   def take
     @team = Team.find(params[:id])
+    redirect_to root_path if @team.captain
     if @team.secret.present? && @team.secret == params[:team][:secret]
       if current_user.team
         current_user.member.destroy
       end
       member = Member.create(team: @team, user: current_user, team_role: :captain)
-      @team.update(secret: nil) if member.persisted?
+      # @team.update(secret: nil) if member.persisted?
       render json: { status: 'ok' }
     else
       render json: { error: 'Неверный секретный код' }, status: 406 

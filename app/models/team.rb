@@ -15,8 +15,11 @@ class Team < ApplicationRecord
   has_many :achievments, dependent: :destroy
 
   before_create :set_invite
+  before_create :set_secret
 
   validates :name, presence: true, uniqueness: true
+  validates_uniqueness_of :secret, allow_blank: true, allow_nil: true
+  validates_uniqueness_of :invite
 
   rails_admin do
     edit do
@@ -64,15 +67,15 @@ class Team < ApplicationRecord
     query = <<-SQL
       WITH 
         existing_scope AS (#{existing_scope_sql}),
-        team_ratings_sum (id, team_id, game_id, SUM) AS
+        team_ratings_sum (id, team_id, game_id, SUM, max_score) AS
         (SELECT team_ratings.id,
                 team_ratings.team_id,
                 team_ratings.game_id,
-                team_ratings.round_one+team_ratings.round_two+team_ratings.round_three+team_ratings.round_four+team_ratings.round_five+team_ratings.round_six+team_ratings.round_seven
+                team_ratings.round_one+team_ratings.round_two+team_ratings.round_three+team_ratings.round_four+team_ratings.round_five+team_ratings.round_six+team_ratings.round_seven,
+                team_ratings.max_score
          FROM team_ratings),
-           games_scores (id, max_score) AS
-        (SELECT games.id,
-                max(team_ratings_sum.sum)
+           games_scores (id) AS
+        (SELECT games.id
          FROM games
          INNER JOIN team_ratings_sum ON team_ratings_sum.game_id=games.id
          GROUP BY games.id),
@@ -80,7 +83,7 @@ class Team < ApplicationRecord
         (SELECT team_ratings_sum.id,
                 team_ratings_sum.team_id,
                 team_ratings_sum.game_id,
-                team_ratings_sum.sum, (team_ratings_sum.sum::float/nullif(games_scores.max_score, 0)*100)
+                team_ratings_sum.sum, (team_ratings_sum.sum::float/nullif(team_ratings_sum.max_score, 0)*100)
          FROM team_ratings_sum
          INNER JOIN games_scores ON games_scores.id=team_ratings_sum.game_id)
       SELECT teams.*,
@@ -156,6 +159,13 @@ class Team < ApplicationRecord
     self.invite = loop do
       inv = generate_invite
       break inv unless Team.find_by_invite inv
+    end
+  end
+
+  def set_secret
+    self.secret = loop do
+      s = generate_invite
+      break s unless Team.find_by_secret s
     end
   end
 

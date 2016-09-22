@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :game_registrations, only: [:create]
   resources :members, only: [:destroy] do
     put 'set_boatswain', on: :member, as: :set_boatswain
+    put 'set_captain', on: :member, as: :set_captain
   end
   resources :teams, only: [:create, :destroy, :update, :show] do
     get 'list', on: :collection
