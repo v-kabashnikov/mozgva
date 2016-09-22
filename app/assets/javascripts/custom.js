@@ -16,7 +16,9 @@ $(document).ready(function(){
 	});
 	// $("#phoneOfUser").mask("+7(999)999-99-99");
 	// $("#user_phone").mask("+7(999)999-99-99");
-
+	$(".videoModal").on('hidden.bs.modal', function (e) {
+	    $(".videoModal iframe").attr("src", $(".videoModal iframe").attr("src"));
+	});
 
 	$("#mySliderTabs").slick({
 		arrows:false,
