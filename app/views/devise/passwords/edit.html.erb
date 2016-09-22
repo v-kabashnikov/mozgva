@@ -1,15 +1,7 @@
 <section class="topInfo franchise">
   <div class="contentWrap">
     <div class="btnWrap authorizationWrap">
-      <% unless current_user %>
-        <span>
-          <img src="<%= asset_path('lightningSec/lightning.png') %>">
-          <div class="links">
-            <a href="#sign_in" data-toggle="modal">Войти</a>
-            <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
-          </div>
-        </span>
-      <% end %>
+      <%= render 'shared/topleft_menu' %>
     </div>
     <h1>Изменить пароль</h1>
   </div>

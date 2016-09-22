@@ -1,0 +1,23 @@
+<div class="modal fade in" id="take_team">
+  <div class="modal-dialog registration">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="closeModal" data-dismiss="modal">
+          <span></span>
+          <span></span>
+        </div>
+        <h2 class="text-center">Завладеть командой</h2>
+      </div>
+      <div class="modal-body">
+        <%= form_tag(take_team_path(@team), authenticity_token: true, id: 'take_team_form', method: :post, class: 'take_team', remote: true) do |f| %>
+          <div class="input_wrapper">
+            <%= text_field_tag "team[secret]", nil, autofocus: true, placeholder: 'Секретный код', class: "modalInput", required: true %>
+          </div>
+          <p style="display:none" class="warning_text">Вы будете удалены из вашей текущей команды. Вы уверены?</p>
+          <%= submit_tag "Отправить", class: (current_user.team ? "blueBtn need_confirmation" : "blueBtn") %>
+        <% end %>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

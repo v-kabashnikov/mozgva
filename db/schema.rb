@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20160921081502) do
     t.string   "invite"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "secret"
     t.index ["invite"], name: "index_teams_on_invite", unique: true, using: :btree
     t.index ["league_id"], name: "index_teams_on_league_id", using: :btree
     t.index ["name"], name: "index_teams_on_name", unique: true, using: :btree

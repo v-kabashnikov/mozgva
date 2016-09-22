@@ -270,6 +270,7 @@ $( document ).ready(function() {
 	$( "#user_avatar" ).change(function(event) {
 		showFile(event);
 	});
+
 });
 
 var a2a_config = a2a_config || {};

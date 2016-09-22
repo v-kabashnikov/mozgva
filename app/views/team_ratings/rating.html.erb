@@ -1,35 +1,7 @@
 <section class="topInfo rating">
   <div class="contentWrap">
     <div class="btnWrap authorizationWrap">
-      <% if current_user %>
-      <span>
-        <img src="<%= asset_path('symbol/lock.png') %>">
-        <div class="links">
-          <%= link_to "Выйти", destroy_user_session_path, method: :delete %>
-          <%= link_to "Профиль", '#edit_profile', 'data-toggle' => 'modal' %>
-          <% if @invitations.present? %>
-          <%= link_to "#{@invitations.count} #{Russian.p(@invitations.count, "приглашение", "приглашения", "приглашений")}", '#invitations_modal', 'data-toggle' => 'modal' %>
-          <% end %>
-          <% if current_user.team %>
-          <%= link_to("Команда", my_team_path) %>
-          <% else %>
-          <% if current_user.phone_confirmed_at %>
-          <%= link_to('Создать команду', '#team_modal', 'data-toggle' => 'modal') %>
-          <% else %>
-          <a href="#phone_confirmation" data-toggle="modal">Создать команду</a>
-          <% end %>
-          <% end %>
-        </div>
-      </span>
-      <% else %>
-      <span>
-        <img src="<%= asset_path('symbol/lock.png') %>">
-        <div class="links">
-          <a href="#sign_in" data-toggle="modal">Войти</a>
-          <a href="#sign_up" data-toggle="modal">Зарегистрироваться</a>
-        </div>
-      </span>
-      <% end %>
+      <%= render 'shared/topleft_menu' %>
     </div>
     <h1>Рейтинг<br/> команд</h1>
   </div>

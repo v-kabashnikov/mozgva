@@ -15,8 +15,11 @@ class Team < ApplicationRecord
   has_many :achievments, dependent: :destroy
 
   before_create :set_invite
+  before_create :set_secret
 
   validates :name, presence: true, uniqueness: true
+  validates_uniqueness_of :secret, allow_blank: true, allow_nil: true
+  validates_uniqueness_of :invite
 
   rails_admin do
     edit do
@@ -156,6 +159,13 @@ class Team < ApplicationRecord
     self.invite = loop do
       inv = generate_invite
       break inv unless Team.find_by_invite inv
+    end
+  end
+
+  def set_secret
+    self.secret = loop do
+      s = generate_invite
+      break s unless Team.find_by_secret s
     end
   end
 
